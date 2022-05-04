@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="John Doe">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="John Doe">
+    
+        <meta name="keywords" content="blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="一、功能概述1.1 高亮提示   myShell运行的起始提示 命令提示符前Musel&#39;s shell的前缀标识 当前路径提示 Error的报错提示  1.2 cd切换目录 1.3 标准I&#x2F;O重定向  1.4 可变长参数命令的运行  1.5 管道连接多条命令  1.6 管道、重定向、命令格式的错误检查  1.7 exit退出myShell  1.8 malloc与free 管道连接命令数、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUAA-Unix-Linux下C语言实现MyShell">
+<meta property="og:url" content="http://example.com/2022/05/04/Unix-MyShell-Summary/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、功能概述1.1 高亮提示   myShell运行的起始提示 命令提示符前Musel&#39;s shell的前缀标识 当前路径提示 Error的报错提示  1.2 cd切换目录 1.3 标准I&#x2F;O重定向  1.4 可变长参数命令的运行  1.5 管道连接多条命令  1.6 管道、重定向、命令格式的错误检查  1.7 exit退出myShell  1.8 malloc与free 管道连接命令数、">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/05/04/Unix-MyShell-Summary/highlight.png">
+<meta property="og:image" content="http://example.com/2022/05/04/Unix-MyShell-Summary/cd.png">
+<meta property="og:image" content="http://example.com/2022/05/04/Unix-MyShell-Summary/io.png">
+<meta property="og:image" content="http://example.com/2022/05/04/Unix-MyShell-Summary/cmd.png">
+<meta property="og:image" content="http://example.com/2022/05/04/Unix-MyShell-Summary/pipe.png">
+<meta property="og:image" content="http://example.com/2022/05/04/Unix-MyShell-Summary/error.png">
+<meta property="og:image" content="http://example.com/2022/05/04/Unix-MyShell-Summary/exit.png">
+<meta property="og:image" content="http://example.com/2022/05/04/Unix-MyShell-Summary/myShell.png">
+<meta property="og:image" content="http://example.com/2022/05/04/Unix-MyShell-Summary/parse.png">
+<meta property="og:image" content="http://example.com/2022/05/04/Unix-MyShell-Summary/split.png">
+<meta property="og:image" content="http://example.com/2022/05/04/Unix-MyShell-Summary/exe.png">
+<meta property="article:published_time" content="2022-05-04T13:02:27.000Z">
+<meta property="article:modified_time" content="2022-05-04T13:33:26.455Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Unix">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/05/04/Unix-MyShell-Summary/highlight.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/x.ico">
+    
+    <title>BUAA-Unix-Linux下C语言实现MyShell · Musel&#39;s blog</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>Musel's blog</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Musel&#39;s blog</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">BUAA-Unix-Linux下C语言实现MyShell</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                BUAA-Unix-Linux下C语言实现MyShell
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Unix">Unix</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">2.4k</span>Reading time: <span class="post-count reading-time">9 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2022/05/04</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="一、功能概述"><a href="#一、功能概述" class="headerlink" title="一、功能概述"></a>一、功能概述</h1><h2 id="1-1-高亮提示"><a href="#1-1-高亮提示" class="headerlink" title="1.1 高亮提示"></a>1.1 高亮提示</h2><img src="/2022/05/04/Unix-MyShell-Summary/highlight.png" class="" title="pic1">
+
+<ul>
+<li>myShell运行的起始提示</li>
+<li>命令提示符前<code>Musel&#39;s shell</code>的前缀标识</li>
+<li>当前路径提示</li>
+<li>Error的报错提示</li>
+</ul>
+<h2 id="1-2-cd切换目录"><a href="#1-2-cd切换目录" class="headerlink" title="1.2 cd切换目录"></a>1.2 cd切换目录</h2><img src="/2022/05/04/Unix-MyShell-Summary/cd.png" class="" title="pic1">
+<h2 id="1-3-标准I-O重定向"><a href="#1-3-标准I-O重定向" class="headerlink" title="1.3 标准I/O重定向"></a>1.3 标准I/O重定向</h2><img src="/2022/05/04/Unix-MyShell-Summary/io.png" class="" title="pic1">
+
+<h2 id="1-4-可变长参数命令的运行"><a href="#1-4-可变长参数命令的运行" class="headerlink" title="1.4 可变长参数命令的运行"></a>1.4 可变长参数命令的运行</h2><img src="/2022/05/04/Unix-MyShell-Summary/cmd.png" class="" title="pic1">
+
+<h2 id="1-5-管道连接多条命令"><a href="#1-5-管道连接多条命令" class="headerlink" title="1.5 管道连接多条命令"></a>1.5 管道连接多条命令</h2><img src="/2022/05/04/Unix-MyShell-Summary/pipe.png" class="" title="pic1">
+
+<h2 id="1-6-管道、重定向、命令格式的错误检查"><a href="#1-6-管道、重定向、命令格式的错误检查" class="headerlink" title="1.6 管道、重定向、命令格式的错误检查"></a>1.6 管道、重定向、命令格式的错误检查</h2><img src="/2022/05/04/Unix-MyShell-Summary/error.png" class="" title="pic1">
+
+<h2 id="1-7-exit退出myShell"><a href="#1-7-exit退出myShell" class="headerlink" title="1.7 exit退出myShell"></a>1.7 exit退出myShell</h2><img src="/2022/05/04/Unix-MyShell-Summary/exit.png" class="" title="pic1">
+
+<h2 id="1-8-malloc与free"><a href="#1-8-malloc与free" class="headerlink" title="1.8 malloc与free"></a>1.8 malloc与free</h2><ul>
+<li>管道连接命令数、命令参数个数、参数长度均不定长，所以使用malloc申请存储空间，避免内存浪费。</li>
+<li>单条命令执行完后调用free释放命令申请的空间，防止内存泄漏。</li>
+</ul>
+<h1 id="二、系统调用"><a href="#二、系统调用" class="headerlink" title="二、系统调用"></a>二、系统调用</h1><p>在第三部分会结合具体功能具体阐述系统调用。此处作简要汇总：</p>
+<ul>
+<li>获取当前目录：<code>path = getcwd(NULL, 0)</code></li>
+<li>切换工作目录：<code>chdir(command-&gt;args[1])</code></li>
+<li>创建进程：<code>pid_t pid = fork()</code></li>
+<li>打开文件描述符表：<code>open(command-&gt;read, O_RDONLY, 0666)</code></li>
+<li>复制文件描述符表：<code>dup2(in, 0)</code></li>
+<li>执行程序：<code>execvp(command-&gt;cmd, command-&gt;args)</code></li>
+<li>父进程等待子进程退出：<code>wait(&amp;status)</code></li>
+<li>父进程获取子进程退出状态：<code>WIFEXITED(status)</code></li>
+<li>创建与关闭管道：<code>pipe(fd);close(fd[0]);</code></li>
+<li>退出进程：<code>exit(0)</code></li>
+</ul>
+<h1 id="三、功能实现与流程图"><a href="#三、功能实现与流程图" class="headerlink" title="三、功能实现与流程图"></a>三、功能实现与流程图</h1><img src="/2022/05/04/Unix-MyShell-Summary/myShell.png" class="" title="pic1">
+<h2 id="3-1-宏定义"><a href="#3-1-宏定义" class="headerlink" title="3.1 宏定义"></a>3.1 宏定义</h2><h3 id="3-1-1-单行命令的输入与解析规模"><a href="#3-1-1-单行命令的输入与解析规模" class="headerlink" title="3.1.1 单行命令的输入与解析规模"></a>3.1.1 单行命令的输入与解析规模</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ARGS_COUNT 8        <span class="comment">//单条命令的参数个数</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> COMMANDS_COUNT 8    <span class="comment">//管道连接的命令个数</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUF_SIZE 128        <span class="comment">//单行命令的字符数</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="3-2-2-命令格式的错误检查"><a href="#3-2-2-命令格式的错误检查" class="headerlink" title="3.2.2 命令格式的错误检查"></a>3.2.2 命令格式的错误检查</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR_EMPTY(errorStr)       <span class="comment">//起始或管道符号后未输入合法命令</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR_STR                   <span class="comment">//字符串格式错误，后引号丢失</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR_FORK                  <span class="comment">//创建子进程失败</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR_OPEN                  <span class="comment">//重定向的读文件不存在</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR_EXECUTE(errorCmd)     <span class="comment">//命令执行失败：命令类型或参数不合法</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR_EXIT                  <span class="comment">//子进程退出失败</span></span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="3-2-打印当前路径"><a href="#3-2-打印当前路径" class="headerlink" title="3.2 打印当前路径"></a>3.2 打印当前路径</h2><p><code>print_current_directory()</code>函数调用<code>path = getcwd(NULL, 0)</code>获取当前工作目录。</p>
+<h2 id="3-3-拆分管道连接的多条命令和重定向文件名"><a href="#3-3-拆分管道连接的多条命令和重定向文件名" class="headerlink" title="3.3 拆分管道连接的多条命令和重定向文件名"></a>3.3 拆分管道连接的多条命令和重定向文件名</h2><img src="/2022/05/04/Unix-MyShell-Summary/parse.png" class="" title="pic1">
+<img src="/2022/05/04/Unix-MyShell-Summary/split.png" class="" title="pic1">
+
+<ul>
+<li>fgets获取输入、malloc命令结构体、标志本次输入的命令条数为1</li>
+<li><code>splitCommands(buf, commands)</code><ul>
+<li>初始化命令结构体：<ul>
+<li>标志状态为<strong>等待命令</strong>，即<code>waitCommand</code>置位：此时如果接受到管道符号、重定向符号、字符串、回车终止符均会由相关宏抛出ERROR_EMPTY</li>
+<li>初始化本条命令的结构体</li>
+<li>malloc申请参数数组</li>
+</ul>
+</li>
+<li>识别到命令</li>
+<li>持续识别本条命令的命令参数与重定向标志，直到管道符号或回车符<ul>
+<li>可识别的命令参数：无特殊符号的字符串、单双引号标志的字符串。记录在args参数数组中。</li>
+<li>重定向标志：识别到<code>&lt; &gt; &gt;&gt;</code>后调用<code>fetchFileName()</code>识别重定向文件名，记录在命令结构体中。如果文件格式不对会由相关宏抛出ERROR_IOFILE</li>
+</ul>
+</li>
+<li>识别到管道符号<ul>
+<li>标记本条命令的参数数组的最后一个参数(*args)为NULL。目的是便于execvp(command)和free(commands)。</li>
+<li>命令条数++</li>
+<li>初始化下一条命令结构体，继续读取下一条命令</li>
+</ul>
+</li>
+<li>识别到回车符：<ul>
+<li>标记本条命令的参数数组的最后一个参数<code>(*args) = NULL</code>。</li>
+<li>标记命令数组的最后一个命令<code>commans-&gt;cmd = NULL</code>。目的是便于<code>execvp(command)</code>和<code>free(commands)</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-4-如果拆分命令未出现异常，逐条执行命令commands"><a href="#3-4-如果拆分命令未出现异常，逐条执行命令commands" class="headerlink" title="3.4 如果拆分命令未出现异常，逐条执行命令commands"></a>3.4 如果拆分命令未出现异常，逐条执行命令commands</h2><img src="/2022/05/04/Unix-MyShell-Summary/exe.png" class="" title="pic1">
+<h3 id="3-4-1-逐条执行指令，使用管道连接父子进程数据"><a href="#3-4-1-逐条执行指令，使用管道连接父子进程数据" class="headerlink" title="3.4.1 逐条执行指令，使用管道连接父子进程数据"></a>3.4.1 逐条执行指令，使用管道连接父子进程数据</h3><p><code>executeCommands(commands)</code></p>
+<ul>
+<li>命令数commandsCount = 1：<ul>
+<li>不用创建管道，不从pipe读取重定向I/O，fd_in和fd_out为-1</li>
+<li><code>forkToExecute(commands,-1,-1)</code>创建子进程并执行</li>
+</ul>
+</li>
+<li>命令数commandsCount = 2：<ul>
+<li>此时重定向方向为：第一条命令写 -&gt; 第二条命令读。故创建一条管道<code>pipe(fd);</code>即可；</li>
+<li>为第一条指令创建子进程，执行第一条指令的子进程不使用此管道的读指针（没有前序命令为此命令提供输入），fd_in设置为-1；使用写指针fd[1].</li>
+<li>第一条指令结束后其子进程退出。父进程关闭此管道的fd[1],释放第一条指令结构体。</li>
+<li>父进程为第二条指令创建子进程，执行第二条指令的子进程使用此管道的读指针fd[0]，不使用此管道的写指针（没有后续命令需要此命令的输出），fd_out设置为-1。</li>
+<li>第二条指令结束后其子进程退出。父进程关闭此管道的fd[1],释放第二条指令结构体。</li>
+</ul>
+</li>
+<li>命令数commandsCount &gt; 2: <ul>
+<li>与上述大致相同，基本遵循：<strong>pipe()-&gt;fork()-&gt;execute()-&gt;close()-&gt;free()</strong></li>
+<li>多命令的管道需要保证两条管道同时开启：见源码下的分析<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *pipes[<span class="number">2</span>];</span><br><span class="line">pipes[<span class="number">0</span>]=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*<span class="number">2</span>);</span><br><span class="line">pipes[<span class="number">1</span>]=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*<span class="number">2</span>);</span><br><span class="line"><span class="keyword">int</span> newPoint = <span class="number">0</span>;</span><br><span class="line">pipe(pipes[newPoint]);</span><br><span class="line">forkToExecute(commands,<span class="number">-1</span>,(pipes[newPoint])[<span class="number">1</span>]);</span><br><span class="line">close((pipes[newPoint])[<span class="number">1</span>]);</span><br><span class="line">freeCommand(commands++);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; (commandsCount - <span class="number">1</span>); ++i) &#123;</span><br><span class="line">    newPoint = <span class="number">1</span>-newPoint;</span><br><span class="line">    </span><br><span class="line">    pipe(pipes[newPoint]);</span><br><span class="line">    forkToExecute(commands,(pipes[<span class="number">1</span>-newPoint])[<span class="number">0</span>],(pipes[newPoint])[<span class="number">1</span>]);</span><br><span class="line">    close((pipes[<span class="number">1</span>-newPoint])[<span class="number">0</span>]);</span><br><span class="line">    close((pipes[newPoint])[<span class="number">1</span>]);</span><br><span class="line">    freeCommand(commands++);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">forkToExecute(commands,(pipes[newPoint])[<span class="number">0</span>],<span class="number">-1</span>);</span><br><span class="line">close((pipes[newPoint])[<span class="number">0</span>]);</span><br><span class="line">freeCommand(commands);</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="关于pipe-close-与fork-父子进程的理解："><a href="#关于pipe-close-与fork-父子进程的理解：" class="headerlink" title="关于pipe(),close()与fork()父子进程的理解："></a>关于pipe(),close()与fork()父子进程的理解：</h4><blockquote>
+<p>(由于网上资料并不多，以下仅为根据程序的运行结果做出的个人理解,正确性未知)</p>
+</blockquote>
+<h5 id="pipe-int-fd-2-："><a href="#pipe-int-fd-2-：" class="headerlink" title="pipe(int fd[2])："></a>pipe(int fd[2])：</h5><ul>
+<li>malloc是用户区的申请。而pipe类似于<strong>内核区域</strong>的malloc。</li>
+<li>pipe相当于在内核缓冲区<strong>申请</strong>一片空间，用于存放数据。类似多线程生产者消费者模式的table，供不同线程不同时间的读取。<h5 id="int-fd-2-："><a href="#int-fd-2-：" class="headerlink" title="int fd[2]："></a>int fd[2]：</h5></li>
+<li>fd为<strong>内核缓冲区指针</strong>的数组，fd[0]为此缓冲区的<strong>读指针</strong>，fd[1]为<strong>写指针</strong>。<h5 id="close"><a href="#close" class="headerlink" title="close()"></a>close()</h5></li>
+<li>在内核缓冲区申请的空间的<strong>释放</strong>：需要<strong>两个条件</strong>，即<strong>四次操作</strong>：<ul>
+<li>一次pipe得到的空间，<strong>只允许发生且必须发生</strong>一次读和一次写。</li>
+<li>必须在读后关闭读指针close(fd[0]);必须在写后关闭写指针close(fd[1]);</li>
+<li>完成上述条件后，此段空间自动释放。<h5 id="fork"><a href="#fork" class="headerlink" title="fork()"></a>fork()</h5></li>
+</ul>
+</li>
+<li>一个进程创建pipe(int fd[2])，只供自己读取是没有意义的，因为可以在用户区malloc也能实现同等效果。pipe一般**与fork()**配合使用，目的是用于不同进程之间的数据传输。</li>
+<li>学过OS的进程管理以后非常容易理解：因为不同进程自身占用各自的用户区虚拟空间，而<strong>不同进程</strong>之间<strong>共享</strong>相同的<strong>内核</strong>虚拟空间。一个<strong>进程结束</strong>后，自身<strong>用户区</strong>的虚拟空间中的数据随之<strong>消失</strong>。</li>
+<li>那么pipe的应用场景是，当一个进程运行后产生数据后就消亡。而另一个进程在<strong>上个进程消亡后</strong>才开始运行，需要获取上个进程运行的数据。这时候上个进程的数据只能<strong>写入内核区</strong>才能保存，即在**地址fd[1]**写数据。</li>
+<li>造成此种应用场景的原因是:<ul>
+<li>① Linux支持的众多指令是靠<strong>调用内核程序</strong>实现的。所以当shell把用户命令解析出命令和命令参数后，通过c库函数<code>execvp(command-&gt;cmd, command-&gt;args)</code>等实现调用内核程序的效果。该函数成功执行后，<strong>调用此函数的进程结束</strong>，此函数的后续指令并不会再运行。</li>
+<li>② c语言用于并行操作的<strong>fork函数</strong>。其模式是这样的：所以可以看到，当子进程调用执行函数执行命令后，子进程消亡。父进程需要等待子进程结束后再工作。   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pid_t</span> pid = fork();</span><br><span class="line"><span class="keyword">if</span> (pid &lt; <span class="number">0</span>) &#123; </span><br><span class="line">        <span class="comment">//子进程创建失败，不会进入此分支 </span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (pid == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">//子进程创建成功，进入此分支。</span></span><br><span class="line">        <span class="comment">//此分支执行子进程操作</span></span><br><span class="line">        Execute <span class="keyword">and</span> Write (to fd[<span class="number">1</span>] in kernel buffer);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//由于fork()函数有两个返回值</span></span><br><span class="line">        <span class="comment">//所以如果子进程创建成功，进入上个分支后，也会进入这个分支</span></span><br><span class="line">        <span class="comment">//此分支执行父进程操作</span></span><br><span class="line">        Wait;</span><br><span class="line">        <span class="function">Fetch <span class="title">Data</span> <span class="params">(from fd[<span class="number">0</span>] in kernel buffer)</span> <span class="keyword">and</span> <span class="keyword">continue</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="close-的时机"><a href="#close-的时机" class="headerlink" title="close()的时机"></a>close()的时机</h5></li>
+<li>父进程在fork()前pipe(fd)，fork()后父子进程共享相同的fd。</li>
+<li>子进程执行时写fd[1]。返回到父进程时由父进程close(fd[1]).</li>
+<li>父进程再次创建新的子进程执行下一条指令，子进程执行时读fd[0]。如果此命令后续还有指令，那么子进程再写另一条新管道的newfd[1].子进程执行完毕返回到父进程时，由父进程close(fd[0]).至此fd的缓冲区完成两次关闭和一写一读，被释放。由于已经写过新管道的newfd[1]，此时父进程也要close(newfd[1]).</li>
+<li>原则是创建新进程前pipe，子进程负责读写fd，父进程负责关闭fd。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-2-创建子进程，执行单条指令"><a href="#3-4-2-创建子进程，执行单条指令" class="headerlink" title="3.4.2 创建子进程，执行单条指令"></a>3.4.2 创建子进程，执行单条指令</h3><p><code>forkToExecute(Command *command, int fd_in, int fd_out)</code></p>
+<ul>
+<li>exit : 释放命令结构体并退出shell</li>
+<li>cd ：系统调用<code>chdir(command-&gt;args[1])</code>切换工作目录</li>
+<li>外部命令：<ul>
+<li>fork()创建子进程</li>
+<li>command结构体中读出重定向文件：<code>int open(const char *pathname, int oflag, [mode_t mode])</code>系统调用获得文件描述符表</li>
+<li>重定向：<code>dup2(in, 0);dup2(out, 1);</code></li>
+<li>子进程运行命令<code>execvp(command-&gt;cmd, command-&gt;args)</code></li>
+<li>父进程等待子进程结束后运行下一条命令</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-5-释放本次输入的commands数组，等待用户的下一次输入"><a href="#3-5-释放本次输入的commands数组，等待用户的下一次输入" class="headerlink" title="3.5 释放本次输入的commands数组，等待用户的下一次输入"></a>3.5 释放本次输入的commands数组，等待用户的下一次输入</h2>
+    </article>
+    <!-- license -->
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/05/01/OO-Unit2-summary/" title="BUAA-OO-Unit2">
+                    <div class="prevTitle">BUAA-OO-Unit2</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+    
+        
+            
+                <a href="//github.com/Mmmusel" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://github.com/Mmmusel" target="_blank">Musel</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Author <a href="https://Mmmusel.github.io" target="_blank">🍔</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">Thanks Vistiors <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8A%9F%E8%83%BD%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">一、功能概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E9%AB%98%E4%BA%AE%E6%8F%90%E7%A4%BA"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 高亮提示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-cd%E5%88%87%E6%8D%A2%E7%9B%AE%E5%BD%95"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 cd切换目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%A0%87%E5%87%86I-O%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 标准I&#x2F;O重定向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E5%8F%AF%E5%8F%98%E9%95%BF%E5%8F%82%E6%95%B0%E5%91%BD%E4%BB%A4%E7%9A%84%E8%BF%90%E8%A1%8C"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 可变长参数命令的运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E7%AE%A1%E9%81%93%E8%BF%9E%E6%8E%A5%E5%A4%9A%E6%9D%A1%E5%91%BD%E4%BB%A4"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 管道连接多条命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-%E7%AE%A1%E9%81%93%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91%E3%80%81%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F%E7%9A%84%E9%94%99%E8%AF%AF%E6%A3%80%E6%9F%A5"><span class="toc-number">1.6.</span> <span class="toc-text">1.6 管道、重定向、命令格式的错误检查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-exit%E9%80%80%E5%87%BAmyShell"><span class="toc-number">1.7.</span> <span class="toc-text">1.7 exit退出myShell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-8-malloc%E4%B8%8Efree"><span class="toc-number">1.8.</span> <span class="toc-text">1.8 malloc与free</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二、系统调用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">三、功能实现与流程图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%AE%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 宏定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-%E5%8D%95%E8%A1%8C%E5%91%BD%E4%BB%A4%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%A7%A3%E6%9E%90%E8%A7%84%E6%A8%A1"><span class="toc-number">3.1.1.</span> <span class="toc-text">3.1.1 单行命令的输入与解析规模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F%E7%9A%84%E9%94%99%E8%AF%AF%E6%A3%80%E6%9F%A5"><span class="toc-number">3.1.2.</span> <span class="toc-text">3.2.2 命令格式的错误检查</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E6%89%93%E5%8D%B0%E5%BD%93%E5%89%8D%E8%B7%AF%E5%BE%84"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 打印当前路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E6%8B%86%E5%88%86%E7%AE%A1%E9%81%93%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%A4%9A%E6%9D%A1%E5%91%BD%E4%BB%A4%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 拆分管道连接的多条命令和重定向文件名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E5%A6%82%E6%9E%9C%E6%8B%86%E5%88%86%E5%91%BD%E4%BB%A4%E6%9C%AA%E5%87%BA%E7%8E%B0%E5%BC%82%E5%B8%B8%EF%BC%8C%E9%80%90%E6%9D%A1%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4commands"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 如果拆分命令未出现异常，逐条执行命令commands</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-1-%E9%80%90%E6%9D%A1%E6%89%A7%E8%A1%8C%E6%8C%87%E4%BB%A4%EF%BC%8C%E4%BD%BF%E7%94%A8%E7%AE%A1%E9%81%93%E8%BF%9E%E6%8E%A5%E7%88%B6%E5%AD%90%E8%BF%9B%E7%A8%8B%E6%95%B0%E6%8D%AE"><span class="toc-number">3.4.1.</span> <span class="toc-text">3.4.1 逐条执行指令，使用管道连接父子进程数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Epipe-close-%E4%B8%8Efork-%E7%88%B6%E5%AD%90%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9A"><span class="toc-number">3.4.1.1.</span> <span class="toc-text">关于pipe(),close()与fork()父子进程的理解：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#pipe-int-fd-2-%EF%BC%9A"><span class="toc-number">3.4.1.1.1.</span> <span class="toc-text">pipe(int fd[2])：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#int-fd-2-%EF%BC%9A"><span class="toc-number">3.4.1.1.2.</span> <span class="toc-text">int fd[2]：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#close"><span class="toc-number">3.4.1.1.3.</span> <span class="toc-text">close()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#fork"><span class="toc-number">3.4.1.1.4.</span> <span class="toc-text">fork()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#close-%E7%9A%84%E6%97%B6%E6%9C%BA"><span class="toc-number">3.4.1.1.5.</span> <span class="toc-text">close()的时机</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-2-%E5%88%9B%E5%BB%BA%E5%AD%90%E8%BF%9B%E7%A8%8B%EF%BC%8C%E6%89%A7%E8%A1%8C%E5%8D%95%E6%9D%A1%E6%8C%87%E4%BB%A4"><span class="toc-number">3.4.2.</span> <span class="toc-text">3.4.2 创建子进程，执行单条指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-%E9%87%8A%E6%94%BE%E6%9C%AC%E6%AC%A1%E8%BE%93%E5%85%A5%E7%9A%84commands%E6%95%B0%E7%BB%84%EF%BC%8C%E7%AD%89%E5%BE%85%E7%94%A8%E6%88%B7%E7%9A%84%E4%B8%8B%E4%B8%80%E6%AC%A1%E8%BE%93%E5%85%A5"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 释放本次输入的commands数组，等待用户的下一次输入</span></a></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 11
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span>
+            <a class="archive-post-title" href="/2022/05/04/Unix-MyShell-Summary/">BUAA-Unix-Linux下C语言实现MyShell</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span>
+            <a class="archive-post-title" href="/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span>
+            <a class="archive-post-title" href="/2022/03/24/OO-Unit1-summary/">BUAA-OO-Unit1</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2022/03/23/OS-lab2-summary/">BUAA-OS-Lab2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2022/03/15/OS-lab0-summary/">BUAA-OS-Lab0</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span>
+            <a class="archive-post-title" href="/2022/03/12/shell/">Shell</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/">OS-Pre-Cause SR EPC BadVaddr</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/git/">Git</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span>
+            <a class="archive-post-title" href="/2022/02/16/CSS/">CSS</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span>
+            <a class="archive-post-title" href="/2022/02/14/HTML/">HTML</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span>
+            <a class="archive-post-title" href="/2022/01/27/hello-world/">Hello World</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="CSS">
+                <span class="iconfont-archer">&#xe606;</span>
+                CSS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OO">
+                <span class="iconfont-archer">&#xe606;</span>
+                OO
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OS">
+                <span class="iconfont-archer">&#xe606;</span>
+                OS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Unix">
+                <span class="iconfont-archer">&#xe606;</span>
+                Unix
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "http://example.com",
+        root: siteMetaRoot,
+        author: "John Doe"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v="></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v="></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>

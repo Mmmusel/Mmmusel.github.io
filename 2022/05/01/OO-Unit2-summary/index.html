@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="John Doe">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="John Doe">
+    
+        <meta name="keywords" content="blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="一、电梯的调度策略1.1 状态转移图  1.2 纵向电梯的LOOK算法LOOK算法实现 与真实的电梯大致相同的策略，即维护电梯当前运行方向dir，更远层无请求(各楼层的call请求&amp;电梯中乘客的目的地请求)时才转向。   为了在实现捎带策略的同时将电梯和调度器功能解耦，电梯应当①具有“短视性”，即并不知道自己的目的楼层，而是仅根据从调度器获取上行、下行的boolean值。在此条件下电梯实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUAA-OO-Unit2">
+<meta property="og:url" content="http://example.com/2022/05/01/OO-Unit2-summary/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、电梯的调度策略1.1 状态转移图  1.2 纵向电梯的LOOK算法LOOK算法实现 与真实的电梯大致相同的策略，即维护电梯当前运行方向dir，更远层无请求(各楼层的call请求&amp;电梯中乘客的目的地请求)时才转向。   为了在实现捎带策略的同时将电梯和调度器功能解耦，电梯应当①具有“短视性”，即并不知道自己的目的楼层，而是仅根据从调度器获取上行、下行的boolean值。在此条件下电梯实现">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/05/01/OO-Unit2-summary/5.png">
+<meta property="og:image" content="http://example.com/2022/05/01/OO-Unit2-summary/4.png">
+<meta property="og:image" content="http://example.com/2022/05/01/OO-Unit2-summary/1.png">
+<meta property="og:image" content="http://example.com/2022/05/01/OO-Unit2-summary/2.png">
+<meta property="og:image" content="http://example.com/2022/05/01/OO-Unit2-summary/3.png">
+<meta property="article:published_time" content="2022-05-01T04:46:53.000Z">
+<meta property="article:modified_time" content="2022-05-02T12:04:27.190Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="OO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/05/01/OO-Unit2-summary/5.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/x.ico">
+    
+    <title>BUAA-OO-Unit2 · Musel&#39;s blog</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>Musel's blog</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Musel&#39;s blog</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">BUAA-OO-Unit2</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                BUAA-OO-Unit2
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="OO">OO</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">3.8k</span>Reading time: <span class="post-count reading-time">13 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2022/05/01</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="一、电梯的调度策略"><a href="#一、电梯的调度策略" class="headerlink" title="一、电梯的调度策略"></a>一、电梯的调度策略</h1><h2 id="1-1-状态转移图"><a href="#1-1-状态转移图" class="headerlink" title="1.1 状态转移图"></a>1.1 状态转移图</h2><img src="/2022/05/01/OO-Unit2-summary/5.png" class="" title="pic1">
+
+<h2 id="1-2-纵向电梯的LOOK算法"><a href="#1-2-纵向电梯的LOOK算法" class="headerlink" title="1.2 纵向电梯的LOOK算法"></a>1.2 纵向电梯的LOOK算法</h2><h3 id="LOOK算法实现"><a href="#LOOK算法实现" class="headerlink" title="LOOK算法实现"></a>LOOK算法实现</h3><ul>
+<li>与真实的电梯大致相同的策略，即维护电梯当前运行方向dir，更远层无请求(各楼层的call请求&amp;电梯中乘客的目的地请求)时才转向。  </li>
+<li>为了在实现捎带策略的同时将电梯和调度器功能解耦，电梯应当①具有“短视性”，即并不知道自己的目的楼层，而是仅根据从调度器获取上行、下行的boolean值。在此条件下电梯实现以层间运行时间为最小单位实时更新可稍带目标层。②屏蔽外部各楼层的call请求：按运行方向运行一层后，询问调度器是否应该开门。  </li>
+</ul>
+<h3 id="LOOK算法相较ALS的优势"><a href="#LOOK算法相较ALS的优势" class="headerlink" title="LOOK算法相较ALS的优势"></a>LOOK算法相较ALS的优势</h3><ul>
+<li><p>打破了ALS算法可能出现的<strong>“局部性原理”</strong>。  </p>
+</li>
+<li><p>即ALS算法在将电梯内部乘客全部送达后形成空梯时，会选择最先到达的请求作为主请求。两种策略下对于<strong>中间楼层的捎带表现一致</strong>，但是ALS策略下<strong>低层和高层请求</strong>因为<strong>难于被捎带而堆积</strong>，直到被安排为主请求时才会运行到低层或高层。此类请求容易堆积在末尾才进行集中处理，导致电梯出现因为一个远端请求<strong>空转</strong>(<strong>无捎带</strong>，远端请求的vip专梯)的效率问题。</p>
+</li>
+<li><p>LOOK算法更像是<strong>就近远端捎带</strong>，在将电梯内部乘客全部送达后形成空梯时会沿此方向去处理远端请求，避免了底层和高层请求因为难于捎带而堆积后的空转问题，效率较好。  </p>
+</li>
+</ul>
+<h2 id="1-3-横向电梯"><a href="#1-3-横向电梯" class="headerlink" title="1.3 横向电梯"></a>1.3 横向电梯</h2><h3 id="就近策略"><a href="#就近策略" class="headerlink" title="就近策略"></a>就近策略</h3><ul>
+<li><p>不再需要LOOK算法  </p>
+<p>LOOK算法的优势在于处理纵向梯难于到达的高底层问题，而横向电梯由于下面两个原因不需要LOOK算法。  </p>
+<p>①横向电梯仅5个座    </p>
+<p>②横向电梯可环状运行，即打破纵向电梯1层与10层的时间差    </p>
+</li>
+<li><p>就近策略的实现<br>①判定请求的方向时按<strong>最短运行路径</strong>  </p>
+<p>②同方向捎带  </p>
+<p>③空梯时选择<strong>距离最近</strong>的请求作为主请求  </p>
+</li>
+<li><p>就近策略的电梯利用率比较高，因为总运行路径最短，比较适合横向电梯出现大量请求的情况下使用，比较适合hw7。缺点是开关门的次数比按同方向运行的横向电梯多，顾客等待电梯转到自己方向的时间比较长。不过由于hw6拖后腿的是纵向电梯，所以请求少的时候这种策略也不会很耽误事。  </p>
+</li>
+</ul>
+<h2 id="1-4-性能分析"><a href="#1-4-性能分析" class="headerlink" title="1.4 性能分析"></a>1.4 性能分析</h2><ul>
+<li>hw5实现LOOK算法后性能分98，发现的问题是：调度器在<strong>是否应该开门</strong>时没有考虑<strong>已满员</strong>的情况，导致出现满员时在请求层开门，电梯发现满员不接客，出现空开关门的情况 :(</li>
+<li>所以在hw6重构了纵向电梯优化掉了开关门问题，然而性能分只有96 :( 观察输出后发现主要问题不在调度器的调度策略上，而是重构以后的LOOK算法出了问题：虽然<strong>捎带</strong>要满足<strong>同方向</strong>才可捎带，但是LOOK算法的<strong>远端请求</strong>可以为任意方向。有几个强测85的点观察输出后发现是因为远端请求被一刀切成同方向，导致<strong>反方向的请求没有被LOOK到</strong>不会远端捎带，退化成ALS的主请求造成堆积。  </li>
+<li>个人感觉比较影响hw6性能分的一些85的点的问题并不在调度器策略，对于后两次作业来说，在hw5把LOOK算法实现好就可以保证比较可观的性能分，比起写复杂的调度器算法更符合二八法则 :)</li>
+</ul>
+<h1 id="二、调度器"><a href="#二、调度器" class="headerlink" title="二、调度器"></a>二、调度器</h1><h2 id="2-1-调度器设计"><a href="#2-1-调度器设计" class="headerlink" title="2.1 调度器设计"></a>2.1 调度器设计</h2><h3 id="2-1-1-电梯调度器使用掩码表示楼层请求，取代遍历"><a href="#2-1-1-电梯调度器使用掩码表示楼层请求，取代遍历" class="headerlink" title="2.1.1 电梯调度器使用掩码表示楼层请求，取代遍历"></a>2.1.1 电梯调度器使用掩码表示楼层请求，取代遍历</h3><ul>
+<li>FLOOR[1]为<code>10&#39;b1</code>，FLOOR[3]为二进制<code>10&#39;b100</code></li>
+<li><del>后来Experiment4才知道可以用Bitset</del></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>[] FLOOR = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">12</span>];</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        FLOOR[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> h = <span class="number">1</span>;h &lt; <span class="number">12</span>;h++) &#123;</span><br><span class="line">            FLOOR[h] = <span class="number">1</span> &lt;&lt; (h - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>掩码表示楼层请求，取代遍历</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> inElv;<span class="comment">//电梯中所有人的目的地</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> upCall;<span class="comment">//上行请求发出层</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> downCall;<span class="comment">//下行请求发出层</span></span><br><span class="line"><span class="keyword">int</span> status = inElv | upCall | downCall;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//判断是否开门</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">isToOpen</span><span class="params">(<span class="keyword">boolean</span> dir,<span class="keyword">int</span> nowFloor)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> order;</span><br><span class="line">        <span class="keyword">int</span> nowCall = ((dir) ? upCall : downCall);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> ((inElv &amp; FLOOR[nowFloor]) &gt; <span class="number">0</span>) &#123; order =  <span class="keyword">true</span>; &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (((nowCall &amp; FLOOR[nowFloor]) &gt; <span class="number">0</span>) &amp;&amp; (inNum &lt; capacity)) &#123; order = <span class="keyword">true</span>; &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123; order = <span class="keyword">false</span>; &#125;</span><br><span class="line"></span><br><span class="line">        notifyAll();</span><br><span class="line">        <span class="keyword">return</span> order;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//判断远端是否有请求 即判断是否换向，无需遍历</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">furtherNoReq</span><span class="params">(<span class="keyword">boolean</span> dir,<span class="keyword">int</span> nowFloor)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> noReq;</span><br><span class="line">        <span class="keyword">int</span> status = inElv | upCall | downCall;</span><br><span class="line">        <span class="keyword">if</span> (dir) &#123;</span><br><span class="line">            noReq = (!(status &gt;= FLOOR[nowFloor + <span class="number">1</span>]));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            noReq = ((status &amp; (FLOOR[nowFloor] - <span class="number">1</span>)) == <span class="number">0</span>); </span><br><span class="line">        &#125;</span><br><span class="line">        notifyAll();</span><br><span class="line">        <span class="keyword">return</span> noReq;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-2-座调度器分配纵向电梯的调度策略"><a href="#2-1-2-座调度器分配纵向电梯的调度策略" class="headerlink" title="2.1.2 座调度器分配纵向电梯的调度策略"></a>2.1.2 座调度器分配纵向电梯的调度策略</h3><p>①优先分配空梯</p>
+<p>②LOOK算法能捎带的电梯：处在电梯运行方向的远端+加入该请求后此次此方向的可稍带请求不会因此请求的加入导致满员而无法捎带</p>
+<p>上行时的判断<strong>捎带后不满员</strong>的逻辑：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//维护当前方向的upNum[i]：i层将要进入电梯的人数</span></span><br><span class="line"><span class="comment">//维护当前方向的outNum[i]：i层将要下电梯的人数</span></span><br><span class="line"><span class="keyword">int</span> people = inElvNum;<span class="comment">//当前电梯人数</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = floor;i &lt;= <span class="number">9</span>;i++) &#123;</span><br><span class="line">    people = people + upNum[i] - outNum[i];</span><br><span class="line">    <span class="keyword">if</span> (people &gt; capacity) &#123;</span><br><span class="line">        notifyAll();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">notifyAll();</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>③无可稍带的电梯，则<strong>上行</strong>请求分配给当前<strong>未处理请求数最少</strong>的<strong>下行</strong>电梯(换向后可处理此请求)；<strong>下行</strong>请求分配给当前<strong>未处理请求数最少</strong>的<strong>上行</strong>电梯</p>
+<h3 id="2-1-3-层调度器分配横向电梯的调度策略"><a href="#2-1-3-层调度器分配横向电梯的调度策略" class="headerlink" title="2.1.3 层调度器分配横向电梯的调度策略"></a>2.1.3 层调度器分配横向电梯的调度策略</h3><ul>
+<li>当前未到达请求数最少的电梯调度器</li>
+</ul>
+<h3 id="2-1-4-hw7的请求拆分策略"><a href="#2-1-4-hw7的请求拆分策略" class="headerlink" title="2.1.4 hw7的请求拆分策略"></a>2.1.4 hw7的请求拆分策略</h3><ul>
+<li>分成五类：纵向直达、横向直达、横+纵、纵+横、纵+横+纵。分别在<code>ProRequest</code>中标记好下一站目的地，投入对应层/座的调度器。</li>
+<li>允许在某一层<strong>乘坐两次横向电梯</strong>扩展横向电梯的可达性：由于横向电梯只有五个座比较容易连通，且为了横向梯的可达性而去一层或其他层中转的纵向时间代价比较大，所以采取<code>Arraylist&lt;NextBuilding&gt;</code>存储横向电梯的两次换乘，以达到尽量<strong>缩减去其他层中转的纵向电梯的代价</strong>。</li>
+</ul>
+<h3 id="2-1-5-调度器的性能分析"><a href="#2-1-5-调度器的性能分析" class="headerlink" title="2.1.5 调度器的性能分析"></a>2.1.5 调度器的性能分析</h3><ul>
+<li>hw6强测96，主要是LOOK算法没有优化好。</li>
+<li>LOOK算法修正后hw7强测98，我认为在调度器的调度策略上还是比较好地符合了二八定律的 :)</li>
+</ul>
+<h2 id="2-2-UML协作图与三次作业的迭代"><a href="#2-2-UML协作图与三次作业的迭代" class="headerlink" title="2.2 UML协作图与三次作业的迭代"></a>2.2 UML协作图与三次作业的迭代</h2><ul>
+<li><p>输入线程、层\座的调度器线程、电梯线程三类线程之间的协作关系由<strong>两类调度器</strong><code>BuildingScheduler``ElevatorScheduler</code>负责<strong>中转请求</strong>、<strong>信息交互</strong>和<strong>计算调度</strong>。后续将结合UML类图具体说明。</p>
+</li>
+<li><p>下图为协作方面的迭代设计。</p>
+</li>
+</ul>
+<img src="/2022/05/01/OO-Unit2-summary/4.png" class="" title="pic1">
+
+<h2 id="2-3-协作模式与调度器功能"><a href="#2-3-协作模式与调度器功能" class="headerlink" title="2.3 协作模式与调度器功能"></a>2.3 协作模式与调度器功能</h2><h3 id="hw5-UML类图"><a href="#hw5-UML类图" class="headerlink" title="hw5 UML类图"></a>hw5 UML类图</h3><img src="/2022/05/01/OO-Unit2-summary/1.png" class="" title="pic1">
+
+<h3 id="hw5-生产者消费者模式"><a href="#hw5-生产者消费者模式" class="headerlink" title="hw5 - 生产者消费者模式"></a>hw5 - 生产者消费者模式</h3><ul>
+<li><p>仅有输入线程、电梯线程和每个电梯的调度器。</p>
+</li>
+<li><p>中转请求：</p>
+<ul>
+<li>调度器负责接受来自输入线程的请求，把当前楼层的请求发放给电梯。使用生产者消费者模式。</li>
+</ul>
+</li>
+<li><p>信息交互：</p>
+<ul>
+<li><p>调度器作为电梯线程的决策类，综合当前的各层请求和电梯状态，计算电梯的下一步行为。包括：本层是否开门、是否进入等待请求的阻塞状态、是否换向。</p>
+</li>
+<li><p>调度器接受输入线程的终止信号，传递给电梯线程，作为线程结束标志。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="hw6-UML类图"><a href="#hw6-UML类图" class="headerlink" title="hw6 UML类图"></a>hw6 UML类图</h3><img src="/2022/05/01/OO-Unit2-summary/2.png" class="" title="pic1">
+
+<h3 id="hw6-两级调度器"><a href="#hw6-两级调度器" class="headerlink" title="hw6 - 两级调度器"></a>hw6 - 两级调度器</h3><ul>
+<li><p>迭代：增加层/座的调度器<code>BuildingScheduler</code>和调度线程<code>SchedulerThread</code>。</p>
+</li>
+<li><p>中转请求：调度器负责接受来自输入线程的请求，调度线程把请求发放给本层/座特定电梯的调度器。使用生产者消费者模式。</p>
+</li>
+<li><p>计算调度：调度器综合本层/座的各电梯状态，按调度策略<code>choose()</code>选择派遣请求的电梯。</p>
+</li>
+<li><p>信息交互：调度器接受输入线程的终止信号，将其传递给电梯调度器后，作为调度线程结束标志。</p>
+</li>
+</ul>
+<h3 id="hw7-UML类图"><a href="#hw7-UML类图" class="headerlink" title="hw7 UML类图"></a>hw7 UML类图</h3><img src="/2022/05/01/OO-Unit2-summary/3.png" class="" title="pic1">
+
+<h3 id="hw7-流水线模式"><a href="#hw7-流水线模式" class="headerlink" title="hw7 - 流水线模式"></a>hw7 - 流水线模式</h3><ul>
+<li><p>迭代：请求分阶段存储；增加<code>RequestCounter</code>作为流水是否结束的计数器。</p>
+</li>
+<li><p>中转请求：未完成请求由电梯线程更新下一流水阶段的目的地，并把请求发放给本层/座调度器。</p>
+</li>
+<li><p>信息交互：完成请求计数器加1.</p>
+</li>
+</ul>
+<h2 id="2-4-调度器的可扩展性"><a href="#2-4-调度器的可扩展性" class="headerlink" title="2.4 调度器的可扩展性"></a>2.4 调度器的可扩展性</h2><p>我认为本单元选择调度器是一种结构清晰、扩展性好的办法。</p>
+<ul>
+<li>层/座的调度器<code>BuildingScheduler</code>和调度线程<code>SchedulerThread</code><ul>
+<li>不论对于楼层和楼座，其基本行为保持一致，都可直接使用，复用性强。</li>
+<li>如果想更换调度策略，只需重载choose()方法即可。</li>
+<li>由于电梯的调度器实现了<code>Sche</code>接口，本级调度器存储的电梯名单为<code>elvList : ArrayList&lt;Sche&gt;</code>类型，所以不仅仅可以作为某层或某座的调度器，还可作为包含特定横向电梯+特定纵向电梯的调度器，例如服务于一类二次元主题的横纵电梯，乘客愿意步行爬楼前往此类电梯的可搭乘地进行观光乘坐电梯，即二次元乘客的专属调度器。</li>
+</ul>
+</li>
+<li>不同类的电梯调度器实现<code>Sche</code>接口，方便与上层调度器交互。开始时由于横向电梯和纵向电梯的策略和实现差异较大，所以选择了接口而非继承。画出UML图以后觉得使用抽象类或许更加简洁。</li>
+<li>两级调度器模式在hw7并未很大改动，只是增加了电梯线程把未完成请求发给层/座调度器的工序。两级调度器的扩展性较好。</li>
+</ul>
+<h1 id="三、同步块的设置和锁的选择"><a href="#三、同步块的设置和锁的选择" class="headerlink" title="三、同步块的设置和锁的选择"></a>三、同步块的设置和锁的选择</h1><h2 id="3-1-输出安全"><a href="#3-1-输出安全" class="headerlink" title="3.1 输出安全"></a>3.1 输出安全</h2><ul>
+<li><p>输出类中采取单例模式，实现加锁的静态方法。</p>
+</li>
+<li><p>采用<strong>生产者消费者模式</strong>并<strong>不能</strong>完美地解决<strong>电梯作业</strong>的输出安全的问题：原因为例如[0.0]在输出队列添加OPEN请求，[0.4]在输出队列添加CLOSE请求，此时并不一定保证输出线程两次take()并println()的时间间隔严格≥0.4s.</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainOutput</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        TimableOutput.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-共享对象"><a href="#3-2-共享对象" class="headerlink" title="3.2 共享对象"></a>3.2 共享对象</h2><ul>
+<li>Scheduler类包含的共享对象为<strong>本电梯</strong>的请求队列<code>Arraylist&lt;PersonRequest&gt; requests</code>，所有读写此请求队列的方法均在Scheduler中实现。</li>
+<li>即把共享对象和需要加锁的方法全部封装进Scheduler.</li>
+</ul>
+<h1 id="四、bug分析"><a href="#四、bug分析" class="headerlink" title="四、bug分析"></a>四、bug分析</h1><blockquote>
+<p>分析自己程序的bug分析未通过的公测用例和被互测发现的bug：问题特征和修复办法  </p>
+</blockquote>
+<ul>
+<li>本单元强测互测没有Bug。</li>
+<li>hw5中测时遇到了轮询cpu超时的问题，后来经过排查是在[电梯线程里关门后]进入[依赖下一步请求实现的换向逻辑]时忘记wait()，导致电梯关门后进入空闲时跳过了此次换向逻辑而进入下一个循环的起始处wait().这导致了空闲后再有新请求进入时，电梯按上次循环时遗留下的方向继续运行，而缺少了电梯换向的逻辑导致从1层运行到0层。解决办法是电梯的每一个步骤后都添加wait()。</li>
+<li>由于我在电梯每个步骤前都有换向逻辑，所以这种轮询出现情况只会在运行到1层且需要换向时空闲的这种特殊的情况下出现，所以轮询的bug在随机生成样例时比较难复现。手动造边界数据+循环起始处println()对于轮询更为有效。</li>
+</ul>
+<h1 id="五、hack策略"><a href="#五、hack策略" class="headerlink" title="五、hack策略"></a>五、hack策略</h1><blockquote>
+<p>分析自己发现别人程序bug所采用的策略<br>列出自己所采取的测试策略及有效性<br>分析自己采用了什么策略来发现线程安全相关的问题<br>分析本单元的测试策略与第一单元测试策略的差异之处  </p>
+</blockquote>
+<ul>
+<li>主要采用自动评测机的方式。不过这种评测方式有一定随机性，本地评测的bug有时难复现。hw5和hw6的评测机并没有发现bug。hw7的评测机本地运行发现了bug但是没有提交成功。评测机主要用于正确性测试，适合作业前期自测正确性。</li>
+<li>另一种hack策略时针对特定线程安全的bug手动造数据，比如hw5时的线程输出安全问题，hw7时不可达的横线电梯出现的轮询问题。hw7时hack到一个横向电梯轮询的Bug。手动hack策略覆盖范围不如自动评测，但是效率和命中率较好。</li>
+<li>本单元相较第一单元的策略差异是，例如超时和轮询的bug比较难通过评测机显现，所以更需要针对特殊情况手动造数据。</li>
+</ul>
+<h1 id="六、心得体会"><a href="#六、心得体会" class="headerlink" title="六、心得体会"></a>六、心得体会</h1><blockquote>
+<p>从线程安全和层次化设计两个方面来梳理自己在本单元三次作业中获得的心得体会</p>
+</blockquote>
+<ul>
+<li><p>从线程安全的角度：</p>
+<ul>
+<li><strong>死锁</strong>的bug比较好排查和避免，出现率并不高；</li>
+<li><strong>共享对象</strong>使用sychronized和notifyAll()保证临界区的访问和修改是一种简单且省心的办法；本次作业稍有遗憾的是受限于时间并没有实现读写锁。</li>
+<li><strong>线程的结束条件</strong>需要依据具体情况判断，比如hw5和hw6的结束条件只需要考虑<code>输入结束 &amp;&amp; 调度器中无请求 &amp;&amp; 电梯为空</code>；由于hw7出现请求中转的情况，所以在<code>输入结束</code>这个条件上不再只是输入线程读到<code>null</code>，而是使用类似Experiment4.2代码中的Counter静态实例，当所有请求均运送完毕后才视作输入结束，各级调度器逐级发放isEnd信号。</li>
+<li><strong>轮询</strong>的Bug出现率比较高，且仅在特殊条件下出现而较难排查，需要合理地布局while循环终止地条件和wait()的位置。尤其是在LOOK算法需要频繁依据<strong>当前请求</strong>而实现转向逻辑的电梯中，需要更加细心地应对各种换向和空闲等情况。</li>
+</ul>
+</li>
+<li><p>层次化设计：</p>
+<ul>
+<li>两级调度器更适合完成hw7的多换乘请求，各层级间传递请求易于实现。</li>
+</ul>
+</li>
+</ul>
+
+    </article>
+    <!-- license -->
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2022/05/04/Unix-MyShell-Summary/" title="BUAA-Unix-Linux下C语言实现MyShell">
+                    <div class="nextTitle">BUAA-Unix-Linux下C语言实现MyShell</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/03/24/OO-Unit1-summary/" title="BUAA-OO-Unit1">
+                    <div class="prevTitle">BUAA-OO-Unit1</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+    
+        
+            
+                <a href="//github.com/Mmmusel" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://github.com/Mmmusel" target="_blank">Musel</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Author <a href="https://Mmmusel.github.io" target="_blank">🍔</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">Thanks Vistiors <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%94%B5%E6%A2%AF%E7%9A%84%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5"><span class="toc-number">1.</span> <span class="toc-text">一、电梯的调度策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E5%9B%BE"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 状态转移图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E7%BA%B5%E5%90%91%E7%94%B5%E6%A2%AF%E7%9A%84LOOK%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 纵向电梯的LOOK算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LOOK%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.1.</span> <span class="toc-text">LOOK算法实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LOOK%E7%AE%97%E6%B3%95%E7%9B%B8%E8%BE%83ALS%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">1.2.2.</span> <span class="toc-text">LOOK算法相较ALS的优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%A8%AA%E5%90%91%E7%94%B5%E6%A2%AF"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 横向电梯</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%B1%E8%BF%91%E7%AD%96%E7%95%A5"><span class="toc-number">1.3.1.</span> <span class="toc-text">就近策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 性能分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">二、调度器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E8%B0%83%E5%BA%A6%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 调度器设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E7%94%B5%E6%A2%AF%E8%B0%83%E5%BA%A6%E5%99%A8%E4%BD%BF%E7%94%A8%E6%8E%A9%E7%A0%81%E8%A1%A8%E7%A4%BA%E6%A5%BC%E5%B1%82%E8%AF%B7%E6%B1%82%EF%BC%8C%E5%8F%96%E4%BB%A3%E9%81%8D%E5%8E%86"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1 电梯调度器使用掩码表示楼层请求，取代遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E5%BA%A7%E8%B0%83%E5%BA%A6%E5%99%A8%E5%88%86%E9%85%8D%E7%BA%B5%E5%90%91%E7%94%B5%E6%A2%AF%E7%9A%84%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2 座调度器分配纵向电梯的调度策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-%E5%B1%82%E8%B0%83%E5%BA%A6%E5%99%A8%E5%88%86%E9%85%8D%E6%A8%AA%E5%90%91%E7%94%B5%E6%A2%AF%E7%9A%84%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5"><span class="toc-number">2.1.3.</span> <span class="toc-text">2.1.3 层调度器分配横向电梯的调度策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-hw7%E7%9A%84%E8%AF%B7%E6%B1%82%E6%8B%86%E5%88%86%E7%AD%96%E7%95%A5"><span class="toc-number">2.1.4.</span> <span class="toc-text">2.1.4 hw7的请求拆分策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-5-%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-number">2.1.5.</span> <span class="toc-text">2.1.5 调度器的性能分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-UML%E5%8D%8F%E4%BD%9C%E5%9B%BE%E4%B8%8E%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A%E7%9A%84%E8%BF%AD%E4%BB%A3"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 UML协作图与三次作业的迭代</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E5%8D%8F%E4%BD%9C%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%B0%83%E5%BA%A6%E5%99%A8%E5%8A%9F%E8%83%BD"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 协作模式与调度器功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hw5-UML%E7%B1%BB%E5%9B%BE"><span class="toc-number">2.3.1.</span> <span class="toc-text">hw5 UML类图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw5-%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.3.2.</span> <span class="toc-text">hw5 - 生产者消费者模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw6-UML%E7%B1%BB%E5%9B%BE"><span class="toc-number">2.3.3.</span> <span class="toc-text">hw6 UML类图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw6-%E4%B8%A4%E7%BA%A7%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="toc-number">2.3.4.</span> <span class="toc-text">hw6 - 两级调度器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw7-UML%E7%B1%BB%E5%9B%BE"><span class="toc-number">2.3.5.</span> <span class="toc-text">hw7 UML类图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hw7-%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.3.6.</span> <span class="toc-text">hw7 - 流水线模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 调度器的可扩展性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%90%8C%E6%AD%A5%E5%9D%97%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%92%8C%E9%94%81%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">3.</span> <span class="toc-text">三、同步块的设置和锁的选择</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E8%BE%93%E5%87%BA%E5%AE%89%E5%85%A8"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 输出安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E5%85%B1%E4%BA%AB%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 共享对象</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81bug%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">四、bug分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81hack%E7%AD%96%E7%95%A5"><span class="toc-number">5.</span> <span class="toc-text">五、hack策略</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">六、心得体会</span></a></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 11
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span>
+            <a class="archive-post-title" href="/2022/05/04/Unix-MyShell-Summary/">BUAA-Unix-Linux下C语言实现MyShell</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span>
+            <a class="archive-post-title" href="/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span>
+            <a class="archive-post-title" href="/2022/03/24/OO-Unit1-summary/">BUAA-OO-Unit1</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2022/03/23/OS-lab2-summary/">BUAA-OS-Lab2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2022/03/15/OS-lab0-summary/">BUAA-OS-Lab0</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span>
+            <a class="archive-post-title" href="/2022/03/12/shell/">Shell</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/">OS-Pre-Cause SR EPC BadVaddr</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/git/">Git</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span>
+            <a class="archive-post-title" href="/2022/02/16/CSS/">CSS</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span>
+            <a class="archive-post-title" href="/2022/02/14/HTML/">HTML</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span>
+            <a class="archive-post-title" href="/2022/01/27/hello-world/">Hello World</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="CSS">
+                <span class="iconfont-archer">&#xe606;</span>
+                CSS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OO">
+                <span class="iconfont-archer">&#xe606;</span>
+                OO
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OS">
+                <span class="iconfont-archer">&#xe606;</span>
+                OS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Unix">
+                <span class="iconfont-archer">&#xe606;</span>
+                Unix
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "http://example.com",
+        root: siteMetaRoot,
+        author: "John Doe"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v="></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v="></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>

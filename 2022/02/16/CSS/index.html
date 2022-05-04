@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="John Doe">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="John Doe">
+    
+        <meta name="keywords" content="blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="基础语法 内嵌式：写在&lt;style&gt;双标签，选择器查找标签。    1234567891011121314&lt;style&gt;    div&amp;#123;        color:red;        font-size:30px;        background-color:green;        width:400px;        hright:300px;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS">
+<meta property="og:url" content="http://example.com/2022/02/16/CSS/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="基础语法 内嵌式：写在&lt;style&gt;双标签，选择器查找标签。    1234567891011121314&lt;style&gt;    div&amp;#123;        color:red;        font-size:30px;        background-color:green;        width:400px;        hright:300px;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-16T08:06:53.000Z">
+<meta property="article:modified_time" content="2022-03-11T09:01:22.079Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/x.ico">
+    
+    <title>CSS · Musel&#39;s blog</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>Musel's blog</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Musel&#39;s blog</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">CSS</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                CSS
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="CSS">CSS</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">2.9k</span>Reading time: <span class="post-count reading-time">12 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2022/02/16</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
+<li>内嵌式：写在&lt;style&gt;双标签，选择器查找标签。  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    <span class="selector-tag">div</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>:red;</span><br><span class="line">        <span class="attribute">font-size</span>:<span class="number">30px</span>;</span><br><span class="line">        <span class="attribute">background-color</span>:green;</span><br><span class="line">        <span class="attribute">width</span>:<span class="number">400px</span>;</span><br><span class="line">        hright:<span class="number">300px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">body</span>&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>外联式：写在单独.css，通过link标签在网页中引入<br><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;&quot;&gt;</code></li>
+<li>css写在标签的style属性，配合js使用<br><code>&lt;div style=&quot;color:green;&quot;&gt;内容&lt;/div&gt;;</code></li>
+</ul>
+<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><ul>
+<li>标签选择器选择一类标签。</li>
+<li>类选择器&lt;div&gt;<ul>
+<li>一个标签可以多个类名，空格隔开</li>
+<li>类名由数字字母下划线中划线组成，可以重复<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    <span class="selector-class">.one</span>&#123;</span><br><span class="line">        <span class="comment">/**/</span></span><br><span class="line">    &#125;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">p</span> class=&quot;one&quot;&gt;内容&lt;/<span class="selector-tag">p</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=&quot;one&quot;&gt;内容&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">body</span>&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>id选择器<ul>
+<li>#定义</li>
+<li>所有标签都有且仅有一个id属性，id在一个页面唯一，一个id选择器只能选中一个标签值，配合js属性</li>
+</ul>
+</li>
+<li>通配符选择器<ul>
+<li>*{}定义</li>
+<li>修改页面边距</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>CSS层叠样式表，设置相同样式时按最后一次渲染</p>
+</blockquote>
+<h2 id="文字样式"><a href="#文字样式" class="headerlink" title="文字样式"></a>文字样式</h2><ul>
+<li>font-size:使用谷歌工具检查工具</li>
+<li>font-weight:<ul>
+<li>关键字：一般normal bold</li>
+<li>纯数字：100~900整百</li>
+</ul>
+</li>
+<li>font-style:normal/italic</li>
+<li>font-family:微软雅黑，黑体，sans-serif //未安装微软雅黑使用黑体或任意非衬线字体</li>
+<li>复合属性font:style weight size family<ul>
+<li>只能省略前两个</li>
+<li>单独的样式写在连写下方</li>
+</ul>
+</li>
+</ul>
+<h2 id="文本样式"><a href="#文本样式" class="headerlink" title="文本样式"></a>文本样式</h2><ul>
+<li>文本缩进text-indent:数字+px/em字大小</li>
+<li>文本对齐text-align:left,center,right<ul>
+<li>文本(h1)；span,a,input,img标签</li>
+<li>属性加给父级标签内&lt;&gt;&lt;&gt;</li>
+</ul>
+</li>
+<li>文本修饰text-decoration:underline(下划线);line-through(删除线);overline(上划线);none(a标签清除装饰线);</li>
+<li>行高line-height：px/倍数<ul>
+<li>font:style weight size/lineheight family</li>
+</ul>
+</li>
+</ul>
+<h2 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h2><table>
+<thead>
+<tr>
+<th align="left">颜色表示方式</th>
+<th align="left">表示含义</th>
+<th align="left">属性值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">关键词</td>
+<td align="left">预设颜色</td>
+<td align="left">red</td>
+</tr>
+<tr>
+<td align="left">rgb表示法</td>
+<td align="left">红绿蓝，每项取值0~255</td>
+<td align="left">rgb(0,255,255)</td>
+</tr>
+<tr>
+<td align="left">rgba表示法</td>
+<td align="left">a表示透明度，0~1</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">十六进制表示法</td>
+<td align="left">#红绿蓝</td>
+<td align="left">#ff0000</td>
+</tr>
+</tbody></table>
+<h2 id="code1"><a href="#code1" class="headerlink" title="code1"></a>code1</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">html</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    <span class="selector-tag">div</span>&#123;</span><br><span class="line">        <span class="attribute">margin</span>:<span class="number">0</span> auto;<span class="comment">/*div整体居中*/</span></span><br><span class="line">        <span class="comment">/*text-align:center:此标签内部的所有内容居中*/</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">h1</span>&#123;</span><br><span class="line">        <span class="attribute">text-align</span>:center;<span class="comment">/*h1标题整体居中*/</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*后面还有其他p段落，所以p副标题的居中不采用标签选择器，用类选择器*/</span></span><br><span class="line">    <span class="selector-class">.center</span>&#123;</span><br><span class="line">        <span class="attribute">text-align</span>:center;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.color1</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>:<span class="number">#808080</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.color2</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>:<span class="number">#87ceeb</span>;</span><br><span class="line">        <span class="attribute">font-weight</span>:<span class="number">700</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">a</span>&#123;</span><br><span class="line">        <span class="attribute">text-decoration</span>:none;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span>&gt;</span><br><span class="line">        &lt;<span class="selector-tag">h1</span>&gt;标题&lt;/<span class="selector-tag">h1</span>&gt;</span><br><span class="line">        &lt;<span class="selector-tag">p</span> class=&quot;center&quot;&gt;</span><br><span class="line">            &lt;<span class="selector-tag">span</span> class=&quot;color1&quot;&gt;副标题<span class="number">1.1</span>&lt;/<span class="selector-tag">span</span>&gt;</span><br><span class="line">            &lt;<span class="selector-tag">span</span> class=&quot;color2&quot;&gt;副标题<span class="number">1.2</span>&lt;/<span class="selector-tag">span</span>&gt;</span><br><span class="line">            &lt;<span class="selector-tag">a</span> href=&quot; &quot;&gt;收藏本文&lt;/<span class="selector-tag">a</span>&gt;</span><br><span class="line">        &lt;/<span class="selector-tag">p</span>&gt;</span><br><span class="line">    &lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">body</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">html</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><ul>
+<li>后代选择器：<code>父选择器 后代选择器</code>(儿子、孙子…)</li>
+<li>子代选择器：<code>父选择器&gt;子代选择器</code></li>
+<li>并集选择器：<code>选择器1，选择器2，选择器n</code>(换行隔开 )</li>
+<li>交集选择器：同时满足多个选择器的标签。选择器之间没有间隔符分隔，标签选择器必须写在类选择器前</li>
+<li>hover伪类选择器：<code>选择器:hover&#123;css&#125;</code>鼠标悬停在元素的状态。</li>
+</ul>
+<h2 id="emmet语法"><a href="#emmet语法" class="headerlink" title="emmet语法"></a>emmet语法</h2><p>//TODO</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
+<li>background-color:</li>
+<li>background-image:url(./images/1.jpg);</li>
+<li>background-repeat背景平铺:repeat/norepeat/repeat-x/repeat-y</li>
+<li>background-position<ul>
+<li>left/center/right ; top/center/bottom</li>
+<li>+-数字px</li>
+</ul>
+</li>
+<li>background推荐复合顺序：color image repeat position<blockquote>
+<p>重要图片img，装饰性图片background</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="显示模式"><a href="#显示模式" class="headerlink" title="显示模式"></a>显示模式</h2><ul>
+<li>块级：独占一行、宽度默认父级标题、可以设置宽高。如&lt;div&gt;</li>
+<li>行内：不换行、设置宽高不生效、宽高和内容一致。如&lt;a&gt;&lt;span&gt;</li>
+<li>行内块：一行可以显示多个，可以设置宽高。如&lt;input&gt;&lt;textarea&gt;&lt;button&gt;&lt;select&gt;&lt;image&gt;<br><em><strong>！解析行内块或行内标签时，如果换行会产生空格</strong></em></li>
+<li>元素显示模式转换display:block;inline-block;in-line<blockquote>
+<p>标签嵌套原则：</p>
+<ul>
+<li>块级元素作为大容器，可以嵌套文本、块级元素，行内块，行内元素。</li>
+<li>p不能嵌套div,p,h元素</li>
+<li>a标签内部可以嵌套除a外任意元素</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h2 id="CSS特性"><a href="#CSS特性" class="headerlink" title="CSS特性"></a>CSS特性</h2><ul>
+<li>继承性<ul>
+<li>子元素默认继承父元素样式，可继承文字控制属性(color,font,text,line-height;height不生效)</li>
+<li>继承失效：a标签的color;h标签的font-size</li>
+</ul>
+</li>
+<li>层叠性：<strong>选择器优先级相同</strong><ul>
+<li>不同样式叠加；相同样式覆盖。</li>
+</ul>
+</li>
+<li>优先级<ul>
+<li>继承&lt;通配符选择器&lt;标签选择器&lt;类选择器&lt;id选择器&lt;行内样式&lt;！important</li>
+<li>覆盖范围越大，优先级越低</li>
+<li>important权重最高，继承权重最低，但important不继承<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        <span class="selector-id">#box</span>&#123;</span><br><span class="line">            <span class="attribute">color</span>:orange;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-class">.box</span>&#123;</span><br><span class="line">            <span class="attribute">color</span>:blue;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-tag">div</span>&#123;</span><br><span class="line">            <span class="attribute">color</span>:green <span class="meta">!important</span>;<span class="comment">/*开发不建议使用*/</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-tag">body</span>&#123;</span><br><span class="line">            <span class="attribute">color</span>:red;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=&quot;box&quot; id=&quot;box&quot; style=&quot;<span class="attribute">color</span>:pink<span class="string">&quot;&gt;priority&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>权重叠加计算：复合选择器</li>
+<li>（行内样式，id选择器，类选择器，标签选择器）<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        <span class="comment">/* (0,1,0,1) */</span></span><br><span class="line">        <span class="selector-tag">div</span> <span class="selector-id">#one</span>&#123;</span><br><span class="line">            <span class="attribute">color</span>:orange;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* (0,0,2,0) */</span></span><br><span class="line">        <span class="selector-class">.father</span> <span class="selector-class">.son</span>&#123;</span><br><span class="line">            <span class="attribute">color</span>:blue;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* (0,0,1,1) */</span></span><br><span class="line">        <span class="selector-class">.father</span> <span class="selector-tag">p</span>&#123;</span><br><span class="line">            <span class="attribute">color</span>:green </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* (0,0,0,2) */</span></span><br><span class="line">        <span class="selector-tag">div</span> <span class="selector-tag">p</span>&#123;</span><br><span class="line">            <span class="attribute">color</span>:red;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=&quot;father&quot;&gt;priority&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">body</span>&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="code2"><a href="#code2" class="headerlink" title="code2"></a>code2</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE <span class="selector-tag">html</span>&gt;</span><br><span class="line">&lt;<span class="selector-tag">html</span> lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-<span class="number">8</span>&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; <span class="attribute">content</span>=&quot;IE=edge&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; <span class="attribute">content</span>=&quot;<span class="attribute">width</span>=device-<span class="attribute">width</span>, <span class="attribute">initial</span>-scale=<span class="number">1.0</span>&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        <span class="selector-tag">a</span>&#123;</span><br><span class="line">            <span class="attribute">text-decoration</span>: none;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">50px</span>;<span class="attribute">background-color</span>: red;</span><br><span class="line">            <span class="attribute">display</span>: inline-block;</span><br><span class="line">            <span class="comment">/*a显示模式是行内，不能设置宽高，需要display转换*/</span></span><br><span class="line">            <span class="attribute">color</span>:<span class="number">#fff</span>;</span><br><span class="line">            <span class="attribute">text-align</span>: center;</span><br><span class="line">            <span class="attribute">line-height</span>: <span class="number">50px</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">            <span class="attribute">background-color</span>: orange;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">a</span> href=&quot;&quot;&gt;导航<span class="number">1</span>&lt;/<span class="selector-tag">a</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">a</span> href=&quot;&quot;&gt;导航<span class="number">2</span>&lt;/<span class="selector-tag">a</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">a</span> href=&quot;&quot;&gt;导航<span class="number">3</span>&lt;/<span class="selector-tag">a</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">a</span> href=&quot;&quot;&gt;导航<span class="number">4</span>&lt;/<span class="selector-tag">a</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">a</span> href=&quot;&quot;&gt;导航<span class="number">5</span>&lt;/<span class="selector-tag">a</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">body</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">html</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h1><ul>
+<li><p>border边框线  </p>
+<ul>
+<li><code>border:10px solid/dashed/dotted red</code>,不分先后顺序 </li>
+<li>快捷键bd+tab</li>
+<li>单方向边框：<code>border-left/top/bottom:</code></li>
+</ul>
+</li>
+<li><p>padding内边距：边框和内容</p>
+<ul>
+<li><code>padding:top right bottom left</code> 顺时针<br><code>padding:top right&amp;left bottom</code><br><code>padding:top&amp;bottom right&amp;left</code>  </li>
+</ul>
+</li>
+<li><p>margin外边距：盒子外边距，边框与边框间</p>
+<ul>
+<li>合并现象：垂直布局的块级元素，上下margin合并，取最大值</li>
+<li>塌陷现象：互相嵌套的块级元素，子元素的margin-top会作用在父级元素上，导致父级元素一起下移</li>
+</ul>
+<blockquote>
+<ul>
+<li>解决办法：</li>
+<li>父元素设置border-top或者padding-top,分隔父子元素的margin-top  </li>
+<li>父元素设置overflow:hidden</li>
+<li>转换成行内块元素</li>
+<li>设置浮动  </li>
+</ul>
+</blockquote>
+<ul>
+<li>行内标签的margin/padding不改变垂直位置</li>
+</ul>
+</li>
+</ul>
+<h2 id="code3"><a href="#code3" class="headerlink" title="code3"></a>code3</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 从外到内：先宽高背景色，内容，内容位置，文字细节 */</span></span><br><span class="line">&lt;!DOCTYPE <span class="selector-tag">html</span>&gt;</span><br><span class="line">&lt;<span class="selector-tag">html</span> lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-<span class="number">8</span>&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; <span class="attribute">content</span>=&quot;IE=edge&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; <span class="attribute">content</span>=&quot;<span class="attribute">width</span>=device-<span class="attribute">width</span>, <span class="attribute">initial</span>-scale=<span class="number">1.0</span>&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        <span class="selector-class">.box</span> &#123;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">            <span class="attribute">border-top</span>: <span class="number">3px</span> solid <span class="number">#ff8500</span>;</span><br><span class="line">            <span class="attribute">border-bottom</span>: <span class="number">1px</span> solid <span class="number">#edeef0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-class">.box</span> <span class="selector-tag">a</span>&#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">80px</span>;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line"></span><br><span class="line">            <span class="attribute">display</span>: inline-block;</span><br><span class="line">            <span class="attribute">text-align</span>: center;</span><br><span class="line">            <span class="attribute">line-height</span>: <span class="number">40</span>;</span><br><span class="line">            <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">            <span class="attribute">color</span>:<span class="number">#4c4c4c</span>;</span><br><span class="line">            <span class="attribute">text-decoration</span>: none;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-class">.box</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">            <span class="attribute">background-color</span>: <span class="number">#edeef0</span>;</span><br><span class="line">            <span class="attribute">color</span>:<span class="number">#ff8400</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=&quot;box&quot;&gt;</span><br><span class="line">        &lt;<span class="selector-tag">a</span> href=&quot;&quot;&gt;导航<span class="number">1</span>&lt;/<span class="selector-tag">a</span>&gt;</span><br><span class="line">        &lt;<span class="selector-tag">a</span> href=&quot;&quot;&gt;导航<span class="number">2</span>&lt;/<span class="selector-tag">a</span>&gt;</span><br><span class="line">        &lt;<span class="selector-tag">a</span> href=&quot;&quot;&gt;导航<span class="number">3</span>&lt;/<span class="selector-tag">a</span>&gt;</span><br><span class="line">        &lt;<span class="selector-tag">a</span> href=&quot;&quot;&gt;导航<span class="number">4</span>&lt;/<span class="selector-tag">a</span>&gt;</span><br><span class="line">    &lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">body</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">html</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="结构伪类选择器"><a href="#结构伪类选择器" class="headerlink" title="结构伪类选择器"></a>结构伪类选择器</h2><ul>
+<li>减少对类的依赖，根据HTML的结构关系找元素，保持代码整洁</li>
+<li><code>label:first/last-child&#123;&#125;</code><br><code>label:nth-child(n)&#123;&#125;</code><br><code>label:nth-last-child(n)&#123;&#125;</code>  </li>
+<li>n数字：n从1开始</li>
+<li>n公式：n从0开始  <ul>
+<li>偶数：2n/even  </li>
+<li>奇数：2n+1/2n-1/odd  </li>
+<li>前5个：-n+5  </li>
+<li>从第5个往后：n+5  </li>
+</ul>
+</li>
+</ul>
+<h2 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h2><ul>
+<li>CSS模拟的标签效果<code>(父级元素)::before/after&#123;&#125;</code></li>
+<li>默认行内元素，宽高不生效</li>
+<li>必须加<code>content:&#39;&#39;</code>,否则不生效</li>
+</ul>
+<h1 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h1><ul>
+<li>作用：图文环绕/div盒子环绕</li>
+<li>特点：浮动元素脱离标准位置，不占位置；浮动比标准流高半个级别，覆盖标准流的元素；浮动的标签顶端对齐；具备行内块效果；浮动盒子无法margin:0 auto水平居中</li>
+</ul>
+<h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><ul>
+<li><p>设置父级元素高度</p>
+<ul>
+<li>缺点：有些布局不能设置父级元素高度，如可变长度内容填充</li>
+</ul>
+</li>
+<li><p>额外标签：在父级元素内容的最后添加块级元素，块级元素设置<code>clear:both</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 子级浮动，父级未设置高度，可在父级内容添加 */</span></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        <span class="selector-class">.clearfix</span> &#123;</span><br><span class="line">            clea:both;</span><br><span class="line">            <span class="comment">/* 清除左右两侧浮动的影响 */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span>&gt;</span><br><span class="line">        <span class="comment">/* float1 */</span></span><br><span class="line">        <span class="comment">/* float2 */</span></span><br><span class="line">        &lt;<span class="selector-tag">div</span> class=&quot;clearfix&quot;&gt;&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">    &lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=&quot;standardStream&quot;&gt;standardStream&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>单伪元素清除法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 父级类&lt;div class=&quot;class_n clearfix&gt; */</span></span><br><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="attribute">display</span>:block;</span><br><span class="line">    <span class="attribute">clear</span>:both;</span><br><span class="line">    <span class="comment">/* 隐藏伪元素 保持低版本兼容性*/</span></span><br><span class="line">    <span class="attribute">height</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">visibility</span>:hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>双伪元素清除法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">::before</span>,</span><br><span class="line"><span class="comment">/*解决外边距塌陷问题</span></span><br><span class="line"><span class="comment">父子标签，都是块级，子级加margin会影响父级的位置*/</span></span><br><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>:<span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="attribute">display</span>:tavle;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">clear</span>:both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>父元素设置overflow<br>优缺点。。。。。。。。。。。</p>
+</li>
+</ul>
+<h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><h3 id="网页常见布局形式"><a href="#网页常见布局形式" class="headerlink" title="网页常见布局形式"></a>网页常见布局形式</h3><ul>
+<li>标准流：<ul>
+<li>块级元素独占一行：垂直布局</li>
+<li>行内元素/行内块元素一行显示多个：水平布局</li>
+</ul>
+</li>
+<li>浮动：<ul>
+<li>可以让原本垂直布局的块级元素变成水平布局</li>
+</ul>
+</li>
+<li>定位：<ul>
+<li>元素自由地摆放在网页的任意位置</li>
+<li>盒子间的层叠情况：定位后元素层级最高，可以叠在其他盒子上面</li>
+<li>盒子始终固定在屏幕的某个位置，如导航栏</li>
+</ul>
+</li>
+</ul>
+<h3 id="定位方式"><a href="#定位方式" class="headerlink" title="定位方式"></a>定位方式</h3><blockquote>
+<p>position:static/relative/absolute/fixed<br>设置偏移值left/top:<br>同级定位，下压上;z-index设置</p>
+</blockquote>
+<ul>
+<li>相对定位：<ul>
+<li>相对自己原来的位置移动，原有占位不变(没有脱离标准流控制)</li>
+</ul>
+</li>
+<li>绝对定位：<ul>
+<li>如果有已经定位的父级，以就近定位父级为参照物；否则浏览器窗口为参照物。</li>
+<li>脱离标准流，不占位</li>
+<li>不能实现margin auto居中<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 居中显示 */</span></span><br><span class="line"><span class="attribute">position</span>:absolute;</span><br><span class="line"><span class="attribute">left</span>:<span class="number">50%</span>;</span><br><span class="line"><span class="attribute">margin-left</span>:-<span class="number">150px</span>/*水平距离一半*/</span><br><span class="line">/*<span class="built_in">translate</span>(-<span class="number">50%</span>,<span class="number">0</span>);*/</span><br></pre></td></tr></table></figure></li>
+<li>变成行内块的显示模式:加宽度高度生效，如果没有宽度也没有内容，盒子的宽度尺寸是0</li>
+<li>子绝父相：子级绝对定位，父级相对定位</li>
+</ul>
+</li>
+<li>固定定位<ul>
+<li>脱标，相对于浏览器窗口</li>
+<li>行内块特点</li>
+</ul>
+</li>
+</ul>
+<h2 id="vertical-align"><a href="#vertical-align" class="headerlink" title="vertical-align"></a>vertical-align</h2><ul>
+<li><p>浏览器处理行内和行内块默认按基线对齐导致</p>
+</li>
+<li><p>baseline;top;bottom;middle;</p>
+</li>
+<li><p>```css<br>/* 文本框和图片基线对齐 */<br>input{</p>
+<pre><code>height:50px;
+box-sizing:boder-box;
+vertical-align:middle;
+</code></pre>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- ```css</span><br><span class="line">  /* 父级div由文字内容撑开：图片取消基线对齐的两种处理模式 */</span><br><span class="line">  img&#123;</span><br><span class="line">      vertical-align:middle;</span><br><span class="line">      display:block;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li><pre><code class="css">/* 图片垂直 水平居中 */
+
+.father&#123;
+    width:600px;  /* 图片垂直居中 */
+    height:600px;
+    background-color:pink;
+    line-height:600px;  /* 图片垂直居中 */
+    /* 图片水平居中：处理行内和行内块按文字 */
+    text-align:center;
+&#125;
+img&#123;
+    vertical-align:middle;  /* 图片垂直居中 */
+&#125;
+</code></pre>
+</li>
+</ul>
+
+    </article>
+    <!-- license -->
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2022/03/11/git/" title="Git">
+                    <div class="nextTitle">Git</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/02/14/HTML/" title="HTML">
+                    <div class="prevTitle">HTML</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+    
+        
+            
+                <a href="//github.com/Mmmusel" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://github.com/Mmmusel" target="_blank">Musel</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Author <a href="https://Mmmusel.github.io" target="_blank">🍔</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">Thanks Vistiors <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E5%AD%97%E6%A0%B7%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">文字样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%A0%B7%E5%BC%8F"><span class="toc-number">1.4.</span> <span class="toc-text">文本样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2"><span class="toc-number">1.5.</span> <span class="toc-text">颜色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#code1"><span class="toc-number">1.6.</span> <span class="toc-text">code1</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6"><span class="toc-number">2.</span> <span class="toc-text">进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#emmet%E8%AF%AD%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">emmet语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">2.2.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text">显示模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS%E7%89%B9%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">CSS特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#code2"><span class="toc-number">2.5.</span> <span class="toc-text">code2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">盒子模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#code3"><span class="toc-number">3.1.</span> <span class="toc-text">code3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">3.2.</span> <span class="toc-text">结构伪类选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%AA%E5%85%83%E7%B4%A0"><span class="toc-number">3.3.</span> <span class="toc-text">伪元素</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%AE%E5%8A%A8"><span class="toc-number">4.</span> <span class="toc-text">浮动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8"><span class="toc-number">4.1.</span> <span class="toc-text">清除浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8D"><span class="toc-number">4.2.</span> <span class="toc-text">定位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E9%A1%B5%E5%B8%B8%E8%A7%81%E5%B8%83%E5%B1%80%E5%BD%A2%E5%BC%8F"><span class="toc-number">4.2.1.</span> <span class="toc-text">网页常见布局形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">4.2.2.</span> <span class="toc-text">定位方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vertical-align"><span class="toc-number">4.3.</span> <span class="toc-text">vertical-align</span></a></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 11
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span>
+            <a class="archive-post-title" href="/2022/05/04/Unix-MyShell-Summary/">BUAA-Unix-Linux下C语言实现MyShell</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span>
+            <a class="archive-post-title" href="/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span>
+            <a class="archive-post-title" href="/2022/03/24/OO-Unit1-summary/">BUAA-OO-Unit1</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span>
+            <a class="archive-post-title" href="/2022/03/23/OS-lab2-summary/">BUAA-OS-Lab2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2022/03/15/OS-lab0-summary/">BUAA-OS-Lab0</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span>
+            <a class="archive-post-title" href="/2022/03/12/shell/">Shell</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/">OS-Pre-Cause SR EPC BadVaddr</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/git/">Git</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span>
+            <a class="archive-post-title" href="/2022/02/16/CSS/">CSS</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span>
+            <a class="archive-post-title" href="/2022/02/14/HTML/">HTML</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span>
+            <a class="archive-post-title" href="/2022/01/27/hello-world/">Hello World</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="CSS">
+                <span class="iconfont-archer">&#xe606;</span>
+                CSS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OO">
+                <span class="iconfont-archer">&#xe606;</span>
+                OO
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OS">
+                <span class="iconfont-archer">&#xe606;</span>
+                OS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Unix">
+                <span class="iconfont-archer">&#xe606;</span>
+                Unix
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "http://example.com",
+        root: siteMetaRoot,
+        author: "John Doe"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v="></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v="></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>

@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://example.com/2022/05/03/OS-lab3-summary/clock1.jpg">
 <meta property="og:image" content="http://example.com/2022/05/03/OS-lab3-summary/clock2.jpg">
 <meta property="article:published_time" content="2022-05-03T08:19:53.000Z">
-<meta property="article:modified_time" content="2022-05-05T02:21:10.963Z">
+<meta property="article:modified_time" content="2022-05-05T02:32:55.502Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
@@ -511,23 +511,29 @@
 </blockquote>
 <ul>
 <li>ULIM: user limit:kuseg用户态上限，0x8000 0000区分内核态和用户态的地址</li>
-<li>UTOP: userSpace top:用户可分配虚拟内存上限<blockquote>
+<li>UTOP: userSpace top:用户可分配虚拟内存上限  </li>
+</ul>
+<blockquote>
 <p>UTOP 和 ULIM 之间的区域与 UTOP 以下的区域相比有什么区别？</p>
 </blockquote>
-</li>
+<ul>
 <li>UTOP 和 ULIM 之间的区域：<ul>
 <li>用与存放页表和内核结构体，用户不可自由分配，即env中结构体数组的pgdir被清零后不会被赋值</li>
 <li>其中UPAGES和ENVS其所占的物理页面，除了映射到用户态的这一部分虚拟地址，还与内核中的虚拟地址有一一映射关系。</li>
 </ul>
 </li>
-<li>UTOP 以下的区域：占用物理内存，但是以页表形式，没有物理内存和内核地址的一一映射<blockquote>
+<li>UTOP 以下的区域：占用物理内存，但是以页表形式，没有物理内存和内核地址的一一映射  </li>
+</ul>
+<blockquote>
 <p>请结合系统自映射机制解释 Step4 中pgdir[PDX(UVPT)]=env_cr3的含义。</p>
 </blockquote>
-</li>
-<li>内核态中的虚拟页目录的第PDX(UVPT)个页目录项中保存着此页目录所在页表的基地址的物理地址env_cr3<blockquote>
+<ul>
+<li>内核态中的虚拟页目录的第PDX(UVPT)个页目录项中保存着此页目录所在页表的基地址的物理地址env_cr3  </li>
+</ul>
+<blockquote>
 <p>谈谈自己对进程中物理地址和虚拟地址的理解。</p>
 </blockquote>
-</li>
+<ul>
 <li>每个进程都有kuseg的2G虚拟空间，但是实际所有进程共享相同的内存空间。不同的进程有相同的虚拟地址，但是相同虚拟地址映射到不同物理地址</li>
 </ul>
 <h2 id="Thinking-3-3"><a href="#Thinking-3-3" class="headerlink" title="Thinking 3.3"></a>Thinking 3.3</h2><blockquote>
@@ -543,16 +549,16 @@
 </blockquote>
 <img src="/2022/05/03/OS-lab3-summary/mapper.jpg" class="" title="pic1">
 
-
-
 <h2 id="Thinking-3-5"><a href="#Thinking-3-5" class="headerlink" title="Thinking 3.5"></a>Thinking 3.5</h2><blockquote>
 <p>你认为这里的 env_tf.pc 存储的是物理地址还是虚拟地址?</p>
 </blockquote>
 <ul>
-<li>物理地址。大概在0x400000+<blockquote>
+<li>物理地址。大概在0x400000+   </li>
+</ul>
+<blockquote>
 <p>你觉得entry_point其值对于每个进程是否一样？该如何理解这种统一或不同？</p>
 </blockquote>
-</li>
+<ul>
 <li>entry_point是一样的虚拟地址，但是进程PCB不同，可以映射到各自不同的物理地址。</li>
 </ul>
 <h2 id="Thinking-3-6"><a href="#Thinking-3-6" class="headerlink" title="Thinking 3.6"></a>Thinking 3.6</h2><blockquote>
@@ -566,10 +572,12 @@
 <p>操作系统在何时将什么内容存到了 TIMESTACK 区域</p>
 </blockquote>
 <ul>
-<li>handle_int()处理时钟中断时，SAVE_ALL保存当前寄存器值的栈顶地址get_sp为0x8200_0000，即为TIMESTACK。<blockquote>
+<li>handle_int()处理时钟中断时，SAVE_ALL保存当前寄存器值的栈顶地址get_sp为0x8200_0000，即为TIMESTACK.  </li>
+</ul>
+<blockquote>
 <p>TIMESTACK 和 env_asm.S 中所定义的 KERNEL_SP 的含义有何不同</p>
 </blockquote>
-</li>
+<ul>
 <li>TIMESTACK是产生时钟中断异常时用的存放CPU寄存器状态的栈顶指针，KERNEL_SP是非时钟中断异常用的栈指针。</li>
 </ul>
 <h2 id="Thinking-3-8"><a href="#Thinking-3-8" class="headerlink" title="Thinking 3.8"></a>Thinking 3.8</h2><blockquote>

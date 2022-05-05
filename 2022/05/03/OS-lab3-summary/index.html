@@ -19,23 +19,27 @@
         <meta name="keywords" content="blog">
     
     <meta name="description" content="">
-    <meta name="description" content="Cause查询Cause寄存器以决定异常类型并调用哪一种异常处理进程。 BD [31] 分支延迟 置位表示EPC没有指向实际异常指令，指向直接前序分支指令。 异常重进点为分支指令后的延迟槽时，EPC指向分支指令。这对重新执行分支是无害的，但是如果CPU从异常中返回分支延迟指令，则没有跳转分支，且异常会破坏中断的程序。  软件唯一可能注意BD位的时间是：如果它必须分析‘冒犯’指令(如果BD &#x3D; 1，">
+    <meta name="description" content="一、实验思考题Thinking 3.1 思考 envid2env 函数: 为什么 envid2env 中需要判断 e-&gt;env_id !&#x3D;envid 的情况？如果没有这步判断会发生什么情况？   mkenvid(struct Env *e)中生成的envid为(asid &lt;&lt; (1 + LOG2NENV)) | (1 &lt;&lt; LOG2NENV) | idx,即asid|">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OS-Pre-Cause SR EPC BadVaddr">
-<meta property="og:url" content="http://example.com/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/index.html">
+<meta property="og:title" content="BUAA-OS-Lab3">
+<meta property="og:url" content="http://example.com/2022/05/03/OS-lab3-summary/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Cause查询Cause寄存器以决定异常类型并调用哪一种异常处理进程。 BD [31] 分支延迟 置位表示EPC没有指向实际异常指令，指向直接前序分支指令。 异常重进点为分支指令后的延迟槽时，EPC指向分支指令。这对重新执行分支是无害的，但是如果CPU从异常中返回分支延迟指令，则没有跳转分支，且异常会破坏中断的程序。  软件唯一可能注意BD位的时间是：如果它必须分析‘冒犯’指令(如果BD &#x3D; 1，">
+<meta property="og:description" content="一、实验思考题Thinking 3.1 思考 envid2env 函数: 为什么 envid2env 中需要判断 e-&gt;env_id !&#x3D;envid 的情况？如果没有这步判断会发生什么情况？   mkenvid(struct Env *e)中生成的envid为(asid &lt;&lt; (1 + LOG2NENV)) | (1 &lt;&lt; LOG2NENV) | idx,即asid|">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-03-11T08:06:53.000Z">
-<meta property="article:modified_time" content="2022-03-12T14:46:38.592Z">
+<meta property="og:image" content="http://example.com/2022/05/03/OS-lab3-summary/mapper.jpg">
+<meta property="og:image" content="http://example.com/2022/05/03/OS-lab3-summary/clock1.jpg">
+<meta property="og:image" content="http://example.com/2022/05/03/OS-lab3-summary/clock2.jpg">
+<meta property="article:published_time" content="2022-05-03T08:19:53.000Z">
+<meta property="article:modified_time" content="2022-05-05T02:21:10.963Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/05/03/OS-lab3-summary/mapper.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/x.ico">
     
-    <title>OS-Pre-Cause SR EPC BadVaddr · Musel&#39;s blog</title>
+    <title>BUAA-OS-Lab3 · Musel&#39;s blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -260,7 +264,7 @@
                 <a href="/">Musel&#39;s blog</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">OS-Pre-Cause SR EPC BadVaddr</a>
+                <a href="#" class="post-name">BUAA-OS-Lab3</a>
             </div>
         </div>
     
@@ -306,7 +310,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                OS-Pre-Cause SR EPC BadVaddr
+                BUAA-OS-Lab3
             <!-- 404 -->
             
         </h1>
@@ -333,13 +337,13 @@
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1.9k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
+                        <span>Word count: <span class="post-count word-count">2k</span>Reading time: <span class="post-count reading-time">7 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2022/03/11</span>
+                    <span class="post-intro-time">2022/05/03</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -494,161 +498,124 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h1 id="Cause"><a href="#Cause" class="headerlink" title="Cause"></a>Cause</h1><p>查询Cause寄存器以决定异常类型并调用哪一种异常处理进程。</p>
-<h2 id="BD-31-分支延迟"><a href="#BD-31-分支延迟" class="headerlink" title="BD [31] 分支延迟"></a>BD [31] 分支延迟</h2><ul>
-<li>置位表示EPC没有指向实际异常指令，指向直接前序分支指令。</li>
-<li>异常重进点为分支指令后的延迟槽时，EPC指向分支指令。这对重新执行分支是无害的，但是如果CPU从异常中返回分支延迟指令，则没有跳转分支，且异常会破坏中断的程序。</li>
-<li><blockquote>
-<p>软件唯一可能注意BD位的时间是：如果它必须分析‘冒犯’指令(如果BD = 1，则该指令位于EPC + 4 )。如果需要对指令进行仿真(例如在没有FPA的设备中使用浮点指令)，就会出现这种情况；或放置在分支延迟槽中的断点)。</p>
+        <h1 id="一、实验思考题"><a href="#一、实验思考题" class="headerlink" title="一、实验思考题"></a>一、实验思考题</h1><h2 id="Thinking-3-1"><a href="#Thinking-3-1" class="headerlink" title="Thinking 3.1"></a>Thinking 3.1</h2><blockquote>
+<p>思考 envid2env 函数: 为什么 envid2env 中需要判断 e-&gt;env_id !=envid 的情况？如果没有这步判断会发生什么情况？</p>
 </blockquote>
-<h2 id="CE-29-28-协处理器错误"><a href="#CE-29-28-协处理器错误" class="headerlink" title="CE [29:28] 协处理器错误"></a>CE [29:28] 协处理器错误</h2></li>
-<li>如果异常是因为 协处理器指令是针对SR中CUx位未启用的CP，那么CE就有来自该指令的协处理器编号。<h2 id="IP-15-8-中断待决断"><a href="#IP-15-8-中断待决断" class="headerlink" title="IP [15:8] 中断待决断"></a>IP [15:8] 中断待决断</h2></li>
-<li>显示当前生效的中断(但可能在实际表征异常的情况下被掩盖)。</li>
-<li>这些位在六个硬件层次上都遵循CPU的输入。</li>
-<li>位9和位8是可读/可写的，保存最后写入的值。</li>
-<li>当8位中的任何一个被<strong>合适的IM位使能</strong>以及SR中全局中断使能标志IEc激活时，都会引起中断。</li>
-<li>IP与其他Cause寄存器字段存在微妙不同：它并不表明异常发生时发生了什么，而是表明现在正在发生什么。<h2 id="ExcCode-6-2"><a href="#ExcCode-6-2" class="headerlink" title="ExcCode [6:2]"></a>ExcCode [6:2]</h2></li>
+<ul>
+<li><code>mkenvid(struct Env *e)</code>中生成的envid为<code>(asid &lt;&lt; (1 + LOG2NENV)) | (1 &lt;&lt; LOG2NENV) | idx</code>,即<code>asid|有效位|env结构体在envs数组的偏移</code>。</li>
+<li>而<code>envid2env(u_int envid, struct Env **penv, int checkperm)</code>中通过envid的偏移找到结构体<code>e=envs+ENVX(envid);</code>。而此时不能确保所给envid中asid的有效性。所以需要通过再次判断<code>e-&gt;env_id !=envid</code>保证进程块的asid.</li>
+<li>若此index所对的env已经更换，则新env结构体会对应新的ASID。如果没有这步判断，可能会出现：①所给envid所对的结构体已经被free后再次使用，即旧结构体所代表的PCB被淘汰，而此时得到的新env与envid想找的旧结构体不匹配；②env结构体没有成功切换为新进程的PCB，导致asid匹配出现错误。</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>ExcCode Value</th>
-<th>注记符</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0</td>
-<td>Int</td>
-<td>中断</td>
-</tr>
-<tr>
-<td>1</td>
-<td>Mod</td>
-<td>TLB修改</td>
-</tr>
-<tr>
-<td>2</td>
-<td>TLBL</td>
-<td>TLB load</td>
-</tr>
-<tr>
-<td>3</td>
-<td>TLBS</td>
-<td>TLB store</td>
-</tr>
-<tr>
-<td>4</td>
-<td>AdEL</td>
-<td>load/I-fetch时，用户态下地址超出kuseg或在非对齐地址读字/半字</td>
-</tr>
-<tr>
-<td>5</td>
-<td>AdES</td>
-<td>store时，用户态下地址超出kuseg或在非对齐地址读字/半字</td>
-</tr>
-<tr>
-<td>6</td>
-<td>IBE</td>
-<td>取指令总线错误。外部硬件已经预示着某种错误；合适的异常处理是系统依赖。R30xx家族CPU不能在一个存储上采取总线错误；写缓冲区会使这样的异常‘不精确’。</td>
-</tr>
-<tr>
-<td>7</td>
-<td>DBE</td>
-<td>load数据总线错误。外部硬件已经预示着某种错误；合适的异常处理是系统依赖。R30xx家族CPU不能在一个存储上采取总线错误；写缓冲区会使这样的异常‘不精确’。</td>
-</tr>
-<tr>
-<td>8</td>
-<td>Syscall</td>
-<td>系统指令无条件生成</td>
-</tr>
-<tr>
-<td>9</td>
-<td>Bp</td>
-<td>断点指令</td>
-</tr>
-<tr>
-<td>10</td>
-<td>RI</td>
-<td>未定义指令</td>
-</tr>
-<tr>
-<td>11</td>
-<td>CpU</td>
-<td>协处理器不可用</td>
-</tr>
-<tr>
-<td>12</td>
-<td>Ov</td>
-<td>算术溢出。无符号计算如addu不会导致异常</td>
-</tr>
-<tr>
-<td>13-31</td>
-<td>未定义或在后续版本中定义</td>
-<td></td>
-</tr>
-</tbody></table>
-<h1 id="EPC"><a href="#EPC" class="headerlink" title="EPC"></a>EPC</h1><ul>
-<li>异常的32位返回地址。引起(或遭受)异常的指令位于EPC。</li>
-<li>Cause中BD置位时，EPC指向前序分支指令。</li>
-</ul>
-<h1 id="BadVaddr"><a href="#BadVaddr" class="headerlink" title="BadVaddr"></a>BadVaddr</h1><ul>
-<li>存放32位导致异常的不合法的引用地址。</li>
-<li>设置在任何MMU相关的异常上，由用户程序试图访问kuseg以外的地址，或者如果某个地址对引用的基准大小错误对齐。</li>
-<li><blockquote>
-<p>在其他任何异常后，此寄存器是未定义的。<br>特别要注意，它不是在一次总线错误后设置的。</p>
+<h2 id="Thinking-3-2-结合-include-mmu-h-中的地址空间布局，思考-env-setup-vm-函数："><a href="#Thinking-3-2-结合-include-mmu-h-中的地址空间布局，思考-env-setup-vm-函数：" class="headerlink" title="Thinking 3.2 结合 include/mmu.h 中的地址空间布局，思考 env_setup_vm 函数："></a>Thinking 3.2 结合 include/mmu.h 中的地址空间布局，思考 env_setup_vm 函数：</h2><blockquote>
+<p>UTOP 和 ULIM 的含义分别是什么?</p>
+</blockquote>
+<ul>
+<li>ULIM: user limit:kuseg用户态上限，0x8000 0000区分内核态和用户态的地址</li>
+<li>UTOP: userSpace top:用户可分配虚拟内存上限<blockquote>
+<p>UTOP 和 ULIM 之间的区域与 UTOP 以下的区域相比有什么区别？</p>
 </blockquote>
 </li>
-</ul>
-<h1 id="SR：存储MIPS-CPU的各种模式"><a href="#SR：存储MIPS-CPU的各种模式" class="headerlink" title="SR：存储MIPS CPU的各种模式"></a>SR：存储MIPS CPU的各种模式</h1><blockquote>
-<p>注：以下标题格式为：[位名称] [在寄存器中的位数] [作用]</p>
-</blockquote>
-<h2 id="CU3-CU2-31-30-CP3CP2使用权"><a href="#CU3-CU2-31-30-CP3CP2使用权" class="headerlink" title="CU3,CU2 [31:30] CP3CP2使用权"></a>CU3,CU2 [31:30] CP3CP2使用权</h2><ul>
-<li>软件使用BrCond[3:2]用于轮询的输入引脚 或 者加速异常解码。<h2 id="CU1-29-CP1使用权，能否使用FPA浮点协处理器"><a href="#CU1-29-CP1使用权，能否使用FPA浮点协处理器" class="headerlink" title="CU1 [29] CP1使用权，能否使用FPA浮点协处理器"></a>CU1 [29] CP1使用权，能否使用FPA浮点协处理器</h2><ul>
-<li>置零时，内核态与用户态下运行FPA指令都会导致异常。</li>
-<li>可用于停用空闲FPA。</li>
-<li>如果使用BrCond[1]用于轮询的输入，没有FPA的CU1也会被置位。<h2 id="CU0-28-CP0使用权"><a href="#CU0-28-CP0使用权" class="headerlink" title="CU0 [28] CP0使用权"></a>CU0 [28] CP0使用权</h2></li>
-<li>用户态使用nominally-priviledged指令(少)</li>
-<li>CP0内核态保持可使用状态，无视CU0位。<h2 id="RE-25-用户态时反转大小端即字节顺序"><a href="#RE-25-用户态时反转大小端即字节顺序" class="headerlink" title="RE [25] 用户态时反转大小端即字节顺序"></a>RE [25] 用户态时反转大小端即字节顺序</h2></li>
-<li>保证大小端系统间的移植性。</li>
-<li>嵌入式系统实现反转字节序需要大量软件工作。<h2 id="BEV-22-引导异常向量"><a href="#BEV-22-引导异常向量" class="headerlink" title="BEV [22] 引导异常向量"></a>BEV [22] 引导异常向量</h2></li>
-<li>置位：CPU使用ROM kseg2异常入口点。</li>
-<li>通常置零</li>
-<li>将异常向量重新定位到RAM地址，加快访问速度，允许使用”用户提供”的异常服务例程。<h2 id="TS-21-置位时关闭TLB"><a href="#TS-21-置位时关闭TLB" class="headerlink" title="TS [21] 置位时关闭TLB"></a>TS [21] 置位时关闭TLB</h2></li>
-<li>程序地址同时匹配两个TLB条目</li>
-<li>长时间此状态时损坏芯片</li>
-<li>TLB关闭是永久的，只能被硬件复位清除。</li>
-<li>软件依此判断硬件是否支持TLB<h2 id="PE-20-如果发生缓存奇偶错误，则置位"><a href="#PE-20-如果发生缓存奇偶错误，则置位" class="headerlink" title="PE [20] 如果发生缓存奇偶错误，则置位"></a>PE [20] 如果发生缓存奇偶错误，则置位</h2></li>
+<li>UTOP 和 ULIM 之间的区域：<ul>
+<li>用与存放页表和内核结构体，用户不可自由分配，即env中结构体数组的pgdir被清零后不会被赋值</li>
+<li>其中UPAGES和ENVS其所占的物理页面，除了映射到用户态的这一部分虚拟地址，还与内核中的虚拟地址有一一映射关系。</li>
 </ul>
 </li>
-<li>这个条件不会导致异常，真正只对诊断有用。</li>
-<li>MIPS架构具有缓存诊断功能，因为早期版本的CPU使用外部缓存，这为验证特定系统的时序提供了一种方法。</li>
-<li>对于这些实现，缓存奇偶错误位是必不可少的设计调试工具。</li>
-<li>单片缓存不需要这个特性，R3071、R3081<h2 id="CM-19-显示用隔离D-cache执行的最后一次load操作的结果"><a href="#CM-19-显示用隔离D-cache执行的最后一次load操作的结果" class="headerlink" title="CM [19] 显示用隔离D-cache执行的最后一次load操作的结果"></a>CM [19] 显示用隔离D-cache执行的最后一次load操作的结果</h2><blockquote>
-<p>CM是指如果缓存中确实包含了地址存储器位置的数据(即使缓存没有被隔离，缓存中的负载也会被击中)。</p>
+<li>UTOP 以下的区域：占用物理内存，但是以页表形式，没有物理内存和内核地址的一一映射<blockquote>
+<p>请结合系统自映射机制解释 Step4 中pgdir[PDX(UVPT)]=env_cr3的含义。</p>
 </blockquote>
-<h2 id="PZ-18-置位时缓存奇偶位写0并且不被检查"><a href="#PZ-18-置位时缓存奇偶位写0并且不被检查" class="headerlink" title="PZ [18] 置位时缓存奇偶位写0并且不被检查"></a>PZ [18] 置位时缓存奇偶位写0并且不被检查</h2></li>
-<li>对早期需要外部RAM缓存的R3000A系统有价值。<h2 id="SwC-IsC-17-16-对内存管理和诊断的内存模式位"><a href="#SwC-IsC-17-16-对内存管理和诊断的内存模式位" class="headerlink" title="SwC IsC [17][16]对内存管理和诊断的内存模式位"></a>SwC IsC [17][16]对内存管理和诊断的内存模式位</h2><h2 id="SwC-17-交换缓存"><a href="#SwC-17-交换缓存" class="headerlink" title="SwC [17] 交换缓存"></a>SwC [17] 交换缓存</h2></li>
-<li>所有load和store只能访问数据缓存，不访问内存。</li>
-<li>此模式下局部字store(lb)使缓存条目无效</li>
-<li>总线中不会出现未缓存的数据访问</li>
-<li>此位不被reset初始化，故启动程式软件必须确保此位在依赖外部数据引用之前被正确初始化<h2 id="IsC-16-隔离缓存"><a href="#IsC-16-隔离缓存" class="headerlink" title="IsC [16] 隔离缓存"></a>IsC [16] 隔离缓存</h2></li>
-<li>反转I-缓存和D-缓存功能，所以软件能够访问并使指令高速缓存条目无效<h2 id="IM-15-8-中断掩码-定义中断源，作为允许异常的标志"><a href="#IM-15-8-中断掩码-定义中断源，作为允许异常的标志" class="headerlink" title="IM [15:8] 中断掩码 定义中断源，作为允许异常的标志"></a>IM [15:8] 中断掩码 定义中断源，作为允许异常的标志</h2></li>
-<li>六种中断源是外部引脚<ul>
-<li>其中之一会被FPA使用，虽然与其他同属一个芯片，但逻辑层面是外在的</li>
-<li>其余两种是Cause寄存器中软件写的中断位。</li>
+</li>
+<li>内核态中的虚拟页目录的第PDX(UVPT)个页目录项中保存着此页目录所在页表的基地址的物理地址env_cr3<blockquote>
+<p>谈谈自己对进程中物理地址和虚拟地址的理解。</p>
+</blockquote>
+</li>
+<li>每个进程都有kuseg的2G虚拟空间，但是实际所有进程共享相同的内存空间。不同的进程有相同的虚拟地址，但是相同虚拟地址映射到不同物理地址</li>
+</ul>
+<h2 id="Thinking-3-3"><a href="#Thinking-3-3" class="headerlink" title="Thinking 3.3"></a>Thinking 3.3</h2><blockquote>
+<p>找到 user_data 这一参数的来源，思考它的作用。没有这个参数可不可以？为什么？（可以尝试说明实际的应用场景，举一个实际的库中的例子）</p>
+</blockquote>
+<ul>
+<li>来源：env_create_priority()函数中alloc的Env结构体指针</li>
+<li>这个参数的作用是传给load_elf函数，并作为load_elf的int* map函数的参数，获得结构体的页目录</li>
+<li>c语言库函数中qsort()的回调函数<code>int(*cmp)(const void* e1,const void* e2))</code>使用qsort()的参数width实现多类型的比较：<code>cmp((char*)base + j*width,(char*)base+(j+1)*width) &gt; 0))</code></li>
+</ul>
+<h2 id="Thinking-3-4"><a href="#Thinking-3-4" class="headerlink" title="Thinking 3.4"></a>Thinking 3.4</h2><blockquote>
+<p>结合 load_icode_mapper 的参数以及二进制镜像的大小，考虑该函<br>数可能会面临哪几种复制的情况？你是否都考虑到了？</p>
+</blockquote>
+<img src="/2022/05/03/OS-lab3-summary/mapper.jpg" class="" title="pic1">
+
+
+
+<h2 id="Thinking-3-5"><a href="#Thinking-3-5" class="headerlink" title="Thinking 3.5"></a>Thinking 3.5</h2><blockquote>
+<p>你认为这里的 env_tf.pc 存储的是物理地址还是虚拟地址?</p>
+</blockquote>
+<ul>
+<li>物理地址。大概在0x400000+<blockquote>
+<p>你觉得entry_point其值对于每个进程是否一样？该如何理解这种统一或不同？</p>
+</blockquote>
+</li>
+<li>entry_point是一样的虚拟地址，但是进程PCB不同，可以映射到各自不同的物理地址。</li>
+</ul>
+<h2 id="Thinking-3-6"><a href="#Thinking-3-6" class="headerlink" title="Thinking 3.6"></a>Thinking 3.6</h2><blockquote>
+<p>请查阅相关资料解释，上面提到的 epc 是什么？为什么要将env_tf.pc 设置为 epc 呢？</p>
+</blockquote>
+<ul>
+<li>epc是发生异常中断时执行到的pc值,保存在curenv-&gt;env_tf.cp0_epc。</li>
+<li>env_tf.pc保存进程上下文，pc保存了返回该进程时开始执行的pc值，即为发生异常时的epc</li>
+</ul>
+<h2 id="Thinking-3-7"><a href="#Thinking-3-7" class="headerlink" title="Thinking 3.7"></a>Thinking 3.7</h2><blockquote>
+<p>操作系统在何时将什么内容存到了 TIMESTACK 区域</p>
+</blockquote>
+<ul>
+<li>handle_int()处理时钟中断时，SAVE_ALL保存当前寄存器值的栈顶地址get_sp为0x8200_0000，即为TIMESTACK。<blockquote>
+<p>TIMESTACK 和 env_asm.S 中所定义的 KERNEL_SP 的含义有何不同</p>
+</blockquote>
+</li>
+<li>TIMESTACK是产生时钟中断异常时用的存放CPU寄存器状态的栈顶指针，KERNEL_SP是非时钟中断异常用的栈指针。</li>
+</ul>
+<h2 id="Thinking-3-8"><a href="#Thinking-3-8" class="headerlink" title="Thinking 3.8"></a>Thinking 3.8</h2><blockquote>
+<p>试找出上述 5 个异常处理函数的具体实现位置。</p>
+</blockquote>
+<ul>
+<li>genex.S中有 handle_int()的实现，有do_refill()即handle_tlb()的实现</li>
+<li>syscall.S有handle_sys()的实现</li>
+</ul>
+<h2 id="Thinking-3-9"><a href="#Thinking-3-9" class="headerlink" title="Thinking 3.9"></a>Thinking 3.9</h2><blockquote>
+<p>阅读 kclock_asm.S 和 genex.S 两个文件，并尝试说出 set_timer 和time_irq 函数中每行汇编代码的作用</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">	.<span class="function">text</span></span><br><span class="line"><span class="function"><span class="title">LEAF</span><span class="params">(set_timer)</span></span></span><br><span class="line"><span class="function">	li t0, 0xc8</span></span><br><span class="line"><span class="function">	sb t0, 0xb5000100 </span></span><br><span class="line"><span class="function"><span class="comment">//实时钟绑定4号中断，触发4号中断</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">	sw	sp, KERNEL_SP </span></span><br><span class="line"><span class="function"><span class="comment">//内核栈保存栈寄存器值</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">setup_c0_status STATUS_CU0|0x1001 0</span></span><br><span class="line"><span class="function"><span class="comment">//设置SR寄存器的状态：</span></span></span><br><span class="line"><span class="function"><span class="comment">//1.STATUS_CU0：打开CP0寄存器使用权</span></span></span><br><span class="line"><span class="function"><span class="comment">//2.SR[16]：IsC：软件能够访问并使指令高速缓存条目无效</span></span></span><br><span class="line"><span class="function"><span class="comment">//3.SR[4]：IEo</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">	jr ra</span></span><br><span class="line"><span class="function">	nop</span></span><br><span class="line"><span class="function"><span class="title">END</span><span class="params">(set_timer)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">	.<span class="keyword">extern</span> delay</span></span><br><span class="line"><span class="function">timer_irq:</span></span><br><span class="line"><span class="function">	sb zero, 0xb5000110</span></span><br><span class="line"><span class="function"><span class="comment">//关闭时钟中断</span></span></span><br><span class="line"><span class="function">1:	j	sched_yield</span></span><br><span class="line"><span class="function"><span class="comment">//进程调度</span></span></span><br><span class="line"><span class="function">	nop</span></span><br><span class="line"><span class="function">	<span class="comment">/*li t1, 0xff</span></span></span><br><span class="line"><span class="comment"><span class="function">	lw    t0, delay</span></span></span><br><span class="line"><span class="comment"><span class="function">	addu  t0, 1</span></span></span><br><span class="line"><span class="comment"><span class="function">	sw	t0, delay</span></span></span><br><span class="line"><span class="comment"><span class="function">	beq	t0,t1,1f	</span></span></span><br><span class="line"><span class="comment"><span class="function">	nop*/</span></span></span><br><span class="line"><span class="function">	j	ret_from_exception</span></span><br><span class="line"><span class="function"><span class="comment">//异常返回</span></span></span><br><span class="line"><span class="function">	nop</span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Thinking-3-10"><a href="#Thinking-3-10" class="headerlink" title="Thinking 3.10"></a>Thinking 3.10</h2><blockquote>
+<p>阅读相关代码，思考操作系统是怎么根据时钟周期切换进程的。</p>
+</blockquote>
+<img src="/2022/05/03/OS-lab3-summary/clock1.jpg" class="" title="pic1">
+<img src="/2022/05/03/OS-lab3-summary/clock2.jpg" class="" title="pic1">
+
+<h1 id="二、实验难点与指导书反馈"><a href="#二、实验难点与指导书反馈" class="headerlink" title="二、实验难点与指导书反馈"></a>二、实验难点与指导书反馈</h1><ul>
+<li>初始化进程目录时，没有理解为什么要复制UTOP上部分的内核目录，也不知道这部分的权限该如何设置。建议建议指导书把<strong>权限位</strong>的作用在头文件中指明，或者在lab教程中指明本实验中用到的权限位及其说明</li>
+<li>汇编代码读起来比较晦涩，可以把R3000中的一些部分的<strong>汇编知识</strong>抽离出来，辅助理解；比如：<ul>
+<li>SR寄存器各个位的作用。因为个人感觉虽然自己强硬地把R3000中那部分阅读翻译了一遍，但实际上还是比较困惑，不是很能读懂</li>
+<li>使用到的伪指令的作用。伪指令对阅读理解造成了比较大的理解障碍。</li>
 </ul>
 </li>
-<li>CPU不提供中断优先级。硬件处理所有中断时一视同仁。[见异常处理章节]<h2 id="KUc-IEc-1-0-计算机保护位"><a href="#KUc-IEc-1-0-计算机保护位" class="headerlink" title="KUc IEc [1][0]计算机保护位"></a>KUc IEc [1][0]计算机保护位</h2><h2 id="KUc-1-内核态置位"><a href="#KUc-1-内核态置位" class="headerlink" title="KUc [1] 内核态置位"></a>KUc [1] 内核态置位</h2></li>
-<li>内核状态下，软件可以在整个程序地址空间内得到并使用特权指令(CP0)。用户模式限制软件在<strong>kuseg</strong>地址空间内，运行权限指令时会被拒绝。违反此项规则会导致异常。<h2 id="IEc-0-置位允许计算机接受中断"><a href="#IEc-0-置位允许计算机接受中断" class="headerlink" title="IEc [0] 置位允许计算机接受中断"></a>IEc [0] 置位允许计算机接受中断</h2><h2 id="KUp-IEp-3-2"><a href="#KUp-IEp-3-2" class="headerlink" title="KUp IEp [3][2]"></a>KUp IEp [3][2]</h2></li>
-<li>在异常时，硬件接受 KUc IEc 的值并保存在 KUp IEp。</li>
-<li>同时修改KUc IEc为1和0。此时内核态下拒绝接受中断。</li>
-<li>rfe指令可以被用于复制KUp IEp返还到KUc IEc。<h2 id="KUo-IEo-5-4"><a href="#KUo-IEo-5-4" class="headerlink" title="KUo IEo [5][4]"></a>KUo IEo [5][4]</h2></li>
-<li>异常时KUp IEp在此处保存。</li>
-<li>六个KU/IE位被一个三位深度，两位位宽的栈操作。</li>
-<li>堆栈遇到异常时push，遇到ref指令pop。</li>
-<li>这很早地在异常处理过程中 提供了从异常中干净恢复的机会 以至于第一个异常还未在SR中完成保存。</li>
-<li>此类操作可以被完成的情况受限，仅用于允许用户TLB充填短一些的代码。[见内存管理章节]</li>
+<li><code>load_icode_mapper()</code>，纠结了很久段尾要不要考虑和后面段的共享页面。希望指导书可以提前说明段按地址顺序由小到大加载，只用考虑段首的页面共用情况</li>
+<li>de的第一个Bug就是<code>load_elf()</code>里面的binary地址，开始没有给<code>binary+shdr_offset</code>的段偏移</li>
+<li>TIMESTACK和SP两个概念的辨析：这个思考题一开始卡住了，原因是<code>grep -r TIMESTACK</code>的时候没有查到汇编代码get_sp出现了0x8200_0000。</li>
+<li>可以强调一下<code>INSERT_TAIL(env_sche_list,e,sche_link)</code>要在<code>env_create()</code>而不是alloc时插入</li>
+<li>进程调度算法时为<code>INSERT_TAIL</code></li>
+</ul>
+<h1 id="三、体会与感想"><a href="#三、体会与感想" class="headerlink" title="三、体会与感想"></a>三、体会与感想</h1><p>个人对Lab3的整体感受是比Lab2体验差很多。主要是以下原因：</p>
+<ul>
+<li>课下：<ul>
+<li>Lab2对存储管理的结构比较浑然一体，Lab3的知识相对零碎，比如很多变量的设置并不能直接看到其作用效果或范围，所以debug的时候也比较困难，比如Lab2debug还可以通过输出地址判断本步骤的正确性等，Lab3设计很多汇编函数和寄存器的操作，不管是理解还是测试都不是很容易</li>
+<li>从Lab3遇到Bug会比较瞻前顾后，不知道是本次Lab还是之前Lab的bug，排查Bug所在范围的过程比较头疼</li>
+</ul>
+</li>
+<li>上机时的Exam和Extra题面都比较模糊，具体是以下几点：<ul>
+<li>Exam对于“版本号相同、ASID空闲”这一分支并未显式说明要分配此ASID，而另一分支显式说明“找到最小的未使用ASID并分配”，且还强调“不要做任何无关操作”，虽然按题意是要分配，但是在阅读上的体验并不好，会在是否需要分配的问题上绊住</li>
+<li>Exam对于“模拟位图”和“运行进程”的界定可以更清晰些，避免歧义</li>
+<li>Extra对PV操作资源的个数并未叙述清楚造成理解偏差</li>
+</ul>
+</li>
 </ul>
 
     </article>
@@ -659,16 +626,16 @@
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href="/2022/03/12/shell/" title="Shell">
-                    <div class="nextTitle">Shell</div>
+                <a href="/2022/05/04/Unix-MyShell-Summary/" title="BUAA-Unix-Linux下C语言实现MyShell">
+                    <div class="nextTitle">BUAA-Unix-Linux下C语言实现MyShell</div>
                 </a>
             
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2022/03/11/git/" title="Git">
-                    <div class="prevTitle">Git</div>
+                <a href="/2022/05/01/OO-Unit2-summary/" title="BUAA-OO-Unit2">
+                    <div class="prevTitle">BUAA-OO-Unit2</div>
                 </a>
             
         </li>
@@ -797,7 +764,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cause"><span class="toc-number">1.</span> <span class="toc-text">Cause</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BD-31-%E5%88%86%E6%94%AF%E5%BB%B6%E8%BF%9F"><span class="toc-number">1.1.</span> <span class="toc-text">BD [31] 分支延迟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CE-29-28-%E5%8D%8F%E5%A4%84%E7%90%86%E5%99%A8%E9%94%99%E8%AF%AF"><span class="toc-number">1.2.</span> <span class="toc-text">CE [29:28] 协处理器错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP-15-8-%E4%B8%AD%E6%96%AD%E5%BE%85%E5%86%B3%E6%96%AD"><span class="toc-number">1.3.</span> <span class="toc-text">IP [15:8] 中断待决断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ExcCode-6-2"><span class="toc-number">1.4.</span> <span class="toc-text">ExcCode [6:2]</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#EPC"><span class="toc-number">2.</span> <span class="toc-text">EPC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BadVaddr"><span class="toc-number">3.</span> <span class="toc-text">BadVaddr</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SR%EF%BC%9A%E5%AD%98%E5%82%A8MIPS-CPU%E7%9A%84%E5%90%84%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">SR：存储MIPS CPU的各种模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CU3-CU2-31-30-CP3CP2%E4%BD%BF%E7%94%A8%E6%9D%83"><span class="toc-number">4.1.</span> <span class="toc-text">CU3,CU2 [31:30] CP3CP2使用权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CU1-29-CP1%E4%BD%BF%E7%94%A8%E6%9D%83%EF%BC%8C%E8%83%BD%E5%90%A6%E4%BD%BF%E7%94%A8FPA%E6%B5%AE%E7%82%B9%E5%8D%8F%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">4.2.</span> <span class="toc-text">CU1 [29] CP1使用权，能否使用FPA浮点协处理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CU0-28-CP0%E4%BD%BF%E7%94%A8%E6%9D%83"><span class="toc-number">4.3.</span> <span class="toc-text">CU0 [28] CP0使用权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RE-25-%E7%94%A8%E6%88%B7%E6%80%81%E6%97%B6%E5%8F%8D%E8%BD%AC%E5%A4%A7%E5%B0%8F%E7%AB%AF%E5%8D%B3%E5%AD%97%E8%8A%82%E9%A1%BA%E5%BA%8F"><span class="toc-number">4.4.</span> <span class="toc-text">RE [25] 用户态时反转大小端即字节顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BEV-22-%E5%BC%95%E5%AF%BC%E5%BC%82%E5%B8%B8%E5%90%91%E9%87%8F"><span class="toc-number">4.5.</span> <span class="toc-text">BEV [22] 引导异常向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS-21-%E7%BD%AE%E4%BD%8D%E6%97%B6%E5%85%B3%E9%97%ADTLB"><span class="toc-number">4.6.</span> <span class="toc-text">TS [21] 置位时关闭TLB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PE-20-%E5%A6%82%E6%9E%9C%E5%8F%91%E7%94%9F%E7%BC%93%E5%AD%98%E5%A5%87%E5%81%B6%E9%94%99%E8%AF%AF%EF%BC%8C%E5%88%99%E7%BD%AE%E4%BD%8D"><span class="toc-number">4.7.</span> <span class="toc-text">PE [20] 如果发生缓存奇偶错误，则置位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CM-19-%E6%98%BE%E7%A4%BA%E7%94%A8%E9%9A%94%E7%A6%BBD-cache%E6%89%A7%E8%A1%8C%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E6%AC%A1load%E6%93%8D%E4%BD%9C%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="toc-number">4.8.</span> <span class="toc-text">CM [19] 显示用隔离D-cache执行的最后一次load操作的结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PZ-18-%E7%BD%AE%E4%BD%8D%E6%97%B6%E7%BC%93%E5%AD%98%E5%A5%87%E5%81%B6%E4%BD%8D%E5%86%990%E5%B9%B6%E4%B8%94%E4%B8%8D%E8%A2%AB%E6%A3%80%E6%9F%A5"><span class="toc-number">4.9.</span> <span class="toc-text">PZ [18] 置位时缓存奇偶位写0并且不被检查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SwC-IsC-17-16-%E5%AF%B9%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%AF%8A%E6%96%AD%E7%9A%84%E5%86%85%E5%AD%98%E6%A8%A1%E5%BC%8F%E4%BD%8D"><span class="toc-number">4.10.</span> <span class="toc-text">SwC IsC [17][16]对内存管理和诊断的内存模式位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SwC-17-%E4%BA%A4%E6%8D%A2%E7%BC%93%E5%AD%98"><span class="toc-number">4.11.</span> <span class="toc-text">SwC [17] 交换缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IsC-16-%E9%9A%94%E7%A6%BB%E7%BC%93%E5%AD%98"><span class="toc-number">4.12.</span> <span class="toc-text">IsC [16] 隔离缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IM-15-8-%E4%B8%AD%E6%96%AD%E6%8E%A9%E7%A0%81-%E5%AE%9A%E4%B9%89%E4%B8%AD%E6%96%AD%E6%BA%90%EF%BC%8C%E4%BD%9C%E4%B8%BA%E5%85%81%E8%AE%B8%E5%BC%82%E5%B8%B8%E7%9A%84%E6%A0%87%E5%BF%97"><span class="toc-number">4.13.</span> <span class="toc-text">IM [15:8] 中断掩码 定义中断源，作为允许异常的标志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KUc-IEc-1-0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BF%9D%E6%8A%A4%E4%BD%8D"><span class="toc-number">4.14.</span> <span class="toc-text">KUc IEc [1][0]计算机保护位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KUc-1-%E5%86%85%E6%A0%B8%E6%80%81%E7%BD%AE%E4%BD%8D"><span class="toc-number">4.15.</span> <span class="toc-text">KUc [1] 内核态置位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IEc-0-%E7%BD%AE%E4%BD%8D%E5%85%81%E8%AE%B8%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8E%A5%E5%8F%97%E4%B8%AD%E6%96%AD"><span class="toc-number">4.16.</span> <span class="toc-text">IEc [0] 置位允许计算机接受中断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KUp-IEp-3-2"><span class="toc-number">4.17.</span> <span class="toc-text">KUp IEp [3][2]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KUo-IEo-5-4"><span class="toc-number">4.18.</span> <span class="toc-text">KUo IEo [5][4]</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">一、实验思考题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-1"><span class="toc-number">1.1.</span> <span class="toc-text">Thinking 3.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-2-%E7%BB%93%E5%90%88-include-mmu-h-%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E5%B8%83%E5%B1%80%EF%BC%8C%E6%80%9D%E8%80%83-env-setup-vm-%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">Thinking 3.2 结合 include&#x2F;mmu.h 中的地址空间布局，思考 env_setup_vm 函数：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-3"><span class="toc-number">1.3.</span> <span class="toc-text">Thinking 3.3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-4"><span class="toc-number">1.4.</span> <span class="toc-text">Thinking 3.4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-5"><span class="toc-number">1.5.</span> <span class="toc-text">Thinking 3.5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-6"><span class="toc-number">1.6.</span> <span class="toc-text">Thinking 3.6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-7"><span class="toc-number">1.7.</span> <span class="toc-text">Thinking 3.7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-8"><span class="toc-number">1.8.</span> <span class="toc-text">Thinking 3.8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-9"><span class="toc-number">1.9.</span> <span class="toc-text">Thinking 3.9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-10"><span class="toc-number">1.10.</span> <span class="toc-text">Thinking 3.10</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E9%9A%BE%E7%82%B9%E4%B8%8E%E6%8C%87%E5%AF%BC%E4%B9%A6%E5%8F%8D%E9%A6%88"><span class="toc-number">2.</span> <span class="toc-text">二、实验难点与指导书反馈</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BD%93%E4%BC%9A%E4%B8%8E%E6%84%9F%E6%83%B3"><span class="toc-number">3.</span> <span class="toc-text">三、体会与感想</span></a></li></ol>
             </div>
         
         <!-- sidebar -->

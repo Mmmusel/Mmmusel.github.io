@@ -1,0 +1,5 @@
+#web_bg {
+  background: ../images/page.jpg
+  background-repeat: no-repeat;
+  background-size: cover;
+}

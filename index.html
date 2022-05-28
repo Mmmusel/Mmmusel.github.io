@@ -1,1283 +1,305 @@
-<!DOCTYPE html>
-<html lang="en">
-    <!-- title -->
-
-
-    
-
-<!-- keywords -->
-
-
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="author" content="John Doe">
-    <meta name="renderer" content="webkit">
-    <meta name="copyright" content="John Doe">
-    
-        <meta name="keywords" content="blog">
-    
-    <meta name="description" content="">
-    <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="https://mmmusel.github.io/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-    <meta http-equiv="Cache-control" content="no-cache">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link rel="icon" href="/mmmusel.github.io/assets/x.ico">
-    
-    <title>Musel&#39;s blog</title>
-    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
-/* This file is meant as a standalone workflow for
-- testing support for link[rel=preload]
-- enabling async CSS loading in browsers that do not support rel=preload
-- applying rel preload css once loaded, whether supported or not.
-*/ -->
-<script>
-    (function (w) {
-        'use strict'
-        // rel=preload support test
-        if (!w.loadCSS) {
-            w.loadCSS = function () {}
-        }
-        // define on the loadCSS obj
-        var rp = (loadCSS.relpreload = {})
-        // rel=preload feature support test
-        // runs once and returns a function for compat purposes
-        rp.support = (function () {
-            var ret
-            try {
-                ret = w.document.createElement('link').relList.supports('preload')
-            } catch (e) {
-                ret = false
-            }
-            return function () {
-                return ret
-            }
-        })()
-
-        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
-        // then change that media back to its intended value on load
-        rp.bindMediaToggle = function (link) {
-            // remember existing media attr for ultimate state, or default to 'all'
-            var finalMedia = link.media || 'all'
-
-            function enableStylesheet() {
-                link.media = finalMedia
-            }
-
-            // bind load handlers to enable media
-            if (link.addEventListener) {
-                link.addEventListener('load', enableStylesheet)
-            } else if (link.attachEvent) {
-                link.attachEvent('onload', enableStylesheet)
-            }
-
-            // Set rel and non-applicable media type to start an async request
-            // note: timeout allows this to happen async to let rendering continue in IE
-            setTimeout(function () {
-                link.rel = 'stylesheet'
-                link.media = 'only x'
-            })
-            // also enable media after 3 seconds,
-            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
-            setTimeout(enableStylesheet, 3000)
-        }
-
-        // loop through link elements in DOM
-        rp.poly = function () {
-            // double check this to prevent external calls from running
-            if (rp.support()) {
-                return
-            }
-            var links = w.document.getElementsByTagName('link')
-            for (var i = 0; i < links.length; i++) {
-                var link = links[i]
-                // qualify links to those with rel=preload and as=style attrs
-                if (
-                    link.rel === 'preload' &&
-                    link.getAttribute('as') === 'style' &&
-                    !link.getAttribute('data-loadcss')
-                ) {
-                    // prevent rerunning on link
-                    link.setAttribute('data-loadcss', true)
-                    // bind listeners to toggle media back
-                    rp.bindMediaToggle(link)
-                }
-            }
-        }
-
-        // if unsupported, run the polyfill
-        if (!rp.support()) {
-            // run once at least
-            rp.poly()
-
-            // rerun poly on an interval until onload
-            var run = w.setInterval(rp.poly, 500)
-            if (w.addEventListener) {
-                w.addEventListener('load', function () {
-                    rp.poly()
-                    w.clearInterval(run)
-                })
-            } else if (w.attachEvent) {
-                w.attachEvent('onload', function () {
-                    rp.poly()
-                    w.clearInterval(run)
-                })
-            }
-        }
-
-        // commonjs
-        if (typeof exports !== 'undefined') {
-            exports.loadCSS = loadCSS
-        } else {
-            w.loadCSS = loadCSS
-        }
-    })(typeof global !== 'undefined' ? global : this)
-</script>
-
-    <style type="text/css">
-    @font-face {
-        font-family: 'Oswald-Regular';
-        src: url("/mmmusel.github.io/font/Oswald-Regular.ttf");
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/mmmusel.github.io/img/favicon.png"><link rel="canonical" href="https://mmmusel.github.io/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/mmmusel.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/mmmusel.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
     }
-
-    body {
-        margin: 0;
-    }
-
-    header,
-    footer,
-    .back-top,
-    .sidebar,
-    .container,
-    .site-intro-meta,
-    .toc-wrapper {
-        display: none;
-    }
-
-    .site-intro {
-        position: relative;
-        z-index: 3;
-        width: 100%;
-        /* height: 50vh; */
-        overflow: hidden;
-    }
-
-    .site-intro-placeholder {
-        position: absolute;
-        z-index: -2;
-        top: 0;
-        left: 0;
-        width: calc(100% + 300px);
-        height: 100%;
-        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
-        background-position: center center;
-        transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2.5s ease-out 0s infinite;
-    }
-
-    @keyframes gradient-move {
-        0% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        100% {
-            transform: translate3d(0, 0, 0);
-        }
-    }
-</style>
-
-    <link rel="preload" href="/mmmusel.github.io/css/style.css?v=" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="/mmmusel.github.io/css/dark.css?v=" as="style">
-    <link rel="stylesheet" href="/mmmusel.github.io/css/dark.css">
-    <link rel="stylesheet" href="/mmmusel.github.io/css/mobile.css?v=" media="(max-width: 960px)">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
-    <link rel="preload" href="/mmmusel.github.io/scripts/main.js?v=" as="script">
-    <link rel="preload" href="/mmmusel.github.io/scripts/dark.js?v=" as="script">
-    <link rel="preload" href="/mmmusel.github.io/font/Oswald-Regular.ttf" as="font" crossorigin>
-    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
-    <!-- algolia -->
-    
-    <!-- 百度统计  -->
-    
-    <!-- 谷歌统计  -->
-    
-<meta name="generator" content="Hexo 6.0.0"></head>
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        if (typeof window.$ == undefined) {
-            console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="/mmmusel.github.io/lib/jquery.min.js" />')
-        }
-    </script>
-    
-        <body class="home-body">
-    
-        <!-- header -->
-        <header class="header header-mobile index-header">
-    <!-- top read progress line -->
-    <div class="header-element">
-        <div class="read-progress"></div>
-    </div>
-    <!-- sidebar menu button -->
-    <div class="header-element">
-        
-            <div class="header-sidebar-menu">
-        
-            
-                <div style="padding-left: 1px;">&#xe775;</div>
-            
-        </div>
-    </div>
-    <!-- header actions -->
-    <div class="header-actions">
-        <!-- theme mode switch button -->
-        <span class="header-theme-btn header-element">
-            <i class="fas fa-adjust"></i>
-        </span>
-        <!-- back to home page text -->
-        <span class="home-link header-element">
-            <a href=/mmmusel.github.io/>Musel's blog</a>
-        </span>
-    </div>
-    <!-- toggle banner for post layout -->
-    
-</header>
-
-        <!-- fixed footer -->
-        <footer class="footer-fixed index-footer-fixed">
-    <!-- back to top button -->
-    <div class="footer-fixed-element">
-        
-            <div class="back-top back-top-hidden">
-        
-        
-            <div>&#xe639;</div>
-        
-        </div>
-    </div>
-</footer>
-
-        <!-- wrapper -->
-        <div class="wrapper">
-            <div class="site-intro" style="
-
-
-
-
-
-
-
-    height:50vh;
-
-">
-    
-    <!-- 主页  -->
-    
-        
-    <!-- 文章页  -->
-            
-    <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/mmmusel.github.io/intro/index-bg.jpg)"></div>
-    <div class="site-intro-meta">
-        <!-- 标题  -->
-        <h1 class="intro-title">
-            <!-- 主页  -->
-            
-                Musel's blog
-            <!-- 文章页  -->
-            
-        </h1>
-        <!-- 副标题 -->
-        <p class="intro-subtitle">
-            <!-- 主页副标题  -->
-            
-                
-                    浪漫的本质是不确定性.
-                
-            <!-- 文章页  -->
-            
-        </p>
-        <!-- 文章页 meta -->
-        
-    </div>
-</div>
-
-            <script>
-  // get user agent
-  function getBrowserVersions() {
-    var u = window.navigator.userAgent
-    return {
-      userAgent: u,
-      trident: u.indexOf('Trident') > -1, //IE内核
-      presto: u.indexOf('Presto') > -1, //opera内核
-      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
-      iPad: u.indexOf('iPad') > -1, //是否为iPad
-      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
-      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
-      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
-    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-05-28 17:43:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
   }
-  var browser = {
-    versions: getBrowserVersions(),
+  .justified-gallery img {
+    opacity: 1
   }
-  console.log('userAgent: ' + browser.versions.userAgent)
 
-  // callback
-  function fontLoaded() {
-    console.log('font loaded')
-    if (document.getElementsByClassName('site-intro-meta')) {
-      document
-        .getElementsByClassName('intro-title')[0]
-        .classList.add('intro-fade-in')
-      document
-        .getElementsByClassName('intro-subtitle')[0]
-        .classList.add('intro-fade-in')
-      var postIntros = document.getElementsByClassName('post-intros')[0]
-      if (postIntros) {
-        postIntros.classList.add('post-fade-in')
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
       }
     }
-  }
-
-  // UC不支持跨域，所以直接显示
-  function asyncCb() {
-    if (browser.versions.uc) {
-      console.log('UCBrowser')
-      fontLoaded()
-    } else {
-      WebFont.load({
-        custom: {
-          families: ['Oswald-Regular'],
-        },
-        loading: function () {
-          // 所有字体开始加载
-          // console.log('font loading');
-        },
-        active: function () {
-          // 所有字体已渲染
-          fontLoaded()
-        },
-        inactive: function () {
-          // 字体预加载失败，无效字体或浏览器不支持加载
-          console.log('inactive: timeout')
-          fontLoaded()
-        },
-        timeout: 5000, // Set the timeout to two seconds
-      })
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
     }
-  }
-
-  function asyncErr() {
-    console.warn('script load from CDN failed, will load local script')
-  }
-
-  // load webfont-loader async, and add callback function
-  function async(u, cb, err) {
-    var d = document,
-      t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0]
-    o.src = u
-    if (cb) {
-      o.addEventListener(
-        'load',
-        function (e) {
-          cb(null, e)
-        },
-        false
-      )
-    }
-    if (err) {
-      o.addEventListener(
-        'error',
-        function (e) {
-          err(null, e)
-        },
-        false
-      )
-    }
-    s.parentNode.insertBefore(o, s)
-  }
-
-  var asyncLoadWithFallBack = function (arr, success, reject) {
-    var currReject = function () {
-      reject()
-      arr.shift()
-      if (arr.length) async(arr[0], success, currReject)
-    }
-
-    async(arr[0], success, currReject)
-  }
-
-  asyncLoadWithFallBack(
-    [
-      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
-      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
-      "/mmmusel.github.io/lib/webfontloader.min.js",
-    ],
-    asyncCb,
-    asyncErr
-  )
-</script>
-
-            <img class="loading" src="/mmmusel.github.io/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
-            <div class="container container-unloaded">
-                <main class="main index-page">
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/mmmusel.github.io/2022/05/04/Unix-MyShell-Summary/">
-                
-                <span class="abstract-title-text">BUAA-Unix-Linux下C语言实现MyShell</span>
-            </a>
-            <div class="abstract-content">
-                shell是用户命令和Linux内核之间的接口程序，是一个命令语言解释器（command-language interpreter）。在提示符下输入的每个命令都由shell先解释然后传给Linux内核。
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/05/04">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/05/04</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Unix">Unix</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/mmmusel.github.io/2022/05/03/OS-lab3-summary/">
-                
-                <span class="abstract-title-text">BUAA-OS-Lab3</span>
-            </a>
-            <div class="abstract-content">
-                操作系统 Lab3：进程和异常
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/05/05">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/05/03</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="OS">OS</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/mmmusel.github.io/2022/05/01/OO-Unit2-summary/">
-                
-                <span class="abstract-title-text">BUAA-OO-Unit2</span>
-            </a>
-            <div class="abstract-content">
-                面向对象设计与构造 第二单元：多线程与电梯调度
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/05/02">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/05/01</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="OO">OO</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/mmmusel.github.io/2022/04/14/OS-lab2-summary/">
-                
-                <span class="abstract-title-text">BUAA-OS-Lab2</span>
-            </a>
-            <div class="abstract-content">
-                操作系统 Lab2：存储管理流程图解
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/05/05">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/04/14</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="OS">OS</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/mmmusel.github.io/2022/03/24/OO-Unit1-summary/">
-                
-                <span class="abstract-title-text">BUAA-OO-Unit1</span>
-            </a>
-            <div class="abstract-content">
-                面对对象设计与构造 第一单元：递归下降与表达式化简
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/05/02">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/24</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="OO">OO</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/mmmusel.github.io/2022/03/15/OS-lab0-summary/">
-                
-                <span class="abstract-title-text">BUAA-OS-Lab0</span>
-            </a>
-            <div class="abstract-content">
-                操作系统 Lab0：git与shell
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/05/01">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/15</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="OS">OS</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/mmmusel.github.io/2022/03/12/shell/">
-                
-                <span class="abstract-title-text">Shell</span>
-            </a>
-            <div class="abstract-content">
-                shell基础
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/03/12">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/12</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Unix">Unix</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/mmmusel.github.io/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/">
-                
-                <span class="abstract-title-text">OS-Pre-Cause SR EPC BadVaddr</span>
-            </a>
-            <div class="abstract-content">
-                《IDT R30xx Family Software Reference Manual》 Chapter 3 翻译
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/03/12">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/11</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="OS">OS</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/mmmusel.github.io/2022/03/11/git/">
-                
-                <span class="abstract-title-text">Git</span>
-            </a>
-            <div class="abstract-content">
-                Git理解
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/05/01">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/03/11</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="OS">OS</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/mmmusel.github.io/2022/02/16/CSS/">
-                
-                <span class="abstract-title-text">CSS</span>
-            </a>
-            <div class="abstract-content">
-                CSS基础
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/03/11">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/02/16</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="CSS">CSS</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-    <!-- paginator  -->
-    
-        <nav class="page-nav">
-            <span class="page-number current">1</span><a class="page-number" href="/mmmusel.github.io/page/2/">2</a><a class="extend next" rel="next" href="/mmmusel.github.io/page/2/">NEXT &gt;</a>
-        </nav>
-    
-</main>
-
-                <!-- profile -->
-                
-                    <div class="profile">
-    <img class="profile-avatar" alt="avatar" src= /mmmusel.github.io/avatar/photo.jpg />
-    <div class="profile-name">Musel</div>
-    
-        <div class="profile-signature">
-            /&#39;Musel&#39; is inspired by &#39;暮色里&#39;.
-        </div>
-    
-    
-        <div class="profile-social">
-            
-    
-        
-    
-        
-            
-                <a href="//github.com/Mmmusel" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/mmmusel.github.io/archives/"><div class="headline">Articles</div><div class="length-num">12</div></a><a href="/mmmusel.github.io/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/mmmusel.github.io/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/mmmusel.github.io/">Hexo</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/mmmusel.github.io/2022/05/04/Unix-MyShell-Summary/" title="BUAA-Unix-Linux下C语言实现MyShell">BUAA-Unix-Linux下C语言实现MyShell</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-04T13:02:27.000Z" title="Created 2022-05-04 21:02:27">2022-05-04</time></span></div><div class="content">
+一、功能概述1.1 高亮提示
 
 
-        </div>
-    
-    
-        <div class="friends">
-            <div>
-                
-                    <i class="fas fa-heart profile-item-icon"></i>
-                
-                FRIENDS
-            </div>
-            
-                
-                    <span>
-                        <a href="//saltyfishyjk.github.io/" target="_black">🐟bf</a>
-                    </span>
-                
-            
-        </div>
-    
-    
-        <div class="profile-link-item">
-            <a href="/mmmusel.github.io/about" class="about-me">
-                
-                    <i class="fas fa-id-card profile-item-icon"></i>
-                
-                ABOUT ME
-            </a>
-        </div>
-    
-    
-    
-</div>
+myShell运行的起始提示
+命令提示符前Musel&#39;s shell的前缀标识
+当前路径提示
+Error的报错提示
 
-                
-            </div>
-            <footer class="footer footer-unloaded">
-    <!-- social  -->
-    
-        <div class="social">
-            
-    
-        
-    
-        
-            
-                <a href="//github.com/Mmmusel" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+1.2 cd切换目录
+1.3 标准I/O重定向
+
+1.4 可变长参数命令的运行
+
+1.5 管道连接多条命令
+
+1.6 管道、重定向、命令格式的错误检查
+
+1.7 exit退出myShell
+
+1.8 malloc与free
+管道连接命令数、命令参数个数、参数长度均不定长，所以使用malloc申请存储空间，避免内存浪费。
+单条命令执行完后调用free释放命令申请的空间，防止内存泄漏。
+
+二、系统调用在第三部分会结合具体功能具体阐述系统调用。此处作简要汇总：
+
+获取当前目录：path = getcwd(NULL, 0)
+切换工作目录：chdir(command-&gt;args[1])
+创建进程：pid_t pid = fork()
+打开文件描述符表：open(command-&gt;read, O_RDONLY, 0666)
+复制文件描述符表：dup2(in, 0)
+执行程序：execvp(command-&gt;cmd, co ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/mmmusel.github.io/2022/05/03/OS-lab3-summary/" title="BUAA-OS-Lab3">BUAA-OS-Lab3</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-03T08:19:53.000Z" title="Created 2022-05-03 16:19:53">2022-05-03</time></span></div><div class="content">一、实验思考题Thinking 3.1
+思考 envid2env 函数: 为什么 envid2env 中需要判断 e-&gt;env_id !=envid 的情况？如果没有这步判断会发生什么情况？
 
 
-        </div>
-    
-    <!-- powered by Hexo  -->
-    <div class="copyright">
-        <span id="hexo-power">Powered by <a href="https://github.com/Mmmusel" target="_blank">Musel</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Author <a href="https://Mmmusel.github.io" target="_blank">🍔</a></span>
-    </div>
-    <!-- website approve for Chinese user -->
-    
-    <!-- 不蒜子  -->
-    
-        <div class="busuanzi-container">
-            
-             
-                <span id="busuanzi_container_site_pv">Thanks Vistiors <span id="busuanzi_value_site_pv"></span> :)</span>
-            
-        </div>
-    	
-</footer>
+mkenvid(struct Env *e)中生成的envid为(asid &lt;&lt; (1 + LOG2NENV)) | (1 &lt;&lt; LOG2NENV) | idx,即asid|有效位|env结构体在envs数组的偏移。
+而envid2env(u_int envid, struct Env **penv, int checkperm)中通过envid的偏移找到结构体e=envs+ENVX(envid);。而此时不能确保所给envid中asid的有效性。所以需要通过再次判断e-&gt;env_id !=envid保证进程块的asid.
+若此index所对的env已经更换，则新env结构体会对应新的ASID。如果没有这步判断，可能会出现：①所给envid所对的结构体已经被free后再次使用，即旧结构体所代表的PCB被淘汰，而此时得到的新env与envid想找的旧结构体不匹 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/mmmusel.github.io/2022/05/01/OO-Unit2-summary/" title="BUAA-OO-Unit2">BUAA-OO-Unit2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-01T04:46:53.000Z" title="Created 2022-05-01 12:46:53">2022-05-01</time></span></div><div class="content">一、电梯的调度策略1.1 状态转移图
 
-        </div>
-        <!-- toc -->
-        
-        <!-- sidebar -->
-        <div class="sidebar sidebar-hide">
-    <ul class="sidebar-tabs sidebar-tabs-active-0">
-        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
-        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
-        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
-    </ul>
-    <div class="sidebar-content sidebar-content-show-archive">
-        <div class="sidebar-panel-archives">
-    <!-- 在 ejs 中将 archive 按照时间排序 -->
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-    
-    
-    <div class="total-and-search">
-        <div class="total-archive">
-        Total : 12
-        </div>
-        <!-- search  -->
-        
-    </div>
-    
-    <div class="post-archive">
-    
-        
-            
-            
-            <div class="archive-year"> 2022 </div>
-            <ul class="year-list">
-            
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/04</span>
-            <a class="archive-post-title" href="/mmmusel.github.io/2022/05/04/Unix-MyShell-Summary/">BUAA-Unix-Linux下C语言实现MyShell</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/03</span>
-            <a class="archive-post-title" href="/mmmusel.github.io/2022/05/03/OS-lab3-summary/">BUAA-OS-Lab3</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/01</span>
-            <a class="archive-post-title" href="/mmmusel.github.io/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/14</span>
-            <a class="archive-post-title" href="/mmmusel.github.io/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/24</span>
-            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/24/OO-Unit1-summary/">BUAA-OO-Unit1</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/15</span>
-            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/15/OS-lab0-summary/">BUAA-OS-Lab0</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/12</span>
-            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/12/shell/">Shell</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/11</span>
-            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/">OS-Pre-Cause SR EPC BadVaddr</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/11</span>
-            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/11/git/">Git</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/16</span>
-            <a class="archive-post-title" href="/mmmusel.github.io/2022/02/16/CSS/">CSS</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/14</span>
-            <a class="archive-post-title" href="/mmmusel.github.io/2022/02/14/HTML/">HTML</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/27</span>
-            <a class="archive-post-title" href="/mmmusel.github.io/2022/01/27/hello-world/">Hello World</a>
-        </li>
-    
-    </div>
-</div>
+1.2 纵向电梯的LOOK算法LOOK算法实现
+与真实的电梯大致相同的策略，即维护电梯当前运行方向dir，更远层无请求(各楼层的call请求&amp;电梯中乘客的目的地请求)时才转向。  
+为了在实现捎带策略的同时将电梯和调度器功能解耦，电梯应当①具有“短视性”，即并不知道自己的目的楼层，而是仅根据从调度器获取上行、下行的boolean值。在此条件下电梯实现以层间运行时间为最小单位实时更新可稍带目标层。②屏蔽外部各楼层的call请求：按运行方向运行一层后，询问调度器是否应该开门。  
 
-        <div class="sidebar-panel-tags">
-    <div class="sidebar-tags-name">
-        
-            <span class="sidebar-tag-name" data-tags="CSS">
-                <span class="iconfont-archer">&#xe606;</span>
-                CSS
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="OO">
-                <span class="iconfont-archer">&#xe606;</span>
-                OO
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="OS">
-                <span class="iconfont-archer">&#xe606;</span>
-                OS
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="Unix">
-                <span class="iconfont-archer">&#xe606;</span>
-                Unix
-            </span>
-        
-    </div>
-    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
-    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
-        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
-    </div> 
-    <div class="sidebar-tags-list"></div>
-</div>
+LOOK算法相较ALS的优势
+打破了ALS算法可能出现的“局部性原理”。  
 
-        <div class="sidebar-panel-categories">
-    <div class="sidebar-categories-name">
-    
-    </div>
-    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
-    <div class="sidebar-categories-list"></div>
-</div>
+即ALS算法在将电梯内部乘客全部送达后形成空梯时，会选择最先到达的请求作为主请求。两种策略下对于中间楼层的捎带表现一致，但是ALS策略下低层和高层请求因为难于被捎带而堆积，直到被安排为主请求时才会运行到低层或高层。此类请求容易堆积在末尾才进行集中处理，导致电梯出现因为一个远端请求空转(无捎带，远端请求的vip专梯)的效率问题。
 
-    </div>
-</div>
-
-        <!-- site-meta -->
-        <script>
-    var siteMetaRoot = "/mmmusel.github.io/"
-    if (siteMetaRoot === "undefined") {
-        siteMetaRoot = '/'
-    }
-    var siteMeta = {
-        url: "https://mmmusel.github.io",
-        root: siteMetaRoot,
-        author: "John Doe"
-    }
-</script>
-
-        <!-- import experimental options here -->
-        <!-- Custom Font -->
+LOOK算法更像是就近远端捎带，在将电梯内部乘客全部送达 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/mmmusel.github.io/2022/04/14/OS-lab2-summary/" title="BUAA-OS-Lab2">BUAA-OS-Lab2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-04-14T08:19:53.000Z" title="Created 2022-04-14 16:19:53">2022-04-14</time></span></div><div class="content">一、流程图解(一)虚存内存映射图：
 
 
-        <!-- main func -->
-        <script src="/mmmusel.github.io/scripts/main.js?v="></script>
-        <!-- dark mode -->
-        <script src="/mmmusel.github.io/scripts/dark.js?v="></script>
-        <!-- fancybox -->
-        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
-        <!-- algolia -->
-        
-        <!-- busuanzi -->
-        
-            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-        
-        <!-- CNZZ -->
-        
-        <!-- async load share.js -->
-        
-        <!-- mermaid -->
-        
-    </body>
-</html>
+(二)mips_vm_init流程图：1.物理存储部分
+
+
+2.虚拟存储部分(1)目标:  (粉色字)
+
+(2)boot_segment_map()   和   为何它要调用boot_pgdir_walk():
+
+(3)boot_pgdir_walk后续部分：关于权限位的细节
+
+(4)两个函数更为简略抽象的图解，所述内容与上文大致相同
+
+二、实验思考题Thinking 2.1
+请你根据上述说明，回答问题：在我们编写的 C 程序中，指针变量中存储的地址是虚拟地址还是物理地址？MIPS 汇编程序中 lw, sw 使用的是虚拟地址还是物理地址？  
+
+指针变量中存储的地址是虚拟地址;MIPS 汇编程序中 lw, sw 使用的是物理地址。
+Thinking 2.2
+请从可重用性的角度，阐述用宏来实现链表的好处。  
+
+
+各类结构体都可以使用queue.h的宏简化代码量：
+一开始写Exercise2.2的时候没有明白field字段设置的意义，觉得传入了elm参数以后，field应该是作为elm的成员变量名，不应该作为可变参数传入，显得有点多此一举，忘记了宏 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/mmmusel.github.io/2022/03/24/OO-Unit1-summary/" title="BUAA-OO-Unit1">BUAA-OO-Unit1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-03-24T08:19:53.000Z" title="Created 2022-03-24 16:19:53">2022-03-24</time></span></div><div class="content">写在前面：我很满足！助教夸我类图画的好看耶！
+
+一、程序结构UML类图与架构设计第一次作业
+
+通过Lexer和Parser解析字符串，递归下降生成Expr对象时去除括号
+重写Expr.toString()，生成记录运算顺序的后缀表达式SuffixString。格式”X1(操作数) X2(操作数) +(操作符) …”。后缀表达式的操作符包括+、*、^int(表达式因子的幂运算)、!(取反)；
+Parser维护了一个后缀表达式操作数表
+Suffix类获取包含操作符运算顺序的String和操作数表，用栈进行计算结果得到Quantic对象，对Quantic对象调用print()方法输出。第二次作业迭代思路：
+
+一、引入三角函数后的统一存储形式
+多项式的每项基本形式：ax^b -&gt; ax^b(sin容器)(cos容器)
+选用hashmap，merge()方法和lambda函数实现合并同类项非常简洁。
+Key为自定义类型BaseKey，重写hashcode()和equal()后便于合并同类项。形式：x^b(sin容器)(cos容器)
+由于需要维护可变类型BaseKey作为hashmap的ke ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/mmmusel.github.io/2022/03/15/OS-lab0-summary/" title="BUAA-OS-Lab0">BUAA-OS-Lab0</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-03-15T08:19:53.000Z" title="Created 2022-03-15 16:19:53">2022-03-15</time></span></div><div class="content">一、实验思考题thinking 0.1
+
+
+
+不一样，第一次add前时README.md属于尚未跟踪文件；第二次修改后的文件属于工作区未暂存以备提交的变更。  
+不同的原因：未跟踪文件不存在于.git对象库中，而修改后未提交的文件存在一份修改前的文件在.git的对象库。
+
+thinking 0.21.add the file :$ git add $ git commit2.stage the file :$ git add3.commit :$ git commit
+thinking 0.31.恢复工作区的printf.c :$ git checkout -- printf.c2.$ git rm --cached printf.c后，恢复暂存区文件：  
+12$ git reset HEAD printf.c $ git checkout -- printf.c
+3.删除暂存区文件,同时保留本地：git rm --cached Tucao.txt  
+thinking 0.4命令与结果
+找到提交说明为1的哈希值，使用 git reset –hard  ，再使用git log，2和3 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/mmmusel.github.io/2022/03/12/shell/" title="Shell">Shell</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-03-12T14:46:53.000Z" title="Created 2022-03-12 22:46:53">2022-03-12</time></span></div><div class="content">shell脚本运行方式可执行程序
+头文件 ·#!/bin/bash,保证我们的脚本默认会使用bash。#! 告诉系统其后路径所指定的程序即是解释此脚本文件的 Shell 程序。
+添加权限  chmod +x my.sh
+传递参数：$n就代表第几个参数，而$0也就是命令
+执行命令 ./my2.sh msg
+一定要写成 ./test.sh，而不是 test.sh，运行其它二进制的程序也一样，直接写 test.sh，linux 系统会去 PATH 里寻找有没有叫 test.sh 的，而只有 /bin, /sbin, /usr/bin，/usr/sbin 等在 PATH 里，你的当前目录通常不在 PATH 里，所以写成 test.sh 是会找不到命令的，要用 ./test.sh 告诉系统说，就在当前目录找。解释器参数
+
+
+/bin/sh test.sh
+不需要在第一行指定解释器信息
+
+shell变量显式赋值
+定义变量时，不加$
+变量与赋值=间无空格
+不能使用bash关键字。help命令查看
+readonly只读变量
+unset命令可以删除变量，不能删除只读变量
+可二次赋值1234your_na ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/mmmusel.github.io/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/" title="OS-Pre-Cause SR EPC BadVaddr">OS-Pre-Cause SR EPC BadVaddr</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-03-11T08:06:53.000Z" title="Created 2022-03-11 16:06:53">2022-03-11</time></span></div><div class="content">Cause查询Cause寄存器以决定异常类型并调用哪一种异常处理进程。
+BD [31] 分支延迟
+置位表示EPC没有指向实际异常指令，指向直接前序分支指令。
+异常重进点为分支指令后的延迟槽时，EPC指向分支指令。这对重新执行分支是无害的，但是如果CPU从异常中返回分支延迟指令，则没有跳转分支，且异常会破坏中断的程序。
+
+软件唯一可能注意BD位的时间是：如果它必须分析‘冒犯’指令(如果BD = 1，则该指令位于EPC + 4 )。如果需要对指令进行仿真(例如在没有FPA的设备中使用浮点指令)，就会出现这种情况；或放置在分支延迟槽中的断点)。
+
+CE [29:28] 协处理器错误
+如果异常是因为 协处理器指令是针对SR中CUx位未启用的CP，那么CE就有来自该指令的协处理器编号。IP [15:8] 中断待决断
+显示当前生效的中断(但可能在实际表征异常的情况下被掩盖)。
+这些位在六个硬件层次上都遵循CPU的输入。
+位9和位8是可读/可写的，保存最后写入的值。
+当8位中的任何一个被合适的IM位使能以及SR中全局中断使能标志IEc激活时，都会引起中断。
+IP与其他Cause寄存器字段存在微妙不同 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/mmmusel.github.io/2022/03/11/git/" title="Git">Git</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-03-11T04:46:53.000Z" title="Created 2022-03-11 12:46:53">2022-03-11</time></span></div><div class="content">对象与目录的关系
+
+git add
+ 暂存区的目录树被更新
+ 同时工作区修改或新增的文件内容被写入到对象库中的一个新的对象中
+
+
+git commit
+将暂存区的目录树写到版本库（对象库）中，master 分支会做相应的更新。即 master 指向的目录树就是提交时暂存区的目录树(?副本还是指针)
+
+
+git rm --cached &lt;file&gt;
+会直接从暂存区删除文件，工作区则不做出改变。
+
+
+git reset HEAD
+暂存区的目录树会被master 分支指向的目录树所替换，但是工作区不受影响。
+
+
+git checkout -- &lt;file&gt;
+会用暂存区目录树指定的文件替换工作区的文件。
+这个操作很危险，会清除工作区中未添加到暂存区的改动。
+
+
+git checkout HEAD &lt;file&gt;
+会用 HEAD 指向的 master 分支中的指定文件替换暂存区和以及工作区中的文件。这个命令也是极具危险性的，因为不但会清除工作区中未提交的改动，也会清除暂存区中未提交的改动。
+
+版本库丢失目前文件的索引？文件仍可回退；工作区文件被替换，且未加入对象 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/mmmusel.github.io/2022/02/16/CSS/" title="CSS">CSS</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-02-16T08:06:53.000Z" title="Created 2022-02-16 16:06:53">2022-02-16</time></span></div><div class="content">基础语法
+内嵌式：写在&lt;style&gt;双标签，选择器查找标签。  
+
+1234567891011121314&lt;style&gt;    div&#123;        color:red;        font-size:30px;        background-color:green;        width:400px;        hright:300px;    &#125;&lt;/style&gt;&lt;body&gt;    &lt;div&gt;    &lt;/div&gt;&lt;/body&gt;
+
+外联式：写在单独.css，通过link标签在网页中引入&lt;link rel=&quot;stylesheet&quot; href=&quot;&quot;&gt;
+css写在标签的style属性，配合js使用&lt;div style=&quot;color:green;&quot;&gt;内容&lt;/div&gt;;
+
+选择器
+标签选择器选择一类标签。
+类选择器&lt;div&gt;
+一个标签可以多个类名，空格隔开
+类名由数字 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/mmmusel.github.io/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/mmmusel.github.io/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/mmmusel.github.io/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/mmmusel.github.io/archives/"><div class="headline">Articles</div><div class="length-num">12</div></a><a href="/mmmusel.github.io/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/mmmusel.github.io/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/mmmusel.github.io/2022/05/04/Unix-MyShell-Summary/" title="BUAA-Unix-Linux下C语言实现MyShell">BUAA-Unix-Linux下C语言实现MyShell</a><time datetime="2022-05-04T13:02:27.000Z" title="Created 2022-05-04 21:02:27">2022-05-04</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/mmmusel.github.io/2022/05/03/OS-lab3-summary/" title="BUAA-OS-Lab3">BUAA-OS-Lab3</a><time datetime="2022-05-03T08:19:53.000Z" title="Created 2022-05-03 16:19:53">2022-05-03</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/mmmusel.github.io/2022/05/01/OO-Unit2-summary/" title="BUAA-OO-Unit2">BUAA-OO-Unit2</a><time datetime="2022-05-01T04:46:53.000Z" title="Created 2022-05-01 12:46:53">2022-05-01</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/mmmusel.github.io/2022/04/14/OS-lab2-summary/" title="BUAA-OS-Lab2">BUAA-OS-Lab2</a><time datetime="2022-04-14T08:19:53.000Z" title="Created 2022-04-14 16:19:53">2022-04-14</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/mmmusel.github.io/2022/03/24/OO-Unit1-summary/" title="BUAA-OO-Unit1">BUAA-OO-Unit1</a><time datetime="2022-03-24T08:19:53.000Z" title="Created 2022-03-24 16:19:53">2022-03-24</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/mmmusel.github.io/tags/CSS/" style="font-size: 1.1em; color: #999">CSS</a> <a href="/mmmusel.github.io/tags/OO/" style="font-size: 1.1em; color: #999">OO</a> <a href="/mmmusel.github.io/tags/OS/" style="font-size: 1.5em; color: #99a9bf">OS</a> <a href="/mmmusel.github.io/tags/Unix/" style="font-size: 1.1em; color: #999">Unix</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/mmmusel.github.io/archives/2022/05/"><span class="card-archive-list-date">May 2022</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/mmmusel.github.io/archives/2022/04/"><span class="card-archive-list-date">April 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/mmmusel.github.io/archives/2022/03/"><span class="card-archive-list-date">March 2022</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/mmmusel.github.io/archives/2022/02/"><span class="card-archive-list-date">February 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/mmmusel.github.io/archives/2022/01/"><span class="card-archive-list-date">January 2022</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">12</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-05-28T09:43:51.864Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/mmmusel.github.io/js/utils.js"></script><script src="/mmmusel.github.io/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

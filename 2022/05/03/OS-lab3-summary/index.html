@@ -26,18 +26,18 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="一、实验思考题Thinking 3.1 思考 envid2env 函数: 为什么 envid2env 中需要判断 e-&gt;env_id !&#x3D;envid 的情况？如果没有这步判断会发生什么情况？   mkenvid(struct Env *e)中生成的envid为(asid &lt;&lt; (1 + LOG2NENV)) | (1 &lt;&lt; LOG2NENV) | idx,即asid|">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://mmmusel.github.io/2022/05/03/OS-lab3-summary/mapper.jpg">
-<meta property="og:image" content="https://mmmusel.github.io/2022/05/03/OS-lab3-summary/clock1.jpg">
-<meta property="og:image" content="https://mmmusel.github.io/2022/05/03/OS-lab3-summary/clock2.jpg">
+<meta property="og:image" content="https://mmmusel.github.io/mmmusel.github.io/2022/05/03/OS-lab3-summary/mapper.jpg">
+<meta property="og:image" content="https://mmmusel.github.io/mmmusel.github.io/2022/05/03/OS-lab3-summary/clock1.jpg">
+<meta property="og:image" content="https://mmmusel.github.io/mmmusel.github.io/2022/05/03/OS-lab3-summary/clock2.jpg">
 <meta property="article:published_time" content="2022-05-03T08:19:53.000Z">
 <meta property="article:modified_time" content="2022-05-05T02:32:55.502Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mmmusel.github.io/2022/05/03/OS-lab3-summary/mapper.jpg">
+<meta name="twitter:image" content="https://mmmusel.github.io/mmmusel.github.io/2022/05/03/OS-lab3-summary/mapper.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link rel="icon" href="/assets/x.ico">
+    <link rel="icon" href="/mmmusel.github.io/assets/x.ico">
     
     <title>BUAA-OS-Lab3 · Musel&#39;s blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
@@ -152,7 +152,7 @@
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
-        src: url("/font/Oswald-Regular.ttf");
+        src: url("/mmmusel.github.io/font/Oswald-Regular.ttf");
     }
 
     body {
@@ -200,15 +200,15 @@
     }
 </style>
 
-    <link rel="preload" href="/css/style.css?v=" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="/css/dark.css?v=" as="style">
-    <link rel="stylesheet" href="/css/dark.css">
-    <link rel="stylesheet" href="/css/mobile.css?v=" media="(max-width: 960px)">
+    <link rel="preload" href="/mmmusel.github.io/css/style.css?v=" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/mmmusel.github.io/css/dark.css?v=" as="style">
+    <link rel="stylesheet" href="/mmmusel.github.io/css/dark.css">
+    <link rel="stylesheet" href="/mmmusel.github.io/css/mobile.css?v=" media="(max-width: 960px)">
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
-    <link rel="preload" href="/scripts/main.js?v=" as="script">
-    <link rel="preload" href="/scripts/dark.js?v=" as="script">
-    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="/mmmusel.github.io/scripts/main.js?v=" as="script">
+    <link rel="preload" href="/mmmusel.github.io/scripts/dark.js?v=" as="script">
+    <link rel="preload" href="/mmmusel.github.io/font/Oswald-Regular.ttf" as="font" crossorigin>
     <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
     <!-- algolia -->
     
@@ -222,7 +222,7 @@
     <script type="text/javascript">
         if (typeof window.$ == undefined) {
             console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="/lib/jquery.min.js" />')
+            document.write('<script src="/mmmusel.github.io/lib/jquery.min.js" />')
         }
     </script>
     
@@ -252,7 +252,7 @@
         </span>
         <!-- back to home page text -->
         <span class="home-link header-element">
-            <a href=/>Musel's blog</a>
+            <a href=/mmmusel.github.io/>Musel's blog</a>
         </span>
     </div>
     <!-- toggle banner for post layout -->
@@ -261,7 +261,7 @@
             <div class="banner">
         
             <div class="blog-title header-element">
-                <a href="/">Musel&#39;s blog</a>
+                <a href="/mmmusel.github.io/">Musel&#39;s blog</a>
             </div>
             <div class="post-title header-element">
                 <a href="#" class="post-name">BUAA-OS-Lab3</a>
@@ -304,7 +304,7 @@
     <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/mmmusel.github.io/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
@@ -487,14 +487,14 @@
     [
       'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
       'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
-      "/lib/webfontloader.min.js",
+      "/mmmusel.github.io/lib/webfontloader.min.js",
     ],
     asyncCb,
     asyncErr
   )
 </script>
 
-            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <img class="loading" src="/mmmusel.github.io/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
@@ -547,7 +547,7 @@
 <h2 id="Thinking-3-4"><a href="#Thinking-3-4" class="headerlink" title="Thinking 3.4"></a>Thinking 3.4</h2><blockquote>
 <p>结合 load_icode_mapper 的参数以及二进制镜像的大小，考虑该函<br>数可能会面临哪几种复制的情况？你是否都考虑到了？</p>
 </blockquote>
-<img src="/2022/05/03/OS-lab3-summary/mapper.jpg" class="" title="pic1">
+<img src="/mmmusel.github.io/2022/05/03/OS-lab3-summary/mapper.jpg" class="" title="pic1">
 
 <h2 id="Thinking-3-5"><a href="#Thinking-3-5" class="headerlink" title="Thinking 3.5"></a>Thinking 3.5</h2><blockquote>
 <p>你认为这里的 env_tf.pc 存储的是物理地址还是虚拟地址?</p>
@@ -595,8 +595,8 @@
 <h2 id="Thinking-3-10"><a href="#Thinking-3-10" class="headerlink" title="Thinking 3.10"></a>Thinking 3.10</h2><blockquote>
 <p>阅读相关代码，思考操作系统是怎么根据时钟周期切换进程的。</p>
 </blockquote>
-<img src="/2022/05/03/OS-lab3-summary/clock1.jpg" class="" title="pic1">
-<img src="/2022/05/03/OS-lab3-summary/clock2.jpg" class="" title="pic1">
+<img src="/mmmusel.github.io/2022/05/03/OS-lab3-summary/clock1.jpg" class="" title="pic1">
+<img src="/mmmusel.github.io/2022/05/03/OS-lab3-summary/clock2.jpg" class="" title="pic1">
 
 <h1 id="二、实验难点与指导书反馈"><a href="#二、实验难点与指导书反馈" class="headerlink" title="二、实验难点与指导书反馈"></a>二、实验难点与指导书反馈</h1><ul>
 <li>初始化进程目录时，没有理解为什么要复制UTOP上部分的内核目录，也不知道这部分的权限该如何设置。建议建议指导书把<strong>权限位</strong>的作用在头文件中指明，或者在lab教程中指明本实验中用到的权限位及其说明</li>
@@ -634,7 +634,7 @@
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href="/2022/05/04/Unix-MyShell-Summary/" title="BUAA-Unix-Linux下C语言实现MyShell">
+                <a href="/mmmusel.github.io/2022/05/04/Unix-MyShell-Summary/" title="BUAA-Unix-Linux下C语言实现MyShell">
                     <div class="nextTitle">BUAA-Unix-Linux下C语言实现MyShell</div>
                 </a>
             
@@ -642,7 +642,7 @@
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2022/05/01/OO-Unit2-summary/" title="BUAA-OO-Unit2">
+                <a href="/mmmusel.github.io/2022/05/01/OO-Unit2-summary/" title="BUAA-OO-Unit2">
                     <div class="prevTitle">BUAA-OO-Unit2</div>
                 </a>
             
@@ -909,10 +909,6 @@
         
         
         
-        
-        
-        
-        
     
     
     
@@ -936,73 +932,73 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">05/04</span>
-            <a class="archive-post-title" href="/2022/05/04/Unix-MyShell-Summary/">BUAA-Unix-Linux下C语言实现MyShell</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/05/04/Unix-MyShell-Summary/">BUAA-Unix-Linux下C语言实现MyShell</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">05/03</span>
-            <a class="archive-post-title" href="/2022/05/03/OS-lab3-summary/">BUAA-OS-Lab3</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/05/03/OS-lab3-summary/">BUAA-OS-Lab3</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">05/01</span>
-            <a class="archive-post-title" href="/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">04/14</span>
-            <a class="archive-post-title" href="/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/24</span>
-            <a class="archive-post-title" href="/2022/03/24/OO-Unit1-summary/">BUAA-OO-Unit1</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/24/OO-Unit1-summary/">BUAA-OO-Unit1</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/15</span>
-            <a class="archive-post-title" href="/2022/03/15/OS-lab0-summary/">BUAA-OS-Lab0</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/15/OS-lab0-summary/">BUAA-OS-Lab0</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/12</span>
-            <a class="archive-post-title" href="/2022/03/12/shell/">Shell</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/12/shell/">Shell</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/11</span>
-            <a class="archive-post-title" href="/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/">OS-Pre-Cause SR EPC BadVaddr</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/">OS-Pre-Cause SR EPC BadVaddr</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/11</span>
-            <a class="archive-post-title" href="/2022/03/11/git/">Git</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/11/git/">Git</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">02/16</span>
-            <a class="archive-post-title" href="/2022/02/16/CSS/">CSS</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/02/16/CSS/">CSS</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">02/14</span>
-            <a class="archive-post-title" href="/2022/02/14/HTML/">HTML</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/02/14/HTML/">HTML</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">01/27</span>
-            <a class="archive-post-title" href="/2022/01/27/hello-world/">Hello World</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/01/27/hello-world/">Hello World</a>
         </li>
     
     </div>
@@ -1052,7 +1048,7 @@
 
         <!-- site-meta -->
         <script>
-    var siteMetaRoot = "/"
+    var siteMetaRoot = "/mmmusel.github.io/"
     if (siteMetaRoot === "undefined") {
         siteMetaRoot = '/'
     }
@@ -1068,9 +1064,9 @@
 
 
         <!-- main func -->
-        <script src="/scripts/main.js?v="></script>
+        <script src="/mmmusel.github.io/scripts/main.js?v="></script>
         <!-- dark mode -->
-        <script src="/scripts/dark.js?v="></script>
+        <script src="/mmmusel.github.io/scripts/dark.js?v="></script>
         <!-- fancybox -->
         <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
         <!-- algolia -->
@@ -1083,7 +1079,7 @@
         
         <!-- async load share.js -->
         
-            <script src="/scripts/share.js?v=" async></script>
+            <script src="/mmmusel.github.io/scripts/share.js?v=" async></script>
         
         <!-- mermaid -->
         

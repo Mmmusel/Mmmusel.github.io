@@ -26,20 +26,20 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="一、电梯的调度策略1.1 状态转移图  1.2 纵向电梯的LOOK算法LOOK算法实现 与真实的电梯大致相同的策略，即维护电梯当前运行方向dir，更远层无请求(各楼层的call请求&amp;电梯中乘客的目的地请求)时才转向。   为了在实现捎带策略的同时将电梯和调度器功能解耦，电梯应当①具有“短视性”，即并不知道自己的目的楼层，而是仅根据从调度器获取上行、下行的boolean值。在此条件下电梯实现">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://mmmusel.github.io/2022/05/01/OO-Unit2-summary/5.png">
-<meta property="og:image" content="https://mmmusel.github.io/2022/05/01/OO-Unit2-summary/4.png">
-<meta property="og:image" content="https://mmmusel.github.io/2022/05/01/OO-Unit2-summary/1.png">
-<meta property="og:image" content="https://mmmusel.github.io/2022/05/01/OO-Unit2-summary/2.png">
-<meta property="og:image" content="https://mmmusel.github.io/2022/05/01/OO-Unit2-summary/3.png">
+<meta property="og:image" content="https://mmmusel.github.io/mmmusel.github.io/2022/05/01/OO-Unit2-summary/5.png">
+<meta property="og:image" content="https://mmmusel.github.io/mmmusel.github.io/2022/05/01/OO-Unit2-summary/4.png">
+<meta property="og:image" content="https://mmmusel.github.io/mmmusel.github.io/2022/05/01/OO-Unit2-summary/1.png">
+<meta property="og:image" content="https://mmmusel.github.io/mmmusel.github.io/2022/05/01/OO-Unit2-summary/2.png">
+<meta property="og:image" content="https://mmmusel.github.io/mmmusel.github.io/2022/05/01/OO-Unit2-summary/3.png">
 <meta property="article:published_time" content="2022-05-01T04:46:53.000Z">
 <meta property="article:modified_time" content="2022-05-02T12:04:27.190Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="OO">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mmmusel.github.io/2022/05/01/OO-Unit2-summary/5.png">
+<meta name="twitter:image" content="https://mmmusel.github.io/mmmusel.github.io/2022/05/01/OO-Unit2-summary/5.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link rel="icon" href="/assets/x.ico">
+    <link rel="icon" href="/mmmusel.github.io/assets/x.ico">
     
     <title>BUAA-OO-Unit2 · Musel&#39;s blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
@@ -154,7 +154,7 @@
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
-        src: url("/font/Oswald-Regular.ttf");
+        src: url("/mmmusel.github.io/font/Oswald-Regular.ttf");
     }
 
     body {
@@ -202,15 +202,15 @@
     }
 </style>
 
-    <link rel="preload" href="/css/style.css?v=" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="/css/dark.css?v=" as="style">
-    <link rel="stylesheet" href="/css/dark.css">
-    <link rel="stylesheet" href="/css/mobile.css?v=" media="(max-width: 960px)">
+    <link rel="preload" href="/mmmusel.github.io/css/style.css?v=" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/mmmusel.github.io/css/dark.css?v=" as="style">
+    <link rel="stylesheet" href="/mmmusel.github.io/css/dark.css">
+    <link rel="stylesheet" href="/mmmusel.github.io/css/mobile.css?v=" media="(max-width: 960px)">
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
-    <link rel="preload" href="/scripts/main.js?v=" as="script">
-    <link rel="preload" href="/scripts/dark.js?v=" as="script">
-    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="/mmmusel.github.io/scripts/main.js?v=" as="script">
+    <link rel="preload" href="/mmmusel.github.io/scripts/dark.js?v=" as="script">
+    <link rel="preload" href="/mmmusel.github.io/font/Oswald-Regular.ttf" as="font" crossorigin>
     <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
     <!-- algolia -->
     
@@ -224,7 +224,7 @@
     <script type="text/javascript">
         if (typeof window.$ == undefined) {
             console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="/lib/jquery.min.js" />')
+            document.write('<script src="/mmmusel.github.io/lib/jquery.min.js" />')
         }
     </script>
     
@@ -254,7 +254,7 @@
         </span>
         <!-- back to home page text -->
         <span class="home-link header-element">
-            <a href=/>Musel's blog</a>
+            <a href=/mmmusel.github.io/>Musel's blog</a>
         </span>
     </div>
     <!-- toggle banner for post layout -->
@@ -263,7 +263,7 @@
             <div class="banner">
         
             <div class="blog-title header-element">
-                <a href="/">Musel&#39;s blog</a>
+                <a href="/mmmusel.github.io/">Musel&#39;s blog</a>
             </div>
             <div class="post-title header-element">
                 <a href="#" class="post-name">BUAA-OO-Unit2</a>
@@ -306,7 +306,7 @@
     <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/mmmusel.github.io/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
@@ -489,18 +489,18 @@
     [
       'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
       'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
-      "/lib/webfontloader.min.js",
+      "/mmmusel.github.io/lib/webfontloader.min.js",
     ],
     asyncCb,
     asyncErr
   )
 </script>
 
-            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <img class="loading" src="/mmmusel.github.io/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h1 id="一、电梯的调度策略"><a href="#一、电梯的调度策略" class="headerlink" title="一、电梯的调度策略"></a>一、电梯的调度策略</h1><h2 id="1-1-状态转移图"><a href="#1-1-状态转移图" class="headerlink" title="1.1 状态转移图"></a>1.1 状态转移图</h2><img src="/2022/05/01/OO-Unit2-summary/5.png" class="" title="pic1">
+        <h1 id="一、电梯的调度策略"><a href="#一、电梯的调度策略" class="headerlink" title="一、电梯的调度策略"></a>一、电梯的调度策略</h1><h2 id="1-1-状态转移图"><a href="#1-1-状态转移图" class="headerlink" title="1.1 状态转移图"></a>1.1 状态转移图</h2><img src="/mmmusel.github.io/2022/05/01/OO-Unit2-summary/5.png" class="" title="pic1">
 
 <h2 id="1-2-纵向电梯的LOOK算法"><a href="#1-2-纵向电梯的LOOK算法" class="headerlink" title="1.2 纵向电梯的LOOK算法"></a>1.2 纵向电梯的LOOK算法</h2><h3 id="LOOK算法实现"><a href="#LOOK算法实现" class="headerlink" title="LOOK算法实现"></a>LOOK算法实现</h3><ul>
 <li>与真实的电梯大致相同的策略，即维护电梯当前运行方向dir，更远层无请求(各楼层的call请求&amp;电梯中乘客的目的地请求)时才转向。  </li>
@@ -566,9 +566,9 @@
 <li><p>下图为协作方面的迭代设计。</p>
 </li>
 </ul>
-<img src="/2022/05/01/OO-Unit2-summary/4.png" class="" title="pic1">
+<img src="/mmmusel.github.io/2022/05/01/OO-Unit2-summary/4.png" class="" title="pic1">
 
-<h2 id="2-3-协作模式与调度器功能"><a href="#2-3-协作模式与调度器功能" class="headerlink" title="2.3 协作模式与调度器功能"></a>2.3 协作模式与调度器功能</h2><h3 id="hw5-UML类图"><a href="#hw5-UML类图" class="headerlink" title="hw5 UML类图"></a>hw5 UML类图</h3><img src="/2022/05/01/OO-Unit2-summary/1.png" class="" title="pic1">
+<h2 id="2-3-协作模式与调度器功能"><a href="#2-3-协作模式与调度器功能" class="headerlink" title="2.3 协作模式与调度器功能"></a>2.3 协作模式与调度器功能</h2><h3 id="hw5-UML类图"><a href="#hw5-UML类图" class="headerlink" title="hw5 UML类图"></a>hw5 UML类图</h3><img src="/mmmusel.github.io/2022/05/01/OO-Unit2-summary/1.png" class="" title="pic1">
 
 <h3 id="hw5-生产者消费者模式"><a href="#hw5-生产者消费者模式" class="headerlink" title="hw5 - 生产者消费者模式"></a>hw5 - 生产者消费者模式</h3><ul>
 <li><p>仅有输入线程、电梯线程和每个电梯的调度器。</p>
@@ -587,7 +587,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="hw6-UML类图"><a href="#hw6-UML类图" class="headerlink" title="hw6 UML类图"></a>hw6 UML类图</h3><img src="/2022/05/01/OO-Unit2-summary/2.png" class="" title="pic1">
+<h3 id="hw6-UML类图"><a href="#hw6-UML类图" class="headerlink" title="hw6 UML类图"></a>hw6 UML类图</h3><img src="/mmmusel.github.io/2022/05/01/OO-Unit2-summary/2.png" class="" title="pic1">
 
 <h3 id="hw6-两级调度器"><a href="#hw6-两级调度器" class="headerlink" title="hw6 - 两级调度器"></a>hw6 - 两级调度器</h3><ul>
 <li><p>迭代：增加层/座的调度器<code>BuildingScheduler</code>和调度线程<code>SchedulerThread</code>。</p>
@@ -599,7 +599,7 @@
 <li><p>信息交互：调度器接受输入线程的终止信号，将其传递给电梯调度器后，作为调度线程结束标志。</p>
 </li>
 </ul>
-<h3 id="hw7-UML类图"><a href="#hw7-UML类图" class="headerlink" title="hw7 UML类图"></a>hw7 UML类图</h3><img src="/2022/05/01/OO-Unit2-summary/3.png" class="" title="pic1">
+<h3 id="hw7-UML类图"><a href="#hw7-UML类图" class="headerlink" title="hw7 UML类图"></a>hw7 UML类图</h3><img src="/mmmusel.github.io/2022/05/01/OO-Unit2-summary/3.png" class="" title="pic1">
 
 <h3 id="hw7-流水线模式"><a href="#hw7-流水线模式" class="headerlink" title="hw7 - 流水线模式"></a>hw7 - 流水线模式</h3><ul>
 <li><p>迭代：请求分阶段存储；增加<code>RequestCounter</code>作为流水是否结束的计数器。</p>
@@ -675,7 +675,7 @@
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href="/2022/05/03/OS-lab3-summary/" title="BUAA-OS-Lab3">
+                <a href="/mmmusel.github.io/2022/05/03/OS-lab3-summary/" title="BUAA-OS-Lab3">
                     <div class="nextTitle">BUAA-OS-Lab3</div>
                 </a>
             
@@ -683,7 +683,7 @@
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2022/04/14/OS-lab2-summary/" title="BUAA-OS-Lab2">
+                <a href="/mmmusel.github.io/2022/04/14/OS-lab2-summary/" title="BUAA-OS-Lab2">
                     <div class="prevTitle">BUAA-OS-Lab2</div>
                 </a>
             
@@ -950,10 +950,6 @@
         
         
         
-        
-        
-        
-        
     
     
     
@@ -977,73 +973,73 @@
         
         <li class="archive-post-item">
             <span class="archive-post-date">05/04</span>
-            <a class="archive-post-title" href="/2022/05/04/Unix-MyShell-Summary/">BUAA-Unix-Linux下C语言实现MyShell</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/05/04/Unix-MyShell-Summary/">BUAA-Unix-Linux下C语言实现MyShell</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">05/03</span>
-            <a class="archive-post-title" href="/2022/05/03/OS-lab3-summary/">BUAA-OS-Lab3</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/05/03/OS-lab3-summary/">BUAA-OS-Lab3</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">05/01</span>
-            <a class="archive-post-title" href="/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">04/14</span>
-            <a class="archive-post-title" href="/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/24</span>
-            <a class="archive-post-title" href="/2022/03/24/OO-Unit1-summary/">BUAA-OO-Unit1</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/24/OO-Unit1-summary/">BUAA-OO-Unit1</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/15</span>
-            <a class="archive-post-title" href="/2022/03/15/OS-lab0-summary/">BUAA-OS-Lab0</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/15/OS-lab0-summary/">BUAA-OS-Lab0</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/12</span>
-            <a class="archive-post-title" href="/2022/03/12/shell/">Shell</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/12/shell/">Shell</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/11</span>
-            <a class="archive-post-title" href="/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/">OS-Pre-Cause SR EPC BadVaddr</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/">OS-Pre-Cause SR EPC BadVaddr</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/11</span>
-            <a class="archive-post-title" href="/2022/03/11/git/">Git</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/03/11/git/">Git</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">02/16</span>
-            <a class="archive-post-title" href="/2022/02/16/CSS/">CSS</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/02/16/CSS/">CSS</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">02/14</span>
-            <a class="archive-post-title" href="/2022/02/14/HTML/">HTML</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/02/14/HTML/">HTML</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">01/27</span>
-            <a class="archive-post-title" href="/2022/01/27/hello-world/">Hello World</a>
+            <a class="archive-post-title" href="/mmmusel.github.io/2022/01/27/hello-world/">Hello World</a>
         </li>
     
     </div>
@@ -1093,7 +1089,7 @@
 
         <!-- site-meta -->
         <script>
-    var siteMetaRoot = "/"
+    var siteMetaRoot = "/mmmusel.github.io/"
     if (siteMetaRoot === "undefined") {
         siteMetaRoot = '/'
     }
@@ -1109,9 +1105,9 @@
 
 
         <!-- main func -->
-        <script src="/scripts/main.js?v="></script>
+        <script src="/mmmusel.github.io/scripts/main.js?v="></script>
         <!-- dark mode -->
-        <script src="/scripts/dark.js?v="></script>
+        <script src="/mmmusel.github.io/scripts/dark.js?v="></script>
         <!-- fancybox -->
         <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
         <!-- algolia -->
@@ -1124,7 +1120,7 @@
         
         <!-- async load share.js -->
         
-            <script src="/scripts/share.js?v=" async></script>
+            <script src="/mmmusel.github.io/scripts/share.js?v=" async></script>
         
         <!-- mermaid -->
         

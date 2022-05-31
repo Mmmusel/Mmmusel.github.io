@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>BUAA-OS-Lab5 | Musel's blog</title><meta name="keywords" content="OS"><meta name="author" content="Musel"><meta name="copyright" content="Musel"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、实验难点 lab5新增加的虚拟地址的映射布局 需要明确：广义用户进程是相对于内核态的，lab5的文件服务进程和用户进程都是用户态下的进程。但是以下涉及的lab5的“用户进程”都是相对服务进程而言的普通用户进程。尽管文件服务进程也属于广义用户进程。 用户进程：文件映射区 文件服务进程：块缓存   lab5新增加的物理空间和虚拟空间的对应 磁盘-文件系统缓存-用户进程的文件区     用户读写文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUAA-OS-Lab5">
+<meta property="og:url" content="https://mmmusel.github.io/2022/05/31/OS-lab5-summary/index.html">
+<meta property="og:site_name" content="Musel&#39;s blog">
+<meta property="og:description" content="一、实验难点 lab5新增加的虚拟地址的映射布局 需要明确：广义用户进程是相对于内核态的，lab5的文件服务进程和用户进程都是用户态下的进程。但是以下涉及的lab5的“用户进程”都是相对服务进程而言的普通用户进程。尽管文件服务进程也属于广义用户进程。 用户进程：文件映射区 文件服务进程：块缓存   lab5新增加的物理空间和虚拟空间的对应 磁盘-文件系统缓存-用户进程的文件区     用户读写文件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mmmusel.github.io/img/1.jpg">
+<meta property="article:published_time" content="2022-05-31T06:13:00.000Z">
+<meta property="article:modified_time" content="2022-05-31T06:19:39.149Z">
+<meta property="article:author" content="Musel">
+<meta property="article:tag" content="OS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mmmusel.github.io/img/1.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mmmusel.github.io/2022/05/31/OS-lab5-summary/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: '/',
+      css: '/'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BUAA-OS-Lab5',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-31 14:19:39'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/page.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/photo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Home/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/1.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Musel's blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Home/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BUAA-OS-Lab5</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2022-05-31T06:13:00.000Z" title="发表于 2022-05-31 14:13:00">2022-05-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="BUAA-OS-Lab5"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一、实验难点"><a href="#一、实验难点" class="headerlink" title="一、实验难点"></a>一、实验难点</h1><ul>
+<li>lab5新增加的虚拟地址的映射布局<ul>
+<li>需要明确：广义用户进程是相对于内核态的，lab5的文件服务进程和用户进程都是用户态下的进程。但是以下涉及的lab5的“用户进程”都是相对服务进程而言的普通用户进程。尽管文件服务进程也属于广义用户进程。</li>
+<li>用户进程：文件映射区</li>
+<li>文件服务进程：块缓存</li>
+</ul>
+</li>
+<li>lab5新增加的物理空间和虚拟空间的对应<ul>
+<li>磁盘-文件系统缓存-用户进程的文件区  </li>
+</ul>
+</li>
+<li>用户读写文件时通过fsipc，把文件块在fs进程对应的块缓存读到用户的文件映射区，而fs进程的块缓存通过ide与磁盘交互。  </li>
+</ul>
+<img src="/2022/05/31/OS-lab5-summary/1.jpg" class="" title="pic1">
+<ul>
+<li>多角色间的协作<ul>
+<li>在做完lab4梳理系统调用、fork、页缺失处理的时候，反观出现在lab4的ipc通信机制，我总觉得它和Lab4的内容格格不入。因为感觉Lab4的内核态和用户态通过系统调用浑然一体地联系了起来，包办好了这三项任务，而此时出现的负责用户进程和用户进程地通信机制ipc看上去是那么不合时宜。<del>所以个人觉得 lab4的两次extra都是关于ipc的考题，是否有些重点偏了呢（x</del></li>
+<li>是在lab5通过文件系统服务的流程梳理，明确了用户进程和服务进程两个用户态进程，才理清楚进程之间ipc机制的流程。</li>
+<li>以下是fs进程的初始化：<img src="/2022/05/31/OS-lab5-summary/2.jpg" class="" title="pic1"></li>
+</ul>
+</li>
+<li>两次ipc机制<ul>
+<li>第一次ipc：<ul>
+<li>用户进程fsipc()的ipc_send()唤醒被ipc_recv()阻塞的fs进程。</li>
+<li>用户进程ipc_send()的页面为req结构体，把用户进程的请求信息传递给fs进程，写进fs进程的dstva为fs进程的REQVA页。</li>
+<li>此后fs进程执行文件服务函数，用户进程被fsipc()的ipc_recv()阻塞，此时的待写入页面为INDEX2FD(fd)页面，此页面需要fs进程执行完文件服务后填入文件的相关信息。</li>
+</ul>
+</li>
+<li>第二次ipc:<ul>
+<li>fs进程执行过程中，把获取到的文件信息保存在<code>struct Open o = opentab[i]</code>结构体中的o_ff页面。（此页面为open_alloc时使用系统调用alloc）。</li>
+<li>fs进程执行完文件服务后，ipc_send()唤醒被ipc_recv()阻塞的用户进程，把写入了文件信息的页面o-&gt;o_ff作为ipc的srcva，映射给用户进程的待写入页面dstva:INDEX2FD(fd)。</li>
+<li>这也是理解难度最大的一个页面:实际上<code>opentab[i].o_ff,fd,ffd</code>这一些虚拟页面都指向同一个物理页面。由于这个页面先是在opentab[i]里判断o_ff地址的pp_ref，再进入没有break的两个case分支，使得o_ff地址在fs进程里alloc出物理页面p，再在fs进程和用户进程之间以ipc映射。映射给用户进程的dstva。dstva在用户进程下的一个名字是fd，另一个名字是ffd。实际上fd和ffd不仅所对物理页面一样，他们作为指针保存的虚拟地址dstva也是一样的。这个页面在两个进程里都不好理解，所以可以说是lab5最大的难点吧…  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/2022/05/31/OS-lab5-summary/3.jpg" class="" title="pic1">
+<img src="/2022/05/31/OS-lab5-summary/4.jpg" class="" title="pic1">
+
+<ul>
+<li>用户文件读写流程、用户通过fsipc机制调用的文件服务接口  </li>
+</ul>
+<img src="/2022/05/31/OS-lab5-summary/5.jpg" class="" title="pic1">
+
+<h1 id="二、思考题"><a href="#二、思考题" class="headerlink" title="二、思考题"></a>二、思考题</h1><h2 id="Thinking-5-4"><a href="#Thinking-5-4" class="headerlink" title="Thinking 5.4"></a>Thinking 5.4</h2><blockquote>
+<p>查找代码中的相关定义，试回答一个磁盘块中最多能存储多少个文件控制块？一个目录下最多能有多少个文件？我们的文件系统支持的单个文件最大为多大？  </p>
+</blockquote>
+<p>BY2FILE = 256，一个文件控制块为256B。<br>BY2BLK = 4096，一个磁盘块4KB。<br>因此一个磁盘块中包含4KB / 256B = 16个文件控制块。<br>一个目录包含1024个指向磁盘块的指针，即最多有1024 * 16 = 16384个文件。<br>1024个磁盘块共1024 * 4KB = 4MB。单个文件最大为4MB。</p>
+<h2 id="Thinking-5-5"><a href="#Thinking-5-5" class="headerlink" title="Thinking 5.5"></a>Thinking 5.5</h2><blockquote>
+<p>请思考，在满足磁盘块缓存的设计的前提下，我们实验使用的内核支持的最大磁盘大小是多少？  </p>
+</blockquote>
+<p>DISKMAX = 0x40000000，因此支持的最大磁盘大小为1GB。</p>
+<h2 id="Thinking-5-7"><a href="#Thinking-5-7" class="headerlink" title="Thinking 5.7"></a>Thinking 5.7</h2><blockquote>
+<p>在lab5 中，fs/fs.h、include/fs.h 等文件中出现了许多宏定义，试列举你认为较为重要的宏定义，并进行解释，写出其主要应用之处。 </p>
+</blockquote>
+<ul>
+<li>user/fd.h 这两个宏用来找fd对应的文件信息页面和文件缓存区地址<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#define INDEX2FD(i)	(FDTABLE+(i)*BY2PG)</span><br><span class="line">#define INDEX2DATA(i)	(FILEBASE+(i)*PDMAP)</span><br></pre></td></tr></table></figure></li>
+<li>文件服务函数调用号，可以重用user/fsipc.c的fsipc()函数，作为进程间通信的value，用户进程传给文件服务系统的fs/serve()<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#define FSREQ_OPEN	1</span><br><span class="line">#define FSREQ_MAP	2</span><br><span class="line">#define FSREQ_SET_SIZE	3</span><br><span class="line">#define FSREQ_CLOSE	4</span><br><span class="line">#define FSREQ_DIRTY	5</span><br><span class="line">#define FSREQ_REMOVE	6</span><br><span class="line">#define FSREQ_SYNC	7</span><br></pre></td></tr></table></figure>
+<h2 id="Thinking-5-8"><a href="#Thinking-5-8" class="headerlink" title="Thinking 5.8"></a>Thinking 5.8</h2><blockquote>
+<p>阅读 user/file.c ，你会发现很多函数中都会将一个 struct Fd * 型的指针转换为 struct Filefd * 型的指针，请解释为什么这样的转换可行。  </p>
+</blockquote>
+</li>
+</ul>
+<p>在结构体Filefd中储存的第一个元素就是struct Fd*，因而对于相匹配的一对struct Fd和struct Filefd，他们的指针实际上指向了相同的虚拟地址INDEX2FD(fd)</p>
+<h2 id="Thinking-5-9"><a href="#Thinking-5-9" class="headerlink" title="Thinking 5.9"></a>Thinking 5.9</h2><blockquote>
+<p>在 lab4 的实验中我们实现了极为重要的 fork 函数。那么 fork 前后的父子进程是否会共享文件描述符和定位指针呢？请在完成上述练习的基础上编写一个程序进行验证。  </p>
+</blockquote>
+<p> fork 前后的父子进程共享文件描述符和定位指针。<br>验证程序：  </p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;lib.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">char</span> *msg = <span class="string">&quot;This is the NEW message of the day!\n\n&quot;</span>;</span><br><span class="line"><span class="type">static</span> <span class="type">char</span> *diff_msg = <span class="string">&quot;This is a different massage of the day!\n\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">umain</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> r;</span><br><span class="line">        <span class="type">int</span> fdnum;</span><br><span class="line">        <span class="type">char</span> buf[<span class="number">512</span>];</span><br><span class="line">        <span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ((r = open(<span class="string">&quot;/newmotd&quot;</span>, O_RDWR)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            user_panic(<span class="string">&quot;open /newmotd: %d&quot;</span>, r);</span><br><span class="line">        &#125;</span><br><span class="line">        fdnum = r;</span><br><span class="line">        writef(<span class="string">&quot;open is good\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ((n = read(fdnum, buf, <span class="number">511</span>)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            user_panic(<span class="string">&quot;read /newmotd: %d&quot;</span>, r);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strcmp</span>(buf, diff_msg) != <span class="number">0</span>) &#123;</span><br><span class="line">            user_panic(<span class="string">&quot;read returned wrong data&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        writef(<span class="string">&quot;read is good\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> id;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ((id = fork()) == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((n = read(fdnum, buf, <span class="number">511</span>)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                user_panic(<span class="string">&quot;child read /newmotd: %d&quot;</span>, r);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">strcmp</span>(buf, diff_msg) != <span class="number">0</span>) &#123;</span><br><span class="line">                user_panic(<span class="string">&quot;child read returned wrong data&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            writef(<span class="string">&quot;child read is good &amp;&amp; child_fd == %d\n&quot;</span>,r);</span><br><span class="line">            <span class="class"><span class="keyword">struct</span> <span class="title">Fd</span> *<span class="title">fdd</span>;</span></span><br><span class="line">            fd_lookup(r,&amp;fdd);</span><br><span class="line">            writef(<span class="string">&quot;child_fd&#x27;s offset == %d\n&quot;</span>,fdd-&gt;fd_offset);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>((n = read(fdnum, buf, <span class="number">511</span>)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                user_panic(<span class="string">&quot;father read /newmotd: %d&quot;</span>, r);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">strcmp</span>(buf, diff_msg) != <span class="number">0</span>) &#123;</span><br><span class="line">                user_panic(<span class="string">&quot;father read returned wrong data&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            writef(<span class="string">&quot;father read is good &amp;&amp; father_fd == %d\n&quot;</span>,r);</span><br><span class="line">            <span class="class"><span class="keyword">struct</span> <span class="title">Fd</span> *<span class="title">fdd</span>;</span></span><br><span class="line">            fd_lookup(r,&amp;fdd);</span><br><span class="line">            writef(<span class="string">&quot;father_fd&#x27;s offset == %d\n&quot;</span>,fdd-&gt;fd_offset);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">main.c: main is start ...</span><br><span class="line"></span><br><span class="line">init.c: mips_init() is called</span><br><span class="line"></span><br><span class="line">Physical memory: 65536K available, base = 65536K, extended = 0K</span><br><span class="line"></span><br><span class="line">to memory 80401000 for struct page directory.</span><br><span class="line"></span><br><span class="line">to memory 80431000 for struct Pages.</span><br><span class="line"></span><br><span class="line">pmap.c:  mips vm init success</span><br><span class="line"></span><br><span class="line">pageout:        @@@___0x7f3fe000___@@@  ins a page </span><br><span class="line"></span><br><span class="line">pageout:        @@@___0x40d000___@@@  ins a page </span><br><span class="line"></span><br><span class="line">FS is running</span><br><span class="line"></span><br><span class="line">FS can do I/O</span><br><span class="line"></span><br><span class="line">pageout:        @@@___0x7f3fe000___@@@  ins a page </span><br><span class="line"></span><br><span class="line">pageout:        @@@___0x407000___@@@  ins a page </span><br><span class="line"></span><br><span class="line">superblock is good</span><br><span class="line"></span><br><span class="line">diskno: 0</span><br><span class="line"></span><br><span class="line">diskno: 0</span><br><span class="line"></span><br><span class="line">read_bitmap is good</span><br><span class="line"></span><br><span class="line">diskno: 0</span><br><span class="line"></span><br><span class="line">alloc_block is good</span><br><span class="line"></span><br><span class="line">file_open is good</span><br><span class="line"></span><br><span class="line">file_get_block is good</span><br><span class="line"></span><br><span class="line">file_flush is good</span><br><span class="line"></span><br><span class="line">file_truncate is good</span><br><span class="line"></span><br><span class="line">diskno: 0</span><br><span class="line"></span><br><span class="line">file rewrite is good</span><br><span class="line"></span><br><span class="line">serve_open 00000400 ffff000 0x2</span><br><span class="line"></span><br><span class="line">open is good</span><br><span class="line"></span><br><span class="line">read is good</span><br><span class="line"></span><br><span class="line">father read is good &amp;&amp; father_fd == 0</span><br><span class="line"></span><br><span class="line">father_fd&#x27;s offset == 41</span><br><span class="line"></span><br><span class="line">[00000400] destroying 00000400</span><br><span class="line"></span><br><span class="line">[00000400] free env 00000400</span><br><span class="line"></span><br><span class="line">i am killed ... </span><br><span class="line"></span><br><span class="line">child read is good &amp;&amp; child_fd == 0</span><br><span class="line"></span><br><span class="line">child_fd&#x27;s offset == 41</span><br><span class="line"></span><br><span class="line">[00001402] destroying 00001402</span><br><span class="line"></span><br><span class="line">[00001402] free env 00001402</span><br><span class="line"></span><br><span class="line">i am killed ... </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Thinking-5-10"><a href="#Thinking-5-10" class="headerlink" title="Thinking 5.10"></a>Thinking 5.10</h2><blockquote>
+<p>请解释 Fd, Filefd, Open 结构体及其各个域的作用。比如各个结构体会在哪些过程中被使用，是否对应磁盘上的物理实体还是单纯的内存数据等。说明形式自定，要求简洁明了，可大致勾勒出文件系统数据结构与物理实体的对应关系与设计框架。 </p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Fd</span> &#123;</span></span><br><span class="line">     u_int fd_dev_id;     <span class="comment">// 外设的id。</span></span><br><span class="line">     <span class="comment">//用户使用fd.c的文件接口时，不同的dev_id会调取不同的文件服务函数。</span></span><br><span class="line">     <span class="comment">//比如File类型的文件服务函数为user/File.c的file_*()函数。</span></span><br><span class="line">     u_int fd_offset;     <span class="comment">// 读写的偏移量</span></span><br><span class="line">     <span class="comment">//seek()时修改。</span></span><br><span class="line">     <span class="comment">//offset会被用来找起始filebno文件块号。</span></span><br><span class="line">     u_int fd_omode;      <span class="comment">// 打开方式，包括只读、只写、读写</span></span><br><span class="line">     <span class="comment">//req和open结构体都会用到</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Filefd</span> &#123;</span></span><br><span class="line">     <span class="class"><span class="keyword">struct</span> <span class="title">Fd</span> <span class="title">f_fd</span>;</span>     <span class="comment">// file descriptor</span></span><br><span class="line">     u_int f_fileid;     <span class="comment">// 文件的id</span></span><br><span class="line">     <span class="comment">//模1024后会用来在opentab[]里索引open结构体</span></span><br><span class="line">     <span class="class"><span class="keyword">struct</span> <span class="title">File</span> <span class="title">f_file</span>;</span> <span class="comment">// 对应文件的文件控制块</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Open</span> &#123;</span></span><br><span class="line">     <span class="class"><span class="keyword">struct</span> <span class="title">File</span> *<span class="title">o_file</span>;</span>    <span class="comment">// 指向打开的文件</span></span><br><span class="line">     u_int o_fileid;         <span class="comment">// 打开文件的id</span></span><br><span class="line">     <span class="type">int</span> o_mode;             <span class="comment">// 打开方式</span></span><br><span class="line">     <span class="class"><span class="keyword">struct</span> <span class="title">Filefd</span> *<span class="title">o_ff</span>;</span>    <span class="comment">// 指向读写的位置（偏移）</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>结构体均为内存数据，记录了文件信息。</li>
+<li>Filefd以及Open中的指向的文件控制块File中记录的磁盘指针对应物理实体。</li>
+</ul>
+<h2 id="Thinking-5-11"><a href="#Thinking-5-11" class="headerlink" title="Thinking 5.11"></a>Thinking 5.11</h2><blockquote>
+<p>上图中有多种不同形式的箭头，请结合 UML 时序图的规范，解释这些不同箭头的差别，并思考我们的操作系统是如何实现对应类型的进程间通信的。</p>
+</blockquote>
+<ul>
+<li>ENV_CREATE(user_env)和ENV_CREATE(fs_serv)都是异步消息，由init()发出创建消息后，init()函数即可返回执行后续步骤，由fs和user线程执行自己的初始化工作。</li>
+<li>fs线程初始化serv_init()和fs_init()完成后，进入serv()函数，被ipc_receive()阻塞为ENV_NOT_RUNNABLE，直到收到User线程的ipc_send(fsreq)被唤醒。</li>
+<li>User线程向fs线程ipc_send(fsreq)发送请求为同步消息，发送后自身进入阻塞ENV_NOT_RUNNABLE等待被唤醒的fs线程服务结束时ipc_send(dst_va),用户线程接收到数据后继续运行，此后fs线程进入阻塞，等待下次被用户唤醒。</li>
+</ul>
+<h2 id="Thinking-5-12"><a href="#Thinking-5-12" class="headerlink" title="Thinking 5.12"></a>Thinking 5.12</h2><blockquote>
+<p>阅读serv.c/serve函数的代码，我们注意到函数中包含了一个死循环for (;;) {…}，为什么这段代码不会导致整个内核进入 panic 状态？  </p>
+</blockquote>
+<p>serve调用ipc_recv函数后会将自身状态变为ENV_NOT_RUNNABLE，进入等待状态。其他进程发出文件系统请求后才被唤醒并开始服务。</p>
+<h1 id="三、体会与感想"><a href="#三、体会与感想" class="headerlink" title="三、体会与感想"></a>三、体会与感想</h1><ul>
+<li>lab5的感觉是填空代码量锐减，但是需要阅读的代码量骤增，一个文件的open操作的函数嵌套层数也是让我大开眼界:)。所以一开始区区18页的指导书让我以为lab5很简单:) 我觉得lab5的复杂度和lab4不相上下，尽管理解上比中断、页缺失容易很多。</li>
+<li>lab5的局部代码理解起来比前边lab更快，可能是因为内核态用户态的接口切换 和 线程间的通信协作在lab4有过涉及，文件索引函数等与lab2的内存管理大体结构比较相似，对于宏函数、指针、结构体以及函数间的调用和异常的写法在前边的lab都有了很好的练习。</li>
+<li>从lab4到lab5更加体会到MOS操作系统设计方面的精巧，各lab之间环环相扣，借助之前lab的代码实现本次lab的新功能，看着自己写的操作系统一步步有了更加完善的功能是非常有趣的一种感受。</li>
+</ul>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OS/">OS</a></div><div class="post_share"><div class="social-share" data-image="/img/1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><script src="/" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/05/04/Unix-MyShell-Summary/"><img class="next-cover" src="/img/1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">BUAA-Unix-Linux下C语言实现MyShell</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/03/15/OS-lab0-summary/" title="BUAA-OS-Lab0"><img class="cover" src="/img/1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-15</div><div class="title">BUAA-OS-Lab0</div></div></a></div><div><a href="/2022/04/14/OS-lab2-summary/" title="BUAA-OS-Lab2"><img class="cover" src="/img/1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-14</div><div class="title">BUAA-OS-Lab2</div></div></a></div><div><a href="/2022/05/03/OS-lab3-summary/" title="BUAA-OS-Lab3"><img class="cover" src="/img/1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-03</div><div class="title">BUAA-OS-Lab3</div></div></a></div><div><a href="/2022/03/11/git/" title="Git"><img class="cover" src="/img/1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-11</div><div class="title">Git</div></div></a></div><div><a href="/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/" title="OS-Pre-Cause SR EPC BadVaddr"><img class="cover" src="/img/1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-11</div><div class="title">OS-Pre-Cause SR EPC BadVaddr</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E9%9A%BE%E7%82%B9"><span class="toc-text">一、实验难点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-text">二、思考题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-5-4"><span class="toc-text">Thinking 5.4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-5-5"><span class="toc-text">Thinking 5.5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-5-7"><span class="toc-text">Thinking 5.7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-5-8"><span class="toc-text">Thinking 5.8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-5-9"><span class="toc-text">Thinking 5.9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-5-10"><span class="toc-text">Thinking 5.10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-5-11"><span class="toc-text">Thinking 5.11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-5-12"><span class="toc-text">Thinking 5.12</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BD%93%E4%BC%9A%E4%B8%8E%E6%84%9F%E6%83%B3"><span class="toc-text">三、体会与感想</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Musel</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

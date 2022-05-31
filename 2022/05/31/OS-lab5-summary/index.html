@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mmmusel.github.io/img/1.jpg">
 <meta property="article:published_time" content="2022-05-31T06:13:00.000Z">
-<meta property="article:modified_time" content="2022-05-31T06:19:39.149Z">
+<meta property="article:modified_time" content="2022-05-31T06:25:39.180Z">
 <meta property="article:author" content="Musel">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
@@ -17,7 +17,7 @@
   localSearch: undefined,
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -53,7 +53,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2022-05-31 14:19:39'
+  postUpdate: '2022-05-31 14:25:39'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -200,12 +200,11 @@
 </blockquote>
 <ul>
 <li>user/fd.h 这两个宏用来找fd对应的文件信息页面和文件缓存区地址<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#define INDEX2FD(i)	(FDTABLE+(i)*BY2PG)</span><br><span class="line">#define INDEX2DATA(i)	(FILEBASE+(i)*PDMAP)</span><br></pre></td></tr></table></figure></li>
-<li>文件服务函数调用号，可以重用user/fsipc.c的fsipc()函数，作为进程间通信的value，用户进程传给文件服务系统的fs/serve()<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#define FSREQ_OPEN	1</span><br><span class="line">#define FSREQ_MAP	2</span><br><span class="line">#define FSREQ_SET_SIZE	3</span><br><span class="line">#define FSREQ_CLOSE	4</span><br><span class="line">#define FSREQ_DIRTY	5</span><br><span class="line">#define FSREQ_REMOVE	6</span><br><span class="line">#define FSREQ_SYNC	7</span><br></pre></td></tr></table></figure>
+<li>文件服务函数调用号，可以重用user/fsipc.c的fsipc()函数，作为进程间通信的value，用户进程传给文件服务系统的fs/serve()<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#define FSREQ_OPEN	1</span><br><span class="line">#define FSREQ_MAP	2</span><br><span class="line">#define FSREQ_SET_SIZE	3</span><br><span class="line">#define FSREQ_CLOSE	4</span><br><span class="line">#define FSREQ_DIRTY	5</span><br><span class="line">#define FSREQ_REMOVE	6</span><br><span class="line">#define FSREQ_SYNC	7</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h2 id="Thinking-5-8"><a href="#Thinking-5-8" class="headerlink" title="Thinking 5.8"></a>Thinking 5.8</h2><blockquote>
 <p>阅读 user/file.c ，你会发现很多函数中都会将一个 struct Fd * 型的指针转换为 struct Filefd * 型的指针，请解释为什么这样的转换可行。  </p>
 </blockquote>
-</li>
-</ul>
 <p>在结构体Filefd中储存的第一个元素就是struct Fd*，因而对于相匹配的一对struct Fd和struct Filefd，他们的指针实际上指向了相同的虚拟地址INDEX2FD(fd)</p>
 <h2 id="Thinking-5-9"><a href="#Thinking-5-9" class="headerlink" title="Thinking 5.9"></a>Thinking 5.9</h2><blockquote>
 <p>在 lab4 的实验中我们实现了极为重要的 fork 函数。那么 fork 前后的父子进程是否会共享文件描述符和定位指针呢？请在完成上述练习的基础上编写一个程序进行验证。  </p>

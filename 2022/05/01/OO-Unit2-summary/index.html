@@ -12,7 +12,7 @@
     <link rel="icon" href="/images/photo.jpg">
     <link rel="stylesheet" href="/css/antd.min.css">
     
-    <link rel="stylesheet" href="/css/maiden-theme.css">
+    <link rel="stylesheet" href="/css/full-theme.css">
     
     <script src="/js/vue.js"></script>
     <script src="/js/antd.min.js"></script>
@@ -71,14 +71,14 @@
             <span>archives</span>
         </a>
         
-        <a href="/like/categories">
+        <a href="/categories">
             <span>
                 <a-icon type="book" theme="filled" />
             </span>
             <span>categories</span>
         </a>
         
-        <a href="/like/tags">
+        <a href="/tags">
             <span>
                 <a-icon type="tags" theme="filled" />
             </span>
@@ -123,7 +123,7 @@
                 </div>
             </a>
             
-            <a href="/like/categories">
+            <a href="/categories">
                 <div class="item">
                     <div style="min-width:20px; max-width:50px; width: 10%">
                         <a-icon type="book" theme="filled" />
@@ -132,7 +132,7 @@
                 </div>
             </a>
             
-            <a href="/like/tags">
+            <a href="/tags">
                 <div class="item">
                     <div style="min-width:20px; max-width:50px; width: 10%">
                         <a-icon type="tags" theme="filled" />
@@ -174,7 +174,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/OO" style=color:#ff7d73>
+                <a href="/tags/OO" style=color:#03a9f4>
                     OO
                 </a>
             </span>
@@ -185,6 +185,8 @@
 
     <div class="content" v-pre>
         <h1 id="一、电梯的调度策略"><a href="#一、电梯的调度策略" class="headerlink" title="一、电梯的调度策略"></a>一、电梯的调度策略</h1><h2 id="1-1-状态转移图"><a href="#1-1-状态转移图" class="headerlink" title="1.1 状态转移图"></a>1.1 状态转移图</h2><img src="/2022/05/01/OO-Unit2-summary/5.png" class="" title="pic1">
+
+<span id="more"></span>
 
 <h2 id="1-2-纵向电梯的LOOK算法"><a href="#1-2-纵向电梯的LOOK算法" class="headerlink" title="1.2 纵向电梯的LOOK算法"></a>1.2 纵向电梯的LOOK算法</h2><h3 id="LOOK算法实现"><a href="#LOOK算法实现" class="headerlink" title="LOOK算法实现"></a>LOOK算法实现</h3><ul>
 <li>与真实的电梯大致相同的策略，即维护电梯当前运行方向dir，更远层无请求(各楼层的call请求&amp;电梯中乘客的目的地请求)时才转向。  </li>

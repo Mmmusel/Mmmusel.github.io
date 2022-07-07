@@ -12,7 +12,7 @@
     <link rel="icon" href="/images/photo.jpg">
     <link rel="stylesheet" href="/css/antd.min.css">
     
-    <link rel="stylesheet" href="/css/maiden-theme.css">
+    <link rel="stylesheet" href="/css/full-theme.css">
     
     <script src="/js/vue.js"></script>
     <script src="/js/antd.min.js"></script>
@@ -71,14 +71,14 @@
             <span>archives</span>
         </a>
         
-        <a href="/like/categories">
+        <a href="/categories">
             <span>
                 <a-icon type="book" theme="filled" />
             </span>
             <span>categories</span>
         </a>
         
-        <a href="/like/tags">
+        <a href="/tags">
             <span>
                 <a-icon type="tags" theme="filled" />
             </span>
@@ -123,7 +123,7 @@
                 </div>
             </a>
             
-            <a href="/like/categories">
+            <a href="/categories">
                 <div class="item">
                     <div style="min-width:20px; max-width:50px; width: 10%">
                         <a-icon type="book" theme="filled" />
@@ -132,7 +132,7 @@
                 </div>
             </a>
             
-            <a href="/like/tags">
+            <a href="/tags">
                 <div class="item">
                     <div style="min-width:20px; max-width:50px; width: 10%">
                         <a-icon type="tags" theme="filled" />
@@ -174,7 +174,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/CSS" style=color:#ff7d73>
+                <a href="/tags/CSS" style=color:#00a596>
                     CSS
                 </a>
             </span>
@@ -184,7 +184,10 @@
     </div>
 
     <div class="content" v-pre>
-        <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
+        <p>CSS基础</p>
+<span id="more"></span>
+
+<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
 <li>内嵌式：写在&lt;style&gt;双标签，选择器查找标签。  </li>
 </ul>
 <pre><code class="css">&lt;style&gt;
@@ -657,10 +660,8 @@ margin-left:-150px/*水平距离一半*/
 </li>
 </ul>
 <h2 id="vertical-align"><a href="#vertical-align" class="headerlink" title="vertical-align"></a>vertical-align</h2><ul>
-<li><p>浏览器处理行内和行内块默认按基线对齐导致</p>
-</li>
-<li><p>baseline;top;bottom;middle;</p>
-</li>
+<li>浏览器处理行内和行内块默认按基线对齐导致</li>
+<li>baseline;top;bottom;middle;</li>
 <li><pre><code class="css">/* 文本框和图片基线对齐 */
 input&#123;
     height:50px;

@@ -12,7 +12,7 @@
     <link rel="icon" href="/images/photo.jpg">
     <link rel="stylesheet" href="/css/antd.min.css">
     
-    <link rel="stylesheet" href="/css/maiden-theme.css">
+    <link rel="stylesheet" href="/css/full-theme.css">
     
     <script src="/js/vue.js"></script>
     <script src="/js/antd.min.js"></script>
@@ -71,14 +71,14 @@
             <span>archives</span>
         </a>
         
-        <a href="/like/categories">
+        <a href="/categories">
             <span>
                 <a-icon type="book" theme="filled" />
             </span>
             <span>categories</span>
         </a>
         
-        <a href="/like/tags">
+        <a href="/tags">
             <span>
                 <a-icon type="tags" theme="filled" />
             </span>
@@ -123,7 +123,7 @@
                 </div>
             </a>
             
-            <a href="/like/categories">
+            <a href="/categories">
                 <div class="item">
                     <div style="min-width:20px; max-width:50px; width: 10%">
                         <a-icon type="book" theme="filled" />
@@ -132,7 +132,7 @@
                 </div>
             </a>
             
-            <a href="/like/tags">
+            <a href="/tags">
                 <div class="item">
                     <div style="min-width:20px; max-width:50px; width: 10%">
                         <a-icon type="tags" theme="filled" />
@@ -184,7 +184,10 @@
     </div>
 
     <div class="content" v-pre>
-        <h1 id="一、实验难点"><a href="#一、实验难点" class="headerlink" title="一、实验难点"></a>一、实验难点</h1><ul>
+        <p>BUAA-OS-Lab5 : 文件管理系统</p>
+<span id="more"></span>
+
+<h1 id="一、实验难点"><a href="#一、实验难点" class="headerlink" title="一、实验难点"></a>一、实验难点</h1><ul>
 <li>lab5新增加的虚拟地址的映射布局<ul>
 <li>需要明确：广义用户进程是相对于内核态的，lab5的文件服务进程和用户进程都是用户态下的进程。但是以下涉及的lab5的“用户进程”都是相对服务进程而言的普通用户进程。尽管文件服务进程也属于广义用户进程。</li>
 <li>用户进程：文件映射区</li>

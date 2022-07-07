@@ -1,148 +1,190 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Shell | Musel's blog</title><meta name="keywords" content="Unix"><meta name="author" content="Musel"><meta name="copyright" content="Musel"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="shell脚本运行方式可执行程序 头文件 ·#!&#x2F;bin&#x2F;bash,保证我们的脚本默认会使用bash。#! 告诉系统其后路径所指定的程序即是解释此脚本文件的 Shell 程序。 添加权限  chmod +x my.sh 传递参数：$n就代表第几个参数，而$0也就是命令 执行命令 .&#x2F;my2.sh msg 一定要写成 .&#x2F;test.sh，而不是 test.sh，运行其它二进制的程序也一样，直接写 t">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Shell">
-<meta property="og:url" content="https://mmmusel.github.io/2022/03/12/shell/index.html">
-<meta property="og:site_name" content="Musel&#39;s blog">
-<meta property="og:description" content="shell脚本运行方式可执行程序 头文件 ·#!&#x2F;bin&#x2F;bash,保证我们的脚本默认会使用bash。#! 告诉系统其后路径所指定的程序即是解释此脚本文件的 Shell 程序。 添加权限  chmod +x my.sh 传递参数：$n就代表第几个参数，而$0也就是命令 执行命令 .&#x2F;my2.sh msg 一定要写成 .&#x2F;test.sh，而不是 test.sh，运行其它二进制的程序也一样，直接写 t">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mmmusel.github.io/img/1.jpg">
-<meta property="article:published_time" content="2022-03-12T14:46:53.000Z">
-<meta property="article:modified_time" content="2022-03-12T15:21:01.765Z">
-<meta property="article:author" content="Musel">
-<meta property="article:tag" content="Unix">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mmmusel.github.io/img/1.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mmmusel.github.io/2022/03/12/shell/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: '/',
-      css: '/'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Shell',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2022-03-12 23:21:01'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
+<!DOCTYPE html>
+<html lang="zh-CN ">
 
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musel&#39;s blog || Shell</title>
+    <meta name="author" content="Musel">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/images/photo.jpg">
+    <link rel="stylesheet" href="/css/antd.min.css">
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
+    <link rel="stylesheet" href="/css/maiden-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Musel's blog</span>
+        </a>
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/page.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/photo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Home/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/1.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Musel's blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Home/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Shell</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2022-03-12T14:46:53.000Z" title="发表于 2022-03-12 22:46:53">2022-03-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Shell"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="shell脚本运行方式"><a href="#shell脚本运行方式" class="headerlink" title="shell脚本运行方式"></a>shell脚本运行方式</h1><h2 id="可执行程序"><a href="#可执行程序" class="headerlink" title="可执行程序"></a>可执行程序</h2><ul>
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/about">
+            <span>
+                <a-icon type="idcard" theme="filled" />
+            </span>
+            <span>about</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/like/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/like/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+    </div>
+
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Musel's blog</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="idcard" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/like/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/like/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                     
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>Shell </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/3/12
+        </span>
+
+        
+
+        
+
+        <span class="tags">
+            <span class="icon">
+                <a-icon type="tags" theme="filled" />
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Unix" style=color:#879cff>
+                    Unix
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+
+    <div class="content" v-pre>
+        <h1 id="shell脚本运行方式"><a href="#shell脚本运行方式" class="headerlink" title="shell脚本运行方式"></a>shell脚本运行方式</h1><h2 id="可执行程序"><a href="#可执行程序" class="headerlink" title="可执行程序"></a>可执行程序</h2><ul>
 <li>头文件 <code>·#!/bin/bash</code>,保证我们的脚本默认会使用bash。<code>#!</code> 告诉系统其后路径所指定的程序即是解释此脚本文件的 Shell 程序。</li>
 <li>添加权限 <code> chmod +x my.sh</code></li>
 <li>传递参数：$n就代表第几个参数，而$0也就是命令</li>
@@ -159,8 +201,14 @@
 <li>不能使用bash关键字。help命令查看</li>
 <li><code>readonly</code>只读变量</li>
 <li><code>unset</code>命令可以删除变量，不能删除只读变量</li>
-<li>可二次赋值<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">your_name=&quot;tom&quot;</span><br><span class="line">echo $your_name</span><br><span class="line">your_name=&quot;alibaba&quot;</span><br><span class="line">echo $your_name</span><br></pre></td></tr></table></figure>
-<h2 id="语句赋值"><a href="#语句赋值" class="headerlink" title="语句赋值"></a>语句赋值</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for file in `ls /etc`</span><br><span class="line">for file in $(ls /etc)</span><br></pre></td></tr></table></figure>
+<li>可二次赋值<pre><code class="shell">your_name=&quot;tom&quot;
+echo $your_name
+your_name=&quot;alibaba&quot;
+echo $your_name
+</code></pre>
+<h2 id="语句赋值"><a href="#语句赋值" class="headerlink" title="语句赋值"></a>语句赋值</h2><pre><code>for file in `ls /etc`
+for file in $(ls /etc)
+</code></pre>
 <h2 id="使用变量"><a href="#使用变量" class="headerlink" title="使用变量"></a>使用变量</h2></li>
 <li>加<code>$</code></li>
 <li><code>&#123;&#125;</code>识别变量边界;<code>echo &quot;I am good at $&#123;skill&#125;Script&quot;</code></li>
@@ -172,195 +220,86 @@
 <li>可成对出现，作为字符串拼接</li>
 </ul>
 </li>
-<li><strong>双引号</strong>可以出现<strong>变量和转义字符</strong><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">your_name=&quot;runoob&quot;</span><br><span class="line">greeting=&quot;hello, &quot;$your_name&quot; !&quot; </span><br><span class="line">greeting_2=&#x27;hello, &#x27;$your_name&#x27; !&#x27;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">均输出hello, runoob !</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- 字符串长度</span><br><span class="line">  - $&#123;#string&#125; 字符串长度</span><br><span class="line">  - $&#123;#string[0]&#125; 数组</span><br><span class="line">- 截取子串</span><br><span class="line">  - $&#123;string:1:4&#125;  #从第二个字符开始，截取四个字符</span><br><span class="line">- 查找子串</span><br><span class="line">  - &quot;$string&quot; io  #字符i或o第一次出现的位置</span><br></pre></td></tr></table></figure>
-<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2></li>
-<li>括号来表示数组，数组元素用”空格”或回车符号分割开</li>
-<li><code>array_name=(value0 value1 value2 value3)</code></li>
-<li>可以使用下表单独定义分量，<strong>范围无限制，可以不连续</strong></li>
-<li>读取<code>$&#123;array_name[n]&#125;</code>  #[@]获取所有元素<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">取得数组元素的个数</span></span><br><span class="line">length=$&#123;#array_name[@]&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者</span></span><br><span class="line">length=$&#123;#array_name[*]&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">取得数组单个元素的长度</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>双引号</strong>可以出现<strong>变量和转义字符</strong><pre><code class="shell">your_name=&quot;runoob&quot;
+greeting=&quot;hello, &quot;$your_name&quot; !&quot; 
+greeting_2=&#39;hello, &#39;$your_name&#39; !&#39;
+# 均输出hello, runoob !
+</code></pre>
+```</li>
+<li>字符串长度<ul>
+<li>$</li>
 </ul>
-<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><h2 id="算数运算符"><a href="#算数运算符" class="headerlink" title="算数运算符"></a>算数运算符</h2><h3 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">val=`expr 2 + 2` # +-*/%</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>表达式和运算符之间要有空格</strong></li>
-<li><strong>乘号(*)前边必须加反斜杠()才能实现乘法运算</strong></li>
-<li>MAC 中 shell 的 expr 语法是：$((表达式))，此处表达式中的 “*” 不需要转义符号 “&quot; 。<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><code>a=$b</code><h3 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h3><code>[ $a == $b ]</code> <code>[ $a != $b ]</code></li>
-<li><strong>条件表达式要放在方括号之间，前后两边必须要有空格。</strong></li>
-<li><strong>同时仍需注意表达式和运算符之间要有空格</strong></li>
-</ul>
-<h2 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h2><ul>
-<li>只支持数字，不支持字符串，或字符串的值为数字</li>
-<li><code>-eq</code> <code>-ne</code> <code>-gt</code> <code>-lt</code> <code>-ge</code> <code>-le</code></li>
-</ul>
-<h2 id="布尔运算符"><a href="#布尔运算符" class="headerlink" title="布尔运算符"></a>布尔运算符</h2><p>优先级如下：</p>
-<ul>
-<li>非：<code>[ ! false ]</code></li>
-<li>与：<code>[ $a -lt 20 -a $b -gt 100 ]</code></li>
-<li>或：<code>[ $a -lt 20 -o $b -gt 100 ]</code></li>
-</ul>
-<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><ul>
-<li><code>[[ $a -lt 100 &amp;&amp; $b -gt 100 ]]</code></li>
-<li><code>   [[ $a -lt 100 || $b -gt 100 ]]</code></li>
-</ul>
-<h2 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h2><table>
-<thead>
-<tr>
-<th>符号</th>
-<th>说明</th>
-<th>使用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>=</td>
-<td>检测两个字符串是否相等，相等返回 true。</td>
-<td>[ $a = $b ] 返回 false。</td>
-</tr>
-<tr>
-<td>!=</td>
-<td>检测两个字符串是否不相等，不相等返回 true。</td>
-<td>[ $a != $b ] 返回 true。</td>
-</tr>
-<tr>
-<td>-z</td>
-<td>检测字符串长度是否为0，为0返回 true。</td>
-<td>[ -z $a ] 返回 false。</td>
-</tr>
-<tr>
-<td>-n</td>
-<td>检测字符串长度是否不为 0，不为 0 返回 true。</td>
-<td>[ -n “$a” ] 返回 true。</td>
-</tr>
-<tr>
-<td>$</td>
-<td>检测字符串是否为空，不为空返回 true。</td>
-<td>[ $a ] 返回 true。</td>
-</tr>
-</tbody></table>
-<h2 id="文件测试运算符"><a href="#文件测试运算符" class="headerlink" title="文件测试运算符"></a>文件测试运算符</h2><p>使用时查阅：<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-shell-basic-operators.html">https://www.runoob.com/linux/linux-shell-basic-operators.html</a></p>
-<h1 id="echo命令-输出字符串"><a href="#echo命令-输出字符串" class="headerlink" title="echo命令:输出字符串"></a>echo命令:输出字符串</h1><h2 id="echo双引号"><a href="#echo双引号" class="headerlink" title="echo双引号"></a>echo双引号</h2><ul>
-<li>输出纯字符串时，字符串的书写形式可以省略引号：<code>echo &quot;aaa&quot;</code>-&gt;aaa</li>
-<li>可以显示转义字符：<code>echo \&quot;</code>-&gt;”<h2 id="echo单引号"><a href="#echo单引号" class="headerlink" title="echo单引号"></a>echo单引号</h2></li>
-<li>原样输出字符串，<strong>不进行转义或取变量</strong><h2 id="显示命令执行结果"><a href="#显示命令执行结果" class="headerlink" title="显示命令执行结果"></a>显示命令执行结果</h2></li>
-<li>使用<strong>反引号</strong>：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo `date`</span><br></pre></td></tr></table></figure>
-<h2 id="显示结果可重定向至文件"><a href="#显示结果可重定向至文件" class="headerlink" title="显示结果可重定向至文件"></a>显示结果可重定向至文件</h2></li>
-</ul>
-<h2 id="换行-不换行"><a href="#换行-不换行" class="headerlink" title="换行/不换行"></a>换行/不换行</h2><ul>
-<li><p><code>echo -e &quot;OK! \n&quot; # -e 开启转义</code></p>
-</li>
-<li><p><code>echo -e &quot;OK! \c&quot; # -e 开启转义 \c 不换行</code></p>
-<h2 id="输出变量"><a href="#输出变量" class="headerlink" title="输出变量"></a>输出变量</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/sh</span></span><br><span class="line">read name </span><br><span class="line">echo &quot;$name It is a test&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">以上代码保存为 test.sh，name 接收标准输入的变量，结果将是:</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>OK                     #标准输入<br>OK It is a test        #输出</p>
-</blockquote>
-</li>
-<li><p>read命令：从标准输入中读取一行,并把输入行的每个字段的值指定给 shell 变量</p>
 </li>
 </ul>
-<h1 id="printf命令"><a href="#printf命令" class="headerlink" title="printf命令"></a>printf命令</h1><h2 id="与echo差异"><a href="#与echo差异" class="headerlink" title="与echo差异"></a>与echo差异</h2><ul>
-<li>使用 printf 的脚本比使用 echo <strong>移植性好</strong>:printf 由 POSIX 标准所定义</li>
-<li>printf 不会像 echo 自动添加换行符<h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2>printf  format-string  [arguments…]  <h3 id="arguments-参数列表"><a href="#arguments-参数列表" class="headerlink" title="arguments:参数列表"></a>arguments:参数列表</h3><h3 id="format-string-格式控制字符串"><a href="#format-string-格式控制字符串" class="headerlink" title="format-string:格式控制字符串"></a>format-string:格式控制字符串</h3></li>
-<li>双引号单引号效果相同，没有引号也可以输出</li>
-<li><code>printf %s abc def</code> 格式只指定了一个参数，但多出的参数仍然会按照该格式输出，format-string 被重用<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">printf &quot;%s %s %s\n&quot; a b c d e f g h i j</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>a b c<br>d e f<br>g h i</p>
-</blockquote>
-</li>
-<li>如果没有 arguments，那么 %s 用NULL代替，%d 用 0 代替<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">printf &quot;%s and %d \n&quot;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p> and 0</p>
-</blockquote>
-<h2 id="格式控制"><a href="#格式控制" class="headerlink" title="格式控制"></a>格式控制</h2></li>
-<li><code>%s %c %d %f</code> 都是格式替代符，％s 输出一个字符串，％d 整型输出，％c 输出一个字符，％f 输出实数，以小数形式输出。  <blockquote>
-<p>? <a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-shell-printf.html">https://www.runoob.com/linux/linux-shell-printf.html</a></p>
-</blockquote>
-</li>
-<li><code>%-10s</code> 指一个宽度为 10 个字符（- 表示左对齐，没有则表示右对齐），任何字符都会被显示在 10 个字符宽的字符内，如果不足则自动以空格填充，超过也会将内容全部显示出来。</li>
-<li>小数位数 <code>%-4.2f</code></li>
-</ul>
-<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><h2 id="数值测试"><a href="#数值测试" class="headerlink" title="数值测试"></a>数值测试</h2><p><code>if test $[num1] -eq $[num2]</code></p>
-<ul>
-<li>方括号内执行基本算术运算 <code>result=$[a+b] # 注意等号两边不能有空格</code><h2 id="字符测试"><a href="#字符测试" class="headerlink" title="字符测试"></a>字符测试</h2><h2 id="文件测试"><a href="#文件测试" class="headerlink" title="文件测试"></a>文件测试</h2></li>
-<li>存在与权限测试</li>
-</ul>
-<h1 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h1><h2 id="不为空"><a href="#不为空" class="headerlink" title="不为空"></a>不为空</h2><ul>
-<li>如果 else 分支没有语句执行，就不要写这个 else。<h2 id="条件语句的两种格式"><a href="#条件语句的两种格式" class="headerlink" title="条件语句的两种格式"></a>条件语句的两种格式</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if condition</span><br><span class="line">then</span><br><span class="line">    command1 </span><br><span class="line">    command2</span><br><span class="line">    ...</span><br><span class="line">else if</span><br><span class="line">then</span><br><span class="line">    ...</span><br><span class="line">else </span><br><span class="line">    ...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">a=1</span><br><span class="line">if [ $a -ne 1 ]; then echo ok; fi</span><br></pre></td></tr></table></figure>
-<h2 id="if-else-语句经常与-test-命令结合使用"><a href="#if-else-语句经常与-test-命令结合使用" class="headerlink" title="if else 语句经常与 test 命令结合使用"></a>if else 语句经常与 test 命令结合使用</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">比较数字</span></span><br><span class="line">num1=$[2*3]</span><br><span class="line">num2=$[1+5]</span><br><span class="line">if test $[num1] -eq $[num2]</span><br><span class="line">then</span><br><span class="line">    echo &#x27;两个数字相等!&#x27;</span><br><span class="line">else</span><br><span class="line">    echo &#x27;两个数字不相等!&#x27;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">while condition</span><br><span class="line">do</span><br><span class="line">    commands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">int=1</span><br><span class="line">while(( $int&lt;=5 ))</span><br><span class="line">do</span><br><span class="line">    echo $int</span><br><span class="line">    let &quot;int++&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>Bash let</strong> 命令，它用于执行一个或多个表达式，<strong>变量计算中不需要加上 $ 来表示变量</strong><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">let a=5+4</span><br><span class="line">let b=9-3</span><br><span class="line">let no++</span><br><span class="line">let no+=10</span><br></pre></td></tr></table></figure></li>
-<li>读取键盘信息<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &#x27;按下 &lt;CTRL-D&gt; 退出&#x27;</span><br><span class="line">echo -n &#x27;输入你最喜欢的网站名: &#x27;</span><br><span class="line">while read FILM</span><br><span class="line">do</span><br><span class="line">    echo &quot;是的！$FILM 是一个好网站&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for var in item1 item2 ... itemN</span><br><span class="line">do</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    ...</span><br><span class="line">    commandN</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">for var in item1 item2 ... itemN; do command1; command2… done;</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><blockquote>
-<p>?in 列表可以包含替换、字符串和文件名。</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">for str in This is a string</span><br><span class="line">do</span><br><span class="line">    echo $str</span><br><span class="line">done</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="until"><a href="#until" class="headerlink" title="until"></a>until</h3><h3 id="case"><a href="#case" class="headerlink" title="case"></a>case</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">case 值 in</span><br><span class="line">模式1)</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    ...</span><br><span class="line">    commandN</span><br><span class="line">    ;;</span><br><span class="line">模式2)</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    ...</span><br><span class="line">    commandN</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
-<ul>
-<li>一旦模式匹配，则执行完匹配模式相应命令后不再继续其他模式。如果无一匹配模式，使用星号 * 捕获该值，再执行后面的命令。</li>
-<li>可以匹配变量或常数</li>
-</ul>
-<h2 id="break-continue"><a href="#break-continue" class="headerlink" title="break continue"></a>break continue</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">while :</span><br><span class="line">do</span><br><span class="line">    echo -n &quot;输入 1 到 5 之间的数字:&quot;</span><br><span class="line">    read aNum</span><br><span class="line">    case $aNum in</span><br><span class="line">        1|2|3|4|5) echo &quot;你输入的数字为 $aNum!&quot;</span><br><span class="line">        ;;</span><br><span class="line">        *) echo &quot;你输入的数字不是 1 到 5 之间的! 游戏结束&quot;</span><br><span class="line">            break</span><br><span class="line">        ;;</span><br><span class="line">    esac</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><ul>
-<li>直接fun()定义</li>
-<li>参数返回，可以显示加：return 返回，如果不加，将以最后一条命令运行结果，作为返回值。 return后跟数值n(0-255</li>
-<li>调用时使用函数名，函数返回值在调用该函数后<strong>立刻</strong>通过 <code>$?</code> 来获得<blockquote>
-<p>调用 demoFun1 后，没有立即查看 $? 的值，而是先插入了一条别的 echo 命令，最后再查看 $? 的值得到的是 0，也就是上一条 echo 命令的结果，而 demoFun1 的返回值被覆盖了</p>
-</blockquote>
-</li>
-<li>必须将函数放在脚本开始部分，直至shell解释器首次发现它时，才可以使用</li>
-<li><strong>当n&gt;=10时，需要使用${n}来获取参数</strong></li>
-</ul>
-<h1 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ul>
-<li><p>三种流可以同时重定向，举例:<br>  <code>command &lt; input.txt 1&gt;output.txt 2&gt;err.txt</code></p>
-</li>
-<li><p>将 stdout 和 stderr 合并后重定向到 file<br><code>$ command &gt; file 2&gt;&amp;1</code></p>
-</li>
-<li><p>管道符号“|”可以连接命令：</p>
-<p>  command1 | command2 | command3 | …<br>以上内容是将command1的stdout发给command2的stdin，command2的stdout发给command3的stdin，依此类推。</p>
-<h2 id="Here-Document"><a href="#Here-Document" class="headerlink" title="Here Document"></a>Here Document</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">command &lt;&lt; delimiter</span><br><span class="line">    document</span><br><span class="line">delimiter</span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF</span><br><span class="line">11</span><br><span class="line">22</span><br><span class="line">33</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<h2 id="dev-null"><a href="#dev-null" class="headerlink" title="/dev/null"></a>/dev/null</h2></li>
-<li><p>执行某个命令但不显示结果，将输出重定向到 /dev/null <code>$ command &gt; /dev/null</code></p>
-</li>
-<li><p>屏蔽 stdout 和 stderr <code>$ command &gt; /dev/null 2&gt;&amp;1</code></p>
-</li>
-</ul>
-<h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">test1.sh</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">url=&quot;http://www.runoob.com&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">test2.sh</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">使用 . 号来引用test1.sh 文件</span></span><br><span class="line">. ./test1.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者使用以下包含文件代码</span></span><br><span class="line">source ./test1.sh</span><br><span class="line"></span><br><span class="line">echo &quot;菜鸟教程官网地址：$url&quot;</span><br></pre></td></tr></table></figure>
+    </div>
 
-<ul>
-<li>被包含的文件 test1.sh 不需要可执行权限。</li>
-</ul>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="多行注释"><a href="#多行注释" class="headerlink" title="多行注释"></a>多行注释</h2><ul>
-<li><code>&#123;&#125;</code>：定义成未被调用的函数</li>
-<li><code>:&lt;&lt;EOF  ... EOF</code>：EOF可替换为<code>!</code>、<code>&#39;</code></li>
-</ul>
-<h2 id="常见符号"><a href="#常见符号" class="headerlink" title="常见符号"></a>常见符号</h2><ul>
-<li><p><code>$#</code> 传递的参数个数</p>
-</li>
-<li><p><code>$*</code> 一个字符串显示传递的全部参数</p>
-</li>
-<li><p><code>[]</code>是一个判断符号，条件语句要放在[]里面，并且前后两边必须要有空格。</p>
-</li>
-<li><p>中括号包含的条件表达式的-ne是关系运算符，它们和c语言的比较运算符对应如下。</p>
-<p>  <code>-eq</code>  ==(equal)<br>  <code>-ne</code>  !=(not equal)<br>  <code>-gt</code>  &gt;(greater than)<br>  <code>-lt</code>  &lt;(less than)<br>  <code>-ge</code>  &gt;=(greater or equal)<br>  <code>-le</code>  &lt;=(less or equal)</p>
-</li>
-</ul>
-<p>条件也可以写true或false。</p>
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unix/">Unix</a></div><div class="post_share"><div class="social-share" data-image="/img/1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><script src="/" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/15/OS-lab0-summary/"><img class="prev-cover" src="/img/1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">BUAA-OS-Lab0</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/"><img class="next-cover" src="/img/1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">OS-Pre-Cause SR EPC BadVaddr</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/05/04/Unix-MyShell-Summary/" title="BUAA-Unix-Linux下C语言实现MyShell"><img class="cover" src="/img/1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-04</div><div class="title">BUAA-Unix-Linux下C语言实现MyShell</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#shell%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="toc-text">shell脚本运行方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="toc-text">可执行程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8%E5%8F%82%E6%95%B0"><span class="toc-text">解释器参数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#shell%E5%8F%98%E9%87%8F"><span class="toc-text">shell变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E5%BC%8F%E8%B5%8B%E5%80%BC"><span class="toc-text">显式赋值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E8%B5%8B%E5%80%BC"><span class="toc-text">语句赋值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F"><span class="toc-text">使用变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-text">数组</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">算数运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E5%92%8C"><span class="toc-text">求和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC"><span class="toc-text">赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD"><span class="toc-text">判断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">关系运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">布尔运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">字符串运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">文件测试运算符</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#echo%E5%91%BD%E4%BB%A4-%E8%BE%93%E5%87%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">echo命令:输出字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#echo%E5%8F%8C%E5%BC%95%E5%8F%B7"><span class="toc-text">echo双引号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#echo%E5%8D%95%E5%BC%95%E5%8F%B7"><span class="toc-text">echo单引号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-text">显示命令执行结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E7%BB%93%E6%9E%9C%E5%8F%AF%E9%87%8D%E5%AE%9A%E5%90%91%E8%87%B3%E6%96%87%E4%BB%B6"><span class="toc-text">显示结果可重定向至文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%A2%E8%A1%8C-%E4%B8%8D%E6%8D%A2%E8%A1%8C"><span class="toc-text">换行&#x2F;不换行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E5%8F%98%E9%87%8F"><span class="toc-text">输出变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#printf%E5%91%BD%E4%BB%A4"><span class="toc-text">printf命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8Eecho%E5%B7%AE%E5%BC%82"><span class="toc-text">与echo差异</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F"><span class="toc-text">格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#arguments-%E5%8F%82%E6%95%B0%E5%88%97%E8%A1%A8"><span class="toc-text">arguments:参数列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#format-string-%E6%A0%BC%E5%BC%8F%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">format-string:格式控制字符串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E6%8E%A7%E5%88%B6"><span class="toc-text">格式控制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#test"><span class="toc-text">test</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E6%B5%8B%E8%AF%95"><span class="toc-text">数值测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E6%B5%8B%E8%AF%95"><span class="toc-text">字符测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%B5%8B%E8%AF%95"><span class="toc-text">文件测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="toc-text">流程控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E4%B8%BA%E7%A9%BA"><span class="toc-text">不为空</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A0%BC%E5%BC%8F"><span class="toc-text">条件语句的两种格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if-else-%E8%AF%AD%E5%8F%A5%E7%BB%8F%E5%B8%B8%E4%B8%8E-test-%E5%91%BD%E4%BB%A4%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8"><span class="toc-text">if else 语句经常与 test 命令结合使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-text">循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for"><span class="toc-text">for</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#until"><span class="toc-text">until</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#case"><span class="toc-text">case</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#break-continue"><span class="toc-text">break continue</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-text">重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-text">基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Here-Document"><span class="toc-text">Here Document</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dev-null"><span class="toc-text">&#x2F;dev&#x2F;null</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-text">文件包含</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%A1%8C%E6%B3%A8%E9%87%8A"><span class="toc-text">多行注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%AC%A6%E5%8F%B7"><span class="toc-text">常见符号</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Musel</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/"></script><script>var preloader = {
-  endLoading: () => {
-    document.body.style.overflow = 'auto';
-    document.getElementById('loading-box').classList.add("loaded")
-  },
-  initLoading: () => {
-    document.body.style.overflow = '';
-    document.getElementById('loading-box').classList.remove("loaded")
+    
+</div>
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2018 - 2022 Musel&#39;s blog
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @Musel
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
 
-  }
-}
-window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+</footer>
+
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
+
+</body>
+
+</html>

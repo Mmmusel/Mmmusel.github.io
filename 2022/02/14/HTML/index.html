@@ -1,148 +1,190 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>HTML | Musel's blog</title><meta name="keywords" content="CSS"><meta name="author" content="Musel"><meta name="copyright" content="Musel"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="语法Web标准：各个浏览器显示效果相同   语言 说明    HTML 文字、图片等页面元素   CSS 网页元素的外观和位置等页面样式   JS 页面的动态和交互效果   页面固定结构&lt;html&gt;    &lt;head&gt;        &lt;title&gt;&lt;&#x2F;title&gt;    &lt;&#x2F;head&gt;    &lt;body&gt;     &lt;&#x2F;b">
-<meta property="og:type" content="article">
-<meta property="og:title" content="HTML">
-<meta property="og:url" content="https://mmmusel.github.io/2022/02/14/HTML/index.html">
-<meta property="og:site_name" content="Musel&#39;s blog">
-<meta property="og:description" content="语法Web标准：各个浏览器显示效果相同   语言 说明    HTML 文字、图片等页面元素   CSS 网页元素的外观和位置等页面样式   JS 页面的动态和交互效果   页面固定结构&lt;html&gt;    &lt;head&gt;        &lt;title&gt;&lt;&#x2F;title&gt;    &lt;&#x2F;head&gt;    &lt;body&gt;     &lt;&#x2F;b">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mmmusel.github.io/img/1.jpg">
-<meta property="article:published_time" content="2022-02-14T08:06:53.000Z">
-<meta property="article:modified_time" content="2022-03-11T09:02:09.218Z">
-<meta property="article:author" content="Musel">
-<meta property="article:tag" content="CSS">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mmmusel.github.io/img/1.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mmmusel.github.io/2022/02/14/HTML/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: '/',
-      css: '/'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'HTML',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2022-03-11 17:02:09'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
+<!DOCTYPE html>
+<html lang="zh-CN ">
 
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musel&#39;s blog || HTML</title>
+    <meta name="author" content="Musel">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/images/photo.jpg">
+    <link rel="stylesheet" href="/css/antd.min.css">
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
+    <link rel="stylesheet" href="/css/maiden-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Musel's blog</span>
+        </a>
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/page.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/photo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Home/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/1.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Musel's blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Home/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">HTML</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2022-02-14T08:06:53.000Z" title="发表于 2022-02-14 16:06:53">2022-02-14</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="HTML"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="Web标准：各个浏览器显示效果相同"><a href="#Web标准：各个浏览器显示效果相同" class="headerlink" title="Web标准：各个浏览器显示效果相同"></a>Web标准：各个浏览器显示效果相同</h2><table>
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/about">
+            <span>
+                <a-icon type="idcard" theme="filled" />
+            </span>
+            <span>about</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/like/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/like/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+    </div>
+
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Musel's blog</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="idcard" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/like/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/like/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                     
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>HTML </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/2/14
+        </span>
+
+        
+
+        
+
+        <span class="tags">
+            <span class="icon">
+                <a-icon type="tags" theme="filled" />
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/CSS" style=color:#879cff>
+                    CSS
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+
+    <div class="content" v-pre>
+        <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="Web标准：各个浏览器显示效果相同"><a href="#Web标准：各个浏览器显示效果相同" class="headerlink" title="Web标准：各个浏览器显示效果相同"></a>Web标准：各个浏览器显示效果相同</h2><table>
 <thead>
 <tr>
 <th align="left">语言</th>
@@ -162,8 +204,14 @@
 <td align="left">页面的动态和交互效果</td>
 </tr>
 </tbody></table>
-<h2 id="页面固定结构"><a href="#页面固定结构" class="headerlink" title="页面固定结构"></a>页面固定结构</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<h2 id="页面固定结构"><a href="#页面固定结构" class="headerlink" title="页面固定结构"></a>页面固定结构</h2><pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt; 
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 <h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><table>
 <thead>
 <tr>
@@ -238,10 +286,42 @@
 <ul>
 <li><strong>targrt</strong>：<code>_self</code>覆盖；<code>_blank</code>新建。</li>
 </ul>
-<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><h2 id="无序列表ul-有序列表ol"><a href="#无序列表ul-有序列表ol" class="headerlink" title="无序列表ul 有序列表ol"></a>无序列表ul 有序列表ol</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="comment">&lt;!--ul只能包含&lt;li&gt;标签--&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="comment">&lt;!--&lt;li&gt;标签可以包含任意内容--&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="自定义列表"><a href="#自定义列表" class="headerlink" title="自定义列表"></a>自定义列表</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dd</span>&gt;</span> <span class="comment">&lt;!--dl标签只能包含dd/dt--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dt</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="comment">&lt;!--dd默认有缩进--&gt;</span><span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">&quot;1&quot;</span> <span class="attr">width</span>=<span class="string">&quot;500&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">caption</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>加粗标题<span class="tag">&lt;/<span class="name">caption</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>第一列<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>第二列<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>第三列<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>(1,1)<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>(1,2)<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>(1,3)<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tfoot</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>(2,1)<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>(2,2)<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>(2,3)<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tfoot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><h2 id="无序列表ul-有序列表ol"><a href="#无序列表ul-有序列表ol" class="headerlink" title="无序列表ul 有序列表ol"></a>无序列表ul 有序列表ol</h2><pre><code class="html">&lt;ul&gt;
+    &lt;li&gt;&lt;!--ul只能包含&lt;li&gt;标签--&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;!--&lt;li&gt;标签可以包含任意内容--&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<h2 id="自定义列表"><a href="#自定义列表" class="headerlink" title="自定义列表"></a>自定义列表</h2><pre><code class="html">&lt;dd&gt; &lt;!--dl标签只能包含dd/dt--&gt;
+    &lt;dt&gt;
+        &lt;dd&gt;&lt;!--dd默认有缩进--&gt;&lt;/dd&gt;
+    &lt;/dt&gt;
+&lt;/dd&gt;
+</code></pre>
+<h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><pre><code class="html">&lt;table border=&quot;1&quot; width=&quot;500&quot;&gt;
+    &lt;caption&gt;&lt;strong&gt;加粗标题&lt;/caption&gt;&lt;/strong&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;第一列&lt;/td&gt;
+            &lt;th&gt;第二列&lt;/td&gt;
+            &lt;th&gt;第三列&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;/tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;(1,1)&lt;/td&gt;
+            &lt;td&gt;(1,2)&lt;/td&gt;
+            &lt;td&gt;(1,3)&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;td&gt;(2,1)&lt;/td&gt;
+            &lt;td&gt;(2,2)&lt;/td&gt;
+            &lt;td&gt;(2,3)&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tfoot&gt;
+&lt;/table&gt;
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -326,28 +406,107 @@
 <td align="left">普通按钮，配合js添加功能</td>
 </tr>
 </tbody></table>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 占位符placeholder --&gt;</span></span><br><span class="line">密码：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;内容&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 复选框（多选一）name --&gt;</span></span><br><span class="line">性别：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;sex&quot;</span>&gt;</span>男 <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;sex&quot;</span>&gt;</span>女</span><br><span class="line"><span class="comment">&lt;!-- 默认选择checked --&gt;</span></span><br><span class="line">性别：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;sex&quot;</span> <span class="attr">checked</span>&gt;</span>男 <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;sex&quot;</span>&gt;</span>女</span><br><span class="line"><span class="comment">&lt;!-- 上传多个文件multiple --&gt;</span></span><br><span class="line">选择文件：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">multiple</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- button相关按钮需要表单域form --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- button相关按钮文字内容value --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="html">&lt;!-- 占位符placeholder --&gt;
+密码：&lt;input type=&quot;text&quot; placeholder=&quot;内容&quot;&gt;
+&lt;!-- 复选框（多选一）name --&gt;
+性别：&lt;input type=&quot;radio&quot; name=&quot;sex&quot;&gt;男 &lt;input type=&quot;radio&quot; name=&quot;sex&quot;&gt;女
+&lt;!-- 默认选择checked --&gt;
+性别：&lt;input type=&quot;radio&quot; name=&quot;sex&quot; checked&gt;男 &lt;input type=&quot;radio&quot; name=&quot;sex&quot;&gt;女
+&lt;!-- 上传多个文件multiple --&gt;
+选择文件：&lt;input type=&quot;file&quot; multiple&gt;
+&lt;!-- button相关按钮需要表单域form --&gt;
+&lt;!-- button相关按钮文字内容value --&gt;
+&lt;form action=&gt;
+    &lt;input type=&quot;button&quot; value=&quot;&quot;&gt;
+&lt;/form&gt;
+</code></pre>
 <h2 id="button双标签"><a href="#button双标签" class="headerlink" title="button双标签"></a>button双标签</h2><p><code>&lt;button type=&quot;reset&quot;&gt;&lt;/button&gt;</code></p>
-<h2 id="select下拉菜单双标签"><a href="#select下拉菜单双标签" class="headerlink" title="select下拉菜单双标签"></a>select下拉菜单双标签</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 默认选择selected --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">selected</span>&gt;</span>内容1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span>&gt;</span>内容2<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<h2 id="select下拉菜单双标签"><a href="#select下拉菜单双标签" class="headerlink" title="select下拉菜单双标签"></a>select下拉菜单双标签</h2><pre><code class="html">&lt;select&gt;
+    &lt;!-- 默认选择selected --&gt;
+    &lt;option selected&gt;内容1&lt;/option&gt;
+    &lt;option&gt;内容2&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
 <h2 id="textarea文本域双标签"><a href="#textarea文本域双标签" class="headerlink" title="textarea文本域双标签"></a>textarea文本域双标签</h2><p>cols:文本域可见宽度<br>rows:文本域可见行数<br>右下角可以拖拽大小，推荐CSS设置</p>
 <h2 id="label标签"><a href="#label标签" class="headerlink" title="label标签"></a>label标签</h2><ul>
 <li>label把内容裹起来，表单标签添加id属性，label标签的for属性设置为对应的id属性值 </li>
-<li>用label标签把内容和表单一起包裹，label的for属性删除即可 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">性别：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;sex&quot;</span> <span class="attr">checked</span> <span class="attr">id</span>=<span class="string">&quot;x&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;x&quot;</span>&gt;</span>男<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;sex&quot;</span>&gt;</span>女<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>用label标签把内容和表单一起包裹，label的for属性删除即可 <pre><code class="html">性别：&lt;input type=&quot;radio&quot; name=&quot;sex&quot; checked id=&quot;x&quot;&gt; &lt;label for=&quot;x&quot;&gt;男&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;sex&quot;&gt;女&lt;/label&gt;
+</code></pre>
+</li>
 </ul>
 <h1 id="语义化标签"><a href="#语义化标签" class="headerlink" title="语义化标签"></a>语义化标签</h1><h2 id="无语义双标签"><a href="#无语义双标签" class="headerlink" title="无语义双标签"></a>无语义双标签</h2><p>div:一行显示一个<br>span:一行显示多个</p>
 <h2 id="有语义双标签"><a href="#有语义双标签" class="headerlink" title="有语义双标签"></a>有语义双标签</h2><p>HTML5，有语义的布局标签供手机端开发者使用<br>header 头部;nav 导航;footer 底部;aside 侧边栏;section 区块;article 文章;  </p>
 <h2 id="字符实体"><a href="#字符实体" class="headerlink" title="字符实体"></a>字符实体</h2><p>空格<code>&amp;nbsp;</code></p>
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CSS/">CSS</a></div><div class="post_share"><div class="social-share" data-image="/img/1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><script src="/" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/02/16/CSS/"><img class="prev-cover" src="/img/1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CSS</div></div></a></div><div class="next-post pull-right"><a href="/2022/01/27/hello-world/"><img class="next-cover" src="/img/1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hello World</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/02/16/CSS/" title="CSS"><img class="cover" src="/img/1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-16</div><div class="title">CSS</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web%E6%A0%87%E5%87%86%EF%BC%9A%E5%90%84%E4%B8%AA%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%BE%E7%A4%BA%E6%95%88%E6%9E%9C%E7%9B%B8%E5%90%8C"><span class="toc-text">Web标准：各个浏览器显示效果相同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E5%9B%BA%E5%AE%9A%E7%BB%93%E6%9E%84"><span class="toc-text">页面固定结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE"><span class="toc-text">标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87"><span class="toc-text">图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9F%B3%E9%A2%91%E8%A7%86%E9%A2%91"><span class="toc-text">音频视频</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="toc-text">超链接</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8ul-%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8ol"><span class="toc-text">无序列表ul 有序列表ol</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%97%E8%A1%A8"><span class="toc-text">自定义列表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC"><span class="toc-text">表格</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E5%8D%95%E5%85%83%E6%A0%BC"><span class="toc-text">合并单元格</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95"><span class="toc-text">表单</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#input%E5%8D%95%E6%A0%87%E7%AD%BE"><span class="toc-text">input单标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#button%E5%8F%8C%E6%A0%87%E7%AD%BE"><span class="toc-text">button双标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#select%E4%B8%8B%E6%8B%89%E8%8F%9C%E5%8D%95%E5%8F%8C%E6%A0%87%E7%AD%BE"><span class="toc-text">select下拉菜单双标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#textarea%E6%96%87%E6%9C%AC%E5%9F%9F%E5%8F%8C%E6%A0%87%E7%AD%BE"><span class="toc-text">textarea文本域双标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#label%E6%A0%87%E7%AD%BE"><span class="toc-text">label标签</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE"><span class="toc-text">语义化标签</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E8%AF%AD%E4%B9%89%E5%8F%8C%E6%A0%87%E7%AD%BE"><span class="toc-text">无语义双标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E8%AF%AD%E4%B9%89%E5%8F%8C%E6%A0%87%E7%AD%BE"><span class="toc-text">有语义双标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E5%AE%9E%E4%BD%93"><span class="toc-text">字符实体</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Musel</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/"></script><script>var preloader = {
-  endLoading: () => {
-    document.body.style.overflow = 'auto';
-    document.getElementById('loading-box').classList.add("loaded")
-  },
-  initLoading: () => {
-    document.body.style.overflow = '';
-    document.getElementById('loading-box').classList.remove("loaded")
 
-  }
-}
-window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+    </div>
+
+    
+</div>
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2018 - 2022 Musel&#39;s blog
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @Musel
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
+
+</footer>
+
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
+
+</body>
+
+</html>

@@ -1,151 +1,599 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>归档 | Musel's blog</title><meta name="author" content="Musel"><meta name="copyright" content="Musel"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
-<meta property="og:title" content="Musel&#39;s blog">
-<meta property="og:url" content="https://mmmusel.github.io/archives/page/2/index.html">
-<meta property="og:site_name" content="Musel&#39;s blog">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mmmusel.github.io/img/photo.jpg">
-<meta property="article:author" content="Musel">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mmmusel.github.io/img/photo.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mmmusel.github.io/archives/page/2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: '/',
-      css: '/'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '归档',
-  isPost: false,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2022-05-31 14:30:06'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
+<!DOCTYPE html>
+<html lang="zh-CN ">
 
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musel&#39;s blog || </title>
+    <meta name="author" content="Musel">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/images/photo.jpg">
+    <link rel="stylesheet" href="/css/antd.min.css">
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
+    <link rel="stylesheet" href="/css/maiden-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Musel's blog</span>
+        </a>
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/page.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/photo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Home/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('/img/1.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Musel's blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Home/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">归档</h1></div></header><main class="layout hide-aside" id="content-inner"><div id="archive"><div class="article-sort-title">文章总览 - 13</div><div class="article-sort"><div class="article-sort-item year">2022</div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2022-02-16T08:06:53.000Z" title="发表于 2022-02-16 16:06:53">2022-02-16</time></div><a class="article-sort-item-title" href="/2022/02/16/CSS/" title="CSS">CSS</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2022-02-14T08:06:53.000Z" title="发表于 2022-02-14 16:06:53">2022-02-14</time></div><a class="article-sort-item-title" href="/2022/02/14/HTML/" title="HTML">HTML</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2022-01-27T08:24:04.295Z" title="发表于 2022-01-27 16:24:04">2022-01-27</time></div><a class="article-sort-item-title" href="/2022/01/27/hello-world/" title="Hello World">Hello World</a></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/archives/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span></div></nav></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Musel</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/"></script><script>var preloader = {
-  endLoading: () => {
-    document.body.style.overflow = 'auto';
-    document.getElementById('loading-box').classList.add("loaded")
-  },
-  initLoading: () => {
-    document.body.style.overflow = '';
-    document.getElementById('loading-box').classList.remove("loaded")
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/about">
+            <span>
+                <a-icon type="idcard" theme="filled" />
+            </span>
+            <span>about</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/like/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/like/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+    </div>
 
-  }
-}
-window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Musel's blog</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="idcard" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/like/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/like/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                    
+<div id="archives">
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/5/31" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/5/31</div>
+                <a href="/2022/05/31/OS-lab5-summary/">
+                    <h3>BUAA-OS-Lab5</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/OS" style=color:#00bcd4>
+                                OS
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/5/4" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/5/4</div>
+                <a href="/2022/05/04/Unix-MyShell-Summary/">
+                    <h3>BUAA-Unix-Linux下C语言实现MyShell</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Unix" style=color:#00bcd4>
+                                Unix
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/5/3" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/5/3</div>
+                <a href="/2022/05/03/OS-lab3-summary/">
+                    <h3>BUAA-OS-Lab3</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/OS" style=color:#ff7d73>
+                                OS
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/5/1" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/5/1</div>
+                <a href="/2022/05/01/OO-Unit2-summary/">
+                    <h3>BUAA-OO-Unit2</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/OO" style=color:#1bccbc>
+                                OO
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/4/14" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/4/14</div>
+                <a href="/2022/04/14/OS-lab2-summary/">
+                    <h3>BUAA-OS-Lab2</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/OS" style=color:#879cff>
+                                OS
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/3/24" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/3/24</div>
+                <a href="/2022/03/24/OO-Unit1-summary/">
+                    <h3>BUAA-OO-Unit1</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/OO" style=color:#ffa2c4>
+                                OO
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/3/15" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/3/15</div>
+                <a href="/2022/03/15/OS-lab0-summary/">
+                    <h3>BUAA-OS-Lab0</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/OS" style=color:#ffa2c4>
+                                OS
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/3/12" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/3/12</div>
+                <a href="/2022/03/12/shell/">
+                    <h3>Shell</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Unix" style=color:#ff7d73>
+                                Unix
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/3/11" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/3/11</div>
+                <a href="/2022/03/11/《IDT R30xx Family》Chapter3/">
+                    <h3>OS-Pre-Cause SR EPC BadVaddr</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/OS" style=color:#ffa2c4>
+                                OS
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/3/11" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/3/11</div>
+                <a href="/2022/03/11/git/">
+                    <h3>Git</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/OS" style=color:#ffa2c4>
+                                OS
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/2/16" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/2/16</div>
+                <a href="/2022/02/16/CSS/">
+                    <h3>CSS</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/CSS" style=color:#ff7d73>
+                                CSS
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/2/14" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/2/14</div>
+                <a href="/2022/02/14/HTML/">
+                    <h3>HTML</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/CSS" style=color:#ff7d73>
+                                CSS
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2022/1/27" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2022/1/27</div>
+                <a href="/2022/01/27/hello-world/">
+                    <h3>Hello World</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+</div>
+
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2018 - 2022 Musel&#39;s blog
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @Musel
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
+
+</footer>
+
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
+
+</body>
+
+</html>

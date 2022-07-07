@@ -1,241 +1,1265 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Musel's blog</title><meta name="author" content="Musel"><meta name="copyright" content="Musel"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
-<meta property="og:title" content="Musel&#39;s blog">
-<meta property="og:url" content="https://mmmusel.github.io/page/2/index.html">
-<meta property="og:site_name" content="Musel&#39;s blog">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mmmusel.github.io/img/photo.jpg">
-<meta property="article:author" content="Musel">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mmmusel.github.io/img/photo.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mmmusel.github.io/page/2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: '/',
-      css: '/'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Musel\'s blog',
-  isPost: false,
-  isHome: true,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2022-05-31 14:30:06'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
+<!DOCTYPE html>
+<html lang="zh-CN ">
 
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musel&#39;s blog || </title>
+    <meta name="author" content="Musel">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/images/photo.jpg">
+    <link rel="stylesheet" href="/css/antd.min.css">
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
+    <link rel="stylesheet" href="/css/maiden-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Musel's blog</span>
+        </a>
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/about">
+            <span>
+                <a-icon type="idcard" theme="filled" />
+            </span>
+            <span>about</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/like/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/like/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+    </div>
+
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Musel's blog</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="idcard" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/like/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/like/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                    <div id="home-head" style=background-image:url('page.jpg')>
+    <script>
+        var menu = document.getElementById("menu")
+        menu.className += " menu-color"
+    </script>
+     
+    <div id="home-info" class="home-info" @click="home_click">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>Musel's blog</h1>
+                <h3></h3>
+                <h5></h5>
+            </div>
+        </span>
+    </div>
+     
+</div>
+
+
+
+<div id="home-posts-wrap" class=>
+    <div id="home-posts">
+
+        <div id="posts">
+            
+
+<div class="post">
+
+    <a href="/2022/02/16/CSS/">
+        <h2>
+            CSS
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/2/16
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
+<li>内嵌式：写在&lt;style&gt;双标签，选择器查找标签。  </li>
+</ul>
+<pre><code class="css">&lt;style&gt;
+    div&#123;
+        color:red;
+        font-size:30px;
+        background-color:green;
+        width:400px;
+        hright:300px;
+    &#125;
+&lt;/style&gt;
+&lt;body&gt;
+    &lt;div&gt;
+
+    &lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+<ul>
+<li>外联式：写在单独.css，通过link标签在网页中引入<br><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;&quot;&gt;</code></li>
+<li>css写在标签的style属性，配合js使用<br><code>&lt;div style=&quot;color:green;&quot;&gt;内容&lt;/div&gt;;</code></li>
+</ul>
+<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><ul>
+<li>标签选择器选择一类标签。</li>
+<li>类选择器&lt;div&gt;<ul>
+<li>一个标签可以多个类名，空格隔开</li>
+<li>类名由数字字母下划线中划线组成，可以重复<pre><code class="css">&lt;head&gt;
+.one&#123;
+    /**/
+&#125;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;one&quot;&gt;内容&lt;/p&gt;
+&lt;div class=&quot;one&quot;&gt;内容&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>id选择器<ul>
+<li>#定义</li>
+<li>所有标签都有且仅有一个id属性，id在一个页面唯一，一个id选择器只能选中一个标签值，配合js属性</li>
+</ul>
+</li>
+<li>通配符选择器<ul>
+<li>*{}定义</li>
+<li>修改页面边距</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>CSS层叠样式表，设置相同样式时按最后一次渲染</p>
+</blockquote>
+<h2 id="文字样式"><a href="#文字样式" class="headerlink" title="文字样式"></a>文字样式</h2><ul>
+<li>font-size:使用谷歌工具检查工具</li>
+<li>font-weight:<ul>
+<li>关键字：一般normal bold</li>
+<li>纯数字：100~900整百</li>
+</ul>
+</li>
+<li>font-style:normal/italic</li>
+<li>font-family:微软雅黑，黑体，sans-serif //未安装微软雅黑使用黑体或任意非衬线字体</li>
+<li>复合属性font:style weight size family<ul>
+<li>只能省略前两个</li>
+<li>单独的样式写在连写下方</li>
+</ul>
+</li>
+</ul>
+<h2 id="文本样式"><a href="#文本样式" class="headerlink" title="文本样式"></a>文本样式</h2><ul>
+<li>文本缩进text-indent:数字+px/em字大小</li>
+<li>文本对齐text-align:left,center,right<ul>
+<li>文本(h1)；span,a,input,img标签</li>
+<li>属性加给父级标签内&lt;&gt;&lt;&gt;</li>
+</ul>
+</li>
+<li>文本修饰text-decoration:underline(下划线);line-through(删除线);overline(上划线);none(a标签清除装饰线);</li>
+<li>行高line-height：px/倍数<ul>
+<li>font:style weight size/lineheight family</li>
+</ul>
+</li>
+</ul>
+<h2 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h2><table>
+<thead>
+<tr>
+<th align="left">颜色表示方式</th>
+<th align="left">表示含义</th>
+<th align="left">属性值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">关键词</td>
+<td align="left">预设颜色</td>
+<td align="left">red</td>
+</tr>
+<tr>
+<td align="left">rgb表示法</td>
+<td align="left">红绿蓝，每项取值0~255</td>
+<td align="left">rgb(0,255,255)</td>
+</tr>
+<tr>
+<td align="left">rgba表示法</td>
+<td align="left">a表示透明度，0~1</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">十六进制表示法</td>
+<td align="left">#红绿蓝</td>
+<td align="left">#ff0000</td>
+</tr>
+</tbody></table>
+<h2 id="code1"><a href="#code1" class="headerlink" title="code1"></a>code1</h2><pre><code class="css">&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+    div&#123;
+        margin:0 auto;/*div整体居中*/
+        /*text-align:center:此标签内部的所有内容居中*/
+    &#125;
+    h1&#123;
+        text-align:center;/*h1标题整体居中*/
+    &#125;
+    /*后面还有其他p段落，所以p副标题的居中不采用标签选择器，用类选择器*/
+    .center&#123;
+        text-align:center;
+    &#125;
+    .color1&#123;
+        color:#808080;
+    &#125;
+    .color2&#123;
+        color:#87ceeb;
+        font-weight:700;
+    &#125;
+    a&#123;
+        text-decoration:none;
+    &#125;
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div&gt;
+        &lt;h1&gt;标题&lt;/h1&gt;
+        &lt;p class=&quot;center&quot;&gt;
+            &lt;span class=&quot;color1&quot;&gt;副标题1.1&lt;/span&gt;
+            &lt;span class=&quot;color2&quot;&gt;副标题1.2&lt;/span&gt;
+            &lt;a href=&quot; &quot;&gt;收藏本文&lt;/a&gt;
+        &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><ul>
+<li>后代选择器：<code>父选择器 后代选择器</code>(儿子、孙子…)</li>
+<li>子代选择器：<code>父选择器&gt;子代选择器</code></li>
+<li>并集选择器：<code>选择器1，选择器2，选择器n</code>(换行隔开 )</li>
+<li>交集选择器：同时满足多个选择器的标签。选择器之间没有间隔符分隔，标签选择器必须写在类选择器前</li>
+<li>hover伪类选择器：<code>选择器:hover&#123;css&#125;</code>鼠标悬停在元素的状态。</li>
+</ul>
+<h2 id="emmet语法"><a href="#emmet语法" class="headerlink" title="emmet语法"></a>emmet语法</h2><p>//TODO</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
+<li>background-color:</li>
+<li>background-image:url(./images/1.jpg);</li>
+<li>background-repeat背景平铺:repeat/norepeat/repeat-x/repeat-y</li>
+<li>background-position<ul>
+<li>left/center/right ; top/center/bottom</li>
+<li>+-数字px</li>
+</ul>
+</li>
+<li>background推荐复合顺序：color image repeat position<blockquote>
+<p>重要图片img，装饰性图片background</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="显示模式"><a href="#显示模式" class="headerlink" title="显示模式"></a>显示模式</h2><ul>
+<li>块级：独占一行、宽度默认父级标题、可以设置宽高。如&lt;div&gt;</li>
+<li>行内：不换行、设置宽高不生效、宽高和内容一致。如&lt;a&gt;&lt;span&gt;</li>
+<li>行内块：一行可以显示多个，可以设置宽高。如&lt;input&gt;&lt;textarea&gt;&lt;button&gt;&lt;select&gt;&lt;image&gt;<br><em><strong>！解析行内块或行内标签时，如果换行会产生空格</strong></em></li>
+<li>元素显示模式转换display:block;inline-block;in-line<blockquote>
+<p>标签嵌套原则：</p>
+<ul>
+<li>块级元素作为大容器，可以嵌套文本、块级元素，行内块，行内元素。</li>
+<li>p不能嵌套div,p,h元素</li>
+<li>a标签内部可以嵌套除a外任意元素</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h2 id="CSS特性"><a href="#CSS特性" class="headerlink" title="CSS特性"></a>CSS特性</h2><ul>
+<li>继承性<ul>
+<li>子元素默认继承父元素样式，可继承文字控制属性(color,font,text,line-height;height不生效)</li>
+<li>继承失效：a标签的color;h标签的font-size</li>
+</ul>
+</li>
+<li>层叠性：<strong>选择器优先级相同</strong><ul>
+<li>不同样式叠加；相同样式覆盖。</li>
+</ul>
+</li>
+<li>优先级<ul>
+<li>继承&lt;通配符选择器&lt;标签选择器&lt;类选择器&lt;id选择器&lt;行内样式&lt;！important</li>
+<li>覆盖范围越大，优先级越低</li>
+<li>important权重最高，继承权重最低，但important不继承<pre><code class="css">&lt;head&gt;
+&lt;style&gt;
+    #box&#123;
+        color:orange;
+    &#125;
+    .box&#123;
+        color:blue;
+    &#125;
+    div&#123;
+        color:green !important;/*开发不建议使用*/
+    &#125;
+    body&#123;
+        color:red;
+    &#125;
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;box&quot; id=&quot;box&quot; style=&quot;color:pink&quot;&gt;priority&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+</li>
+<li>权重叠加计算：复合选择器</li>
+<li>（行内样式，id选择器，类选择器，标签选择器）<pre><code class="css">&lt;head&gt;
+&lt;style&gt;
+    /* (0,1,0,1) */
+    div #one&#123;
+        color:orange;
+    &#125;
+    /* (0,0,2,0) */
+    .father .son&#123;
+        color:blue;
+    &#125;
+    /* (0,0,1,1) */
+    .father p&#123;
+        color:green 
+    &#125;
+    /* (0,0,0,2) */
+    div p&#123;
+        color:red;
+    &#125;
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;father&quot;&gt;priority&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="code2"><a href="#code2" class="headerlink" title="code2"></a>code2</h2><pre><code class="css">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;style&gt;
+        a&#123;
+            text-decoration: none;
+            width: 300px;
+            height: 50px;background-color: red;
+            display: inline-block;
+            /*a显示模式是行内，不能设置宽高，需要display转换*/
+            color:#fff;
+            text-align: center;
+            line-height: 50px;
+        &#125;
+        a:hover&#123;
+            background-color: orange;
+        &#125;
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;a href=&quot;&quot;&gt;导航1&lt;/a&gt;
+    &lt;a href=&quot;&quot;&gt;导航2&lt;/a&gt;
+    &lt;a href=&quot;&quot;&gt;导航3&lt;/a&gt;
+    &lt;a href=&quot;&quot;&gt;导航4&lt;/a&gt;
+    &lt;a href=&quot;&quot;&gt;导航5&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h1 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h1><ul>
+<li><p>border边框线  </p>
+<ul>
+<li><code>border:10px solid/dashed/dotted red</code>,不分先后顺序 </li>
+<li>快捷键bd+tab</li>
+<li>单方向边框：<code>border-left/top/bottom:</code></li>
+</ul>
+</li>
+<li><p>padding内边距：边框和内容</p>
+<ul>
+<li><code>padding:top right bottom left</code> 顺时针<br><code>padding:top right&amp;left bottom</code><br><code>padding:top&amp;bottom right&amp;left</code>  </li>
+</ul>
+</li>
+<li><p>margin外边距：盒子外边距，边框与边框间</p>
+<ul>
+<li>合并现象：垂直布局的块级元素，上下margin合并，取最大值</li>
+<li>塌陷现象：互相嵌套的块级元素，子元素的margin-top会作用在父级元素上，导致父级元素一起下移</li>
+</ul>
+<blockquote>
+<ul>
+<li>解决办法：</li>
+<li>父元素设置border-top或者padding-top,分隔父子元素的margin-top  </li>
+<li>父元素设置overflow:hidden</li>
+<li>转换成行内块元素</li>
+<li>设置浮动  </li>
+</ul>
+</blockquote>
+<ul>
+<li>行内标签的margin/padding不改变垂直位置</li>
+</ul>
+</li>
+</ul>
+<h2 id="code3"><a href="#code3" class="headerlink" title="code3"></a>code3</h2><pre><code class="css">/* 从外到内：先宽高背景色，内容，内容位置，文字细节 */
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;style&gt;
+        .box &#123;
+            height: 40px;
+            border-top: 3px solid #ff8500;
+            border-bottom: 1px solid #edeef0;
+        &#125;
+        .box a&#123;
+            width: 80px;
+            height: 40px;
+
+            display: inline-block;
+            text-align: center;
+            line-height: 40;
+            font-size: 12px;
+            color:#4c4c4c;
+            text-decoration: none;
+        &#125;
+        .box a:hover &#123;
+            background-color: #edeef0;
+            color:#ff8400;
+        &#125;
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;box&quot;&gt;
+        &lt;a href=&quot;&quot;&gt;导航1&lt;/a&gt;
+        &lt;a href=&quot;&quot;&gt;导航2&lt;/a&gt;
+        &lt;a href=&quot;&quot;&gt;导航3&lt;/a&gt;
+        &lt;a href=&quot;&quot;&gt;导航4&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="结构伪类选择器"><a href="#结构伪类选择器" class="headerlink" title="结构伪类选择器"></a>结构伪类选择器</h2><ul>
+<li>减少对类的依赖，根据HTML的结构关系找元素，保持代码整洁</li>
+<li><code>label:first/last-child&#123;&#125;</code><br><code>label:nth-child(n)&#123;&#125;</code><br><code>label:nth-last-child(n)&#123;&#125;</code>  </li>
+<li>n数字：n从1开始</li>
+<li>n公式：n从0开始  <ul>
+<li>偶数：2n/even  </li>
+<li>奇数：2n+1/2n-1/odd  </li>
+<li>前5个：-n+5  </li>
+<li>从第5个往后：n+5  </li>
+</ul>
+</li>
+</ul>
+<h2 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h2><ul>
+<li>CSS模拟的标签效果<code>(父级元素)::before/after&#123;&#125;</code></li>
+<li>默认行内元素，宽高不生效</li>
+<li>必须加<code>content:&#39;&#39;</code>,否则不生效</li>
+</ul>
+<h1 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h1><ul>
+<li>作用：图文环绕/div盒子环绕</li>
+<li>特点：浮动元素脱离标准位置，不占位置；浮动比标准流高半个级别，覆盖标准流的元素；浮动的标签顶端对齐；具备行内块效果；浮动盒子无法margin:0 auto水平居中</li>
+</ul>
+<h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><ul>
+<li><p>设置父级元素高度</p>
+<ul>
+<li>缺点：有些布局不能设置父级元素高度，如可变长度内容填充</li>
+</ul>
+</li>
+<li><p>额外标签：在父级元素内容的最后添加块级元素，块级元素设置<code>clear:both</code></p>
+<pre><code class="css">/* 子级浮动，父级未设置高度，可在父级内容添加 */
+&lt;head&gt;
+  &lt;style&gt;
+      .clearfix &#123;
+          clea:both;
+          /* 清除左右两侧浮动的影响 */
+      &#125;
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div&gt;
+      /* float1 */
+      /* float2 */
+      &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;standardStream&quot;&gt;standardStream&lt;/div&gt;
+&lt;body&gt;
+</code></pre>
+</li>
+<li><p>单伪元素清除法</p>
+<pre><code class="css">/* 父级类&lt;div class=&quot;class_n clearfix&gt; */
+.clearfix::after &#123;
+  content:&#39;&#39;;
+  display:block;
+  clear:both;
+  /* 隐藏伪元素 保持低版本兼容性*/
+  height:0;
+  visibility:hidden;
+&#125;
+</code></pre>
+</li>
+<li><p>双伪元素清除法</p>
+<pre><code class="css">.clearfix::before,
+/*解决外边距塌陷问题
+父子标签，都是块级，子级加margin会影响父级的位置*/
+.clearfix::after &#123;
+  content:&#39;&#39;;
+  display:tavle;
+&#125;
+.clearfix::after &#123;
+  clear:both;
+&#125;
+</code></pre>
+</li>
+<li><p>父元素设置overflow<br>优缺点。。。。。。。。。。。</p>
+</li>
+</ul>
+<h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><h3 id="网页常见布局形式"><a href="#网页常见布局形式" class="headerlink" title="网页常见布局形式"></a>网页常见布局形式</h3><ul>
+<li>标准流：<ul>
+<li>块级元素独占一行：垂直布局</li>
+<li>行内元素/行内块元素一行显示多个：水平布局</li>
+</ul>
+</li>
+<li>浮动：<ul>
+<li>可以让原本垂直布局的块级元素变成水平布局</li>
+</ul>
+</li>
+<li>定位：<ul>
+<li>元素自由地摆放在网页的任意位置</li>
+<li>盒子间的层叠情况：定位后元素层级最高，可以叠在其他盒子上面</li>
+<li>盒子始终固定在屏幕的某个位置，如导航栏</li>
+</ul>
+</li>
+</ul>
+<h3 id="定位方式"><a href="#定位方式" class="headerlink" title="定位方式"></a>定位方式</h3><blockquote>
+<p>position:static/relative/absolute/fixed<br>设置偏移值left/top:<br>同级定位，下压上;z-index设置</p>
+</blockquote>
+<ul>
+<li>相对定位：<ul>
+<li>相对自己原来的位置移动，原有占位不变(没有脱离标准流控制)</li>
+</ul>
+</li>
+<li>绝对定位：<ul>
+<li>如果有已经定位的父级，以就近定位父级为参照物；否则浏览器窗口为参照物。</li>
+<li>脱离标准流，不占位</li>
+<li>不能实现margin auto居中<pre><code class="css">/* 居中显示 */
+position:absolute;
+left:50%;
+margin-left:-150px/*水平距离一半*/
+/*translate(-50%,0);*/
+</code></pre>
+</li>
+<li>变成行内块的显示模式:加宽度高度生效，如果没有宽度也没有内容，盒子的宽度尺寸是0</li>
+<li>子绝父相：子级绝对定位，父级相对定位</li>
+</ul>
+</li>
+<li>固定定位<ul>
+<li>脱标，相对于浏览器窗口</li>
+<li>行内块特点</li>
+</ul>
+</li>
+</ul>
+<h2 id="vertical-align"><a href="#vertical-align" class="headerlink" title="vertical-align"></a>vertical-align</h2><ul>
+<li><p>浏览器处理行内和行内块默认按基线对齐导致</p>
+</li>
+<li><p>baseline;top;bottom;middle;</p>
+</li>
+<li><pre><code class="css">/* 文本框和图片基线对齐 */
+input&#123;
+    height:50px;
+    box-sizing:boder-box;
+    vertical-align:middle;
+&#125;
+</code></pre>
+</li>
+<li><pre><code class="css">/* 父级div由文字内容撑开：图片取消基线对齐的两种处理模式 */
+img&#123;
+    vertical-align:middle;
+    display:block;
+&#125;
+</code></pre>
+</li>
+<li><pre><code class="css">/* 图片垂直 水平居中 */
+
+.father&#123;
+    width:600px;  /* 图片垂直居中 */
+    height:600px;
+    background-color:pink;
+    line-height:600px;  /* 图片垂直居中 */
+    /* 图片水平居中：处理行内和行内块按文字 */
+    text-align:center;
+&#125;
+img&#123;
+    vertical-align:middle;  /* 图片垂直居中 */
+&#125;
+</code></pre>
+</li>
+</ul>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/CSS" style=color:#879cff>
+                CSS
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/02/16/CSS/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/02/14/HTML/">
+        <h2>
+            HTML
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/2/14
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="Web标准：各个浏览器显示效果相同"><a href="#Web标准：各个浏览器显示效果相同" class="headerlink" title="Web标准：各个浏览器显示效果相同"></a>Web标准：各个浏览器显示效果相同</h2><table>
+<thead>
+<tr>
+<th align="left">语言</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">HTML</td>
+<td align="left">文字、图片等<strong>页面元素</strong></td>
+</tr>
+<tr>
+<td align="left">CSS</td>
+<td align="left">网页元素的外观和位置等<strong>页面样式</strong></td>
+</tr>
+<tr>
+<td align="left">JS</td>
+<td align="left">页面的动态和交互效果</td>
+</tr>
+</tbody></table>
+<h2 id="页面固定结构"><a href="#页面固定结构" class="headerlink" title="页面固定结构"></a>页面固定结构</h2><pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt; 
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">b/strong</td>
+<td align="left">加粗</td>
+</tr>
+<tr>
+<td align="left">u/ins</td>
+<td align="left">下划线</td>
+</tr>
+<tr>
+<td align="left">i/em</td>
+<td align="left">倾斜</td>
+</tr>
+<tr>
+<td align="left">s/del</td>
+<td align="left">删除线</td>
+</tr>
+<tr>
+<td align="left">h1</td>
+<td align="left">一级标题</td>
+</tr>
+<tr>
+<td align="left">br</td>
+<td align="left">回车</td>
+</tr>
+<tr>
+<td align="left">hr</td>
+<td align="left">分割线</td>
+</tr>
+<tr>
+<td align="left">p</td>
+<td align="left">分段</td>
+</tr>
+</tbody></table>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p><code>&lt;img src=&quot;&lt;./&gt;文件名+后缀名&quot; alt=&quot;图片显示失败的替换文本&quot; title=&quot;鼠标悬停的提示文本&quot;&gt; width=&quot;200&quot; heigth=&quot;100&quot;</code>   </p>
+<ul>
+<li>空格隔开，属性之间没有顺序之分  </li>
+<li>heigth width只设置一个，等比例缩放；同时设置两个，改变比例  </li>
+<li>相对路径：下级文件夹/文件名+后缀名；../返回上一级</li>
+</ul>
+<h2 id="音频视频"><a href="#音频视频" class="headerlink" title="音频视频"></a>音频视频</h2><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">src</td>
+<td align="left">路径</td>
+</tr>
+<tr>
+<td align="left">controls</td>
+<td align="left">显示播放的控件</td>
+</tr>
+<tr>
+<td align="left">autoplay</td>
+<td align="left">自动播放，部分浏览器不支持；谷歌浏览器配合muted实现静音播放</td>
+</tr>
+<tr>
+<td align="left">loop</td>
+<td align="left">循环播放</td>
+</tr>
+</tbody></table>
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p><code>&lt;a href=&quot;https://www.baidu.com/&quot;&gt;跳转字符&lt;/a&gt;</code><br><code>&lt;a href=&quot;路径&quot;&gt;跳转字符&lt;/a&gt;</code><br><code>&lt;a href=&quot;#&quot;&gt;跳转字符&lt;/a&gt;</code> 空链接  </p>
+<ul>
+<li><strong>targrt</strong>：<code>_self</code>覆盖；<code>_blank</code>新建。</li>
+</ul>
+<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><h2 id="无序列表ul-有序列表ol"><a href="#无序列表ul-有序列表ol" class="headerlink" title="无序列表ul 有序列表ol"></a>无序列表ul 有序列表ol</h2><pre><code class="html">&lt;ul&gt;
+    &lt;li&gt;&lt;!--ul只能包含&lt;li&gt;标签--&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;!--&lt;li&gt;标签可以包含任意内容--&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<h2 id="自定义列表"><a href="#自定义列表" class="headerlink" title="自定义列表"></a>自定义列表</h2><pre><code class="html">&lt;dd&gt; &lt;!--dl标签只能包含dd/dt--&gt;
+    &lt;dt&gt;
+        &lt;dd&gt;&lt;!--dd默认有缩进--&gt;&lt;/dd&gt;
+    &lt;/dt&gt;
+&lt;/dd&gt;
+</code></pre>
+<h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><pre><code class="html">&lt;table border=&quot;1&quot; width=&quot;500&quot;&gt;
+    &lt;caption&gt;&lt;strong&gt;加粗标题&lt;/caption&gt;&lt;/strong&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;第一列&lt;/td&gt;
+            &lt;th&gt;第二列&lt;/td&gt;
+            &lt;th&gt;第三列&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;/tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;(1,1)&lt;/td&gt;
+            &lt;td&gt;(1,2)&lt;/td&gt;
+            &lt;td&gt;(1,3)&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;td&gt;(2,1)&lt;/td&gt;
+            &lt;td&gt;(2,2)&lt;/td&gt;
+            &lt;td&gt;(2,3)&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tfoot&gt;
+&lt;/table&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th align="left">table属性</th>
+<th align="left">效果(推荐CSS)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">border</td>
+<td align="left">边框宽度</td>
+</tr>
+<tr>
+<td align="left">width</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">heigth</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">th</td>
+<td align="left">tr内部，替换td，列标题默认居中加粗</td>
+</tr>
+<tr>
+<td align="left">caption</td>
+<td align="left">表格标题，table内部</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>表格结构标签，包裹hr，可省略<br>thead,tbody,tfoot</p>
+</blockquote>
+<h2 id="合并单元格"><a href="#合并单元格" class="headerlink" title="合并单元格"></a>合并单元格</h2><ul>
+<li>左上原则确定保留单元格，删除其他</li>
+<li>跨行合并rowspan,跨列合并colspan<br>`<td rowspan="2">内容</td></li>
+<li>不同结构标签不能合并</li>
+</ul>
+<h1 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h1><h2 id="input单标签"><a href="#input单标签" class="headerlink" title="input单标签"></a>input单标签</h2><table>
+<thead>
+<tr>
+<th align="left">type属性值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">text</td>
+<td align="left">输入单行文本</td>
+</tr>
+<tr>
+<td align="left">password</td>
+<td align="left">密码</td>
+</tr>
+<tr>
+<td align="left">radio</td>
+<td align="left">单选框</td>
+</tr>
+<tr>
+<td align="left">checkbox</td>
+<td align="left">多选框</td>
+</tr>
+<tr>
+<td align="left">file</td>
+<td align="left">文件选择</td>
+</tr>
+<tr>
+<td align="left">submit</td>
+<td align="left">提交按钮</td>
+</tr>
+<tr>
+<td align="left">reset</td>
+<td align="left">重置按钮</td>
+</tr>
+<tr>
+<td align="left">button</td>
+<td align="left">普通按钮，配合js添加功能</td>
+</tr>
+</tbody></table>
+<pre><code class="html">&lt;!-- 占位符placeholder --&gt;
+密码：&lt;input type=&quot;text&quot; placeholder=&quot;内容&quot;&gt;
+&lt;!-- 复选框（多选一）name --&gt;
+性别：&lt;input type=&quot;radio&quot; name=&quot;sex&quot;&gt;男 &lt;input type=&quot;radio&quot; name=&quot;sex&quot;&gt;女
+&lt;!-- 默认选择checked --&gt;
+性别：&lt;input type=&quot;radio&quot; name=&quot;sex&quot; checked&gt;男 &lt;input type=&quot;radio&quot; name=&quot;sex&quot;&gt;女
+&lt;!-- 上传多个文件multiple --&gt;
+选择文件：&lt;input type=&quot;file&quot; multiple&gt;
+&lt;!-- button相关按钮需要表单域form --&gt;
+&lt;!-- button相关按钮文字内容value --&gt;
+&lt;form action=&gt;
+    &lt;input type=&quot;button&quot; value=&quot;&quot;&gt;
+&lt;/form&gt;
+</code></pre>
+<h2 id="button双标签"><a href="#button双标签" class="headerlink" title="button双标签"></a>button双标签</h2><p><code>&lt;button type=&quot;reset&quot;&gt;&lt;/button&gt;</code></p>
+<h2 id="select下拉菜单双标签"><a href="#select下拉菜单双标签" class="headerlink" title="select下拉菜单双标签"></a>select下拉菜单双标签</h2><pre><code class="html">&lt;select&gt;
+    &lt;!-- 默认选择selected --&gt;
+    &lt;option selected&gt;内容1&lt;/option&gt;
+    &lt;option&gt;内容2&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+<h2 id="textarea文本域双标签"><a href="#textarea文本域双标签" class="headerlink" title="textarea文本域双标签"></a>textarea文本域双标签</h2><p>cols:文本域可见宽度<br>rows:文本域可见行数<br>右下角可以拖拽大小，推荐CSS设置</p>
+<h2 id="label标签"><a href="#label标签" class="headerlink" title="label标签"></a>label标签</h2><ul>
+<li>label把内容裹起来，表单标签添加id属性，label标签的for属性设置为对应的id属性值 </li>
+<li>用label标签把内容和表单一起包裹，label的for属性删除即可 <pre><code class="html">性别：&lt;input type=&quot;radio&quot; name=&quot;sex&quot; checked id=&quot;x&quot;&gt; &lt;label for=&quot;x&quot;&gt;男&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;sex&quot;&gt;女&lt;/label&gt;
+</code></pre>
+</li>
+</ul>
+<h1 id="语义化标签"><a href="#语义化标签" class="headerlink" title="语义化标签"></a>语义化标签</h1><h2 id="无语义双标签"><a href="#无语义双标签" class="headerlink" title="无语义双标签"></a>无语义双标签</h2><p>div:一行显示一个<br>span:一行显示多个</p>
+<h2 id="有语义双标签"><a href="#有语义双标签" class="headerlink" title="有语义双标签"></a>有语义双标签</h2><p>HTML5，有语义的布局标签供手机端开发者使用<br>header 头部;nav 导航;footer 底部;aside 侧边栏;section 区块;article 文章;  </p>
+<h2 id="字符实体"><a href="#字符实体" class="headerlink" title="字符实体"></a>字符实体</h2><p>空格<code>&amp;nbsp;</code></p>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/CSS" style=color:#ffa2c4>
+                CSS
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/02/14/HTML/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/01/27/hello-world/">
+        <h2>
+            Hello World
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/1/27
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        
+    </div>
+
+    <a href="/2022/01/27/hello-world/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+
+             
+<div class="page-current">
+
+    <div class="prev">
+        
+        <a href="/">
+            <span class="page-num">
+                <a-icon type="caret-left" theme="filled" />
+            </span>
+        </a>
+        
+    </div>
+
+    <div class="page-index">
+
+        
+        <span>
+
+            
+
+            
+            <a href="/">
+                <span class="page-num">
+                    1
+                </span>
+            </a>
+        </span>
+        
+
+        <span class="current">
+            2
+        </span>
+
+        
+
+    </div>
+
+    <div class="next">
+        
+    </div>
+
+</div>
+
+        </div>
+    </div>
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/page.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/photo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Home/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/index-bg.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Musel's blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Home/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Musel's blog</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/Mmmusel" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/02/16/CSS/" title="CSS">CSS</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-02-16T08:06:53.000Z" title="发表于 2022-02-16 16:06:53">2022-02-16</time></span></div><div class="content">基础语法
-内嵌式：写在&lt;style&gt;双标签，选择器查找标签。  
+    <div id="home-card">
+        <a-affix :offset-top="card_top">
+    <a-card class="card-style" style="width: 300px">
+        <div class="avatar">
+            <img src="images/photo.jpg " alt="头像">
+        </div>
+        <div class="name">
+            Musel
+        </div>
+        <div class="descriptions">
+            
+            <div class="description">
+                Welcome
+            </div>
+            
+        </div>
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://github.com/Mmmusel">
 
-&lt;style&gt;    div&#123;        color:red;        font-size:30px;        background-color:green;        width:400px;        hright:300px;    &#125;&lt;/style&gt;&lt;body&gt;    &lt;div&gt;    &lt;/div&gt;&lt;/body&gt;
+                    
+                    <a-icon type="github"
+                        theme="filled" />
+                    
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://twitter.com/korilin_dev">
 
-外联式：写在单独.css，通过link标签在网页中引入&lt;link rel=&quot;stylesheet&quot; href=&quot;&quot;&gt;
-css写在标签的style属性，配合js使用&lt;div style=&quot;color:green;&quot;&gt;内容&lt;/div&gt;;
+                    
+                    <a-icon type="bilibili"
+                        theme="" />
+                    
+                </a>
+            </span>
+            
+        </div>
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://saltyfishyjk.github.io/">
+                    yjk
+                </a>
+            </div>
+            
+        </div>
+    </a-card>
+</a-affix>
+    </div>
+    
+</div>
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2018 - 2022 Musel&#39;s blog
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @Musel
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
 
-选择器
-标签选择器选择一类标签。
-类选择器&lt;div&gt;
-一个标签可以多个类名，空格隔开
-类名由数字字母下划线中划线组成，可以重复&lt; ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/02/14/HTML/" title="HTML">HTML</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-02-14T08:06:53.000Z" title="发表于 2022-02-14 16:06:53">2022-02-14</time></span></div><div class="content">语法Web标准：各个浏览器显示效果相同
+</footer>
 
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
 
-语言
-说明
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
 
+</body>
 
-
-HTML
-文字、图片等页面元素
-
-
-CSS
-网页元素的外观和位置等页面样式
-
-
-JS
-页面的动态和交互效果
-
-
-页面固定结构&lt;html&gt;    &lt;head&gt;        &lt;title&gt;&lt;/title&gt;    &lt;/head&gt;    &lt;body&gt;     &lt;/body&gt;&lt;/html&gt;
-
-标签
-
-
-标签
-说明
-
-
-
-b/strong
-加粗
-
-
-u/ins
-下划线
-
-
-i/em
-倾斜
-
-
-s/del
-删除线
-
-
-h1
-一级标题
-
-
-br
-回车
-
-
-hr
-分割线
-
-
-p
-分段
-
-
-图片&lt;img src=&quot;&lt;./&gt;文件名+后缀名&quot; alt=&quot;图片显示失败的替换文本&quot; title=&quot;鼠标悬停的提示文本&quot;&gt; width=&quot;200&quot; heigth=&quot;100&quot;   
-
-空格隔开，属性之间没有顺序之分  
-heigth widt ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/01/27/hello-world/" title="Hello World">Hello World</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-01-27T08:24:04.295Z" title="发表于 2022-01-27 16:24:04">2022-01-27</time></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
-
-More info: Writing
-Run server$ hexo server
-
-More info: Server
-Generate static files$ hexo generate
-
-More info: Generating
-Deploy to remote sites$ hexo deploy
-
-More info: Deployment
-</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/photo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Musel</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Mmmusel"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Mmmusel" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/CSS/" style="font-size: 1.1em; color: #999">CSS</a> <a href="/tags/OO/" style="font-size: 1.1em; color: #999">OO</a> <a href="/tags/OS/" style="font-size: 1.5em; color: #99a9bf">OS</a> <a href="/tags/Unix/" style="font-size: 1.1em; color: #999">Unix</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">13</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Musel</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/"></script><script>var preloader = {
-  endLoading: () => {
-    document.body.style.overflow = 'auto';
-    document.getElementById('loading-box').classList.add("loaded")
-  },
-  initLoading: () => {
-    document.body.style.overflow = '';
-    document.getElementById('loading-box').classList.remove("loaded")
-
-  }
-}
-window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+</html>

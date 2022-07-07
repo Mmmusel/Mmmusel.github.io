@@ -1,321 +1,2550 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Musel's blog</title><meta name="author" content="Musel"><meta name="copyright" content="Musel"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
-<meta property="og:title" content="Musel&#39;s blog">
-<meta property="og:url" content="https://mmmusel.github.io/index.html">
-<meta property="og:site_name" content="Musel&#39;s blog">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mmmusel.github.io/img/photo.jpg">
-<meta property="article:author" content="Musel">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mmmusel.github.io/img/photo.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mmmusel.github.io/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><link rel="stylesheet" href="/" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: '/',
-      css: '/'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Musel\'s blog',
-  isPost: false,
-  isHome: true,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2022-05-31 14:30:06'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
+<!DOCTYPE html>
+<html lang="zh-CN ">
 
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musel&#39;s blog || </title>
+    <meta name="author" content="Musel">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/images/photo.jpg">
+    <link rel="stylesheet" href="/css/antd.min.css">
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
+    <link rel="stylesheet" href="/css/maiden-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Musel's blog</span>
+        </a>
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/about">
+            <span>
+                <a-icon type="idcard" theme="filled" />
+            </span>
+            <span>about</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/like/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/like/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+    </div>
+
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Musel's blog</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="idcard" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/like/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/like/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                    <div id="home-head" style=background-image:url('page.jpg')>
+    <script>
+        var menu = document.getElementById("menu")
+        menu.className += " menu-color"
+    </script>
+     
+    <div id="home-info" class="home-info" @click="home_click">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>Musel's blog</h1>
+                <h3></h3>
+                <h5></h5>
+            </div>
+        </span>
+    </div>
+     
+</div>
+
+
+
+<div id="home-posts-wrap" class=>
+    <div id="home-posts">
+
+        <div id="posts">
+            
+
+<div class="post">
+
+    <a href="/2022/05/31/OS-lab5-summary/">
+        <h2>
+            BUAA-OS-Lab5
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/5/31
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <h1 id="一、实验难点"><a href="#一、实验难点" class="headerlink" title="一、实验难点"></a>一、实验难点</h1><ul>
+<li>lab5新增加的虚拟地址的映射布局<ul>
+<li>需要明确：广义用户进程是相对于内核态的，lab5的文件服务进程和用户进程都是用户态下的进程。但是以下涉及的lab5的“用户进程”都是相对服务进程而言的普通用户进程。尽管文件服务进程也属于广义用户进程。</li>
+<li>用户进程：文件映射区</li>
+<li>文件服务进程：块缓存</li>
+</ul>
+</li>
+<li>lab5新增加的物理空间和虚拟空间的对应<ul>
+<li>磁盘-文件系统缓存-用户进程的文件区  </li>
+</ul>
+</li>
+<li>用户读写文件时通过fsipc，把文件块在fs进程对应的块缓存读到用户的文件映射区，而fs进程的块缓存通过ide与磁盘交互。  </li>
+</ul>
+<img src="/2022/05/31/OS-lab5-summary/1.jpg" class="" title="pic1">
+<ul>
+<li>多角色间的协作<ul>
+<li>在做完lab4梳理系统调用、fork、页缺失处理的时候，反观出现在lab4的ipc通信机制，我总觉得它和Lab4的内容格格不入。因为感觉Lab4的内核态和用户态通过系统调用浑然一体地联系了起来，包办好了这三项任务，而此时出现的负责用户进程和用户进程地通信机制ipc看上去是那么不合时宜。<del>所以个人觉得 lab4的两次extra都是关于ipc的考题，是否有些重点偏了呢（x</del></li>
+<li>是在lab5通过文件系统服务的流程梳理，明确了用户进程和服务进程两个用户态进程，才理清楚进程之间ipc机制的流程。</li>
+<li>以下是fs进程的初始化：<img src="/2022/05/31/OS-lab5-summary/2.jpg" class="" title="pic1"></li>
+</ul>
+</li>
+<li>两次ipc机制<ul>
+<li>第一次ipc：<ul>
+<li>用户进程fsipc()的ipc_send()唤醒被ipc_recv()阻塞的fs进程。</li>
+<li>用户进程ipc_send()的页面为req结构体，把用户进程的请求信息传递给fs进程，写进fs进程的dstva为fs进程的REQVA页。</li>
+<li>此后fs进程执行文件服务函数，用户进程被fsipc()的ipc_recv()阻塞，此时的待写入页面为INDEX2FD(fd)页面，此页面需要fs进程执行完文件服务后填入文件的相关信息。</li>
+</ul>
+</li>
+<li>第二次ipc:<ul>
+<li>fs进程执行过程中，把获取到的文件信息保存在<code>struct Open o = opentab[i]</code>结构体中的o_ff页面。（此页面为open_alloc时使用系统调用alloc）。</li>
+<li>fs进程执行完文件服务后，ipc_send()唤醒被ipc_recv()阻塞的用户进程，把写入了文件信息的页面o-&gt;o_ff作为ipc的srcva，映射给用户进程的待写入页面dstva:INDEX2FD(fd)。</li>
+<li>这也是理解难度最大的一个页面:实际上<code>opentab[i].o_ff,fd,ffd</code>这一些虚拟页面都指向同一个物理页面。由于这个页面先是在opentab[i]里判断o_ff地址的pp_ref，再进入没有break的两个case分支，使得o_ff地址在fs进程里alloc出物理页面p，再在fs进程和用户进程之间以ipc映射。映射给用户进程的dstva。dstva在用户进程下的一个名字是fd，另一个名字是ffd。实际上fd和ffd不仅所对物理页面一样，他们作为指针保存的虚拟地址dstva也是一样的。这个页面在两个进程里都不好理解，所以可以说是lab5最大的难点吧…  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/2022/05/31/OS-lab5-summary/3.jpg" class="" title="pic1">
+<img src="/2022/05/31/OS-lab5-summary/4.jpg" class="" title="pic1">
+
+<ul>
+<li>用户文件读写流程、用户通过fsipc机制调用的文件服务接口  </li>
+</ul>
+<img src="/2022/05/31/OS-lab5-summary/5.jpg" class="" title="pic1">
+
+<h1 id="二、思考题"><a href="#二、思考题" class="headerlink" title="二、思考题"></a>二、思考题</h1><h2 id="Thinking-5-4"><a href="#Thinking-5-4" class="headerlink" title="Thinking 5.4"></a>Thinking 5.4</h2><blockquote>
+<p>查找代码中的相关定义，试回答一个磁盘块中最多能存储多少个文件控制块？一个目录下最多能有多少个文件？我们的文件系统支持的单个文件最大为多大？  </p>
+</blockquote>
+<p>BY2FILE = 256，一个文件控制块为256B。<br>BY2BLK = 4096，一个磁盘块4KB。<br>因此一个磁盘块中包含4KB / 256B = 16个文件控制块。<br>一个目录包含1024个指向磁盘块的指针，即最多有1024 * 16 = 16384个文件。<br>1024个磁盘块共1024 * 4KB = 4MB。单个文件最大为4MB。</p>
+<h2 id="Thinking-5-5"><a href="#Thinking-5-5" class="headerlink" title="Thinking 5.5"></a>Thinking 5.5</h2><blockquote>
+<p>请思考，在满足磁盘块缓存的设计的前提下，我们实验使用的内核支持的最大磁盘大小是多少？  </p>
+</blockquote>
+<p>DISKMAX = 0x40000000，因此支持的最大磁盘大小为1GB。</p>
+<h2 id="Thinking-5-7"><a href="#Thinking-5-7" class="headerlink" title="Thinking 5.7"></a>Thinking 5.7</h2><blockquote>
+<p>在lab5 中，fs/fs.h、include/fs.h 等文件中出现了许多宏定义，试列举你认为较为重要的宏定义，并进行解释，写出其主要应用之处。 </p>
+</blockquote>
+<ul>
+<li>user/fd.h 这两个宏用来找fd对应的文件信息页面和文件缓存区地址<pre><code>#define INDEX2FD(i)    (FDTABLE+(i)*BY2PG)
+#define INDEX2DATA(i)    (FILEBASE+(i)*PDMAP)
+</code></pre>
+</li>
+<li>文件服务函数调用号，可以重用user/fsipc.c的fsipc()函数，作为进程间通信的value，用户进程传给文件服务系统的fs/serve()<pre><code>#define FSREQ_OPEN    1
+#define FSREQ_MAP    2
+#define FSREQ_SET_SIZE    3
+#define FSREQ_CLOSE    4
+#define FSREQ_DIRTY    5
+#define FSREQ_REMOVE    6
+#define FSREQ_SYNC    7
+</code></pre>
+</li>
+</ul>
+<h2 id="Thinking-5-8"><a href="#Thinking-5-8" class="headerlink" title="Thinking 5.8"></a>Thinking 5.8</h2><blockquote>
+<p>阅读 user/file.c ，你会发现很多函数中都会将一个 struct Fd * 型的指针转换为 struct Filefd * 型的指针，请解释为什么这样的转换可行。  </p>
+</blockquote>
+<p>在结构体Filefd中储存的第一个元素就是struct Fd*，因而对于相匹配的一对struct Fd和struct Filefd，他们的指针实际上指向了相同的虚拟地址INDEX2FD(fd)</p>
+<h2 id="Thinking-5-9"><a href="#Thinking-5-9" class="headerlink" title="Thinking 5.9"></a>Thinking 5.9</h2><blockquote>
+<p>在 lab4 的实验中我们实现了极为重要的 fork 函数。那么 fork 前后的父子进程是否会共享文件描述符和定位指针呢？请在完成上述练习的基础上编写一个程序进行验证。  </p>
+</blockquote>
+<p> fork 前后的父子进程共享文件描述符和定位指针。<br>验证程序：  </p>
+<pre><code class="c">#include &quot;lib.h&quot;
+
+static char *msg = &quot;This is the NEW message of the day!\n\n&quot;;
+static char *diff_msg = &quot;This is a different massage of the day!\n\n&quot;;
+
+void umain()
+&#123;
+        int r;
+        int fdnum;
+        char buf[512];
+        int n;
+
+        if ((r = open(&quot;/newmotd&quot;, O_RDWR)) &lt; 0) &#123;
+            user_panic(&quot;open /newmotd: %d&quot;, r);
+        &#125;
+        fdnum = r;
+        writef(&quot;open is good\n&quot;);
+
+        if ((n = read(fdnum, buf, 511)) &lt; 0) &#123;
+            user_panic(&quot;read /newmotd: %d&quot;, r);
+        &#125;
+        if (strcmp(buf, diff_msg) != 0) &#123;
+            user_panic(&quot;read returned wrong data&quot;);
+        &#125;
+        writef(&quot;read is good\n&quot;);
+
+        int id;
+
+        if ((id = fork()) == 0) &#123;
+            if ((n = read(fdnum, buf, 511)) &lt; 0) &#123;
+                user_panic(&quot;child read /newmotd: %d&quot;, r);
+            &#125;
+            if (strcmp(buf, diff_msg) != 0) &#123;
+                user_panic(&quot;child read returned wrong data&quot;);
+            &#125;
+            writef(&quot;child read is good &amp;&amp; child_fd == %d\n&quot;,r);
+            struct Fd *fdd;
+            fd_lookup(r,&amp;fdd);
+            writef(&quot;child_fd&#39;s offset == %d\n&quot;,fdd-&gt;fd_offset);
+        &#125;
+        else &#123;
+            if((n = read(fdnum, buf, 511)) &lt; 0) &#123;
+                user_panic(&quot;father read /newmotd: %d&quot;, r);
+            &#125;
+            if (strcmp(buf, diff_msg) != 0) &#123;
+                user_panic(&quot;father read returned wrong data&quot;);
+            &#125;
+            writef(&quot;father read is good &amp;&amp; father_fd == %d\n&quot;,r);
+            struct Fd *fdd;
+            fd_lookup(r,&amp;fdd);
+            writef(&quot;father_fd&#39;s offset == %d\n&quot;,fdd-&gt;fd_offset);
+        &#125;
+&#125;
+</code></pre>
+<p>结果：  </p>
+<pre><code>main.c: main is start ...
+
+init.c: mips_init() is called
+
+Physical memory: 65536K available, base = 65536K, extended = 0K
+
+to memory 80401000 for struct page directory.
+
+to memory 80431000 for struct Pages.
+
+pmap.c:  mips vm init success
+
+pageout:        @@@___0x7f3fe000___@@@  ins a page 
+
+pageout:        @@@___0x40d000___@@@  ins a page 
+
+FS is running
+
+FS can do I/O
+
+pageout:        @@@___0x7f3fe000___@@@  ins a page 
+
+pageout:        @@@___0x407000___@@@  ins a page 
+
+superblock is good
+
+diskno: 0
+
+diskno: 0
+
+read_bitmap is good
+
+diskno: 0
+
+alloc_block is good
+
+file_open is good
+
+file_get_block is good
+
+file_flush is good
+
+file_truncate is good
+
+diskno: 0
+
+file rewrite is good
+
+serve_open 00000400 ffff000 0x2
+
+open is good
+
+read is good
+
+father read is good &amp;&amp; father_fd == 0
+
+father_fd&#39;s offset == 41
+
+[00000400] destroying 00000400
+
+[00000400] free env 00000400
+
+i am killed ... 
+
+child read is good &amp;&amp; child_fd == 0
+
+child_fd&#39;s offset == 41
+
+[00001402] destroying 00001402
+
+[00001402] free env 00001402
+
+i am killed ... 
+</code></pre>
+<h2 id="Thinking-5-10"><a href="#Thinking-5-10" class="headerlink" title="Thinking 5.10"></a>Thinking 5.10</h2><blockquote>
+<p>请解释 Fd, Filefd, Open 结构体及其各个域的作用。比如各个结构体会在哪些过程中被使用，是否对应磁盘上的物理实体还是单纯的内存数据等。说明形式自定，要求简洁明了，可大致勾勒出文件系统数据结构与物理实体的对应关系与设计框架。 </p>
+</blockquote>
+<pre><code class="c">struct Fd &#123;
+     u_int fd_dev_id;     // 外设的id。
+     //用户使用fd.c的文件接口时，不同的dev_id会调取不同的文件服务函数。
+     //比如File类型的文件服务函数为user/File.c的file_*()函数。
+     u_int fd_offset;     // 读写的偏移量
+     //seek()时修改。
+     //offset会被用来找起始filebno文件块号。
+     u_int fd_omode;      // 打开方式，包括只读、只写、读写
+     //req和open结构体都会用到
+&#125;;
+
+struct Filefd &#123;
+     struct Fd f_fd;     // file descriptor
+     u_int f_fileid;     // 文件的id
+     //模1024后会用来在opentab[]里索引open结构体
+     struct File f_file; // 对应文件的文件控制块
+&#125;;
+
+struct Open &#123;
+     struct File *o_file;    // 指向打开的文件
+     u_int o_fileid;         // 打开文件的id
+     int o_mode;             // 打开方式
+     struct Filefd *o_ff;    // 指向读写的位置（偏移）
+&#125;;
+</code></pre>
+<ul>
+<li>结构体均为内存数据，记录了文件信息。</li>
+<li>Filefd以及Open中的指向的文件控制块File中记录的磁盘指针对应物理实体。</li>
+</ul>
+<h2 id="Thinking-5-11"><a href="#Thinking-5-11" class="headerlink" title="Thinking 5.11"></a>Thinking 5.11</h2><blockquote>
+<p>上图中有多种不同形式的箭头，请结合 UML 时序图的规范，解释这些不同箭头的差别，并思考我们的操作系统是如何实现对应类型的进程间通信的。</p>
+</blockquote>
+<ul>
+<li>ENV_CREATE(user_env)和ENV_CREATE(fs_serv)都是异步消息，由init()发出创建消息后，init()函数即可返回执行后续步骤，由fs和user线程执行自己的初始化工作。</li>
+<li>fs线程初始化serv_init()和fs_init()完成后，进入serv()函数，被ipc_receive()阻塞为ENV_NOT_RUNNABLE，直到收到User线程的ipc_send(fsreq)被唤醒。</li>
+<li>User线程向fs线程ipc_send(fsreq)发送请求为同步消息，发送后自身进入阻塞ENV_NOT_RUNNABLE等待被唤醒的fs线程服务结束时ipc_send(dst_va),用户线程接收到数据后继续运行，此后fs线程进入阻塞，等待下次被用户唤醒。</li>
+</ul>
+<h2 id="Thinking-5-12"><a href="#Thinking-5-12" class="headerlink" title="Thinking 5.12"></a>Thinking 5.12</h2><blockquote>
+<p>阅读serv.c/serve函数的代码，我们注意到函数中包含了一个死循环for (;;) {…}，为什么这段代码不会导致整个内核进入 panic 状态？  </p>
+</blockquote>
+<p>serve调用ipc_recv函数后会将自身状态变为ENV_NOT_RUNNABLE，进入等待状态。其他进程发出文件系统请求后才被唤醒并开始服务。</p>
+<h1 id="三、体会与感想"><a href="#三、体会与感想" class="headerlink" title="三、体会与感想"></a>三、体会与感想</h1><ul>
+<li>lab5的感觉是填空代码量锐减，但是需要阅读的代码量骤增，一个文件的open操作的函数嵌套层数也是让我大开眼界:)。所以一开始区区18页的指导书让我以为lab5很简单:) 我觉得lab5的复杂度和lab4不相上下，尽管理解上比中断、页缺失容易很多。</li>
+<li>lab5的局部代码理解起来比前边lab更快，可能是因为内核态用户态的接口切换 和 线程间的通信协作在lab4有过涉及，文件索引函数等与lab2的内存管理大体结构比较相似，对于宏函数、指针、结构体以及函数间的调用和异常的写法在前边的lab都有了很好的练习。</li>
+<li>从lab4到lab5更加体会到MOS操作系统设计方面的精巧，各lab之间环环相扣，借助之前lab的代码实现本次lab的新功能，看着自己写的操作系统一步步有了更加完善的功能是非常有趣的一种感受。</li>
+</ul>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/OS" style=color:#00bcd4>
+                OS
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/05/31/OS-lab5-summary/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/05/04/Unix-MyShell-Summary/">
+        <h2>
+            BUAA-Unix-Linux下C语言实现MyShell
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/5/4
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <img src="/2022/05/04/Unix-MyShell-Summary/main.png" class="" title="pic1">
+<h1 id="一、功能概述"><a href="#一、功能概述" class="headerlink" title="一、功能概述"></a>一、功能概述</h1><h2 id="1-1-高亮提示"><a href="#1-1-高亮提示" class="headerlink" title="1.1 高亮提示"></a>1.1 高亮提示</h2><img src="/2022/05/04/Unix-MyShell-Summary/highlight.png" class="" title="pic1">
+
+<ul>
+<li>myShell运行的起始提示</li>
+<li>命令提示符前<code>Musel&#39;s shell</code>的前缀标识</li>
+<li>当前路径提示</li>
+<li>Error的报错提示</li>
+</ul>
+<h2 id="1-2-cd切换目录"><a href="#1-2-cd切换目录" class="headerlink" title="1.2 cd切换目录"></a>1.2 cd切换目录</h2><img src="/2022/05/04/Unix-MyShell-Summary/cd.png" class="" title="pic1">
+<h2 id="1-3-标准I-O重定向"><a href="#1-3-标准I-O重定向" class="headerlink" title="1.3 标准I/O重定向"></a>1.3 标准I/O重定向</h2><img src="/2022/05/04/Unix-MyShell-Summary/io.png" class="" title="pic1">
+
+<h2 id="1-4-可变长参数命令的运行"><a href="#1-4-可变长参数命令的运行" class="headerlink" title="1.4 可变长参数命令的运行"></a>1.4 可变长参数命令的运行</h2><img src="/2022/05/04/Unix-MyShell-Summary/cmd.png" class="" title="pic1">
+
+<h2 id="1-5-管道连接多条命令"><a href="#1-5-管道连接多条命令" class="headerlink" title="1.5 管道连接多条命令"></a>1.5 管道连接多条命令</h2><img src="/2022/05/04/Unix-MyShell-Summary/pipe.png" class="" title="pic1">
+
+<h2 id="1-6-管道、重定向、命令格式的错误检查"><a href="#1-6-管道、重定向、命令格式的错误检查" class="headerlink" title="1.6 管道、重定向、命令格式的错误检查"></a>1.6 管道、重定向、命令格式的错误检查</h2><img src="/2022/05/04/Unix-MyShell-Summary/error.png" class="" title="pic1">
+
+<h2 id="1-7-exit退出myShell"><a href="#1-7-exit退出myShell" class="headerlink" title="1.7 exit退出myShell"></a>1.7 exit退出myShell</h2><img src="/2022/05/04/Unix-MyShell-Summary/exit.png" class="" title="pic1">
+
+<h2 id="1-8-malloc与free"><a href="#1-8-malloc与free" class="headerlink" title="1.8 malloc与free"></a>1.8 malloc与free</h2><ul>
+<li>管道连接命令数、命令参数个数、参数长度均不定长，所以使用malloc申请存储空间，避免内存浪费。</li>
+<li>单条命令执行完后调用free释放命令申请的空间，防止内存泄漏。</li>
+</ul>
+<h1 id="二、系统调用"><a href="#二、系统调用" class="headerlink" title="二、系统调用"></a>二、系统调用</h1><p>在第三部分会结合具体功能具体阐述系统调用。此处作简要汇总：</p>
+<ul>
+<li>获取当前目录：<code>path = getcwd(NULL, 0)</code></li>
+<li>切换工作目录：<code>chdir(command-&gt;args[1])</code></li>
+<li>创建进程：<code>pid_t pid = fork()</code></li>
+<li>打开文件描述符表：<code>open(command-&gt;read, O_RDONLY, 0666)</code></li>
+<li>复制文件描述符表：<code>dup2(in, 0)</code></li>
+<li>执行程序：<code>execvp(command-&gt;cmd, command-&gt;args)</code></li>
+<li>父进程等待子进程退出：<code>wait(&amp;status)</code></li>
+<li>父进程获取子进程退出状态：<code>WIFEXITED(status)</code></li>
+<li>创建与关闭管道：<code>pipe(fd);close(fd[0]);</code></li>
+<li>退出进程：<code>exit(0)</code></li>
+</ul>
+<h1 id="三、功能实现与流程图"><a href="#三、功能实现与流程图" class="headerlink" title="三、功能实现与流程图"></a>三、功能实现与流程图</h1><img src="/2022/05/04/Unix-MyShell-Summary/myShell.png" class="" title="pic1">
+<h2 id="3-1-宏定义"><a href="#3-1-宏定义" class="headerlink" title="3.1 宏定义"></a>3.1 宏定义</h2><h3 id="3-1-1-单行命令的输入与解析规模"><a href="#3-1-1-单行命令的输入与解析规模" class="headerlink" title="3.1.1 单行命令的输入与解析规模"></a>3.1.1 单行命令的输入与解析规模</h3><pre><code class="c">#define ARGS_COUNT 8        //单条命令的参数个数
+#define COMMANDS_COUNT 8    //管道连接的命令个数
+#define BUF_SIZE 128        //单行命令的字符数
+</code></pre>
+<h3 id="3-2-2-命令格式的错误检查"><a href="#3-2-2-命令格式的错误检查" class="headerlink" title="3.2.2 命令格式的错误检查"></a>3.2.2 命令格式的错误检查</h3><pre><code class="c">#define ERROR_EMPTY(errorStr)       //起始或管道符号后未输入合法命令
+#define ERROR_STR                   //字符串格式错误，后引号丢失
+#define ERROR_FORK                  //创建子进程失败
+#define ERROR_OPEN                  //重定向的读文件不存在
+#define ERROR_EXECUTE(errorCmd)     //命令执行失败：命令类型或参数不合法
+#define ERROR_EXIT                  //子进程退出失败
+</code></pre>
+<h2 id="3-2-打印当前路径"><a href="#3-2-打印当前路径" class="headerlink" title="3.2 打印当前路径"></a>3.2 打印当前路径</h2><p><code>print_current_directory()</code>函数调用<code>path = getcwd(NULL, 0)</code>获取当前工作目录。</p>
+<h2 id="3-3-拆分管道连接的多条命令和重定向文件名"><a href="#3-3-拆分管道连接的多条命令和重定向文件名" class="headerlink" title="3.3 拆分管道连接的多条命令和重定向文件名"></a>3.3 拆分管道连接的多条命令和重定向文件名</h2><img src="/2022/05/04/Unix-MyShell-Summary/parse.png" class="" title="pic1">
+<img src="/2022/05/04/Unix-MyShell-Summary/split.png" class="" title="pic1">
+
+<ul>
+<li>fgets获取输入、malloc命令结构体、标志本次输入的命令条数为1</li>
+<li><code>splitCommands(buf, commands)</code><ul>
+<li>初始化命令结构体：<ul>
+<li>标志状态为<strong>等待命令</strong>，即<code>waitCommand</code>置位：此时如果接受到管道符号、重定向符号、字符串、回车终止符均会由相关宏抛出ERROR_EMPTY</li>
+<li>初始化本条命令的结构体</li>
+<li>malloc申请参数数组</li>
+</ul>
+</li>
+<li>识别到命令</li>
+<li>持续识别本条命令的命令参数与重定向标志，直到管道符号或回车符<ul>
+<li>可识别的命令参数：无特殊符号的字符串、单双引号标志的字符串。记录在args参数数组中。</li>
+<li>重定向标志：识别到<code>&lt; &gt; &gt;&gt;</code>后调用<code>fetchFileName()</code>识别重定向文件名，记录在命令结构体中。如果文件格式不对会由相关宏抛出ERROR_IOFILE</li>
+</ul>
+</li>
+<li>识别到管道符号<ul>
+<li>标记本条命令的参数数组的最后一个参数(*args)为NULL。目的是便于execvp(command)和free(commands)。</li>
+<li>命令条数++</li>
+<li>初始化下一条命令结构体，继续读取下一条命令</li>
+</ul>
+</li>
+<li>识别到回车符：<ul>
+<li>标记本条命令的参数数组的最后一个参数<code>(*args) = NULL</code>。</li>
+<li>标记命令数组的最后一个命令<code>commans-&gt;cmd = NULL</code>。目的是便于<code>execvp(command)</code>和<code>free(commands)</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-4-如果拆分命令未出现异常，逐条执行命令commands"><a href="#3-4-如果拆分命令未出现异常，逐条执行命令commands" class="headerlink" title="3.4 如果拆分命令未出现异常，逐条执行命令commands"></a>3.4 如果拆分命令未出现异常，逐条执行命令commands</h2><img src="/2022/05/04/Unix-MyShell-Summary/exe.png" class="" title="pic1">
+<h3 id="3-4-1-逐条执行指令，使用管道连接父子进程数据"><a href="#3-4-1-逐条执行指令，使用管道连接父子进程数据" class="headerlink" title="3.4.1 逐条执行指令，使用管道连接父子进程数据"></a>3.4.1 逐条执行指令，使用管道连接父子进程数据</h3><p><code>executeCommands(commands)</code></p>
+<ul>
+<li>命令数commandsCount = 1：<ul>
+<li>不用创建管道，不从pipe读取重定向I/O，fd_in和fd_out为-1</li>
+<li><code>forkToExecute(commands,-1,-1)</code>创建子进程并执行</li>
+</ul>
+</li>
+<li>命令数commandsCount = 2：<ul>
+<li>此时重定向方向为：第一条命令写 -&gt; 第二条命令读。故创建一条管道<code>pipe(fd);</code>即可；</li>
+<li>为第一条指令创建子进程，执行第一条指令的子进程不使用此管道的读指针（没有前序命令为此命令提供输入），fd_in设置为-1；使用写指针fd[1].</li>
+<li>第一条指令结束后其子进程退出。父进程关闭此管道的fd[1],释放第一条指令结构体。</li>
+<li>父进程为第二条指令创建子进程，执行第二条指令的子进程使用此管道的读指针fd[0]，不使用此管道的写指针（没有后续命令需要此命令的输出），fd_out设置为-1。</li>
+<li>第二条指令结束后其子进程退出。父进程关闭此管道的fd[1],释放第二条指令结构体。</li>
+</ul>
+</li>
+<li>命令数commandsCount &gt; 2: <ul>
+<li>与上述大致相同，基本遵循：<strong>pipe()-&gt;fork()-&gt;execute()-&gt;close()-&gt;free()</strong></li>
+<li>多命令的管道需要保证两条管道同时开启：见源码下的分析<pre><code class="c">    int *pipes[2];
+    pipes[0]=(int *)malloc(sizeof(int)*2);
+    pipes[1]=(int *)malloc(sizeof(int)*2);
+    int newPoint = 0;
+    pipe(pipes[newPoint]);
+    forkToExecute(commands,-1,(pipes[newPoint])[1]);
+    close((pipes[newPoint])[1]);
+    freeCommand(commands++);
+
+    for (int i = 1; i &lt; (commandsCount - 1); ++i) &#123;
+        newPoint = 1-newPoint;
+        
+        pipe(pipes[newPoint]);
+        forkToExecute(commands,(pipes[1-newPoint])[0],(pipes[newPoint])[1]);
+        close((pipes[1-newPoint])[0]);
+        close((pipes[newPoint])[1]);
+        freeCommand(commands++);
+    &#125;
+
+    forkToExecute(commands,(pipes[newPoint])[0],-1);
+    close((pipes[newPoint])[0]);
+    freeCommand(commands);
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="关于pipe-close-与fork-父子进程的理解："><a href="#关于pipe-close-与fork-父子进程的理解：" class="headerlink" title="关于pipe(),close()与fork()父子进程的理解："></a>关于pipe(),close()与fork()父子进程的理解：</h4><blockquote>
+<p>(由于网上资料并不多，以下仅为根据程序的运行结果做出的个人理解,正确性未知)</p>
+</blockquote>
+<h5 id="pipe-int-fd-2-："><a href="#pipe-int-fd-2-：" class="headerlink" title="pipe(int fd[2])："></a>pipe(int fd[2])：</h5><ul>
+<li>malloc是用户区的申请。而pipe类似于<strong>内核区域</strong>的malloc。</li>
+<li>pipe相当于在内核缓冲区<strong>申请</strong>一片空间，用于存放数据。类似多线程生产者消费者模式的table，供不同线程不同时间的读取。<h5 id="int-fd-2-："><a href="#int-fd-2-：" class="headerlink" title="int fd[2]："></a>int fd[2]：</h5></li>
+<li>fd为<strong>内核缓冲区指针</strong>的数组，fd[0]为此缓冲区的<strong>读指针</strong>，fd[1]为<strong>写指针</strong>。<h5 id="close"><a href="#close" class="headerlink" title="close()"></a>close()</h5></li>
+<li>在内核缓冲区申请的空间的<strong>释放</strong>：需要<strong>两个条件</strong>，即<strong>四次操作</strong>：<ul>
+<li>一次pipe得到的空间，<strong>只允许发生且必须发生</strong>一次读和一次写。</li>
+<li>必须在读后关闭读指针close(fd[0]);必须在写后关闭写指针close(fd[1]);</li>
+<li>完成上述条件后，此段空间自动释放。<h5 id="fork"><a href="#fork" class="headerlink" title="fork()"></a>fork()</h5></li>
+</ul>
+</li>
+<li>一个进程创建pipe(int fd[2])，只供自己读取是没有意义的，因为可以在用户区malloc也能实现同等效果。pipe一般**与fork()**配合使用，目的是用于不同进程之间的数据传输。</li>
+<li>学过OS的进程管理以后非常容易理解：因为不同进程自身占用各自的用户区虚拟空间，而<strong>不同进程</strong>之间<strong>共享</strong>相同的<strong>内核</strong>虚拟空间。一个<strong>进程结束</strong>后，自身<strong>用户区</strong>的虚拟空间中的数据随之<strong>消失</strong>。</li>
+<li>那么pipe的应用场景是，当一个进程运行后产生数据后就消亡。而另一个进程在<strong>上个进程消亡后</strong>才开始运行，需要获取上个进程运行的数据。这时候上个进程的数据只能<strong>写入内核区</strong>才能保存，即在**地址fd[1]**写数据。</li>
+<li>造成此种应用场景的原因是:<ul>
+<li>① Linux支持的众多指令是靠<strong>调用内核程序</strong>实现的。所以当shell把用户命令解析出命令和命令参数后，通过c库函数<code>execvp(command-&gt;cmd, command-&gt;args)</code>等实现调用内核程序的效果。该函数成功执行后，<strong>调用此函数的进程结束</strong>，此函数的后续指令并不会再运行。</li>
+<li>② c语言用于并行操作的<strong>fork函数</strong>。其模式是这样的：所以可以看到，当子进程调用执行函数执行命令后，子进程消亡。父进程需要等待子进程结束后再工作。   <pre><code class="c">pid_t pid = fork();
+if (pid &lt; 0) &#123; 
+        //子进程创建失败，不会进入此分支 
+    &#125;
+else if (pid == 0) &#123;
+        //子进程创建成功，进入此分支。
+        //此分支执行子进程操作
+        Execute and Write (to fd[1] in kernel buffer);
+&#125; else &#123;
+        //由于fork()函数有两个返回值
+        //所以如果子进程创建成功，进入上个分支后，也会进入这个分支
+        //此分支执行父进程操作
+        Wait;
+        Fetch Data (from fd[0] in kernel buffer) and continue;
+&#125;
+</code></pre>
+<h5 id="close-的时机"><a href="#close-的时机" class="headerlink" title="close()的时机"></a>close()的时机</h5></li>
+<li>父进程在fork()前pipe(fd)，fork()后父子进程共享相同的fd。</li>
+<li>子进程执行时写fd[1]。返回到父进程时由父进程close(fd[1]).</li>
+<li>父进程再次创建新的子进程执行下一条指令，子进程执行时读fd[0]。如果此命令后续还有指令，那么子进程再写另一条新管道的newfd[1].子进程执行完毕返回到父进程时，由父进程close(fd[0]).至此fd的缓冲区完成两次关闭和一写一读，被释放。由于已经写过新管道的newfd[1]，此时父进程也要close(newfd[1]).</li>
+<li>原则是创建新进程前pipe，子进程负责读写fd，父进程负责关闭fd。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-2-创建子进程，执行单条指令"><a href="#3-4-2-创建子进程，执行单条指令" class="headerlink" title="3.4.2 创建子进程，执行单条指令"></a>3.4.2 创建子进程，执行单条指令</h3><p><code>forkToExecute(Command *command, int fd_in, int fd_out)</code></p>
+<ul>
+<li>exit : 释放命令结构体并退出shell</li>
+<li>cd ：系统调用<code>chdir(command-&gt;args[1])</code>切换工作目录</li>
+<li>外部命令：<ul>
+<li>fork()创建子进程</li>
+<li>command结构体中读出重定向文件：<code>int open(const char *pathname, int oflag, [mode_t mode])</code>系统调用获得文件描述符表</li>
+<li>重定向：<code>dup2(in, 0);dup2(out, 1);</code></li>
+<li>子进程运行命令<code>execvp(command-&gt;cmd, command-&gt;args)</code></li>
+<li>父进程等待子进程结束后运行下一条命令</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-5-释放本次输入的commands数组，等待用户的下一次输入"><a href="#3-5-释放本次输入的commands数组，等待用户的下一次输入" class="headerlink" title="3.5 释放本次输入的commands数组，等待用户的下一次输入"></a>3.5 释放本次输入的commands数组，等待用户的下一次输入</h2>
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Unix" style=color:#ffa2c4>
+                Unix
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/05/04/Unix-MyShell-Summary/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/05/03/OS-lab3-summary/">
+        <h2>
+            BUAA-OS-Lab3
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/5/3
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <h1 id="一、实验思考题"><a href="#一、实验思考题" class="headerlink" title="一、实验思考题"></a>一、实验思考题</h1><h2 id="Thinking-3-1"><a href="#Thinking-3-1" class="headerlink" title="Thinking 3.1"></a>Thinking 3.1</h2><blockquote>
+<p>思考 envid2env 函数: 为什么 envid2env 中需要判断 e-&gt;env_id !=envid 的情况？如果没有这步判断会发生什么情况？</p>
+</blockquote>
+<ul>
+<li><code>mkenvid(struct Env *e)</code>中生成的envid为<code>(asid &lt;&lt; (1 + LOG2NENV)) | (1 &lt;&lt; LOG2NENV) | idx</code>,即<code>asid|有效位|env结构体在envs数组的偏移</code>。</li>
+<li>而<code>envid2env(u_int envid, struct Env **penv, int checkperm)</code>中通过envid的偏移找到结构体<code>e=envs+ENVX(envid);</code>。而此时不能确保所给envid中asid的有效性。所以需要通过再次判断<code>e-&gt;env_id !=envid</code>保证进程块的asid.</li>
+<li>若此index所对的env已经更换，则新env结构体会对应新的ASID。如果没有这步判断，可能会出现：①所给envid所对的结构体已经被free后再次使用，即旧结构体所代表的PCB被淘汰，而此时得到的新env与envid想找的旧结构体不匹配；②env结构体没有成功切换为新进程的PCB，导致asid匹配出现错误。</li>
+</ul>
+<h2 id="Thinking-3-2-结合-include-mmu-h-中的地址空间布局，思考-env-setup-vm-函数："><a href="#Thinking-3-2-结合-include-mmu-h-中的地址空间布局，思考-env-setup-vm-函数：" class="headerlink" title="Thinking 3.2 结合 include/mmu.h 中的地址空间布局，思考 env_setup_vm 函数："></a>Thinking 3.2 结合 include/mmu.h 中的地址空间布局，思考 env_setup_vm 函数：</h2><blockquote>
+<p>UTOP 和 ULIM 的含义分别是什么?</p>
+</blockquote>
+<ul>
+<li>ULIM: user limit:kuseg用户态上限，0x8000 0000区分内核态和用户态的地址</li>
+<li>UTOP: userSpace top:用户可分配虚拟内存上限  </li>
+</ul>
+<blockquote>
+<p>UTOP 和 ULIM 之间的区域与 UTOP 以下的区域相比有什么区别？</p>
+</blockquote>
+<ul>
+<li>UTOP 和 ULIM 之间的区域：<ul>
+<li>用与存放页表和内核结构体，用户不可自由分配，即env中结构体数组的pgdir被清零后不会被赋值</li>
+<li>其中UPAGES和ENVS其所占的物理页面，除了映射到用户态的这一部分虚拟地址，还与内核中的虚拟地址有一一映射关系。</li>
+</ul>
+</li>
+<li>UTOP 以下的区域：占用物理内存，但是以页表形式，没有物理内存和内核地址的一一映射  </li>
+</ul>
+<blockquote>
+<p>请结合系统自映射机制解释 Step4 中pgdir[PDX(UVPT)]=env_cr3的含义。</p>
+</blockquote>
+<ul>
+<li>内核态中的虚拟页目录的第PDX(UVPT)个页目录项中保存着此页目录所在页表的基地址的物理地址env_cr3  </li>
+</ul>
+<blockquote>
+<p>谈谈自己对进程中物理地址和虚拟地址的理解。</p>
+</blockquote>
+<ul>
+<li>每个进程都有kuseg的2G虚拟空间，但是实际所有进程共享相同的内存空间。不同的进程有相同的虚拟地址，但是相同虚拟地址映射到不同物理地址</li>
+</ul>
+<h2 id="Thinking-3-3"><a href="#Thinking-3-3" class="headerlink" title="Thinking 3.3"></a>Thinking 3.3</h2><blockquote>
+<p>找到 user_data 这一参数的来源，思考它的作用。没有这个参数可不可以？为什么？（可以尝试说明实际的应用场景，举一个实际的库中的例子）</p>
+</blockquote>
+<ul>
+<li>来源：env_create_priority()函数中alloc的Env结构体指针</li>
+<li>这个参数的作用是传给load_elf函数，并作为load_elf的int* map函数的参数，获得结构体的页目录</li>
+<li>c语言库函数中qsort()的回调函数<code>int(*cmp)(const void* e1,const void* e2))</code>使用qsort()的参数width实现多类型的比较：<code>cmp((char*)base + j*width,(char*)base+(j+1)*width) &gt; 0))</code></li>
+</ul>
+<h2 id="Thinking-3-4"><a href="#Thinking-3-4" class="headerlink" title="Thinking 3.4"></a>Thinking 3.4</h2><blockquote>
+<p>结合 load_icode_mapper 的参数以及二进制镜像的大小，考虑该函<br>数可能会面临哪几种复制的情况？你是否都考虑到了？</p>
+</blockquote>
+<img src="/2022/05/03/OS-lab3-summary/mapper.jpg" class="" title="pic1">
+
+<h2 id="Thinking-3-5"><a href="#Thinking-3-5" class="headerlink" title="Thinking 3.5"></a>Thinking 3.5</h2><blockquote>
+<p>你认为这里的 env_tf.pc 存储的是物理地址还是虚拟地址?</p>
+</blockquote>
+<ul>
+<li>物理地址。大概在0x400000+   </li>
+</ul>
+<blockquote>
+<p>你觉得entry_point其值对于每个进程是否一样？该如何理解这种统一或不同？</p>
+</blockquote>
+<ul>
+<li>entry_point是一样的虚拟地址，但是进程PCB不同，可以映射到各自不同的物理地址。</li>
+</ul>
+<h2 id="Thinking-3-6"><a href="#Thinking-3-6" class="headerlink" title="Thinking 3.6"></a>Thinking 3.6</h2><blockquote>
+<p>请查阅相关资料解释，上面提到的 epc 是什么？为什么要将env_tf.pc 设置为 epc 呢？</p>
+</blockquote>
+<ul>
+<li>epc是发生异常中断时执行到的pc值,保存在curenv-&gt;env_tf.cp0_epc。</li>
+<li>env_tf.pc保存进程上下文，pc保存了返回该进程时开始执行的pc值，即为发生异常时的epc</li>
+</ul>
+<h2 id="Thinking-3-7"><a href="#Thinking-3-7" class="headerlink" title="Thinking 3.7"></a>Thinking 3.7</h2><blockquote>
+<p>操作系统在何时将什么内容存到了 TIMESTACK 区域</p>
+</blockquote>
+<ul>
+<li>handle_int()处理时钟中断时，SAVE_ALL保存当前寄存器值的栈顶地址get_sp为0x8200_0000，即为TIMESTACK.  </li>
+</ul>
+<blockquote>
+<p>TIMESTACK 和 env_asm.S 中所定义的 KERNEL_SP 的含义有何不同</p>
+</blockquote>
+<ul>
+<li>TIMESTACK是产生时钟中断异常时用的存放CPU寄存器状态的栈顶指针，KERNEL_SP是非时钟中断异常用的栈指针。</li>
+</ul>
+<h2 id="Thinking-3-8"><a href="#Thinking-3-8" class="headerlink" title="Thinking 3.8"></a>Thinking 3.8</h2><blockquote>
+<p>试找出上述 5 个异常处理函数的具体实现位置。</p>
+</blockquote>
+<ul>
+<li>genex.S中有 handle_int()的实现，有do_refill()即handle_tlb()的实现</li>
+<li>syscall.S有handle_sys()的实现</li>
+</ul>
+<h2 id="Thinking-3-9"><a href="#Thinking-3-9" class="headerlink" title="Thinking 3.9"></a>Thinking 3.9</h2><blockquote>
+<p>阅读 kclock_asm.S 和 genex.S 两个文件，并尝试说出 set_timer 和time_irq 函数中每行汇编代码的作用</p>
+</blockquote>
+<pre><code class="c">    .text
+LEAF(set_timer)
+    li t0, 0xc8
+    sb t0, 0xb5000100 
+//实时钟绑定4号中断，触发4号中断
+
+    sw    sp, KERNEL_SP 
+//内核栈保存栈寄存器值
+
+setup_c0_status STATUS_CU0|0x1001 0
+//设置SR寄存器的状态：
+//1.STATUS_CU0：打开CP0寄存器使用权
+//2.SR[16]：IsC：软件能够访问并使指令高速缓存条目无效
+//3.SR[4]：IEo
+
+    jr ra
+    nop
+END(set_timer)
+
+
+    .extern delay
+timer_irq:
+    sb zero, 0xb5000110
+//关闭时钟中断
+1:    j    sched_yield
+//进程调度
+    nop
+    /*li t1, 0xff
+    lw    t0, delay
+    addu  t0, 1
+    sw    t0, delay
+    beq    t0,t1,1f    
+    nop*/
+    j    ret_from_exception
+//异常返回
+    nop
+</code></pre>
+<h2 id="Thinking-3-10"><a href="#Thinking-3-10" class="headerlink" title="Thinking 3.10"></a>Thinking 3.10</h2><blockquote>
+<p>阅读相关代码，思考操作系统是怎么根据时钟周期切换进程的。</p>
+</blockquote>
+<img src="/2022/05/03/OS-lab3-summary/clock1.jpg" class="" title="pic1">
+<img src="/2022/05/03/OS-lab3-summary/clock2.jpg" class="" title="pic1">
+
+<h1 id="二、实验难点与指导书反馈"><a href="#二、实验难点与指导书反馈" class="headerlink" title="二、实验难点与指导书反馈"></a>二、实验难点与指导书反馈</h1><ul>
+<li>初始化进程目录时，没有理解为什么要复制UTOP上部分的内核目录，也不知道这部分的权限该如何设置。建议建议指导书把<strong>权限位</strong>的作用在头文件中指明，或者在lab教程中指明本实验中用到的权限位及其说明</li>
+<li>汇编代码读起来比较晦涩，可以把R3000中的一些部分的<strong>汇编知识</strong>抽离出来，辅助理解；比如：<ul>
+<li>SR寄存器各个位的作用。因为个人感觉虽然自己强硬地把R3000中那部分阅读翻译了一遍，但实际上还是比较困惑，不是很能读懂</li>
+<li>使用到的伪指令的作用。伪指令对阅读理解造成了比较大的理解障碍。</li>
+</ul>
+</li>
+<li><code>load_icode_mapper()</code>，纠结了很久段尾要不要考虑和后面段的共享页面。希望指导书可以提前说明段按地址顺序由小到大加载，只用考虑段首的页面共用情况</li>
+<li>de的第一个Bug就是<code>load_elf()</code>里面的binary地址，开始没有给<code>binary+shdr_offset</code>的段偏移</li>
+<li>TIMESTACK和SP两个概念的辨析：这个思考题一开始卡住了，原因是<code>grep -r TIMESTACK</code>的时候没有查到汇编代码get_sp出现了0x8200_0000。</li>
+<li>可以强调一下<code>INSERT_TAIL(env_sche_list,e,sche_link)</code>要在<code>env_create()</code>而不是alloc时插入</li>
+<li>进程调度算法时为<code>INSERT_TAIL</code></li>
+</ul>
+<h1 id="三、体会与感想"><a href="#三、体会与感想" class="headerlink" title="三、体会与感想"></a>三、体会与感想</h1><p>个人对Lab3的整体感受是比Lab2体验差很多。主要是以下原因：</p>
+<ul>
+<li>课下：<ul>
+<li>Lab2对存储管理的结构比较浑然一体，Lab3的知识相对零碎，比如很多变量的设置并不能直接看到其作用效果或范围，所以debug的时候也比较困难，比如Lab2debug还可以通过输出地址判断本步骤的正确性等，Lab3设计很多汇编函数和寄存器的操作，不管是理解还是测试都不是很容易</li>
+<li>从Lab3遇到Bug会比较瞻前顾后，不知道是本次Lab还是之前Lab的bug，排查Bug所在范围的过程比较头疼</li>
+</ul>
+</li>
+<li>上机时的Exam和Extra题面都比较模糊，具体是以下几点：<ul>
+<li>Exam对于“版本号相同、ASID空闲”这一分支并未显式说明要分配此ASID，而另一分支显式说明“找到最小的未使用ASID并分配”，且还强调“不要做任何无关操作”，虽然按题意是要分配，但是在阅读上的体验并不好，会在是否需要分配的问题上绊住</li>
+<li>Exam对于“模拟位图”和“运行进程”的界定可以更清晰些，避免歧义</li>
+<li>Extra对PV操作资源的个数并未叙述清楚造成理解偏差</li>
+</ul>
+</li>
+</ul>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/OS" style=color:#879cff>
+                OS
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/05/03/OS-lab3-summary/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/05/01/OO-Unit2-summary/">
+        <h2>
+            BUAA-OO-Unit2
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/5/1
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <h1 id="一、电梯的调度策略"><a href="#一、电梯的调度策略" class="headerlink" title="一、电梯的调度策略"></a>一、电梯的调度策略</h1><h2 id="1-1-状态转移图"><a href="#1-1-状态转移图" class="headerlink" title="1.1 状态转移图"></a>1.1 状态转移图</h2><img src="/2022/05/01/OO-Unit2-summary/5.png" class="" title="pic1">
+
+<h2 id="1-2-纵向电梯的LOOK算法"><a href="#1-2-纵向电梯的LOOK算法" class="headerlink" title="1.2 纵向电梯的LOOK算法"></a>1.2 纵向电梯的LOOK算法</h2><h3 id="LOOK算法实现"><a href="#LOOK算法实现" class="headerlink" title="LOOK算法实现"></a>LOOK算法实现</h3><ul>
+<li>与真实的电梯大致相同的策略，即维护电梯当前运行方向dir，更远层无请求(各楼层的call请求&amp;电梯中乘客的目的地请求)时才转向。  </li>
+<li>为了在实现捎带策略的同时将电梯和调度器功能解耦，电梯应当①具有“短视性”，即并不知道自己的目的楼层，而是仅根据从调度器获取上行、下行的boolean值。在此条件下电梯实现以层间运行时间为最小单位实时更新可稍带目标层。②屏蔽外部各楼层的call请求：按运行方向运行一层后，询问调度器是否应该开门。  </li>
+</ul>
+<h3 id="LOOK算法相较ALS的优势"><a href="#LOOK算法相较ALS的优势" class="headerlink" title="LOOK算法相较ALS的优势"></a>LOOK算法相较ALS的优势</h3><ul>
+<li><p>打破了ALS算法可能出现的<strong>“局部性原理”</strong>。  </p>
+</li>
+<li><p>即ALS算法在将电梯内部乘客全部送达后形成空梯时，会选择最先到达的请求作为主请求。两种策略下对于<strong>中间楼层的捎带表现一致</strong>，但是ALS策略下<strong>低层和高层请求</strong>因为<strong>难于被捎带而堆积</strong>，直到被安排为主请求时才会运行到低层或高层。此类请求容易堆积在末尾才进行集中处理，导致电梯出现因为一个远端请求<strong>空转</strong>(<strong>无捎带</strong>，远端请求的vip专梯)的效率问题。</p>
+</li>
+<li><p>LOOK算法更像是<strong>就近远端捎带</strong>，在将电梯内部乘客全部送达后形成空梯时会沿此方向去处理远端请求，避免了底层和高层请求因为难于捎带而堆积后的空转问题，效率较好。  </p>
+</li>
+</ul>
+<h2 id="1-3-横向电梯"><a href="#1-3-横向电梯" class="headerlink" title="1.3 横向电梯"></a>1.3 横向电梯</h2><h3 id="就近策略"><a href="#就近策略" class="headerlink" title="就近策略"></a>就近策略</h3><ul>
+<li><p>不再需要LOOK算法  </p>
+<p>LOOK算法的优势在于处理纵向梯难于到达的高底层问题，而横向电梯由于下面两个原因不需要LOOK算法。  </p>
+<p>①横向电梯仅5个座    </p>
+<p>②横向电梯可环状运行，即打破纵向电梯1层与10层的时间差    </p>
+</li>
+<li><p>就近策略的实现<br>①判定请求的方向时按<strong>最短运行路径</strong>  </p>
+<p>②同方向捎带  </p>
+<p>③空梯时选择<strong>距离最近</strong>的请求作为主请求  </p>
+</li>
+<li><p>就近策略的电梯利用率比较高，因为总运行路径最短，比较适合横向电梯出现大量请求的情况下使用，比较适合hw7。缺点是开关门的次数比按同方向运行的横向电梯多，顾客等待电梯转到自己方向的时间比较长。不过由于hw6拖后腿的是纵向电梯，所以请求少的时候这种策略也不会很耽误事。  </p>
+</li>
+</ul>
+<h2 id="1-4-性能分析"><a href="#1-4-性能分析" class="headerlink" title="1.4 性能分析"></a>1.4 性能分析</h2><ul>
+<li>hw5实现LOOK算法后性能分98，发现的问题是：调度器在<strong>是否应该开门</strong>时没有考虑<strong>已满员</strong>的情况，导致出现满员时在请求层开门，电梯发现满员不接客，出现空开关门的情况 :(</li>
+<li>所以在hw6重构了纵向电梯优化掉了开关门问题，然而性能分只有96 :( 观察输出后发现主要问题不在调度器的调度策略上，而是重构以后的LOOK算法出了问题：虽然<strong>捎带</strong>要满足<strong>同方向</strong>才可捎带，但是LOOK算法的<strong>远端请求</strong>可以为任意方向。有几个强测85的点观察输出后发现是因为远端请求被一刀切成同方向，导致<strong>反方向的请求没有被LOOK到</strong>不会远端捎带，退化成ALS的主请求造成堆积。  </li>
+<li>个人感觉比较影响hw6性能分的一些85的点的问题并不在调度器策略，对于后两次作业来说，在hw5把LOOK算法实现好就可以保证比较可观的性能分，比起写复杂的调度器算法更符合二八法则 :)</li>
+</ul>
+<h1 id="二、调度器"><a href="#二、调度器" class="headerlink" title="二、调度器"></a>二、调度器</h1><h2 id="2-1-调度器设计"><a href="#2-1-调度器设计" class="headerlink" title="2.1 调度器设计"></a>2.1 调度器设计</h2><h3 id="2-1-1-电梯调度器使用掩码表示楼层请求，取代遍历"><a href="#2-1-1-电梯调度器使用掩码表示楼层请求，取代遍历" class="headerlink" title="2.1.1 电梯调度器使用掩码表示楼层请求，取代遍历"></a>2.1.1 电梯调度器使用掩码表示楼层请求，取代遍历</h3><ul>
+<li>FLOOR[1]为<code>10&#39;b1</code>，FLOOR[3]为二进制<code>10&#39;b100</code></li>
+<li><del>后来Experiment4才知道可以用Bitset</del></li>
+</ul>
+<pre><code class="java">private static final int[] FLOOR = new int[12];
+public static void init() &#123;
+        FLOOR[0] = 0;
+        for (int h = 1;h &lt; 12;h++) &#123;
+            FLOOR[h] = 1 &lt;&lt; (h - 1);
+        &#125;
+&#125;
+</code></pre>
+<ul>
+<li>掩码表示楼层请求，取代遍历</li>
+</ul>
+<pre><code class="java">private int inElv;//电梯中所有人的目的地
+private int upCall;//上行请求发出层
+private int downCall;//下行请求发出层
+int status = inElv | upCall | downCall;
+
+    //判断是否开门
+    public synchronized boolean isToOpen(boolean dir,int nowFloor) &#123;
+        boolean order;
+        int nowCall = ((dir) ? upCall : downCall);
+ 
+        if ((inElv &amp; FLOOR[nowFloor]) &gt; 0) &#123; order =  true; &#125;
+        else if (((nowCall &amp; FLOOR[nowFloor]) &gt; 0) &amp;&amp; (inNum &lt; capacity)) &#123; order = true; &#125;
+        else &#123; order = false; &#125;
+
+        notifyAll();
+        return order;
+    &#125;
+
+    //判断远端是否有请求 即判断是否换向，无需遍历
+    public synchronized boolean furtherNoReq(boolean dir,int nowFloor) &#123;
+        boolean noReq;
+        int status = inElv | upCall | downCall;
+        if (dir) &#123;
+            noReq = (!(status &gt;= FLOOR[nowFloor + 1]));
+        &#125; else &#123;
+            noReq = ((status &amp; (FLOOR[nowFloor] - 1)) == 0); 
+        &#125;
+        notifyAll();
+        return noReq;
+    &#125;
+</code></pre>
+<h3 id="2-1-2-座调度器分配纵向电梯的调度策略"><a href="#2-1-2-座调度器分配纵向电梯的调度策略" class="headerlink" title="2.1.2 座调度器分配纵向电梯的调度策略"></a>2.1.2 座调度器分配纵向电梯的调度策略</h3><p>①优先分配空梯</p>
+<p>②LOOK算法能捎带的电梯：处在电梯运行方向的远端+加入该请求后此次此方向的可稍带请求不会因此请求的加入导致满员而无法捎带</p>
+<p>上行时的判断<strong>捎带后不满员</strong>的逻辑：</p>
+<pre><code class="java">//维护当前方向的upNum[i]：i层将要进入电梯的人数
+//维护当前方向的outNum[i]：i层将要下电梯的人数
+int people = inElvNum;//当前电梯人数
+for (int i = floor;i &lt;= 9;i++) &#123;
+    people = people + upNum[i] - outNum[i];
+    if (people &gt; capacity) &#123;
+        notifyAll();
+        return false;
+    &#125;
+&#125;
+notifyAll();
+return true;
+</code></pre>
+<p>③无可稍带的电梯，则<strong>上行</strong>请求分配给当前<strong>未处理请求数最少</strong>的<strong>下行</strong>电梯(换向后可处理此请求)；<strong>下行</strong>请求分配给当前<strong>未处理请求数最少</strong>的<strong>上行</strong>电梯</p>
+<h3 id="2-1-3-层调度器分配横向电梯的调度策略"><a href="#2-1-3-层调度器分配横向电梯的调度策略" class="headerlink" title="2.1.3 层调度器分配横向电梯的调度策略"></a>2.1.3 层调度器分配横向电梯的调度策略</h3><ul>
+<li>当前未到达请求数最少的电梯调度器</li>
+</ul>
+<h3 id="2-1-4-hw7的请求拆分策略"><a href="#2-1-4-hw7的请求拆分策略" class="headerlink" title="2.1.4 hw7的请求拆分策略"></a>2.1.4 hw7的请求拆分策略</h3><ul>
+<li>分成五类：纵向直达、横向直达、横+纵、纵+横、纵+横+纵。分别在<code>ProRequest</code>中标记好下一站目的地，投入对应层/座的调度器。</li>
+<li>允许在某一层<strong>乘坐两次横向电梯</strong>扩展横向电梯的可达性：由于横向电梯只有五个座比较容易连通，且为了横向梯的可达性而去一层或其他层中转的纵向时间代价比较大，所以采取<code>Arraylist&lt;NextBuilding&gt;</code>存储横向电梯的两次换乘，以达到尽量<strong>缩减去其他层中转的纵向电梯的代价</strong>。</li>
+</ul>
+<h3 id="2-1-5-调度器的性能分析"><a href="#2-1-5-调度器的性能分析" class="headerlink" title="2.1.5 调度器的性能分析"></a>2.1.5 调度器的性能分析</h3><ul>
+<li>hw6强测96，主要是LOOK算法没有优化好。</li>
+<li>LOOK算法修正后hw7强测98，我认为在调度器的调度策略上还是比较好地符合了二八定律的 :)</li>
+</ul>
+<h2 id="2-2-UML协作图与三次作业的迭代"><a href="#2-2-UML协作图与三次作业的迭代" class="headerlink" title="2.2 UML协作图与三次作业的迭代"></a>2.2 UML协作图与三次作业的迭代</h2><ul>
+<li><p>输入线程、层\座的调度器线程、电梯线程三类线程之间的协作关系由<strong>两类调度器</strong><code>BuildingScheduler``ElevatorScheduler</code>负责<strong>中转请求</strong>、<strong>信息交互</strong>和<strong>计算调度</strong>。后续将结合UML类图具体说明。</p>
+</li>
+<li><p>下图为协作方面的迭代设计。</p>
+</li>
+</ul>
+<img src="/2022/05/01/OO-Unit2-summary/4.png" class="" title="pic1">
+
+<h2 id="2-3-协作模式与调度器功能"><a href="#2-3-协作模式与调度器功能" class="headerlink" title="2.3 协作模式与调度器功能"></a>2.3 协作模式与调度器功能</h2><h3 id="hw5-UML类图"><a href="#hw5-UML类图" class="headerlink" title="hw5 UML类图"></a>hw5 UML类图</h3><img src="/2022/05/01/OO-Unit2-summary/1.png" class="" title="pic1">
+
+<h3 id="hw5-生产者消费者模式"><a href="#hw5-生产者消费者模式" class="headerlink" title="hw5 - 生产者消费者模式"></a>hw5 - 生产者消费者模式</h3><ul>
+<li><p>仅有输入线程、电梯线程和每个电梯的调度器。</p>
+</li>
+<li><p>中转请求：</p>
+<ul>
+<li>调度器负责接受来自输入线程的请求，把当前楼层的请求发放给电梯。使用生产者消费者模式。</li>
+</ul>
+</li>
+<li><p>信息交互：</p>
+<ul>
+<li><p>调度器作为电梯线程的决策类，综合当前的各层请求和电梯状态，计算电梯的下一步行为。包括：本层是否开门、是否进入等待请求的阻塞状态、是否换向。</p>
+</li>
+<li><p>调度器接受输入线程的终止信号，传递给电梯线程，作为线程结束标志。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="hw6-UML类图"><a href="#hw6-UML类图" class="headerlink" title="hw6 UML类图"></a>hw6 UML类图</h3><img src="/2022/05/01/OO-Unit2-summary/2.png" class="" title="pic1">
+
+<h3 id="hw6-两级调度器"><a href="#hw6-两级调度器" class="headerlink" title="hw6 - 两级调度器"></a>hw6 - 两级调度器</h3><ul>
+<li><p>迭代：增加层/座的调度器<code>BuildingScheduler</code>和调度线程<code>SchedulerThread</code>。</p>
+</li>
+<li><p>中转请求：调度器负责接受来自输入线程的请求，调度线程把请求发放给本层/座特定电梯的调度器。使用生产者消费者模式。</p>
+</li>
+<li><p>计算调度：调度器综合本层/座的各电梯状态，按调度策略<code>choose()</code>选择派遣请求的电梯。</p>
+</li>
+<li><p>信息交互：调度器接受输入线程的终止信号，将其传递给电梯调度器后，作为调度线程结束标志。</p>
+</li>
+</ul>
+<h3 id="hw7-UML类图"><a href="#hw7-UML类图" class="headerlink" title="hw7 UML类图"></a>hw7 UML类图</h3><img src="/2022/05/01/OO-Unit2-summary/3.png" class="" title="pic1">
+
+<h3 id="hw7-流水线模式"><a href="#hw7-流水线模式" class="headerlink" title="hw7 - 流水线模式"></a>hw7 - 流水线模式</h3><ul>
+<li><p>迭代：请求分阶段存储；增加<code>RequestCounter</code>作为流水是否结束的计数器。</p>
+</li>
+<li><p>中转请求：未完成请求由电梯线程更新下一流水阶段的目的地，并把请求发放给本层/座调度器。</p>
+</li>
+<li><p>信息交互：完成请求计数器加1.</p>
+</li>
+</ul>
+<h2 id="2-4-调度器的可扩展性"><a href="#2-4-调度器的可扩展性" class="headerlink" title="2.4 调度器的可扩展性"></a>2.4 调度器的可扩展性</h2><p>我认为本单元选择调度器是一种结构清晰、扩展性好的办法。</p>
+<ul>
+<li>层/座的调度器<code>BuildingScheduler</code>和调度线程<code>SchedulerThread</code><ul>
+<li>不论对于楼层和楼座，其基本行为保持一致，都可直接使用，复用性强。</li>
+<li>如果想更换调度策略，只需重载choose()方法即可。</li>
+<li>由于电梯的调度器实现了<code>Sche</code>接口，本级调度器存储的电梯名单为<code>elvList : ArrayList&lt;Sche&gt;</code>类型，所以不仅仅可以作为某层或某座的调度器，还可作为包含特定横向电梯+特定纵向电梯的调度器，例如服务于一类二次元主题的横纵电梯，乘客愿意步行爬楼前往此类电梯的可搭乘地进行观光乘坐电梯，即二次元乘客的专属调度器。</li>
+</ul>
+</li>
+<li>不同类的电梯调度器实现<code>Sche</code>接口，方便与上层调度器交互。开始时由于横向电梯和纵向电梯的策略和实现差异较大，所以选择了接口而非继承。画出UML图以后觉得使用抽象类或许更加简洁。</li>
+<li>两级调度器模式在hw7并未很大改动，只是增加了电梯线程把未完成请求发给层/座调度器的工序。两级调度器的扩展性较好。</li>
+</ul>
+<h1 id="三、同步块的设置和锁的选择"><a href="#三、同步块的设置和锁的选择" class="headerlink" title="三、同步块的设置和锁的选择"></a>三、同步块的设置和锁的选择</h1><h2 id="3-1-输出安全"><a href="#3-1-输出安全" class="headerlink" title="3.1 输出安全"></a>3.1 输出安全</h2><ul>
+<li><p>输出类中采取单例模式，实现加锁的静态方法。</p>
+</li>
+<li><p>采用<strong>生产者消费者模式</strong>并<strong>不能</strong>完美地解决<strong>电梯作业</strong>的输出安全的问题：原因为例如[0.0]在输出队列添加OPEN请求，[0.4]在输出队列添加CLOSE请求，此时并不一定保证输出线程两次take()并println()的时间间隔严格≥0.4s.</p>
+</li>
+</ul>
+<pre><code class="java">public class MainOutput &#123;
+    public static synchronized void println(String str) &#123;
+        TimableOutput.println(str);
+    &#125;
+&#125;
+</code></pre>
+<h2 id="3-2-共享对象"><a href="#3-2-共享对象" class="headerlink" title="3.2 共享对象"></a>3.2 共享对象</h2><ul>
+<li>Scheduler类包含的共享对象为<strong>本电梯</strong>的请求队列<code>Arraylist&lt;PersonRequest&gt; requests</code>，所有读写此请求队列的方法均在Scheduler中实现。</li>
+<li>即把共享对象和需要加锁的方法全部封装进Scheduler.</li>
+</ul>
+<h1 id="四、bug分析"><a href="#四、bug分析" class="headerlink" title="四、bug分析"></a>四、bug分析</h1><blockquote>
+<p>分析自己程序的bug分析未通过的公测用例和被互测发现的bug：问题特征和修复办法  </p>
+</blockquote>
+<ul>
+<li>本单元强测互测没有Bug。</li>
+<li>hw5中测时遇到了轮询cpu超时的问题，后来经过排查是在[电梯线程里关门后]进入[依赖下一步请求实现的换向逻辑]时忘记wait()，导致电梯关门后进入空闲时跳过了此次换向逻辑而进入下一个循环的起始处wait().这导致了空闲后再有新请求进入时，电梯按上次循环时遗留下的方向继续运行，而缺少了电梯换向的逻辑导致从1层运行到0层。解决办法是电梯的每一个步骤后都添加wait()。</li>
+<li>由于我在电梯每个步骤前都有换向逻辑，所以这种轮询出现情况只会在运行到1层且需要换向时空闲的这种特殊的情况下出现，所以轮询的bug在随机生成样例时比较难复现。手动造边界数据+循环起始处println()对于轮询更为有效。</li>
+</ul>
+<h1 id="五、hack策略"><a href="#五、hack策略" class="headerlink" title="五、hack策略"></a>五、hack策略</h1><blockquote>
+<p>分析自己发现别人程序bug所采用的策略<br>列出自己所采取的测试策略及有效性<br>分析自己采用了什么策略来发现线程安全相关的问题<br>分析本单元的测试策略与第一单元测试策略的差异之处  </p>
+</blockquote>
+<ul>
+<li>主要采用自动评测机的方式。不过这种评测方式有一定随机性，本地评测的bug有时难复现。hw5和hw6的评测机并没有发现bug。hw7的评测机本地运行发现了bug但是没有提交成功。评测机主要用于正确性测试，适合作业前期自测正确性。</li>
+<li>另一种hack策略时针对特定线程安全的bug手动造数据，比如hw5时的线程输出安全问题，hw7时不可达的横线电梯出现的轮询问题。hw7时hack到一个横向电梯轮询的Bug。手动hack策略覆盖范围不如自动评测，但是效率和命中率较好。</li>
+<li>本单元相较第一单元的策略差异是，例如超时和轮询的bug比较难通过评测机显现，所以更需要针对特殊情况手动造数据。</li>
+</ul>
+<h1 id="六、心得体会"><a href="#六、心得体会" class="headerlink" title="六、心得体会"></a>六、心得体会</h1><blockquote>
+<p>从线程安全和层次化设计两个方面来梳理自己在本单元三次作业中获得的心得体会</p>
+</blockquote>
+<ul>
+<li><p>从线程安全的角度：</p>
+<ul>
+<li><strong>死锁</strong>的bug比较好排查和避免，出现率并不高；</li>
+<li><strong>共享对象</strong>使用sychronized和notifyAll()保证临界区的访问和修改是一种简单且省心的办法；本次作业稍有遗憾的是受限于时间并没有实现读写锁。</li>
+<li><strong>线程的结束条件</strong>需要依据具体情况判断，比如hw5和hw6的结束条件只需要考虑<code>输入结束 &amp;&amp; 调度器中无请求 &amp;&amp; 电梯为空</code>；由于hw7出现请求中转的情况，所以在<code>输入结束</code>这个条件上不再只是输入线程读到<code>null</code>，而是使用类似Experiment4.2代码中的Counter静态实例，当所有请求均运送完毕后才视作输入结束，各级调度器逐级发放isEnd信号。</li>
+<li><strong>轮询</strong>的Bug出现率比较高，且仅在特殊条件下出现而较难排查，需要合理地布局while循环终止地条件和wait()的位置。尤其是在LOOK算法需要频繁依据<strong>当前请求</strong>而实现转向逻辑的电梯中，需要更加细心地应对各种换向和空闲等情况。</li>
+</ul>
+</li>
+<li><p>层次化设计：</p>
+<ul>
+<li>两级调度器更适合完成hw7的多换乘请求，各层级间传递请求易于实现。</li>
+</ul>
+</li>
+</ul>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/OO" style=color:#00bcd4>
+                OO
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/05/01/OO-Unit2-summary/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/04/14/OS-lab2-summary/">
+        <h2>
+            BUAA-OS-Lab2
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/4/14
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <h1 id="一、流程图解"><a href="#一、流程图解" class="headerlink" title="一、流程图解"></a>一、流程图解</h1><h2 id="一-虚存内存映射图："><a href="#一-虚存内存映射图：" class="headerlink" title="(一)虚存内存映射图："></a>(一)虚存内存映射图：</h2><img src="/2022/04/14/OS-lab2-summary/2.jpg" class="" title="pic1">
+
+
+<h2 id="二-mips-vm-init流程图："><a href="#二-mips-vm-init流程图：" class="headerlink" title="(二)mips_vm_init流程图："></a>(二)mips_vm_init流程图：</h2><h3 id="1-物理存储部分"><a href="#1-物理存储部分" class="headerlink" title="1.物理存储部分"></a>1.物理存储部分</h3><img src="/2022/04/14/OS-lab2-summary/3.jpg" class="" title="pic1">
+
+
+<h3 id="2-虚拟存储部分"><a href="#2-虚拟存储部分" class="headerlink" title="2.虚拟存储部分"></a>2.虚拟存储部分</h3><h4 id="1-目标-粉色字"><a href="#1-目标-粉色字" class="headerlink" title="(1)目标:  (粉色字)"></a>(1)目标:  (粉色字)</h4><img src="/2022/04/14/OS-lab2-summary/4.jpg" class="" title="pic1">
+
+<h4 id="2-boot-segment-map-和-为何它要调用boot-pgdir-walk"><a href="#2-boot-segment-map-和-为何它要调用boot-pgdir-walk" class="headerlink" title="(2)boot_segment_map()   和   为何它要调用boot_pgdir_walk():"></a>(2)boot_segment_map()   和   为何它要调用boot_pgdir_walk():</h4><img src="/2022/04/14/OS-lab2-summary/5.jpg" class="" title="pic1">
+
+<h4 id="3-boot-pgdir-walk后续部分：关于权限位的细节"><a href="#3-boot-pgdir-walk后续部分：关于权限位的细节" class="headerlink" title="(3)boot_pgdir_walk后续部分：关于权限位的细节"></a>(3)boot_pgdir_walk后续部分：关于权限位的细节</h4><img src="/2022/04/14/OS-lab2-summary/6.jpg" class="" title="pic1">
+
+<h4 id="4-两个函数更为简略抽象的图解，所述内容与上文大致相同"><a href="#4-两个函数更为简略抽象的图解，所述内容与上文大致相同" class="headerlink" title="(4)两个函数更为简略抽象的图解，所述内容与上文大致相同"></a>(4)两个函数更为简略抽象的图解，所述内容与上文大致相同</h4><img src="/2022/04/14/OS-lab2-summary/7.jpg" class="" title="pic1">
+
+<h1 id="二、实验思考题"><a href="#二、实验思考题" class="headerlink" title="二、实验思考题"></a>二、实验思考题</h1><h2 id="Thinking-2-1"><a href="#Thinking-2-1" class="headerlink" title="Thinking 2.1"></a>Thinking 2.1</h2><blockquote>
+<p>请你根据上述说明，回答问题：在我们编写的 C 程序中，指针变量中存储的地址是虚拟地址还是物理地址？MIPS 汇编程序中 lw, sw 使用的是虚拟地址还是物理地址？  </p>
+</blockquote>
+<p>指针变量中存储的地址是虚拟地址;MIPS 汇编程序中 lw, sw 使用的是物理地址。</p>
+<h2 id="Thinking-2-2"><a href="#Thinking-2-2" class="headerlink" title="Thinking 2.2"></a>Thinking 2.2</h2><blockquote>
+<p>请从可重用性的角度，阐述用宏来实现链表的好处。  </p>
+</blockquote>
+<ul>
+<li>各类结构体都可以使用queue.h的宏简化代码量：<ul>
+<li>一开始写Exercise2.2的时候没有明白field字段设置的意义，觉得传入了elm参数以后，field应该是作为elm的成员变量名，不应该作为可变参数传入，显得有点多此一举，忘记了宏定义除了可以替换成实参，还可以做字符串字面量的替换。</li>
+<li>写到2.3才意识到field不是变量参数，而是pp_link这个字符串。</li>
+<li>后来思考之所以在queue.h的宏里面这样定义，应该是因为这里的宏并不止服务于Page，所以从工程角度来看，field仍然属于一种变量，field的设置提高了宏的可重用性，因为可以兼顾所有结构体的所有成员变量名。</li>
+</ul>
+</li>
+<li>复杂宏(如LIST_INSERT_TAIL、LIST_INSERT_BEFORE)大量使用简单宏(如LIST_FIRST、LIST_NEXT)，可重用性强</li>
+<li>可读性强，简化代码量，易于维护</li>
+</ul>
+<h2 id="Thinking-2-5"><a href="#Thinking-2-5" class="headerlink" title="Thinking 2.5"></a>Thinking 2.5</h2><blockquote>
+<p>请阅读上面有关 R3000-TLB 的叙述，从虚拟内存的实现角度，阐述 ASID 的必要性  </p>
+</blockquote>
+<ul>
+<li>由于多线程系统中不同进程中，相同的虚拟地址各自占用不同的物理地址空间，所以同一虚拟地址通常映射到不同的物理地址。因此TLB中装着不同进程的页表项，ASID用于区别不同进程的页表项。没有ASID机制的情况下每次进程切换需要地址空间切换的时候都需要清空TLB。</li>
+</ul>
+<blockquote>
+<p>请阅读《IDT R30xx Family Software Reference Manual》的 Chapter 6，结合 ASID 段的位数，说明 R3000 中可容纳不同的地址空间的最大数量。  </p>
+</blockquote>
+<p>ASID6位，容纳64个不同进程。</p>
+<h2 id="Thinking-2-6"><a href="#Thinking-2-6" class="headerlink" title="Thinking 2.6"></a>Thinking 2.6</h2><blockquote>
+<p>请用一句话概括 tlb_invalidate 的作用  </p>
+</blockquote>
+<ul>
+<li>实现删除特定虚拟地址的映射，每当页表被修改，就需要调用该函数以保证下次访问该虚拟地址时诱发 TLB 重填以保证访存的正确性</li>
+</ul>
+<blockquote>
+<p>逐行解释 tlb_out 中的汇编代码  </p>
+</blockquote>
+<pre><code class="c">/* Exercise 2.10 */
+LEAF(tlb_out)
+//1: j 1b
+nop
+    mfc0    k1,CP0_ENTRYHI
+  //把当前VPN和ASID存储到$k1，用于函数结束时恢复CP0_ENTRYHI
+    mtc0    a0,CP0_ENTRYHI
+  //把调用函数时传入的VPN和ASID写进CP0_ENTRYHI
+    nop
+  nop
+    tlbp
+  //根据 EntryHi 中的 Key（包含 VPN 与 ASID），查找 TLB 中与之对应的表项，并将表项的索引存入 Index 寄存器（若未找到匹配项，则Index最高位被置 1）
+  nop
+    nop
+    nop
+    nop
+    nop
+    mfc0    k0,CP0_INDEX
+    bltz    k0,NOFOUND
+  //如果TLB中保存了此VPN 与 ASID对应的表项，那么把EntryHi 与 EntryLo 的值写为0，即清空此表项，用于触发TLB缺失，重新装入
+    nop
+    mtc0    zero,CP0_ENTRYHI
+    mtc0    zero,CP0_ENTRYLO0
+    nop
+    tlbwi
+NOFOUND:
+    mtc0    k1,CP0_ENTRYHI
+  //$k1保存的原VPN和ASID恢复到CP0_ENTRYHI
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/page.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/photo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Home/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/index-bg.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Musel's blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Home/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/About/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Musel's blog</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/Mmmusel" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/05/31/OS-lab5-summary/" title="BUAA-OS-Lab5">BUAA-OS-Lab5</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-05-31T06:13:00.000Z" title="发表于 2022-05-31 14:13:00">2022-05-31</time></span></div><div class="content">一、实验难点
-lab5新增加的虚拟地址的映射布局
-需要明确：广义用户进程是相对于内核态的，lab5的文件服务进程和用户进程都是用户态下的进程。但是以下涉及的lab5的“用户进程”都是相对服务进程而言的普通用户进程。尽管文件服务进程也属于广义用户进程。
-用户进程：文件映射区
-文件服务进程：块缓存
+    j    ra
+    nop
+END(tlb_out)
+</code></pre>
+<h2 id="Thinking-2-7"><a href="#Thinking-2-7" class="headerlink" title="Thinking 2.7"></a>Thinking 2.7</h2><blockquote>
+<p>在现代的 64 位系统中，提供了 64 位的字长，但实际上不是 64 位页式存储系统。假设在 64 位系统中采用三级页表机制，页面大小 4KB。由于 64 位系统中字长为 8B，且页目录也占用一页，因此页目录中有 512 个页目录项，因此每级页表都需要 9 位。因此在 64 位系统下，总共需要 3 × 9 + 12 = 39 位就可以实现三级页表机制，并不需要 64 位。现考虑上述 39 位的三级页式存储系统，虚拟地址空间为 512 GB，若记三级页表的基地址为 PTbase，请你计算：  </p>
+</blockquote>
+<ul>
+<li>三级页表页目录的基地址</li>
+<li>映射到页目录自身的页目录项（自映射）</li>
+</ul>
+<img src="/2022/04/14/OS-lab2-summary/1.jpg" class="" title="pic1">
+<h2 id="Thinking-2-8"><a href="#Thinking-2-8" class="headerlink" title="Thinking 2.8"></a>Thinking 2.8</h2><blockquote>
+<p>简单了解并叙述 X86 体系结构中的内存管理机制，比较 X86 和 MIPS 在内存管理上的区别。</p>
+</blockquote>
+<ol>
+<li>X86 体系结构中的内存管理机制</li>
+</ol>
+<ul>
+<li>通过分段将逻辑地址转换为线性地址，通过分页将线性地址转换为物理地址。</li>
+<li>逻辑地址由两部分构成，一部分是段选择器，一部分是偏移。</li>
+<li>段选择符存放在段寄存器中，如CS（存放代码段选择符）、SS（存放堆栈段选择符）、DS（存放数据段选择符）和ES、FS、GS（一般也用来存放数据段选择符）等；</li>
+<li>偏移与对应段描述符中的基地址相加就是线性地址。</li>
+<li>操作系统创建全局描述符表和提供逻辑地址，之后的分段操作x86的CPU会自动完成，并找到对应的线性地址。</li>
+<li>从线性地址到物理地址的转换是CPU自动完成的，转化时使用的Page Directory和Page Table等需要操作系统提供。</li>
+</ul>
+<ol start="2">
+<li>X86 和 MIPS 在内存管理上的区别</li>
+</ol>
+<ul>
+<li>TLB不命中：<ul>
+<li>MIPS触发TLB缺失和充填，然后CPU重新访问TLB</li>
+<li>x86硬件MMU索引获得页框号，直接输出物理地址，MMU充填TLB加快下次访问速度</li>
+</ul>
+</li>
+<li>分页方式不同：<ul>
+<li>一种MIPS系统内部只有一种分页方式</li>
+<li>x86的CPU支持三种分页模式</li>
+</ul>
+</li>
+<li>逻辑地址不同：<ul>
+<li>MIPS地址空间32位</li>
+<li>x86支持64位逻辑地址，同时提供转换为32位定址选项</li>
+</ul>
+</li>
+<li>段页式的不同：<ul>
+<li>MIPS同时包含了段和段页式两种地址使用方式</li>
+<li>在x86架构的保护模式下的内存管理中，分段是强制的，并不能关闭，而分页是可选的；</li>
+</ul>
+</li>
+</ul>
+<h1 id="三、实验难点"><a href="#三、实验难点" class="headerlink" title="三、实验难点"></a>三、实验难点</h1><h2 id="程序空间和物理内存的映射理解："><a href="#程序空间和物理内存的映射理解：" class="headerlink" title="程序空间和物理内存的映射理解："></a>程序空间和物理内存的映射理解：</h2><ol>
+<li>对于Page结构体数组的理解：</li>
+</ol>
+<ul>
+<li>虚拟空间内，存储在kseg0(pages)和kuseg(UPAGES),映射到<strong>相同物理地址</strong>。<ul>
+<li>kseg0的pages和物理地址一一对应，va高位置0即可得到pa</li>
+<li>kuseg的UPAGES需要建立页目录和物理地址的映射</li>
+</ul>
+</li>
+<li>Page结构体插入page_free_list的顺序不需要按地支顺序。差别仅在于分配物理页面时提供的物理地址不同。保证Page所对物理页面为空即可</li>
+</ul>
+<ol start="2">
+<li>没有分清虚拟地址和物理地址</li>
+</ol>
+<ul>
+<li>MOS中的页表和页表项在虚拟内存中也占有一片空间。我们模拟的内存管理都是在CPU环境下模拟MMU的映射过程，所以涉及的代码均为操作虚拟地址，也就是得到一个需要访存的程序地址，通过MMU读取页目录地址，转换成页表的虚拟地址，返回给CPU，完成访存。</li>
+</ul>
+<ol start="3">
+<li>pgdir_walk函数中，对应的二级页表不存在则会使用 page_alloc 函数分配一页物理内存用于存放。pp_ref 对应这一页物理内存被引用的次数，它等于有多少虚拟页映射到该物理页。所以此时pgdir_walk函数create的时候，pp_ref需要+1.</li>
+</ol>
+<ol start="4">
+<li>对于PPN和PTE_ADDR一开始没有分清楚</li>
+</ol>
+<ul>
+<li>PPN得到虚页号，PTE_ADDR可以得到页表的物理地址。PTE_ADDR&gt;&gt;12=PPN</li>
+</ul>
+<h2 id="链表相关的指针、结构体、宏定义等C语言知识："><a href="#链表相关的指针、结构体、宏定义等C语言知识：" class="headerlink" title="链表相关的指针、结构体、宏定义等C语言知识："></a>链表相关的指针、结构体、宏定义等C语言知识：</h2><ol start="5">
+<li>由于野指针导致了出现死循环</li>
+</ol>
+<ul>
+<li>测试时发现不停的跳转到main函数里，是取了野指针的问题。后来排查发现是出现了*页目录项的问题。pgdir_walk返回的是页表项的地址，所以不需要*页目录项，而是需要把页目录项的物理地址转换成虚拟地址。</li>
+</ul>
+<ol start="6">
+<li>对于链表初始化重复修改了多次才成功</li>
+</ol>
+<ul>
+<li><code>LIST_INIT(&amp;page_free_list);</code>中，page_free_list是Page_list结构体变量，链表宏需要的参数均为Page_list结构体指针，所以需要传入<code>&amp;page_free_list</code>地址</li>
+<li>page_init()函数中，不需要<code>LIST_HEAD(Page_list,Page) page_free_list;</code>的定义。结构体已经定义过。</li>
+</ul>
+<ol start="7">
+<li>双向链表的结构体结构理解不清晰</li>
+</ol>
+<ul>
+<li>prev是struct Page**,保存next的地址；next是struct Page *,保存结构体的地址；</li>
+<li>作用是remove节点时避免遍历双向链表</li>
+</ul>
+<ol start="8">
+<li>移位运算符的bug</li>
+</ol>
+<ul>
+<li>移位运算符的优先级低于加号，需要加括号</li>
+<li>右移后低位截断。如<code>((*pte)&gt;&gt;12)&amp;0xfff</code>,避免出现算数右移的情况</li>
+</ul>
+<h1 id="四、体会与感想"><a href="#四、体会与感想" class="headerlink" title="四、体会与感想"></a>四、体会与感想</h1><ul>
+<li>测试代码写的很好，非常全面地测试了内存管理模块，把原来的黑盒评测变成了白盒，为debug带来了很大的方便！</li>
+<li>回归到了最朴素的printf调试法。由于gxemul的单步调试只能看内存的存取情况，所以想观察函数和地址的行为只能用printf的方法进行单步调试。虽然看过gxemul的断点调试教程，但是比较抽象，希望如果有可能的话助教能结合lab2的具体代码给予结合gxemul的调试示例，作为第二种debug方法</li>
+<li>虚拟内存的函数经常多次调用，返回值类型多，函数间的调用关系比较复杂。我选择在函数的入口、出口、分支判断条件的地方都加入printf语句，配合check()代码可以显式地看到内存分配的过程，加强了对内存管理的理解</li>
+</ul>
+<h1 id="五、指导书反馈"><a href="#五、指导书反馈" class="headerlink" title="五、指导书反馈"></a>五、指导书反馈</h1><ol>
+<li><p><strong>Exercise2.8</strong>给的函数中，<strong>pgdir_walk函数</strong>中，对应的二级页表不存在则会使用 page_alloc 函数分配一页物理内存用于存放。pp_ref 对应这一页物理内存被引用的次数，它等于有多少虚拟页映射到该物理页。所以此时pgdir_walk函数create的时候，<strong>pp_ref需要+1</strong>.</p>
+</li>
+<li><p><strong>请在lab2</strong>就像lab3强调结构体必须为了评测而保证倒序插入一样，<strong>强调page结构体必须倒序插入</strong>。由于一开始在lab2顺序插入的page结构体，虽然在Lab2课上的题面有强调倒序，在课上评测我也按倒序做了修改。但是<strong>lab3的评测</strong>由于没有特殊说明，我没有再修改page结构体的顺序，导致<strong>lab3课下评测只过了8个点</strong>，误以为是lab3的bug导致浪费大量时间才定位到pmap.c</p>
+</li>
+<li><p>lab2的mmu.h增加的KADDR(pa)宏，由于没有对传入的**pa取(u_long)**，且此转换宏的逻辑是pa+ULIM也就是pa+0x8000_0000，导致如果传入指针型的变量就无法高位置1.建议从Lab2到后续lab对mmu.h的KADDR(pa)做修正</p>
+</li>
+<li><p>多级页表自映射可以强调一下自映射的页目录在<strong>页目录、所有页表、虚拟页框</strong>的偏移offset是一致的</p>
+</li>
+<li><p>可以在教程网站中增加一些mmu.h和pmap.h<strong>地址转换宏</strong>的练习题，增加对头文件的理解</p>
+</li>
+<li><p>增加流程图解</p>
+</li>
+</ol>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/OS" style=color:#ffa2c4>
+                OS
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/04/14/OS-lab2-summary/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/03/24/OO-Unit1-summary/">
+        <h2>
+            BUAA-OO-Unit1
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/3/24
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <p>写在前面：我很满足！助教夸我类图画的好看耶！</p>
+<img src="/2022/03/24/OO-Unit1-summary/0.png" class="" title="pic1">
+<h1 id="一、程序结构"><a href="#一、程序结构" class="headerlink" title="一、程序结构"></a>一、程序结构</h1><h2 id="UML类图与架构设计"><a href="#UML类图与架构设计" class="headerlink" title="UML类图与架构设计"></a>UML类图与架构设计</h2><h3 id="第一次作业"><a href="#第一次作业" class="headerlink" title="第一次作业"></a>第一次作业</h3><img src="/2022/03/24/OO-Unit1-summary/hw1.1.png" class="" title="pic1">
+<ul>
+<li>通过Lexer和Parser解析字符串，递归下降生成Expr对象时去除括号</li>
+<li>重写Expr.toString()，生成记录运算顺序的后缀表达式SuffixString。格式”X1(操作数) X2(操作数) +(操作符) …”。后缀表达式的<strong>操作符</strong>包括+、*、^int(表达式因子的幂运算)、!(取反)；</li>
+<li>Parser维护了一个后缀表达式<strong>操作数表</strong></li>
+<li>Suffix类获取包含操作符运算顺序的String和操作数表，用栈进行计算结果得到Quantic对象，对Quantic对象调用print()方法输出。<h3 id="第二次作业迭代思路："><a href="#第二次作业迭代思路：" class="headerlink" title="第二次作业迭代思路："></a>第二次作业迭代思路：</h3><img src="/2022/03/24/OO-Unit1-summary/hw1.2.png" class="" title="pic1"></li>
+</ul>
+<h4 id="一、引入三角函数后的统一存储形式"><a href="#一、引入三角函数后的统一存储形式" class="headerlink" title="一、引入三角函数后的统一存储形式"></a>一、引入三角函数后的统一存储形式</h4><ul>
+<li>多项式的每项基本形式：ax^b -&gt; ax^b(sin容器)(cos容器)</li>
+<li>选用hashmap，<code>merge()</code>方法和<strong>lambda函数</strong>实现合并同类项非常简洁。<ul>
+<li>Key为自定义类型<code>BaseKey</code>，重写<code>hashcode()</code>和<code>equal()</code>后便于合并同类项。形式：<code>x^b(sin容器)(cos容器)</code></li>
+<li>由于需要维护可变类型<code>BaseKey</code>作为hashmap的<code>key</code>的不可变性，以及<code>value</code>代表的系数为<strong>不可变类型</strong>BigInteger，没有出现深浅拷贝的Bug</li>
+</ul>
+</li>
+</ul>
+<h4 id="二、sum函数因子的处理"><a href="#二、sum函数因子的处理" class="headerlink" title="二、sum函数因子的处理"></a>二、sum函数因子的处理</h4><ul>
+<li>将sum函数作为因子Factor，在递归下降处理表达式中，类似处理表达式因子的模式，进行递归下降处理</li>
+<li>具体实现：识别出sum函数的求和表达式，为此表达式新建lexer和parser对象，返回求和后的Expr作为因子。类型为抽象接口Factor</li>
+</ul>
+<h4 id="三、自定义函数的处理"><a href="#三、自定义函数的处理" class="headerlink" title="三、自定义函数的处理"></a>三、自定义函数的处理</h4><ul>
+<li>新建自定义函数类，类中使用static成员变量存储预先读入的函数形参表和函数表达式</li>
+<li>递归下降过程中识别到自定义函数因子时，新建自定义函数类的对象，传入读取到的实参表，返回替换后的Expr作为因子。</li>
+</ul>
+<h3 id="第三次作业迭代思路"><a href="#第三次作业迭代思路" class="headerlink" title="第三次作业迭代思路"></a>第三次作业迭代思路</h3><img src="/2022/03/24/OO-Unit1-summary/hw1.3.png" class="" title="pic1">
 
 
-lab5新增加的物理空间和虚拟空间的对应
-磁盘-文件系统缓存-用户进程的文件区  
+<h4 id="一、嵌套函数：作业二实现"><a href="#一、嵌套函数：作业二实现" class="headerlink" title="一、嵌套函数：作业二实现"></a>一、嵌套函数：作业二实现</h4><h4 id="二、三角函数因子为表达式因子"><a href="#二、三角函数因子为表达式因子" class="headerlink" title="二、三角函数因子为表达式因子"></a>二、三角函数因子为表达式因子</h4><ul>
+<li>sin(bracket)，bracket类型由Single换为Quantic即可<h4 id="三、三角函数的化简"><a href="#三、三角函数的化简" class="headerlink" title="三、三角函数的化简"></a>三、三角函数的化简</h4></li>
+<li>sin(0)-&gt;(0);cos(0)-&gt;(1)，<code>Pre</code>类内字符串替换即可；</li>
+<li>sin(bracket)，bracket为常数因子或幂函数因子时去括号。<code>Suffix.print()</code>输出字符串时按有无<code>&#39;+&#39;&#39;*&#39;</code>作为常数因子或幂函数因子的判断依据；</li>
+<li>诱导公式：括号内负号外提。<code>三角函数符号=f(括号内表达式符号，指数，三角名)</code>，<code>lexer.getTrigon()</code>内处理；</li>
+<li>sin(brackt)**2-&gt;(1-cos(brackt)**2);CalculateExpr()化简，取最短字符串为结果；<br>cos(brackt)**2-&gt;(1-sin(brackt)**2);CalculateExpr()化简，取最短字符串为结果；</li>
+</ul>
+<h2 id="使用的OO度量"><a href="#使用的OO度量" class="headerlink" title="使用的OO度量"></a>使用的OO度量</h2><table>
+<thead>
+<tr>
+<th>度量指标</th>
+<th></th>
+<th></th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LCOM</td>
+<td>Lack of Cohesion in Methods – Class</td>
+<td>方法的内聚缺乏度</td>
+<td>值越大，说明类内聚合度越小。</td>
+</tr>
+<tr>
+<td>FANIN</td>
+<td>Fan-in – Class</td>
+<td>类的扇入</td>
+<td>表示调用该模块的上级模块的个数，扇入越大，表示该模块的复用性好。</td>
+</tr>
+<tr>
+<td>FANOUT</td>
+<td>Fan-out – Class</td>
+<td>类的扇出</td>
+<td>表示该模块直接调用的下级模块的个数，扇出过大表明模块复杂度高，但扇出过小也不好。</td>
+</tr>
+<tr>
+<td>OCavg</td>
+<td>Average opearation complexity</td>
+<td>类的平均操作复杂度</td>
+<td></td>
+</tr>
+<tr>
+<td>OCmax</td>
+<td>Maximum operation complexity</td>
+<td>类的最大操作复杂度</td>
+<td></td>
+</tr>
+<tr>
+<td>WMC</td>
+<td>Weighted method complexity</td>
+<td>类的加权方法复杂度</td>
+<td></td>
+</tr>
+<tr>
+<td>CogC</td>
+<td>Cognitive complexity</td>
+<td>方法的认知复杂度</td>
+<td></td>
+</tr>
+<tr>
+<td>ev(G)</td>
+<td>Essential cyclomatic complexity</td>
+<td>方法的基本圈复杂度</td>
+<td>衡量程序非结构化程度。</td>
+</tr>
+<tr>
+<td>iv(G)</td>
+<td>Design complexity</td>
+<td>方法的设计复杂度</td>
+<td>模块和其他模块的调用关系。软件模块设计复杂度高意味模块耦合度高，这将导致模块难于隔离、维护和复用。</td>
+</tr>
+<tr>
+<td>v(G)</td>
+<td>cyclonmatic complexity</td>
+<td>方法的独立路径的条数</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="类的内聚和相互间的耦合情况"><a href="#类的内聚和相互间的耦合情况" class="headerlink" title="类的内聚和相互间的耦合情况"></a>类的内聚和相互间的耦合情况</h2><p>以下为三次作业的类的属性个数、方法个数、LCOM、FANIN、FANOUT。大致依据类的功能分为存储类和执行类分别统计。执行类包括解析、计算、化简输出三部分。</p>
+<h3 id="hw1"><a href="#hw1" class="headerlink" title="hw1"></a>hw1</h3><img src="/2022/03/24/OO-Unit1-summary/1-1.png" class="" title="pic1">
+<img src="/2022/03/24/OO-Unit1-summary/1-2.png" class="" title="pic1">
+<h3 id="hw2"><a href="#hw2" class="headerlink" title="hw2"></a>hw2</h3><img src="/2022/03/24/OO-Unit1-summary/2-1.png" class="" title="pic1">
+<img src="/2022/03/24/OO-Unit1-summary/2-2.png" class="" title="pic1">
+<h3 id="hw3"><a href="#hw3" class="headerlink" title="hw3"></a>hw3</h3><img src="/2022/03/24/OO-Unit1-summary/3-1.png" class="" title="pic1">
+<img src="/2022/03/24/OO-Unit1-summary/3-2.png" class="" title="pic1">
+<h3 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h3><p><strong>设计要求高内聚低耦合，即LCOM值要小，FANIN值要大，FANOUT值要合理。</strong></p>
+<ol>
+<li>存储类的FANIN明显高于执行类的FANIN</li>
+</ol>
+<ul>
+<li>存储类的复用率高：说明存储类型选取的<code>hashmap&lt;BaseKey,BigInteger&gt;</code>较为合适，与同学交流时也发现自己的存储与计算的代码实现较为简洁，hw1-3均使用了Basekey和merge方法，没有过多迭代过程</li>
+<li>执行类的复用率低，说明执行类的逻辑仍然存在面向过程性。</li>
+</ul>
+<ol start="2">
+<li>LCOM较低，说明方法的高内聚实现较好。</li>
+</ol>
+<h2 id="方法的规模与分支复杂度情况"><a href="#方法的规模与分支复杂度情况" class="headerlink" title="方法的规模与分支复杂度情况"></a>方法的规模与分支复杂度情况</h2><p>以下为截取hw3的复杂度较高的方法和类，复杂度集中在Lexer、Suffix的符号识别和字符串输出化简两部分。由于分支复杂度较高，这两部分的测试时间和bug也相应较多。</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>存储类的数据类型选取合适：<ul>
+<li>选用hashmap，<code>merge()</code>方法和<strong>lambda函数</strong>实现合并同类项非常简洁。</li>
+<li>Key为自定义类型<code>BaseKey</code>，重写<code>hashcode()</code>和<code>equal()</code>后便于合并同类项</li>
+<li>由于需要维护可变类型<code>BaseKey</code>作为hashmap的<code>key</code>的不可变性，以及<code>value</code>代表的系数为<strong>不可变类型</strong>BigInteger，没有出现深浅拷贝的Bug</li>
+</ul>
+</li>
+</ul>
+<pre><code class="java">public class Quantic &#123;
+    private HashMap&lt;BaseKey, BigInteger&gt; quanticMember;
+
+    public void quanticAdd(Quantic nextTop) &#123;
+        nextTop.getQuanticMember().forEach((key, value) -&gt;this.quanticMember.merge(key, value, BigInteger::add));
+        //hashmap1合并进hashmap2，类似合并同类项原理
+    &#125;
+</code></pre>
+<ul>
+<li>forEach()方法用于对 HashMap 中的每个键值对执行指定的操作。匿名函数 lambda 的表达式 作为 forEach()方法的参数传入。</li>
+<li>merge()方法用于合并两个hashmap，使用lambda表达式 <code>(oldValue, newValue) -&gt; (oldValue + newValue)</code> 作为重映射函数。</li>
+<li>Java 8的方法引用更方便，方法引用由::双冒号操作符标示,使用<code>BigInteger::add</code>作为重映射函数即可</li>
+<li>由于<code>hashmap.merge()</code>在插入hashmap2中不存在的key与其对应的value时不会调用重映射函数，故减法不能使用<code>BigInteger::subtract</code>作为映射函数；解决办法为减数先取反，再与被减数调用<code>quanticAdd()</code>即可</li>
+<li>乘法将两个BaseKey相乘后的新BaseKey作为merge方法的key参数，系数的乘积作为value参数，重映射函数<code>BigInteger::add</code><pre><code class="java">public Quantic quanticMulQuantic(Quantic nextTop) &#123;
+      Quantic ans = new Quantic();
+      for (BaseKey j : this.quanticMember.keySet()) &#123;
+          for (BaseKey y : nextTop.quanticMember.keySet()) &#123;
+              BigInteger coeJ = this.quanticMember.get(j);
+              BigInteger coeY = nextTop.getQuanticMember().get(y);
+              ans.getQuanticMember().merge(new BaseKey(j,y),coeJ.multiply(coeY), BigInteger::add);
+          &#125;
+      &#125;
+      return ans;
+  &#125;
+</code></pre>
+</li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>由于对应用设计模式的经验较为缺乏，架构设计时没有采用设计模式，存在显著的面向过程性</li>
+<li>lexer和parser的实现时，复杂度过高。在hw1中把减号的语义去除，即parser的语义分割符仅为<code>&#39;+&#39;&#39;*&#39;</code>，<code>&#39;-&#39;</code>仅作为Expr、Term、Single和Trigon的符号位，在后续作业的<code>系数的符号=f(符号，指数)</code>的转化时出了很多错误，例如负号外提出错<code>sin(-1)**2化简成-sin(1)**2</code>与识别负号位时未考虑<code>pos==length</code>的情况出错。同时parser的三个方法均出现了表示符号的参数的嵌套传递情况，debug时出现非常大的麻烦。</li>
+</ul>
+<h1 id="二、bug分析"><a href="#二、bug分析" class="headerlink" title="二、bug分析"></a>二、bug分析</h1><h2 id="第二次公测"><a href="#第二次公测" class="headerlink" title="第二次公测"></a>第二次公测</h2><ul>
+<li>自定义函数的函数声明中未考虑空格和tab，WA了两个点<h2 id="第二次互测"><a href="#第二次互测" class="headerlink" title="第二次互测"></a>第二次互测</h2></li>
+<li>lexer的一个分支忘记添加<code>pos==length</code>时<code>return</code>的终止条件，导致<code>+-+1</code>出现exception<br>反思：迭代开发作业可以使用之前作业的强测数据来测试本次作业的修改是否影响到之前的功能；做测试时不要忘记测试原先的基础功能是否维持正常</li>
+<li><code>sin(-1)**2</code>化简成<code>-sin(1)**2</code>,未考虑偶数次幂时消去负号的情况。<del>反思：可能是初中的知识没学好</del></li>
+<li>没有注意到互测的指数输入可以大于8<br>反思：公测时也要注意互测的数据规范；修改指数的数据范围时有一处遗漏导致出错<h2 id="第一次和第三次作业未出现Bug"><a href="#第一次和第三次作业未出现Bug" class="headerlink" title="第一次和第三次作业未出现Bug"></a>第一次和第三次作业未出现Bug</h2><h2 id="整体分析"><a href="#整体分析" class="headerlink" title="整体分析"></a>整体分析</h2></li>
+<li>总体来说，由于存储类的代码行和圈复杂度明显低于工作类，未出现计算方面的Bug。</li>
+<li>Bug主要集中在lexer和parser的识别和解析字符串部分，此部分的圈复杂度较高，出现遗漏分支与修改不完善的情况。</li>
+<li>输出部分的圈复杂度最高，针对此部分做的测试较多，未出现bug。</li>
+</ul>
+<h1 id="三、hack策略"><a href="#三、hack策略" class="headerlink" title="三、hack策略"></a>三、hack策略</h1><ul>
+<li>自动化评测机测试时，对于数据生成程序的要求较高，当数据输入的限制较多与程序功能较为简单时，自动生成数据的强度不容易控制，容易出现数据较弱或不合法的情况。</li>
+<li>根据被测程序构造样例的思路：<ul>
+<li>圈复杂度较高的环节：读入、输出、三角优化；</li>
+<li>数据范围是否覆盖全面：例如sum的BigInteger</li>
+<li>新增功能是否考虑全面：例如函数声明的空格和<code>i**n</code>的情况</li>
+</ul>
+</li>
+</ul>
+<h1 id="四、心得体会"><a href="#四、心得体会" class="headerlink" title="四、心得体会"></a>四、心得体会</h1><ul>
+<li>不要出现50行+的方法，否则Bug修复的时候有方法超过60行的风险Orz</li>
+<li>为debug模式重写<code>toString()</code>便于调试，尤其是包含嵌套hashmap的类；满足作业化简要求的的输出单独建立print()方法</li>
+<li>尽量在作业的开始阶段留出一定的可扩展空间，降低后续的修改规模&amp;重构风险：比如作业1的时候偷懒按照幂次为单个char写的程序，不仅导致忘记幂次的前导符号和前导0，还导致作业2把幂次修改成大于8时只修改了lexer部分，后缀表达式有关幂次计算的部分忘记修改了；作业2的时候没有把sum和自定义函数作为字符串替换，而是在递归下降的过程中作为表达式因子替换，给作业3的嵌套函数留出了扩展性,作业3的相关功能也在作业2得到了测试;程序扩展一些额外的功能也意味着有更大的测试空间，对于数据生成程序的格式要求会降低，比如在作业1中不对括号层数和指数作限制时，测试的强度更高，数据生成程序也更简洁一些。</li>
+</ul>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/OO" style=color:#ff7d73>
+                OO
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/03/24/OO-Unit1-summary/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/03/15/OS-lab0-summary/">
+        <h2>
+            BUAA-OS-Lab0
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/3/15
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <h1 id="一、实验思考题"><a href="#一、实验思考题" class="headerlink" title="一、实验思考题"></a>一、实验思考题</h1><h2 id="thinking-0-1"><a href="#thinking-0-1" class="headerlink" title="thinking 0.1"></a>thinking 0.1</h2><img src="/2022/03/15/OS-lab0-summary/0.png" class="" title="pic1">
+<img src="/2022/03/15/OS-lab0-summary/1.png" class="" title="pic1">
+
+<ul>
+<li>不一样，第一次add前时README.md属于尚未跟踪文件；第二次修改后的文件属于工作区未暂存以备提交的变更。  </li>
+<li>不同的原因：未跟踪文件不存在于.git对象库中，而修改后未提交的文件存在一份修改前的文件在.git的对象库。</li>
+</ul>
+<h2 id="thinking-0-2"><a href="#thinking-0-2" class="headerlink" title="thinking 0.2"></a>thinking 0.2</h2><p>1.add the file :<br><code>$ git add</code> <code>$ git commit</code><br>2.stage the file :<br><code>$ git add</code><br>3.commit :<br><code>$ git commit</code></p>
+<h2 id="thinking-0-3"><a href="#thinking-0-3" class="headerlink" title="thinking 0.3"></a>thinking 0.3</h2><p>1.恢复工作区的printf.c :<br><code>$ git checkout -- printf.c</code><br>2.<code>$ git rm --cached printf.c</code>后，恢复暂存区文件：  </p>
+<pre><code>$ git reset HEAD printf.c 
+$ git checkout -- printf.c
+</code></pre>
+<p>3.删除暂存区文件,同时保留本地：<br><code>git rm --cached Tucao.txt</code>  </p>
+<h2 id="thinking-0-4"><a href="#thinking-0-4" class="headerlink" title="thinking 0.4"></a>thinking 0.4</h2><h3 id="命令与结果"><a href="#命令与结果" class="headerlink" title="命令与结果"></a>命令与结果</h3><ul>
+<li>找到提交说明为1的哈希值，使用 git reset –hard <Hash-code> ，再使用git log，2和3的版本库消失了。</li>
+<li>找到记录下的提交说明为3的哈希值，git reset –hard &lt;Hash-code&gt; ，再使用git log，123版本库均存在，但恢复的2和3的内容均回退为1的内容。<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3>git reset –hard &lt;Hash-code&gt;的版本回退问题：</li>
+<li>HEAD类似指针，各提交版本类似链表。</li>
+<li><code>git reset</code>回退到某个版本，只回退了commit信息，不会更改对象库内存储的文件对象.</li>
+<li><code>git reset --hard</code>无法恢复，指在本地的源码变为回退版本库的内容，撤销的commit的更改被抹除。</li>
+<li>实际上后退的版本库的文件对象仍存在于对象库中，<code>--hard</code>无法恢复指的是文件内容被改写，即被回退到的版本库的文件内容覆盖。</li>
+</ul>
+<h2 id="thinking-0-5"><a href="#thinking-0-5" class="headerlink" title="thinking 0.5"></a>thinking 0.5</h2><h3 id="1-1克隆时所有分支均被克隆。-正确"><a href="#1-1克隆时所有分支均被克隆。-正确" class="headerlink" title="1.1克隆时所有分支均被克隆。(正确)"></a>1.1克隆时所有分支均被克隆。(正确)</h3><ul>
+<li>首先，git clone时若未使用git clone -b说明HEAD指向的分支，默认HEAD为master</li>
+<li>第一次git clone时，HEAD指向master，此时git clone共12个文件</li>
+<li>其后未对master进行修改，只对test1 test2分支进行修改</li>
+<li>再次git clone -b master时，git clone共16个文件，说明<strong>克隆时所有分支均被克隆</strong><img src="/2022/03/15/OS-lab0-summary/2.png" class="" title="pic1">
+<h3 id="1-2只有HEAD指向的分支被检出。-正确"><a href="#1-2只有HEAD指向的分支被检出。-正确" class="headerlink" title="1.2只有HEAD指向的分支被检出。(正确)"></a>1.2只有HEAD指向的分支被检出。(正确)</h3></li>
+<li>git clone -b master，git branch后只有master分支</li>
+<li>git clone -b test1，git branch后只有test1分支<img src="/2022/03/15/OS-lab0-summary/3.png" class="" title="pic1">
+<h3 id="2-克隆出的工作区中执行-git-log、git-status、git-checkout、git-commit等操作不会去访问远程版本库。-正确"><a href="#2-克隆出的工作区中执行-git-log、git-status、git-checkout、git-commit等操作不会去访问远程版本库。-正确" class="headerlink" title="2.克隆出的工作区中执行 git log、git status、git checkout、git commit等操作不会去访问远程版本库。(正确)"></a>2.克隆出的工作区中执行 git log、git status、git checkout、git commit等操作不会去访问远程版本库。(正确)</h3></li>
+<li>这四项命令均针对于clone时的<strong>版本快照</strong>，不会与远程库同步</li>
+<li>只有git pull后才会实现本地依照更新的远程库进行更新的步骤</li>
+<li>具体实现为：git clone后，在另外的本地库进行对远程库的修改，再回到刚刚git clone的本地库中执行git log等命令时，不会同步远程库的更新</li>
+</ul>
+<img src="/2022/03/15/OS-lab0-summary/4.png" class="" title="pic1">
+<img src="/2022/03/15/OS-lab0-summary/5.png" class="" title="pic1">
+
+<h3 id="3-克隆时只有远程版本库HEAD指向的分支被克隆。-错误，见1-1"><a href="#3-克隆时只有远程版本库HEAD指向的分支被克隆。-错误，见1-1" class="headerlink" title="3.克隆时只有远程版本库HEAD指向的分支被克隆。(错误，见1.1)"></a>3.克隆时只有远程版本库HEAD指向的分支被克隆。(错误，见1.1)</h3><h3 id="4-克隆后工作区的默认分支处于master分支。-见1-2"><a href="#4-克隆后工作区的默认分支处于master分支。-见1-2" class="headerlink" title="4.克隆后工作区的默认分支处于master分支。(见1.2)"></a>4.克隆后工作区的默认分支处于master分支。(见1.2)</h3><ul>
+<li>若使用git clone，工作区默认分支处于master分支</li>
+<li>若使用git clone -b branch，工作区默认分支处于branch分支</li>
+</ul>
+<h2 id="thinking-0-6"><a href="#thinking-0-6" class="headerlink" title="thinking 0.6"></a>thinking 0.6</h2><img src="/2022/03/15/OS-lab0-summary/6.png" class="" title="pic1">
+<ul>
+<li><code>echo third &gt; output.txt</code> &gt; 覆盖</li>
+<li><code>echo forth &gt;&gt; output.txt</code> &gt;&gt; 追加</li>
+</ul>
+<h2 id="thinking-0-7"><a href="#thinking-0-7" class="headerlink" title="thinking 0.7"></a>thinking 0.7</h2><h3 id="command"><a href="#command" class="headerlink" title="command"></a>command</h3><pre><code class="shell">echo &#39;echo Shell Start...&#39; &gt; test
+echo &#39;echo set a = 1&#39; &gt;&gt;  test
+echo &#39;a=1&#39; &gt;&gt; test
+echo &#39;echo set b = 2&#39; &gt;&gt;  test
+echo &#39;b=2&#39; &gt;&gt; test
+echo &#39;echo set c = a+b&#39; &gt;&gt;test
+echo &#39;c=$[$a+$b]&#39; &gt;&gt;test
+echo &#39;echo c = $c&#39; &gt;&gt;test
+echo &#39;echo save c to ./file1&#39; &gt;&gt;test
+echo &#39;echo $c&gt;file1&#39; &gt;&gt;test
+echo &#39;echo save b to ./file2&#39; &gt;&gt; test
+echo &#39;echo $b&gt;file2&#39; &gt;&gt; test
+echo &#39;echo save a to ./file3&#39; &gt;&gt; test
+echo &#39;echo $a&gt;file3&#39; &gt;&gt; test
+echo &#39;echo save file1 file2 file3 to file4&#39; &gt;&gt; test
+echo &#39;cat file1&gt;file4&#39; &gt;&gt; test
+echo &#39;cat file2&gt;&gt;file4&#39; &gt;&gt; test
+echo &#39;cat file3&gt;&gt;file4&#39; &gt;&gt; test
+echo &#39;echo save file4 to ./result&#39; &gt;&gt; test
+echo &#39;cat file4&gt;&gt;result&#39; &gt;&gt;test
+</code></pre>
+<h3 id="test"><a href="#test" class="headerlink" title="test"></a>test</h3><pre><code class="shell">Shell Start...
+set a = 1
+set b = 2
+set c = a+b
+c = 3
+save c to ./file1
+save b to ./file2
+save a to ./file3
+save file1 file2 file3 to file4
+save file4 to ./result
+</code></pre>
+<h3 id="result"><a href="#result" class="headerlink" title="result"></a>result</h3><blockquote>
+<p>3<br>2<br>1</p>
+</blockquote>
+<h3 id="结果解释"><a href="#结果解释" class="headerlink" title="结果解释"></a>结果解释</h3><ul>
+<li>save可以将变量和文件的内容重定向至文件</li>
+</ul>
+<h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><pre><code class="shell">echo echo Shell Start
+echo &#39;echo Shell Start&#39;
+# 显示echo Shell Start
+echo `echo Shell Start`
+# 显示``反引号内命令的执行结果Shell Start
+</code></pre>
+<h3 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h3><ul>
+<li>echo命令无引号时，识别首尾的”echo …无变量无转义字符串… &gt; file”模式，重定向原字符串到文件，且无转移无变量；终端无输出</li>
+<li>echo命令有单引号时，会把单引号的内容以无转义无变量的形式输出</li>
+<li>echo命令有反引号时，会把反引号的内容作为命令执行，把命令的输出结果使用echo输出<h4 id="testbash-sh"><a href="#testbash-sh" class="headerlink" title="testbash.sh"></a>testbash.sh</h4>```shell<br>echo Shell Start…<br>echo set a = 1<br>a=1<br>echo set b = 2<br>b=2<br>echo set c = a+b<br>c=$[$a+$b]<br>echo c = $c<br>rm file1<br>echo echo $c&gt;file1<br>echo ‘echo $c&gt;&gt;file1’<br>echo <code>echo \$c&gt;&gt;file1</code></li>
+</ul>
+<p>echo echo $c&gt;file1<br>echo echo $c&gt;file1<br>echo echo \$c&gt;file1</p>
+<h1 id="file1"><a href="#file1" class="headerlink" title="file1"></a>file1</h1><h1 id="echo-3"><a href="#echo-3" class="headerlink" title="echo 3"></a>echo 3</h1><h1 id="echo-c"><a href="#echo-c" class="headerlink" title="echo $c"></a>echo $c</h1><h1 id="echo-3-1"><a href="#echo-3-1" class="headerlink" title="echo \3"></a>echo \3</h1><hr>
+<p>echo ‘echo $c&gt;&gt;file1’</p>
+<h1 id="单引号：除了单引号，全部为字面意义"><a href="#单引号：除了单引号，全部为字面意义" class="headerlink" title="单引号：除了单引号，全部为字面意义"></a>单引号：除了单引号，全部为字面意义</h1><p>//变量引用、算术运算和子命令，都失效了<br>//所以如果单引号之中，还要使用单引号，不能使用转义，需要在外层的单引号前面加上一个美元符号（$），然后再对里层的单引号转义。<br>//更合理的方法是改在双引号之中使用单引号。<br>//echo $’it&#39;s’</p>
+<hr>
+<p>echo “echo $c&gt;&gt;file1”<br>echo “echo $c&gt;&gt;file1”<br>echo “echo \$c&gt;&gt;file1”</p>
+<h1 id="终端"><a href="#终端" class="headerlink" title="终端"></a>终端</h1><h1 id="echo-3-gt-gt-file1"><a href="#echo-3-gt-gt-file1" class="headerlink" title="echo 3&gt;&gt;file1"></a>echo 3&gt;&gt;file1</h1><h1 id="echo-c-gt-gt-file1"><a href="#echo-c-gt-gt-file1" class="headerlink" title="echo $c&gt;&gt;file1"></a>echo $c&gt;&gt;file1</h1><h1 id="echo-3-gt-gt-file1-1"><a href="#echo-3-gt-gt-file1-1" class="headerlink" title="echo \3&gt;&gt;file1"></a>echo \3&gt;&gt;file1</h1><p>//三个特殊字符除外：美元符号（$）、反引号（`）和反斜杠（\）。这三个字符在双引号之中，依然有特殊含义，会被 Bash 自动扩展。<br>//美元符号用来引用变量，反引号则是执行子命令。<br>//换行符在双引号之中，会失去特殊含义，Bash 不再将其解释为命令的结束，只是作为普通的换行符。所以可以利用双引号，在命令行输入多行文本。<br>//双引号的另一个常见的使用场合是，文件名包含空格。这时就必须使用双引号，将文件名放在里面</p>
+<pre><code>
+</code></pre>
+<p>musel@musel-virtual-machine:~$ echo it’s</p>
+<blockquote>
+<p>s’<br>its<br>s</p>
+</blockquote>
+<pre><code>
+#### file1
+&gt; echo $c 
+
+echo echo \$c&gt;file1 的输出  
+&gt; 3 
+
+echo \`echo \$c&gt;&gt;file1` 的输出
+
+#### out
+&gt; Shell Start...
+&gt; set a = 1
+&gt; set b = 2
+&gt; set c = a+b
+&gt; c = 3
+&gt; **echo \$c&gt;&gt;file1**   
+&gt; \# echo &#39;echo \$c&gt;&gt;file1&#39; 的输出
+&gt;   
+&gt; \# echo \`echo \$c&gt;&gt;file1` 输出一个回车
+
+# 二、实验难点
+## 1.sed命令的-n 和 -i模式 ——显示与修改的区别
+### 不使用 -i 参数时，&#39;d&#39;&#39;s&#39;相关的删除、替换等工作都是对于终端显示或重定向的，不修改源文件
+- `sed &#39;3p&#39; txt` 首先，sed的命令是按行遍历的，则此条命令在遍历输出txt时，会额外在遍历到第三行时输出第三行
+- `sed -n &#39;3p&#39; txt` 在遍历到第三行时输出第三行，输出仅一行
+- `sed &#39;3d&#39; txt` 输出源文件，不输出第三行
+- `sed -n &#39;3d&#39; txt` -n此时只输出操作行，操作行又被删去，所以无输出
+### 使用 -i 参数，对源文件修改
+- `sed -i &#39;s/str1/str2/g&#39; txt` 修改，无显示
+- `sed -n &#39;s/str1/str2/g&#39; txt` 无显示
+- `sed &#39;s/str1/str2/g&#39; txt` 显示替换后的文件
+- `sed &#39;/str/d&#39; txt` 不显示包含str的行
+- `sed -n &#39;/str/p&#39; txt` 显示包含str的行
+- `sed -n &#39;/aaa/p&#39; txt | sed &#39;s/aaa/bbb/g&#39;` 显示替换后的行
+
+## 2.gcc链接库文件 两种命令的区别
+- `-include filename`功能相当于在代码中使用`#include&lt;filename&gt;`,代码中不能出现`#include&lt;filename&gt;`
+- 对于代码中出现`#include&lt;filename&gt;`的情况，需要使用`-Ipath`链接库
+
+## 3.单引号与双引号的区别
+- 单引号无法引用变量，仅作为字符串解析
+- 双引号可以引用变量
+- `sed -i &#39;s/str1/str2/g&#39; txt`，如果str1的位置是`$1`**参数传递**，需要改成**双引号**
+
+## 4.makefile用法
+- 只使用外部Makefile
+```makefile
+fibo: code/main.c code/fibo.c # 依赖文件
+        gcc -c code/main.c code/fibo.c -I./include # 仅列出头文件所在目录即可
+        mv fibo.o ./code/fibo.o # -c只编译不链接
+        mv main.o ./code/main.o # 在当前makefile文件目录下生成
+        gcc -o fibo code/main.o code/fibo.o -I./include
+clean: 
+        rm ./code/fibo.o
+        rm ./code/main.o
+        
+</code></pre>
+<ul>
+<li>外层调用内层Makefile<br>外层：<pre><code class="makefile">new:./code/main.c ./code/main.c 
+      cd ./code &amp;&amp; make # 同时执行两条命令
+clean: 
+      cd ./code &amp;&amp; make clean
+</code></pre>
+内层：<pre><code class="makefile">new:main.c fibo.c
+      gcc -c main.c fibo.c -I../include
+      gcc main.o fibo.o -o ../fibo
+clean:
+      rm main.o
+      rm fibo.o
+</code></pre>
+</li>
+</ul>
+<h1 id="三、体会与感想"><a href="#三、体会与感想" class="headerlink" title="三、体会与感想"></a>三、体会与感想</h1><ol>
+<li>linux指令以及众多工具的命令过于简洁与灵活，部分资料仅有各种参数的说明而没有<strong>使用实例</strong>的情况下，较难理解掌握，链接资料读起来也难度不一，经常出现一行代码修改多次仍达不到想要的效果，或对于使用什么样的指令和参数无从下手。  </li>
+<li>在虚拟机和git的环境下多尝试使用命令行实践，而不是字面意义上试图看懂各种复杂命令与参数，是上手更快的一种方式。</li>
+<li>thinking的引导是很有启发的，在<strong>使用实例</strong>的复现和探索中，对于git和命令行的掌握更加深入。</li>
+</ol>
+<h1 id="四、指导书反馈"><a href="#四、指导书反馈" class="headerlink" title="四、指导书反馈"></a>四、指导书反馈</h1><ul>
+<li>关于指导书’课程&gt;初识操作系统&gt;Git 专栏–轻松维护和提交代码&gt;Git文件状态’中，下图类似输入命令与文件状态的状态机，更为清晰。  </li>
+<li>原图中出现的’add the file’(实际代表<code>git add  &amp; git commit</code>)容易与<code>git add</code>造成理解上的混淆  </li>
+</ul>
+<img src="/2022/03/15/OS-lab0-summary/7.png" class="" title="pic1">
+<ul>
+<li>未跟踪<ul>
+<li>  表示没有跟踪(add)某个文件的变化，使用git add即可跟踪文件</li>
+<li>  <strong>工作区文件，未添加对象，易失</strong></li>
+</ul>
+</li>
+<li>未修改  <ul>
+<li>表示某文件在跟踪后一直没有改动过或者改动已经被提交</li>
+<li>  <strong>工作区与对象库文件一致，且暂存区和版本库的目录树均指向此文件</strong></li>
+</ul>
+</li>
+<li>已修改  <ul>
+<li>表示修改了某个文件,但还没有加入(add)到暂存区中</li>
+<li><strong>工作区和对象库不一致，暂存区和版本库的目录树均指向此对象库文件</strong></li>
+</ul>
+</li>
+<li>已暂存  <ul>
+<li>表示把已修改的文件放在下次提交(commit)时要保存的清单中</li>
+<li><strong>第一次add时</strong>：对象库文件与工作区文件一致，暂存区指向对象库中此文件，版本库目录树无此文件指向</li>
+<li><strong>后续add修改版本时</strong>：对象库存在工作区修改前后的两版，工作区为新版文件，暂存区指向对象库中的新版文件，版本库目录树指向对象库中旧版文件<h1 id="五、残留难点"><a href="#五、残留难点" class="headerlink" title="五、残留难点"></a>五、残留难点</h1></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>makefile与gcc结合实现多文件链接编译中，对于makefile可以如何更加灵活地使用非常模糊。</li>
+</ol>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/OS" style=color:#879cff>
+                OS
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/03/15/OS-lab0-summary/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/03/12/shell/">
+        <h2>
+            Shell
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/3/12
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <h1 id="shell脚本运行方式"><a href="#shell脚本运行方式" class="headerlink" title="shell脚本运行方式"></a>shell脚本运行方式</h1><h2 id="可执行程序"><a href="#可执行程序" class="headerlink" title="可执行程序"></a>可执行程序</h2><ul>
+<li>头文件 <code>·#!/bin/bash</code>,保证我们的脚本默认会使用bash。<code>#!</code> 告诉系统其后路径所指定的程序即是解释此脚本文件的 Shell 程序。</li>
+<li>添加权限 <code> chmod +x my.sh</code></li>
+<li>传递参数：$n就代表第几个参数，而$0也就是命令</li>
+<li>执行命令 <code>./my2.sh msg</code><ul>
+<li>一定要写成 ./test.sh，而不是 test.sh，运行其它二进制的程序也一样，直接写 test.sh，linux 系统会去 PATH 里寻找有没有叫 test.sh 的，而只有 /bin, /sbin, /usr/bin，/usr/sbin 等在 PATH 里，你的当前目录通常不在 PATH 里，所以写成 test.sh 是会找不到命令的，要用 ./test.sh 告诉系统说，就在当前目录找。<h2 id="解释器参数"><a href="#解释器参数" class="headerlink" title="解释器参数"></a>解释器参数</h2></li>
+</ul>
+</li>
+<li><code>/bin/sh test.sh</code></li>
+<li>不需要在第一行指定解释器信息</li>
+</ul>
+<h1 id="shell变量"><a href="#shell变量" class="headerlink" title="shell变量"></a>shell变量</h1><h2 id="显式赋值"><a href="#显式赋值" class="headerlink" title="显式赋值"></a>显式赋值</h2><ul>
+<li><strong>定义变量</strong>时，不加<code>$</code></li>
+<li>变量与赋值<code>=</code>间无空格</li>
+<li>不能使用bash关键字。help命令查看</li>
+<li><code>readonly</code>只读变量</li>
+<li><code>unset</code>命令可以删除变量，不能删除只读变量</li>
+<li>可二次赋值<pre><code class="shell">your_name=&quot;tom&quot;
+echo $your_name
+your_name=&quot;alibaba&quot;
+echo $your_name
+</code></pre>
+<h2 id="语句赋值"><a href="#语句赋值" class="headerlink" title="语句赋值"></a>语句赋值</h2><pre><code>for file in `ls /etc`
+for file in $(ls /etc)
+</code></pre>
+<h2 id="使用变量"><a href="#使用变量" class="headerlink" title="使用变量"></a>使用变量</h2></li>
+<li>加<code>$</code></li>
+<li><code>&#123;&#125;</code>识别变量边界;<code>echo &quot;I am good at $&#123;skill&#125;Script&quot;</code></li>
+</ul>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul>
+<li>单引号：<ul>
+<li>字符串中的变量无效</li>
+<li>不能出现单个的单引号，不能转义</li>
+<li>可成对出现，作为字符串拼接</li>
+</ul>
+</li>
+<li><strong>双引号</strong>可以出现<strong>变量和转义字符</strong><pre><code class="shell">your_name=&quot;runoob&quot;
+greeting=&quot;hello, &quot;$your_name&quot; !&quot; 
+greeting_2=&#39;hello, &#39;$your_name&#39; !&#39;
+# 均输出hello, runoob !
+</code></pre>
+```</li>
+<li>字符串长度<ul>
+<li>$</li>
+</ul>
+</li>
+</ul>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Unix" style=color:#ffa2c4>
+                Unix
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/03/12/shell/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/03/11/《IDT R30xx Family》Chapter3/">
+        <h2>
+            OS-Pre-Cause SR EPC BadVaddr
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/3/11
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <h1 id="Cause"><a href="#Cause" class="headerlink" title="Cause"></a>Cause</h1><p>查询Cause寄存器以决定异常类型并调用哪一种异常处理进程。</p>
+<h2 id="BD-31-分支延迟"><a href="#BD-31-分支延迟" class="headerlink" title="BD [31] 分支延迟"></a>BD [31] 分支延迟</h2><ul>
+<li>置位表示EPC没有指向实际异常指令，指向直接前序分支指令。</li>
+<li>异常重进点为分支指令后的延迟槽时，EPC指向分支指令。这对重新执行分支是无害的，但是如果CPU从异常中返回分支延迟指令，则没有跳转分支，且异常会破坏中断的程序。</li>
+<li><blockquote>
+<p>软件唯一可能注意BD位的时间是：如果它必须分析‘冒犯’指令(如果BD = 1，则该指令位于EPC + 4 )。如果需要对指令进行仿真(例如在没有FPA的设备中使用浮点指令)，就会出现这种情况；或放置在分支延迟槽中的断点)。</p>
+</blockquote>
+<h2 id="CE-29-28-协处理器错误"><a href="#CE-29-28-协处理器错误" class="headerlink" title="CE [29:28] 协处理器错误"></a>CE [29:28] 协处理器错误</h2></li>
+<li>如果异常是因为 协处理器指令是针对SR中CUx位未启用的CP，那么CE就有来自该指令的协处理器编号。<h2 id="IP-15-8-中断待决断"><a href="#IP-15-8-中断待决断" class="headerlink" title="IP [15:8] 中断待决断"></a>IP [15:8] 中断待决断</h2></li>
+<li>显示当前生效的中断(但可能在实际表征异常的情况下被掩盖)。</li>
+<li>这些位在六个硬件层次上都遵循CPU的输入。</li>
+<li>位9和位8是可读/可写的，保存最后写入的值。</li>
+<li>当8位中的任何一个被<strong>合适的IM位使能</strong>以及SR中全局中断使能标志IEc激活时，都会引起中断。</li>
+<li>IP与其他Cause寄存器字段存在微妙不同：它并不表明异常发生时发生了什么，而是表明现在正在发生什么。<h2 id="ExcCode-6-2"><a href="#ExcCode-6-2" class="headerlink" title="ExcCode [6:2]"></a>ExcCode [6:2]</h2></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ExcCode Value</th>
+<th>注记符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>Int</td>
+<td>中断</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Mod</td>
+<td>TLB修改</td>
+</tr>
+<tr>
+<td>2</td>
+<td>TLBL</td>
+<td>TLB load</td>
+</tr>
+<tr>
+<td>3</td>
+<td>TLBS</td>
+<td>TLB store</td>
+</tr>
+<tr>
+<td>4</td>
+<td>AdEL</td>
+<td>load/I-fetch时，用户态下地址超出kuseg或在非对齐地址读字/半字</td>
+</tr>
+<tr>
+<td>5</td>
+<td>AdES</td>
+<td>store时，用户态下地址超出kuseg或在非对齐地址读字/半字</td>
+</tr>
+<tr>
+<td>6</td>
+<td>IBE</td>
+<td>取指令总线错误。外部硬件已经预示着某种错误；合适的异常处理是系统依赖。R30xx家族CPU不能在一个存储上采取总线错误；写缓冲区会使这样的异常‘不精确’。</td>
+</tr>
+<tr>
+<td>7</td>
+<td>DBE</td>
+<td>load数据总线错误。外部硬件已经预示着某种错误；合适的异常处理是系统依赖。R30xx家族CPU不能在一个存储上采取总线错误；写缓冲区会使这样的异常‘不精确’。</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Syscall</td>
+<td>系统指令无条件生成</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Bp</td>
+<td>断点指令</td>
+</tr>
+<tr>
+<td>10</td>
+<td>RI</td>
+<td>未定义指令</td>
+</tr>
+<tr>
+<td>11</td>
+<td>CpU</td>
+<td>协处理器不可用</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Ov</td>
+<td>算术溢出。无符号计算如addu不会导致异常</td>
+</tr>
+<tr>
+<td>13-31</td>
+<td>未定义或在后续版本中定义</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="EPC"><a href="#EPC" class="headerlink" title="EPC"></a>EPC</h1><ul>
+<li>异常的32位返回地址。引起(或遭受)异常的指令位于EPC。</li>
+<li>Cause中BD置位时，EPC指向前序分支指令。</li>
+</ul>
+<h1 id="BadVaddr"><a href="#BadVaddr" class="headerlink" title="BadVaddr"></a>BadVaddr</h1><ul>
+<li>存放32位导致异常的不合法的引用地址。</li>
+<li>设置在任何MMU相关的异常上，由用户程序试图访问kuseg以外的地址，或者如果某个地址对引用的基准大小错误对齐。</li>
+<li><blockquote>
+<p>在其他任何异常后，此寄存器是未定义的。<br>特别要注意，它不是在一次总线错误后设置的。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="SR：存储MIPS-CPU的各种模式"><a href="#SR：存储MIPS-CPU的各种模式" class="headerlink" title="SR：存储MIPS CPU的各种模式"></a>SR：存储MIPS CPU的各种模式</h1><blockquote>
+<p>注：以下标题格式为：[位名称] [在寄存器中的位数] [作用]</p>
+</blockquote>
+<h2 id="CU3-CU2-31-30-CP3CP2使用权"><a href="#CU3-CU2-31-30-CP3CP2使用权" class="headerlink" title="CU3,CU2 [31:30] CP3CP2使用权"></a>CU3,CU2 [31:30] CP3CP2使用权</h2><ul>
+<li>软件使用BrCond[3:2]用于轮询的输入引脚 或 者加速异常解码。<h2 id="CU1-29-CP1使用权，能否使用FPA浮点协处理器"><a href="#CU1-29-CP1使用权，能否使用FPA浮点协处理器" class="headerlink" title="CU1 [29] CP1使用权，能否使用FPA浮点协处理器"></a>CU1 [29] CP1使用权，能否使用FPA浮点协处理器</h2><ul>
+<li>置零时，内核态与用户态下运行FPA指令都会导致异常。</li>
+<li>可用于停用空闲FPA。</li>
+<li>如果使用BrCond[1]用于轮询的输入，没有FPA的CU1也会被置位。<h2 id="CU0-28-CP0使用权"><a href="#CU0-28-CP0使用权" class="headerlink" title="CU0 [28] CP0使用权"></a>CU0 [28] CP0使用权</h2></li>
+<li>用户态使用nominally-priviledged指令(少)</li>
+<li>CP0内核态保持可使用状态，无视CU0位。<h2 id="RE-25-用户态时反转大小端即字节顺序"><a href="#RE-25-用户态时反转大小端即字节顺序" class="headerlink" title="RE [25] 用户态时反转大小端即字节顺序"></a>RE [25] 用户态时反转大小端即字节顺序</h2></li>
+<li>保证大小端系统间的移植性。</li>
+<li>嵌入式系统实现反转字节序需要大量软件工作。<h2 id="BEV-22-引导异常向量"><a href="#BEV-22-引导异常向量" class="headerlink" title="BEV [22] 引导异常向量"></a>BEV [22] 引导异常向量</h2></li>
+<li>置位：CPU使用ROM kseg2异常入口点。</li>
+<li>通常置零</li>
+<li>将异常向量重新定位到RAM地址，加快访问速度，允许使用”用户提供”的异常服务例程。<h2 id="TS-21-置位时关闭TLB"><a href="#TS-21-置位时关闭TLB" class="headerlink" title="TS [21] 置位时关闭TLB"></a>TS [21] 置位时关闭TLB</h2></li>
+<li>程序地址同时匹配两个TLB条目</li>
+<li>长时间此状态时损坏芯片</li>
+<li>TLB关闭是永久的，只能被硬件复位清除。</li>
+<li>软件依此判断硬件是否支持TLB<h2 id="PE-20-如果发生缓存奇偶错误，则置位"><a href="#PE-20-如果发生缓存奇偶错误，则置位" class="headerlink" title="PE [20] 如果发生缓存奇偶错误，则置位"></a>PE [20] 如果发生缓存奇偶错误，则置位</h2></li>
+</ul>
+</li>
+<li>这个条件不会导致异常，真正只对诊断有用。</li>
+<li>MIPS架构具有缓存诊断功能，因为早期版本的CPU使用外部缓存，这为验证特定系统的时序提供了一种方法。</li>
+<li>对于这些实现，缓存奇偶错误位是必不可少的设计调试工具。</li>
+<li>单片缓存不需要这个特性，R3071、R3081<h2 id="CM-19-显示用隔离D-cache执行的最后一次load操作的结果"><a href="#CM-19-显示用隔离D-cache执行的最后一次load操作的结果" class="headerlink" title="CM [19] 显示用隔离D-cache执行的最后一次load操作的结果"></a>CM [19] 显示用隔离D-cache执行的最后一次load操作的结果</h2><blockquote>
+<p>CM是指如果缓存中确实包含了地址存储器位置的数据(即使缓存没有被隔离，缓存中的负载也会被击中)。</p>
+</blockquote>
+<h2 id="PZ-18-置位时缓存奇偶位写0并且不被检查"><a href="#PZ-18-置位时缓存奇偶位写0并且不被检查" class="headerlink" title="PZ [18] 置位时缓存奇偶位写0并且不被检查"></a>PZ [18] 置位时缓存奇偶位写0并且不被检查</h2></li>
+<li>对早期需要外部RAM缓存的R3000A系统有价值。<h2 id="SwC-IsC-17-16-对内存管理和诊断的内存模式位"><a href="#SwC-IsC-17-16-对内存管理和诊断的内存模式位" class="headerlink" title="SwC IsC [17][16]对内存管理和诊断的内存模式位"></a>SwC IsC [17][16]对内存管理和诊断的内存模式位</h2><h2 id="SwC-17-交换缓存"><a href="#SwC-17-交换缓存" class="headerlink" title="SwC [17] 交换缓存"></a>SwC [17] 交换缓存</h2></li>
+<li>所有load和store只能访问数据缓存，不访问内存。</li>
+<li>此模式下局部字store(lb)使缓存条目无效</li>
+<li>总线中不会出现未缓存的数据访问</li>
+<li>此位不被reset初始化，故启动程式软件必须确保此位在依赖外部数据引用之前被正确初始化<h2 id="IsC-16-隔离缓存"><a href="#IsC-16-隔离缓存" class="headerlink" title="IsC [16] 隔离缓存"></a>IsC [16] 隔离缓存</h2></li>
+<li>反转I-缓存和D-缓存功能，所以软件能够访问并使指令高速缓存条目无效<h2 id="IM-15-8-中断掩码-定义中断源，作为允许异常的标志"><a href="#IM-15-8-中断掩码-定义中断源，作为允许异常的标志" class="headerlink" title="IM [15:8] 中断掩码 定义中断源，作为允许异常的标志"></a>IM [15:8] 中断掩码 定义中断源，作为允许异常的标志</h2></li>
+<li>六种中断源是外部引脚<ul>
+<li>其中之一会被FPA使用，虽然与其他同属一个芯片，但逻辑层面是外在的</li>
+<li>其余两种是Cause寄存器中软件写的中断位。</li>
+</ul>
+</li>
+<li>CPU不提供中断优先级。硬件处理所有中断时一视同仁。[见异常处理章节]<h2 id="KUc-IEc-1-0-计算机保护位"><a href="#KUc-IEc-1-0-计算机保护位" class="headerlink" title="KUc IEc [1][0]计算机保护位"></a>KUc IEc [1][0]计算机保护位</h2><h2 id="KUc-1-内核态置位"><a href="#KUc-1-内核态置位" class="headerlink" title="KUc [1] 内核态置位"></a>KUc [1] 内核态置位</h2></li>
+<li>内核状态下，软件可以在整个程序地址空间内得到并使用特权指令(CP0)。用户模式限制软件在<strong>kuseg</strong>地址空间内，运行权限指令时会被拒绝。违反此项规则会导致异常。<h2 id="IEc-0-置位允许计算机接受中断"><a href="#IEc-0-置位允许计算机接受中断" class="headerlink" title="IEc [0] 置位允许计算机接受中断"></a>IEc [0] 置位允许计算机接受中断</h2><h2 id="KUp-IEp-3-2"><a href="#KUp-IEp-3-2" class="headerlink" title="KUp IEp [3][2]"></a>KUp IEp [3][2]</h2></li>
+<li>在异常时，硬件接受 KUc IEc 的值并保存在 KUp IEp。</li>
+<li>同时修改KUc IEc为1和0。此时内核态下拒绝接受中断。</li>
+<li>rfe指令可以被用于复制KUp IEp返还到KUc IEc。<h2 id="KUo-IEo-5-4"><a href="#KUo-IEo-5-4" class="headerlink" title="KUo IEo [5][4]"></a>KUo IEo [5][4]</h2></li>
+<li>异常时KUp IEp在此处保存。</li>
+<li>六个KU/IE位被一个三位深度，两位位宽的栈操作。</li>
+<li>堆栈遇到异常时push，遇到ref指令pop。</li>
+<li>这很早地在异常处理过程中 提供了从异常中干净恢复的机会 以至于第一个异常还未在SR中完成保存。</li>
+<li>此类操作可以被完成的情况受限，仅用于允许用户TLB充填短一些的代码。[见内存管理章节]</li>
+</ul>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/OS" style=color:#879cff>
+                OS
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/03/11/《IDT R30xx Family》Chapter3/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/03/11/git/">
+        <h2>
+            Git
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/3/11
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <h1 id="对象与目录的关系"><a href="#对象与目录的关系" class="headerlink" title="对象与目录的关系"></a>对象与目录的关系</h1><img src="/2022/03/11/git/1.png" class="" title="pic1">
+<ul>
+<li><code>git add</code><ul>
+<li> <strong>暂存区的目录树</strong>被更新</li>
+<li> 同时工作区修改或新增的<strong>文件内容</strong>被写入到<strong>对象库</strong>中的一个<strong>新的对象</strong>中</li>
+</ul>
+</li>
+<li><code>git commit</code><ul>
+<li>将暂存区的<strong>目录树写到版本库</strong>（对象库）中，master 分支会做相应的更新。即 master 指向的目录树就是提交时暂存区的目录树(?副本还是指针)</li>
+</ul>
+</li>
+<li><code>git rm --cached &lt;file&gt;</code><ul>
+<li>会直接从暂存区删除文件，工作区则不做出改变。</li>
+</ul>
+</li>
+<li><code>git reset HEAD</code><ul>
+<li><strong>暂存区的目录树</strong>会被<strong>master 分支指向的目录树</strong>所替换，但是<strong>工作区不受影响</strong>。</li>
+</ul>
+</li>
+<li><code>git checkout -- &lt;file&gt;</code><ul>
+<li>会用暂存区目录树指定的文件替换工作区的文件。</li>
+<li>这个操作很危险，会<strong>清除工作区中未添加到暂存区的改动</strong>。</li>
+</ul>
+</li>
+<li><code>git checkout HEAD &lt;file&gt;</code><ul>
+<li>会用 HEAD 指向的 master 分支中的指定文件替换暂存区和以及工作区中的文件。这个命令也是极具危险性的，因为不但会清除工作区中未提交的改动，也会清除暂存区中未提交的改动。</li>
+<li><blockquote>
+<p>版本库丢失目前文件的索引？文件仍可回退；工作区文件被替换，且未加入对象库，无法回退</p>
+</blockquote>
+</li>
+<li>–hard 是 reset 命令唯一的危险用法，它也是 git 会真正地销毁数据的 几个操作之一。其他任何形式的 reset 调用都可以轻松撤消，但是 –hard 选项不能，因 为它强制覆盖了工作目录中的文件。若该文件还未提交，git 会覆盖它从而导致无法恢复。</li>
+</ul>
+</li>
+</ul>
+<h1 id="文件状态"><a href="#文件状态" class="headerlink" title="文件状态"></a>文件状态</h1><img src="/2022/03/11/git/2.png" class="" title="pic2">
+<ul>
+<li><p>首先对于任何一个文件, 在 Git 内都只有四种状态: 未跟踪 (untracked)、未修改 (unmodified)、已修改 (modified)、已暂存 (staged)</p>
+</li>
+<li><p>未跟踪</p>
+<ul>
+<li>  表示没有跟踪(add)某个文件的变化，使用git add即可跟踪文件</li>
+<li>  <strong>工作区文件，未添加对象，易失</strong></li>
+</ul>
+</li>
+<li><p>未修改  </p>
+<ul>
+<li>表示某文件在跟踪后一直没有改动过或者改动已经被提交</li>
+<li>  <strong>工作区与对象库文件一致，且暂存区和版本库的目录树均指向此文件</strong></li>
+</ul>
+</li>
+<li><p>已修改  </p>
+<ul>
+<li>表示修改了某个文件,但还没有加入(add)到暂存区中</li>
+<li><strong>工作区和对象库不一致，暂存区和版本库的目录树均指向此对象库文件</strong></li>
+</ul>
+</li>
+<li><p>已暂存  </p>
+<ul>
+<li>表示把已修改的文件放在下次提交(commit)时要保存的清单中</li>
+<li>第一次add时：对象库文件与工作区文件一致，暂存区指向对象库中此文件，版本库目录树无此文件指向</li>
+<li>后续add修改版本时：对象库存在工作区修改前后的两版，工作区为新版文件，暂存区指向对象库中的新版文件，版本库目录树指向对象库中旧版文件</li>
+</ul>
+</li>
+</ul>
+<h1 id="转换形式"><a href="#转换形式" class="headerlink" title="转换形式"></a>转换形式</h1><p>Untracked: 未跟踪, 此文件在文件夹中, 但并没有加入到git库, 不参与版本控制. 通过git add 状态变为Staged</p>
+<p>Unmodify: 文件已经入库, 未修改, 即版本库中的文件快照内容与文件夹中完全一致. 这种类型的文件有两种去处, 如果它被修改, 而变为Modified. 如果使用git rm移出版本库, 则成为Untracked文件</p>
+<p>Modified: 文件已修改, 仅仅是修改, 并没有进行其他的操作. 这个文件也有两个去处, 通过git add可进入暂存staged状态, 使用git checkout 则丢弃修改过, 返回到unmodify状态, 这个git checkout即从库中取出文件, 覆盖当前修改</p>
+<p>Staged: 暂存状态. 执行git commit则将修改同步到库中, 这时库中的文件和本地文件又变为一致, 文件为Unmodify状态. 执行git reset HEAD filename取消暂存, 文件状态为Modified</p>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/OS" style=color:#879cff>
+                OS
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/03/11/git/ " class="go-post">
+        阅读全文
+    </a>
+</div>
 
 
-用户读写文件时通过fsipc，把文件块在fs进程对应的块缓存读到用户的文件映射区，而fs进程的块缓存通过ide与磁盘交互。  
+             
+<div class="page-current">
 
+    <div class="prev">
+        
+    </div>
 
+    <div class="page-index">
 
-多角色间的协作
-在做完lab4梳理系统调用、fork、页缺失处理的时候，反观出现在lab4的ipc通信机制，我总觉得它和Lab4的内容格格不入。因为感觉Lab4的内核态和用户态通过系统调用浑然一体地联系了起来，包办好了这三项任务，而此时出现的负责用户进程和用户进程地通信机制ipc看上去是那么不合时宜。所以个人觉得 lab4的两次extra都是关于ipc的考题，是否有些重点偏了呢（x
-是在lab5通过文件系统服务的流程梳理，明确了用户进程和服务进程两个用户态进程，才理清楚进程 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/05/04/Unix-MyShell-Summary/" title="BUAA-Unix-Linux下C语言实现MyShell">BUAA-Unix-Linux下C语言实现MyShell</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-05-04T13:02:27.000Z" title="发表于 2022-05-04 21:02:27">2022-05-04</time></span></div><div class="content">
-一、功能概述1.1 高亮提示
+        
 
+        <span class="current">
+            1
+        </span>
 
-myShell运行的起始提示
-命令提示符前Musel&#39;s shell的前缀标识
-当前路径提示
-Error的报错提示
+        
+        <span>
+            <a href="/page/2/">
+                <span class="page-num">
+                    2
+                </span>
+            </a>
+            
 
-1.2 cd切换目录
-1.3 标准I/O重定向
+            
 
-1.4 可变长参数命令的运行
+        </span>
+        
 
-1.5 管道连接多条命令
+    </div>
 
-1.6 管道、重定向、命令格式的错误检查
+    <div class="next">
+        
+        <a href="/page/2/ ">
+            <span class="page-num">
+                <a-icon type="caret-right" theme="filled" />
+            </span>
+        </a>
+        
+    </div>
 
-1.7 exit退出myShell
+</div>
 
-1.8 malloc与free
-管道连接命令数、命令参数个数、参数长度均不定长，所以使用malloc申请存储空间，避免内存浪费。
-单条命令执行完后调用free释放命令申请的空间，防止内存泄漏。
+        </div>
+    </div>
+    
+    <div id="home-card">
+        <a-affix :offset-top="card_top">
+    <a-card class="card-style" style="width: 300px">
+        <div class="avatar">
+            <img src="images/photo.jpg " alt="头像">
+        </div>
+        <div class="name">
+            Musel
+        </div>
+        <div class="descriptions">
+            
+            <div class="description">
+                Welcome
+            </div>
+            
+        </div>
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://github.com/Mmmusel">
 
-二、系统调用在第三部分会结合具体功能具体阐述系统调用。此处作简要汇总：
+                    
+                    <a-icon type="github"
+                        theme="filled" />
+                    
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://twitter.com/korilin_dev">
 
-获取当前目录：path = getcwd(NULL, 0)
-切换工作目录：chdir(command-&gt;args[1])
-创建进程：pid_t pid = fork()
-打开文件描述符表：open(command-&gt;read, O_RDONLY, 0666)
-复制文件描述符表：dup2(in, 0)
-执行程序：execvp(command-&gt;cmd, co ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/05/03/OS-lab3-summary/" title="BUAA-OS-Lab3">BUAA-OS-Lab3</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-05-03T08:19:53.000Z" title="发表于 2022-05-03 16:19:53">2022-05-03</time></span></div><div class="content">一、实验思考题Thinking 3.1
-思考 envid2env 函数: 为什么 envid2env 中需要判断 e-&gt;env_id !=envid 的情况？如果没有这步判断会发生什么情况？
+                    
+                    <a-icon type="bilibili"
+                        theme="" />
+                    
+                </a>
+            </span>
+            
+        </div>
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://saltyfishyjk.github.io/">
+                    yjk
+                </a>
+            </div>
+            
+        </div>
+    </a-card>
+</a-affix>
+    </div>
+    
+</div>
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2018 - 2022 Musel&#39;s blog
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @Musel
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
 
+</footer>
 
-mkenvid(struct Env *e)中生成的envid为(asid &lt;&lt; (1 + LOG2NENV)) | (1 &lt;&lt; LOG2NENV) | idx,即asid|有效位|env结构体在envs数组的偏移。
-而envid2env(u_int envid, struct Env **penv, int checkperm)中通过envid的偏移找到结构体e=envs+ENVX(envid);。而此时不能确保所给envid中asid的有效性。所以需要通过再次判断e-&gt;env_id !=envid保证进程块的asid.
-若此index所对的env已经更换，则新env结构体会对应新的ASID。如果没有这步判断，可能会出现：①所给envid所对的结构体已经被free后再次使用，即旧结构体所代表的PCB被淘汰，而此时得到的新env与envid想找的旧结构体不匹 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/05/01/OO-Unit2-summary/" title="BUAA-OO-Unit2">BUAA-OO-Unit2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-05-01T04:46:53.000Z" title="发表于 2022-05-01 12:46:53">2022-05-01</time></span></div><div class="content">一、电梯的调度策略1.1 状态转移图
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
 
-1.2 纵向电梯的LOOK算法LOOK算法实现
-与真实的电梯大致相同的策略，即维护电梯当前运行方向dir，更远层无请求(各楼层的call请求&amp;电梯中乘客的目的地请求)时才转向。  
-为了在实现捎带策略的同时将电梯和调度器功能解耦，电梯应当①具有“短视性”，即并不知道自己的目的楼层，而是仅根据从调度器获取上行、下行的boolean值。在此条件下电梯实现以层间运行时间为最小单位实时更新可稍带目标层。②屏蔽外部各楼层的call请求：按运行方向运行一层后，询问调度器是否应该开门。  
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
 
-LOOK算法相较ALS的优势
-打破了ALS算法可能出现的“局部性原理”。  
+</body>
 
-即ALS算法在将电梯内部乘客全部送达后形成空梯时，会选择最先到达的请求作为主请求。两种策略下对于中间楼层的捎带表现一致，但是ALS策略下低层和高层请求因为难于被捎带而堆积，直到被安排为主请求时才会运行到低层或高层。此类请求容易堆积在末尾才进行集中处理，导致电梯出现因为一个远端请求空转(无捎带，远端请求的vip专梯)的效率问题。
-
-LOOK算法更像是就近远端捎带，在将电梯内部乘客全部送达 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/04/14/OS-lab2-summary/" title="BUAA-OS-Lab2">BUAA-OS-Lab2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-14T08:19:53.000Z" title="发表于 2022-04-14 16:19:53">2022-04-14</time></span></div><div class="content">一、流程图解(一)虚存内存映射图：
-
-
-(二)mips_vm_init流程图：1.物理存储部分
-
-
-2.虚拟存储部分(1)目标:  (粉色字)
-
-(2)boot_segment_map()   和   为何它要调用boot_pgdir_walk():
-
-(3)boot_pgdir_walk后续部分：关于权限位的细节
-
-(4)两个函数更为简略抽象的图解，所述内容与上文大致相同
-
-二、实验思考题Thinking 2.1
-请你根据上述说明，回答问题：在我们编写的 C 程序中，指针变量中存储的地址是虚拟地址还是物理地址？MIPS 汇编程序中 lw, sw 使用的是虚拟地址还是物理地址？  
-
-指针变量中存储的地址是虚拟地址;MIPS 汇编程序中 lw, sw 使用的是物理地址。
-Thinking 2.2
-请从可重用性的角度，阐述用宏来实现链表的好处。  
-
-
-各类结构体都可以使用queue.h的宏简化代码量：
-一开始写Exercise2.2的时候没有明白field字段设置的意义，觉得传入了elm参数以后，field应该是作为elm的成员变量名，不应该作为可变参数传入，显得有点多此一举，忘记了宏 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/03/24/OO-Unit1-summary/" title="BUAA-OO-Unit1">BUAA-OO-Unit1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-03-24T08:19:53.000Z" title="发表于 2022-03-24 16:19:53">2022-03-24</time></span></div><div class="content">写在前面：我很满足！助教夸我类图画的好看耶！
-
-一、程序结构UML类图与架构设计第一次作业
-
-通过Lexer和Parser解析字符串，递归下降生成Expr对象时去除括号
-重写Expr.toString()，生成记录运算顺序的后缀表达式SuffixString。格式”X1(操作数) X2(操作数) +(操作符) …”。后缀表达式的操作符包括+、*、^int(表达式因子的幂运算)、!(取反)；
-Parser维护了一个后缀表达式操作数表
-Suffix类获取包含操作符运算顺序的String和操作数表，用栈进行计算结果得到Quantic对象，对Quantic对象调用print()方法输出。第二次作业迭代思路：
-
-一、引入三角函数后的统一存储形式
-多项式的每项基本形式：ax^b -&gt; ax^b(sin容器)(cos容器)
-选用hashmap，merge()方法和lambda函数实现合并同类项非常简洁。
-Key为自定义类型BaseKey，重写hashcode()和equal()后便于合并同类项。形式：x^b(sin容器)(cos容器)
-由于需要维护可变类型BaseKey作为hashmap的ke ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/03/15/OS-lab0-summary/" title="BUAA-OS-Lab0">BUAA-OS-Lab0</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-03-15T08:19:53.000Z" title="发表于 2022-03-15 16:19:53">2022-03-15</time></span></div><div class="content">一、实验思考题thinking 0.1
-
-
-
-不一样，第一次add前时README.md属于尚未跟踪文件；第二次修改后的文件属于工作区未暂存以备提交的变更。  
-不同的原因：未跟踪文件不存在于.git对象库中，而修改后未提交的文件存在一份修改前的文件在.git的对象库。
-
-thinking 0.21.add the file :$ git add $ git commit2.stage the file :$ git add3.commit :$ git commit
-thinking 0.31.恢复工作区的printf.c :$ git checkout -- printf.c2.$ git rm --cached printf.c后，恢复暂存区文件：  
-$ git reset HEAD printf.c $ git checkout -- printf.c
-3.删除暂存区文件,同时保留本地：git rm --cached Tucao.txt  
-thinking 0.4命令与结果
-找到提交说明为1的哈希值，使用 git reset –hard  ，再使用git log，2和3的版 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/03/12/shell/" title="Shell">Shell</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-03-12T14:46:53.000Z" title="发表于 2022-03-12 22:46:53">2022-03-12</time></span></div><div class="content">shell脚本运行方式可执行程序
-头文件 ·#!/bin/bash,保证我们的脚本默认会使用bash。#! 告诉系统其后路径所指定的程序即是解释此脚本文件的 Shell 程序。
-添加权限  chmod +x my.sh
-传递参数：$n就代表第几个参数，而$0也就是命令
-执行命令 ./my2.sh msg
-一定要写成 ./test.sh，而不是 test.sh，运行其它二进制的程序也一样，直接写 test.sh，linux 系统会去 PATH 里寻找有没有叫 test.sh 的，而只有 /bin, /sbin, /usr/bin，/usr/sbin 等在 PATH 里，你的当前目录通常不在 PATH 里，所以写成 test.sh 是会找不到命令的，要用 ./test.sh 告诉系统说，就在当前目录找。解释器参数
-
-
-/bin/sh test.sh
-不需要在第一行指定解释器信息
-
-shell变量显式赋值
-定义变量时，不加$
-变量与赋值=间无空格
-不能使用bash关键字。help命令查看
-readonly只读变量
-unset命令可以删除变量，不能删除只读变量
-可二次赋值your_name=& ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/" title="OS-Pre-Cause SR EPC BadVaddr">OS-Pre-Cause SR EPC BadVaddr</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-03-11T08:06:53.000Z" title="发表于 2022-03-11 16:06:53">2022-03-11</time></span></div><div class="content">Cause查询Cause寄存器以决定异常类型并调用哪一种异常处理进程。
-BD [31] 分支延迟
-置位表示EPC没有指向实际异常指令，指向直接前序分支指令。
-异常重进点为分支指令后的延迟槽时，EPC指向分支指令。这对重新执行分支是无害的，但是如果CPU从异常中返回分支延迟指令，则没有跳转分支，且异常会破坏中断的程序。
-
-软件唯一可能注意BD位的时间是：如果它必须分析‘冒犯’指令(如果BD = 1，则该指令位于EPC + 4 )。如果需要对指令进行仿真(例如在没有FPA的设备中使用浮点指令)，就会出现这种情况；或放置在分支延迟槽中的断点)。
-
-CE [29:28] 协处理器错误
-如果异常是因为 协处理器指令是针对SR中CUx位未启用的CP，那么CE就有来自该指令的协处理器编号。IP [15:8] 中断待决断
-显示当前生效的中断(但可能在实际表征异常的情况下被掩盖)。
-这些位在六个硬件层次上都遵循CPU的输入。
-位9和位8是可读/可写的，保存最后写入的值。
-当8位中的任何一个被合适的IM位使能以及SR中全局中断使能标志IEc激活时，都会引起中断。
-IP与其他Cause寄存器字段存在微妙不同 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/03/11/git/" title="Git">Git</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-03-11T04:46:53.000Z" title="发表于 2022-03-11 12:46:53">2022-03-11</time></span></div><div class="content">对象与目录的关系
-
-git add
- 暂存区的目录树被更新
- 同时工作区修改或新增的文件内容被写入到对象库中的一个新的对象中
-
-
-git commit
-将暂存区的目录树写到版本库（对象库）中，master 分支会做相应的更新。即 master 指向的目录树就是提交时暂存区的目录树(?副本还是指针)
-
-
-git rm --cached &lt;file&gt;
-会直接从暂存区删除文件，工作区则不做出改变。
-
-
-git reset HEAD
-暂存区的目录树会被master 分支指向的目录树所替换，但是工作区不受影响。
-
-
-git checkout -- &lt;file&gt;
-会用暂存区目录树指定的文件替换工作区的文件。
-这个操作很危险，会清除工作区中未添加到暂存区的改动。
-
-
-git checkout HEAD &lt;file&gt;
-会用 HEAD 指向的 master 分支中的指定文件替换暂存区和以及工作区中的文件。这个命令也是极具危险性的，因为不但会清除工作区中未提交的改动，也会清除暂存区中未提交的改动。
-
-版本库丢失目前文件的索引？文件仍可回退；工作区文件被替换，且未加入对象 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/photo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Musel</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Mmmusel"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Mmmusel" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/CSS/" style="font-size: 1.1em; color: #999">CSS</a> <a href="/tags/OO/" style="font-size: 1.1em; color: #999">OO</a> <a href="/tags/OS/" style="font-size: 1.5em; color: #99a9bf">OS</a> <a href="/tags/Unix/" style="font-size: 1.1em; color: #999">Unix</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">13</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Musel</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/"></script><script>var preloader = {
-  endLoading: () => {
-    document.body.style.overflow = 'auto';
-    document.getElementById('loading-box').classList.add("loaded")
-  },
-  initLoading: () => {
-    document.body.style.overflow = '';
-    document.getElementById('loading-box').classList.remove("loaded")
-
-  }
-}
-window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+</html>

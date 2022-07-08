@@ -25,10 +25,12 @@
   margin: 10px auto;
   color: text-font;
   text-transform: capitalize;
+  font-size: 26px;
 }
 #home-card .card-style .descriptions {
   margin: 20px auto;
   width: 85%;
+  font-size: 16px;
 }
 #home-card .card-style .icon-links {
   width: 85%;
@@ -45,7 +47,7 @@
 }
 #home-card .card-style .icon-links a:hover {
   color: #fff;
-  background: default-link;
+  background: side-card-button;
 }
 #home-card .card-style .icon-links .icon-link {
   margin: 5px;
@@ -61,6 +63,7 @@
   display: inline-block;
   width: 140px;
   line-height: 3;
+  background: linear-gradient(120deg, #96ceff 0, #ff9edb 100%);
   color: label-font;
   font-size: 16px;
   border-radius: 15px;

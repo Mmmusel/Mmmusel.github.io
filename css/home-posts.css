@@ -2,14 +2,14 @@
   position: relative;
   display: flex;
   width: 100%;
-  background: #fff;
+  background: rgba(246,248,250,0.6);
   z-index: 101;
   border-radius: 10px;
   margin: auto;
 }
 #home-posts {
   position: relative;
-  background: #fff;
+  background: rgba(246,248,250,0);
   margin: auto;
 }
 #home-posts h2 {

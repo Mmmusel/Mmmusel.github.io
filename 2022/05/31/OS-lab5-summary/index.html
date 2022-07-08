@@ -134,11 +134,14 @@
 
                 <div id="main">
                      
+
 <link rel="stylesheet" href="/css/post-body.css">
 <div class="article">
+    <div id="home-posts-wrap" class=>
     <div>
         <h1>BUAA-OS-Lab5 </h1>
     </div>
+
     <div class="info">
         <span class="date">
             <span class="icon">
@@ -158,7 +161,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/OS" style=color:#00bcd4>
+                <a href="/tags/OS" style=color:#03a9f4>
                     OS
                 </a>
             </span>
@@ -166,9 +169,17 @@
         </span>
         
     </div>
+</div>
+</div>
 
-    <div class="content" v-pre>
-        <p>BUAA-OS-Lab5 : 文件管理系统</p>
+
+
+
+<div id="home-posts-wrap" class=>
+
+    <span id="xxx" class="xxx">
+        <div class="content" v-pre>
+            <p>BUAA-OS-Lab5 : 文件管理系统</p>
 <span id="more"></span>
 
 <h1 id="一、实验难点"><a href="#一、实验难点" class="headerlink" title="一、实验难点"></a>一、实验难点</h1><ul>
@@ -429,22 +440,30 @@ struct Open &#123;
 <li>从lab4到lab5更加体会到MOS操作系统设计方面的精巧，各lab之间环环相扣，借助之前lab的代码实现本次lab的新功能，看着自己写的操作系统一步步有了更加完善的功能是非常有趣的一种感受。</li>
 </ul>
 
-    </div>
+        </div>
 
-    
+        <a-affix :offset-top="toc_top" offset-width="toc_width" offset-bottom="40px">
+                    <aside id="sidebar">
+                    <div id="toc" class="toc-article">
+                    <strong class="toc-title">Contents</strong>
+                    <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E9%9A%BE%E7%82%B9"><span class="toc-nav-text">一、实验难点</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%BA%8C%E3%80%81%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-nav-text">二、思考题</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-5-4"><span class="toc-nav-text">Thinking 5.4</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-5-5"><span class="toc-nav-text">Thinking 5.5</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-5-7"><span class="toc-nav-text">Thinking 5.7</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-5-8"><span class="toc-nav-text">Thinking 5.8</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-5-9"><span class="toc-nav-text">Thinking 5.9</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-5-10"><span class="toc-nav-text">Thinking 5.10</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-5-11"><span class="toc-nav-text">Thinking 5.11</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-5-12"><span class="toc-nav-text">Thinking 5.12</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%B8%89%E3%80%81%E4%BD%93%E4%BC%9A%E4%B8%8E%E6%84%9F%E6%83%B3"><span class="toc-nav-text">三、体会与感想</span></a></li></ol>
+                    </div>
+                    </aside>
+        </a-affix>
+    </span>
 </div>
+
+
                      
 <footer id="footer">
     <div class="footer-wrap">
         <div>
-            © 2018 - 2022 Musel&#39;s blog
+            Welcome >3<
             <span class="footer-icon">
                 <a-icon type="flag" theme="filled" /></span>
             @Musel
         </div>
         <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
         
     </div>
 
@@ -464,7 +483,9 @@ struct Open &#123;
             show_page: false,
             onload_menu: false,
             menu_show: false,
-            card_top: 100
+            card_top: 100,
+            toc_top: 100,
+            toc_width: 40
         },
         created: function () {
             var that = this

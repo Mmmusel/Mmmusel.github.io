@@ -134,11 +134,14 @@
 
                 <div id="main">
                      
+
 <link rel="stylesheet" href="/css/post-body.css">
 <div class="article">
+    <div id="home-posts-wrap" class=>
     <div>
         <h1>BUAA-Unix-Linux下C语言实现MyShell </h1>
     </div>
+
     <div class="info">
         <span class="date">
             <span class="icon">
@@ -166,9 +169,17 @@
         </span>
         
     </div>
+</div>
+</div>
 
-    <div class="content" v-pre>
-        <img src="/2022/05/04/Unix-MyShell-Summary/main.png" class="" title="pic1">
+
+
+
+<div id="home-posts-wrap" class=>
+
+    <span id="xxx" class="xxx">
+        <div class="content" v-pre>
+            <img src="/2022/05/04/Unix-MyShell-Summary/main.png" class="" title="pic1">
 <span id="more"></span>
 
 <h1 id="一、功能概述"><a href="#一、功能概述" class="headerlink" title="一、功能概述"></a>一、功能概述</h1><h2 id="1-1-高亮提示"><a href="#1-1-高亮提示" class="headerlink" title="1.1 高亮提示"></a>1.1 高亮提示</h2><img src="/2022/05/04/Unix-MyShell-Summary/highlight.png" class="" title="pic1">
@@ -353,22 +364,30 @@ else if (pid == 0) &#123;
 </li>
 </ul>
 <h2 id="3-5-释放本次输入的commands数组，等待用户的下一次输入"><a href="#3-5-释放本次输入的commands数组，等待用户的下一次输入" class="headerlink" title="3.5 释放本次输入的commands数组，等待用户的下一次输入"></a>3.5 释放本次输入的commands数组，等待用户的下一次输入</h2>
-    </div>
+        </div>
 
-    
+        <a-affix :offset-top="toc_top" offset-width="toc_width" offset-bottom="40px">
+                    <aside id="sidebar">
+                    <div id="toc" class="toc-article">
+                    <strong class="toc-title">Contents</strong>
+                    <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%B8%80%E3%80%81%E5%8A%9F%E8%83%BD%E6%A6%82%E8%BF%B0"><span class="toc-nav-text">一、功能概述</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-1-%E9%AB%98%E4%BA%AE%E6%8F%90%E7%A4%BA"><span class="toc-nav-text">1.1 高亮提示</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-2-cd%E5%88%87%E6%8D%A2%E7%9B%AE%E5%BD%95"><span class="toc-nav-text">1.2 cd切换目录</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-3-%E6%A0%87%E5%87%86I-O%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-nav-text">1.3 标准I&#x2F;O重定向</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-4-%E5%8F%AF%E5%8F%98%E9%95%BF%E5%8F%82%E6%95%B0%E5%91%BD%E4%BB%A4%E7%9A%84%E8%BF%90%E8%A1%8C"><span class="toc-nav-text">1.4 可变长参数命令的运行</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-5-%E7%AE%A1%E9%81%93%E8%BF%9E%E6%8E%A5%E5%A4%9A%E6%9D%A1%E5%91%BD%E4%BB%A4"><span class="toc-nav-text">1.5 管道连接多条命令</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-6-%E7%AE%A1%E9%81%93%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91%E3%80%81%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F%E7%9A%84%E9%94%99%E8%AF%AF%E6%A3%80%E6%9F%A5"><span class="toc-nav-text">1.6 管道、重定向、命令格式的错误检查</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-7-exit%E9%80%80%E5%87%BAmyShell"><span class="toc-nav-text">1.7 exit退出myShell</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-8-malloc%E4%B8%8Efree"><span class="toc-nav-text">1.8 malloc与free</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-nav-text">二、系统调用</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%B8%89%E3%80%81%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-nav-text">三、功能实现与流程图</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-1-%E5%AE%8F%E5%AE%9A%E4%B9%89"><span class="toc-nav-text">3.1 宏定义</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-1-1-%E5%8D%95%E8%A1%8C%E5%91%BD%E4%BB%A4%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%A7%A3%E6%9E%90%E8%A7%84%E6%A8%A1"><span class="toc-nav-text">3.1.1 单行命令的输入与解析规模</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-2-2-%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F%E7%9A%84%E9%94%99%E8%AF%AF%E6%A3%80%E6%9F%A5"><span class="toc-nav-text">3.2.2 命令格式的错误检查</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-2-%E6%89%93%E5%8D%B0%E5%BD%93%E5%89%8D%E8%B7%AF%E5%BE%84"><span class="toc-nav-text">3.2 打印当前路径</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-3-%E6%8B%86%E5%88%86%E7%AE%A1%E9%81%93%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%A4%9A%E6%9D%A1%E5%91%BD%E4%BB%A4%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-nav-text">3.3 拆分管道连接的多条命令和重定向文件名</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-4-%E5%A6%82%E6%9E%9C%E6%8B%86%E5%88%86%E5%91%BD%E4%BB%A4%E6%9C%AA%E5%87%BA%E7%8E%B0%E5%BC%82%E5%B8%B8%EF%BC%8C%E9%80%90%E6%9D%A1%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4commands"><span class="toc-nav-text">3.4 如果拆分命令未出现异常，逐条执行命令commands</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-4-1-%E9%80%90%E6%9D%A1%E6%89%A7%E8%A1%8C%E6%8C%87%E4%BB%A4%EF%BC%8C%E4%BD%BF%E7%94%A8%E7%AE%A1%E9%81%93%E8%BF%9E%E6%8E%A5%E7%88%B6%E5%AD%90%E8%BF%9B%E7%A8%8B%E6%95%B0%E6%8D%AE"><span class="toc-nav-text">3.4.1 逐条执行指令，使用管道连接父子进程数据</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%85%B3%E4%BA%8Epipe-close-%E4%B8%8Efork-%E7%88%B6%E5%AD%90%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9A"><span class="toc-nav-text">关于pipe(),close()与fork()父子进程的理解：</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#pipe-int-fd-2-%EF%BC%9A"><span class="toc-nav-text">pipe(int fd[2])：</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#int-fd-2-%EF%BC%9A"><span class="toc-nav-text">int fd[2]：</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#close"><span class="toc-nav-text">close()</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#fork"><span class="toc-nav-text">fork()</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#close-%E7%9A%84%E6%97%B6%E6%9C%BA"><span class="toc-nav-text">close()的时机</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-4-2-%E5%88%9B%E5%BB%BA%E5%AD%90%E8%BF%9B%E7%A8%8B%EF%BC%8C%E6%89%A7%E8%A1%8C%E5%8D%95%E6%9D%A1%E6%8C%87%E4%BB%A4"><span class="toc-nav-text">3.4.2 创建子进程，执行单条指令</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-5-%E9%87%8A%E6%94%BE%E6%9C%AC%E6%AC%A1%E8%BE%93%E5%85%A5%E7%9A%84commands%E6%95%B0%E7%BB%84%EF%BC%8C%E7%AD%89%E5%BE%85%E7%94%A8%E6%88%B7%E7%9A%84%E4%B8%8B%E4%B8%80%E6%AC%A1%E8%BE%93%E5%85%A5"><span class="toc-nav-text">3.5 释放本次输入的commands数组，等待用户的下一次输入</span></a></li></ol></li></ol>
+                    </div>
+                    </aside>
+        </a-affix>
+    </span>
 </div>
+
+
                      
 <footer id="footer">
     <div class="footer-wrap">
         <div>
-            © 2018 - 2022 Musel&#39;s blog
+            Welcome >3<
             <span class="footer-icon">
                 <a-icon type="flag" theme="filled" /></span>
             @Musel
         </div>
         <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
         
     </div>
 
@@ -388,7 +407,9 @@ else if (pid == 0) &#123;
             show_page: false,
             onload_menu: false,
             menu_show: false,
-            card_top: 100
+            card_top: 100,
+            toc_top: 100,
+            toc_width: 40
         },
         created: function () {
             var that = this

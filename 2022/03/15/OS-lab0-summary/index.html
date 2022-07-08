@@ -134,11 +134,14 @@
 
                 <div id="main">
                      
+
 <link rel="stylesheet" href="/css/post-body.css">
 <div class="article">
+    <div id="home-posts-wrap" class=>
     <div>
         <h1>BUAA-OS-Lab0 </h1>
     </div>
+
     <div class="info">
         <span class="date">
             <span class="icon">
@@ -166,9 +169,17 @@
         </span>
         
     </div>
+</div>
+</div>
 
-    <div class="content" v-pre>
-        <p>操作系统 Lab0：git与shell</p>
+
+
+
+<div id="home-posts-wrap" class=>
+
+    <span id="xxx" class="xxx">
+        <div class="content" v-pre>
+            <p>操作系统 Lab0：git与shell</p>
 <span id="more"></span>
 
 <h1 id="一、实验思考题"><a href="#一、实验思考题" class="headerlink" title="一、实验思考题"></a>一、实验思考题</h1><h2 id="thinking-0-1"><a href="#thinking-0-1" class="headerlink" title="thinking 0.1"></a>thinking 0.1</h2><img src="/2022/03/15/OS-lab0-summary/0.png" class="" title="pic1">
@@ -388,22 +399,30 @@ clean:
 <li>makefile与gcc结合实现多文件链接编译中，对于makefile可以如何更加灵活地使用非常模糊。</li>
 </ol>
 
-    </div>
+        </div>
 
-    
+        <a-affix :offset-top="toc_top" offset-width="toc_width" offset-bottom="40px">
+                    <aside id="sidebar">
+                    <div id="toc" class="toc-article">
+                    <strong class="toc-title">Contents</strong>
+                    <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-nav-text">一、实验思考题</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#thinking-0-1"><span class="toc-nav-text">thinking 0.1</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#thinking-0-2"><span class="toc-nav-text">thinking 0.2</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#thinking-0-3"><span class="toc-nav-text">thinking 0.3</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#thinking-0-4"><span class="toc-nav-text">thinking 0.4</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%BB%93%E6%9E%9C"><span class="toc-nav-text">命令与结果</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%80%9D%E8%80%83"><span class="toc-nav-text">思考</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#thinking-0-5"><span class="toc-nav-text">thinking 0.5</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-1%E5%85%8B%E9%9A%86%E6%97%B6%E6%89%80%E6%9C%89%E5%88%86%E6%94%AF%E5%9D%87%E8%A2%AB%E5%85%8B%E9%9A%86%E3%80%82-%E6%AD%A3%E7%A1%AE"><span class="toc-nav-text">1.1克隆时所有分支均被克隆。(正确)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-2%E5%8F%AA%E6%9C%89HEAD%E6%8C%87%E5%90%91%E7%9A%84%E5%88%86%E6%94%AF%E8%A2%AB%E6%A3%80%E5%87%BA%E3%80%82-%E6%AD%A3%E7%A1%AE"><span class="toc-nav-text">1.2只有HEAD指向的分支被检出。(正确)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-%E5%85%8B%E9%9A%86%E5%87%BA%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8C%BA%E4%B8%AD%E6%89%A7%E8%A1%8C-git-log%E3%80%81git-status%E3%80%81git-checkout%E3%80%81git-commit%E7%AD%89%E6%93%8D%E4%BD%9C%E4%B8%8D%E4%BC%9A%E5%8E%BB%E8%AE%BF%E9%97%AE%E8%BF%9C%E7%A8%8B%E7%89%88%E6%9C%AC%E5%BA%93%E3%80%82-%E6%AD%A3%E7%A1%AE"><span class="toc-nav-text">2.克隆出的工作区中执行 git log、git status、git checkout、git commit等操作不会去访问远程版本库。(正确)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-%E5%85%8B%E9%9A%86%E6%97%B6%E5%8F%AA%E6%9C%89%E8%BF%9C%E7%A8%8B%E7%89%88%E6%9C%AC%E5%BA%93HEAD%E6%8C%87%E5%90%91%E7%9A%84%E5%88%86%E6%94%AF%E8%A2%AB%E5%85%8B%E9%9A%86%E3%80%82-%E9%94%99%E8%AF%AF%EF%BC%8C%E8%A7%811-1"><span class="toc-nav-text">3.克隆时只有远程版本库HEAD指向的分支被克隆。(错误，见1.1)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-%E5%85%8B%E9%9A%86%E5%90%8E%E5%B7%A5%E4%BD%9C%E5%8C%BA%E7%9A%84%E9%BB%98%E8%AE%A4%E5%88%86%E6%94%AF%E5%A4%84%E4%BA%8Emaster%E5%88%86%E6%94%AF%E3%80%82-%E8%A7%811-2"><span class="toc-nav-text">4.克隆后工作区的默认分支处于master分支。(见1.2)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#thinking-0-6"><span class="toc-nav-text">thinking 0.6</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#thinking-0-7"><span class="toc-nav-text">thinking 0.7</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#command"><span class="toc-nav-text">command</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#test"><span class="toc-nav-text">test</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#result"><span class="toc-nav-text">result</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%BB%93%E6%9E%9C%E8%A7%A3%E9%87%8A"><span class="toc-nav-text">结果解释</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E9%97%AE%E9%A2%981"><span class="toc-nav-text">问题1</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E9%97%AE%E9%A2%982"><span class="toc-nav-text">问题2</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#testbash-sh"><span class="toc-nav-text">testbash.sh</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#file1"><span class="toc-nav-text">file1</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#echo-3"><span class="toc-nav-text">echo 3</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#echo-c"><span class="toc-nav-text">echo $c</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#echo-3-1"><span class="toc-nav-text">echo \3</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E5%8D%95%E5%BC%95%E5%8F%B7%EF%BC%9A%E9%99%A4%E4%BA%86%E5%8D%95%E5%BC%95%E5%8F%B7%EF%BC%8C%E5%85%A8%E9%83%A8%E4%B8%BA%E5%AD%97%E9%9D%A2%E6%84%8F%E4%B9%89"><span class="toc-nav-text">单引号：除了单引号，全部为字面意义</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E7%BB%88%E7%AB%AF"><span class="toc-nav-text">终端</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#echo-3-gt-gt-file1"><span class="toc-nav-text">echo 3&gt;&gt;file1</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#echo-c-gt-gt-file1"><span class="toc-nav-text">echo $c&gt;&gt;file1</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#echo-3-gt-gt-file1-1"><span class="toc-nav-text">echo \3&gt;&gt;file1</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%B8%89%E3%80%81%E4%BD%93%E4%BC%9A%E4%B8%8E%E6%84%9F%E6%83%B3"><span class="toc-nav-text">三、体会与感想</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E5%9B%9B%E3%80%81%E6%8C%87%E5%AF%BC%E4%B9%A6%E5%8F%8D%E9%A6%88"><span class="toc-nav-text">四、指导书反馈</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%BA%94%E3%80%81%E6%AE%8B%E7%95%99%E9%9A%BE%E7%82%B9"><span class="toc-nav-text">五、残留难点</span></a></li></ol>
+                    </div>
+                    </aside>
+        </a-affix>
+    </span>
 </div>
+
+
                      
 <footer id="footer">
     <div class="footer-wrap">
         <div>
-            © 2018 - 2022 Musel&#39;s blog
+            Welcome >3<
             <span class="footer-icon">
                 <a-icon type="flag" theme="filled" /></span>
             @Musel
         </div>
         <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
         
     </div>
 
@@ -423,7 +442,9 @@ clean:
             show_page: false,
             onload_menu: false,
             menu_show: false,
-            card_top: 100
+            card_top: 100,
+            toc_top: 100,
+            toc_width: 40
         },
         created: function () {
             var that = this

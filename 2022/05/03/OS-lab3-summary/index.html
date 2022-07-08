@@ -134,11 +134,14 @@
 
                 <div id="main">
                      
+
 <link rel="stylesheet" href="/css/post-body.css">
 <div class="article">
+    <div id="home-posts-wrap" class=>
     <div>
         <h1>BUAA-OS-Lab3 </h1>
     </div>
+
     <div class="info">
         <span class="date">
             <span class="icon">
@@ -166,9 +169,17 @@
         </span>
         
     </div>
+</div>
+</div>
 
-    <div class="content" v-pre>
-        <p>操作系统 Lab3：进程与调度</p>
+
+
+
+<div id="home-posts-wrap" class=>
+
+    <span id="xxx" class="xxx">
+        <div class="content" v-pre>
+            <p>操作系统 Lab3：进程与调度</p>
 <span id="more"></span>
 
 <h1 id="一、实验思考题"><a href="#一、实验思考题" class="headerlink" title="一、实验思考题"></a>一、实验思考题</h1><h2 id="Thinking-3-1"><a href="#Thinking-3-1" class="headerlink" title="Thinking 3.1"></a>Thinking 3.1</h2><blockquote>
@@ -334,22 +345,30 @@ timer_irq:
 </li>
 </ul>
 
-    </div>
+        </div>
 
-    
+        <a-affix :offset-top="toc_top" offset-width="toc_width" offset-bottom="40px">
+                    <aside id="sidebar">
+                    <div id="toc" class="toc-article">
+                    <strong class="toc-title">Contents</strong>
+                    <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-nav-text">一、实验思考题</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-3-1"><span class="toc-nav-text">Thinking 3.1</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-3-2-%E7%BB%93%E5%90%88-include-mmu-h-%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E5%B8%83%E5%B1%80%EF%BC%8C%E6%80%9D%E8%80%83-env-setup-vm-%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="toc-nav-text">Thinking 3.2 结合 include&#x2F;mmu.h 中的地址空间布局，思考 env_setup_vm 函数：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-3-3"><span class="toc-nav-text">Thinking 3.3</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-3-4"><span class="toc-nav-text">Thinking 3.4</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-3-5"><span class="toc-nav-text">Thinking 3.5</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-3-6"><span class="toc-nav-text">Thinking 3.6</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-3-7"><span class="toc-nav-text">Thinking 3.7</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-3-8"><span class="toc-nav-text">Thinking 3.8</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-3-9"><span class="toc-nav-text">Thinking 3.9</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Thinking-3-10"><span class="toc-nav-text">Thinking 3.10</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E9%9A%BE%E7%82%B9%E4%B8%8E%E6%8C%87%E5%AF%BC%E4%B9%A6%E5%8F%8D%E9%A6%88"><span class="toc-nav-text">二、实验难点与指导书反馈</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E4%B8%89%E3%80%81%E4%BD%93%E4%BC%9A%E4%B8%8E%E6%84%9F%E6%83%B3"><span class="toc-nav-text">三、体会与感想</span></a></li></ol>
+                    </div>
+                    </aside>
+        </a-affix>
+    </span>
 </div>
+
+
                      
 <footer id="footer">
     <div class="footer-wrap">
         <div>
-            © 2018 - 2022 Musel&#39;s blog
+            Welcome >3<
             <span class="footer-icon">
                 <a-icon type="flag" theme="filled" /></span>
             @Musel
         </div>
         <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
         
     </div>
 
@@ -369,7 +388,9 @@ timer_irq:
             show_page: false,
             onload_menu: false,
             menu_show: false,
-            card_top: 100
+            card_top: 100,
+            toc_top: 100,
+            toc_width: 40
         },
         created: function () {
             var that = this

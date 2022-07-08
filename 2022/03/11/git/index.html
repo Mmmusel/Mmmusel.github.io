@@ -134,11 +134,14 @@
 
                 <div id="main">
                      
+
 <link rel="stylesheet" href="/css/post-body.css">
 <div class="article">
+    <div id="home-posts-wrap" class=>
     <div>
         <h1>Git </h1>
     </div>
+
     <div class="info">
         <span class="date">
             <span class="icon">
@@ -166,9 +169,17 @@
         </span>
         
     </div>
+</div>
+</div>
 
-    <div class="content" v-pre>
-        <img src="/2022/03/11/git/2.png" class="" title="pic2">
+
+
+
+<div id="home-posts-wrap" class=>
+
+    <span id="xxx" class="xxx">
+        <div class="content" v-pre>
+            <img src="/2022/03/11/git/2.png" class="" title="pic2">
 
 <span id="more"></span>
 
@@ -242,22 +253,30 @@
 <p>Modified: 文件已修改, 仅仅是修改, 并没有进行其他的操作. 这个文件也有两个去处, 通过git add可进入暂存staged状态, 使用git checkout 则丢弃修改过, 返回到unmodify状态, 这个git checkout即从库中取出文件, 覆盖当前修改</p>
 <p>Staged: 暂存状态. 执行git commit则将修改同步到库中, 这时库中的文件和本地文件又变为一致, 文件为Unmodify状态. 执行git reset HEAD filename取消暂存, 文件状态为Modified</p>
 
-    </div>
+        </div>
 
-    
+        <a-affix :offset-top="toc_top" offset-width="toc_width" offset-bottom="40px">
+                    <aside id="sidebar">
+                    <div id="toc" class="toc-article">
+                    <strong class="toc-title">Contents</strong>
+                    <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E5%AF%B9%E8%B1%A1%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-nav-text">对象与目录的关系</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="toc-nav-text">文件状态</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#%E8%BD%AC%E6%8D%A2%E5%BD%A2%E5%BC%8F"><span class="toc-nav-text">转换形式</span></a></li></ol>
+                    </div>
+                    </aside>
+        </a-affix>
+    </span>
 </div>
+
+
                      
 <footer id="footer">
     <div class="footer-wrap">
         <div>
-            © 2018 - 2022 Musel&#39;s blog
+            Welcome >3<
             <span class="footer-icon">
                 <a-icon type="flag" theme="filled" /></span>
             @Musel
         </div>
         <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
         
     </div>
 
@@ -277,7 +296,9 @@
             show_page: false,
             onload_menu: false,
             menu_show: false,
-            card_top: 100
+            card_top: 100,
+            toc_top: 100,
+            toc_width: 40
         },
         created: function () {
             var that = this

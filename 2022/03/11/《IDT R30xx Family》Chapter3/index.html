@@ -134,11 +134,14 @@
 
                 <div id="main">
                      
+
 <link rel="stylesheet" href="/css/post-body.css">
 <div class="article">
+    <div id="home-posts-wrap" class=>
     <div>
         <h1>OS-Pre-Cause SR EPC BadVaddr </h1>
     </div>
+
     <div class="info">
         <span class="date">
             <span class="icon">
@@ -158,7 +161,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/OS" style=color:#00bcd4>
+                <a href="/tags/OS" style=color:#03a9f4>
                     OS
                 </a>
             </span>
@@ -166,9 +169,17 @@
         </span>
         
     </div>
+</div>
+</div>
 
-    <div class="content" v-pre>
-        <p>《IDT R30xx Family Software Reference Manual》 Chapter 3 翻译</p>
+
+
+
+<div id="home-posts-wrap" class=>
+
+    <span id="xxx" class="xxx">
+        <div class="content" v-pre>
+            <p>《IDT R30xx Family Software Reference Manual》 Chapter 3 翻译</p>
 <span id="more"></span>
 
 <h1 id="Cause"><a href="#Cause" class="headerlink" title="Cause"></a>Cause</h1><p>查询Cause寄存器以决定异常类型并调用哪一种异常处理进程。</p>
@@ -328,22 +339,30 @@
 <li>此类操作可以被完成的情况受限，仅用于允许用户TLB充填短一些的代码。[见内存管理章节]</li>
 </ul>
 
-    </div>
+        </div>
 
-    
+        <a-affix :offset-top="toc_top" offset-width="toc_width" offset-bottom="40px">
+                    <aside id="sidebar">
+                    <div id="toc" class="toc-article">
+                    <strong class="toc-title">Contents</strong>
+                    <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Cause"><span class="toc-nav-text">Cause</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#BD-31-%E5%88%86%E6%94%AF%E5%BB%B6%E8%BF%9F"><span class="toc-nav-text">BD [31] 分支延迟</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#CE-29-28-%E5%8D%8F%E5%A4%84%E7%90%86%E5%99%A8%E9%94%99%E8%AF%AF"><span class="toc-nav-text">CE [29:28] 协处理器错误</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#IP-15-8-%E4%B8%AD%E6%96%AD%E5%BE%85%E5%86%B3%E6%96%AD"><span class="toc-nav-text">IP [15:8] 中断待决断</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ExcCode-6-2"><span class="toc-nav-text">ExcCode [6:2]</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#EPC"><span class="toc-nav-text">EPC</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#BadVaddr"><span class="toc-nav-text">BadVaddr</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#SR%EF%BC%9A%E5%AD%98%E5%82%A8MIPS-CPU%E7%9A%84%E5%90%84%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="toc-nav-text">SR：存储MIPS CPU的各种模式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#CU3-CU2-31-30-CP3CP2%E4%BD%BF%E7%94%A8%E6%9D%83"><span class="toc-nav-text">CU3,CU2 [31:30] CP3CP2使用权</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#CU1-29-CP1%E4%BD%BF%E7%94%A8%E6%9D%83%EF%BC%8C%E8%83%BD%E5%90%A6%E4%BD%BF%E7%94%A8FPA%E6%B5%AE%E7%82%B9%E5%8D%8F%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-nav-text">CU1 [29] CP1使用权，能否使用FPA浮点协处理器</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#CU0-28-CP0%E4%BD%BF%E7%94%A8%E6%9D%83"><span class="toc-nav-text">CU0 [28] CP0使用权</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#RE-25-%E7%94%A8%E6%88%B7%E6%80%81%E6%97%B6%E5%8F%8D%E8%BD%AC%E5%A4%A7%E5%B0%8F%E7%AB%AF%E5%8D%B3%E5%AD%97%E8%8A%82%E9%A1%BA%E5%BA%8F"><span class="toc-nav-text">RE [25] 用户态时反转大小端即字节顺序</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#BEV-22-%E5%BC%95%E5%AF%BC%E5%BC%82%E5%B8%B8%E5%90%91%E9%87%8F"><span class="toc-nav-text">BEV [22] 引导异常向量</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#TS-21-%E7%BD%AE%E4%BD%8D%E6%97%B6%E5%85%B3%E9%97%ADTLB"><span class="toc-nav-text">TS [21] 置位时关闭TLB</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#PE-20-%E5%A6%82%E6%9E%9C%E5%8F%91%E7%94%9F%E7%BC%93%E5%AD%98%E5%A5%87%E5%81%B6%E9%94%99%E8%AF%AF%EF%BC%8C%E5%88%99%E7%BD%AE%E4%BD%8D"><span class="toc-nav-text">PE [20] 如果发生缓存奇偶错误，则置位</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#CM-19-%E6%98%BE%E7%A4%BA%E7%94%A8%E9%9A%94%E7%A6%BBD-cache%E6%89%A7%E8%A1%8C%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E6%AC%A1load%E6%93%8D%E4%BD%9C%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="toc-nav-text">CM [19] 显示用隔离D-cache执行的最后一次load操作的结果</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#PZ-18-%E7%BD%AE%E4%BD%8D%E6%97%B6%E7%BC%93%E5%AD%98%E5%A5%87%E5%81%B6%E4%BD%8D%E5%86%990%E5%B9%B6%E4%B8%94%E4%B8%8D%E8%A2%AB%E6%A3%80%E6%9F%A5"><span class="toc-nav-text">PZ [18] 置位时缓存奇偶位写0并且不被检查</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#SwC-IsC-17-16-%E5%AF%B9%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%92%8C%E8%AF%8A%E6%96%AD%E7%9A%84%E5%86%85%E5%AD%98%E6%A8%A1%E5%BC%8F%E4%BD%8D"><span class="toc-nav-text">SwC IsC [17][16]对内存管理和诊断的内存模式位</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#SwC-17-%E4%BA%A4%E6%8D%A2%E7%BC%93%E5%AD%98"><span class="toc-nav-text">SwC [17] 交换缓存</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#IsC-16-%E9%9A%94%E7%A6%BB%E7%BC%93%E5%AD%98"><span class="toc-nav-text">IsC [16] 隔离缓存</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#IM-15-8-%E4%B8%AD%E6%96%AD%E6%8E%A9%E7%A0%81-%E5%AE%9A%E4%B9%89%E4%B8%AD%E6%96%AD%E6%BA%90%EF%BC%8C%E4%BD%9C%E4%B8%BA%E5%85%81%E8%AE%B8%E5%BC%82%E5%B8%B8%E7%9A%84%E6%A0%87%E5%BF%97"><span class="toc-nav-text">IM [15:8] 中断掩码 定义中断源，作为允许异常的标志</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#KUc-IEc-1-0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BF%9D%E6%8A%A4%E4%BD%8D"><span class="toc-nav-text">KUc IEc [1][0]计算机保护位</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#KUc-1-%E5%86%85%E6%A0%B8%E6%80%81%E7%BD%AE%E4%BD%8D"><span class="toc-nav-text">KUc [1] 内核态置位</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#IEc-0-%E7%BD%AE%E4%BD%8D%E5%85%81%E8%AE%B8%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8E%A5%E5%8F%97%E4%B8%AD%E6%96%AD"><span class="toc-nav-text">IEc [0] 置位允许计算机接受中断</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#KUp-IEp-3-2"><span class="toc-nav-text">KUp IEp [3][2]</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#KUo-IEo-5-4"><span class="toc-nav-text">KUo IEo [5][4]</span></a></li></ol></li></ol>
+                    </div>
+                    </aside>
+        </a-affix>
+    </span>
 </div>
+
+
                      
 <footer id="footer">
     <div class="footer-wrap">
         <div>
-            © 2018 - 2022 Musel&#39;s blog
+            Welcome >3<
             <span class="footer-icon">
                 <a-icon type="flag" theme="filled" /></span>
             @Musel
         </div>
         <div></div>
-        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
-                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
         
     </div>
 
@@ -363,7 +382,9 @@
             show_page: false,
             onload_menu: false,
             menu_show: false,
-            card_top: 100
+            card_top: 100,
+            toc_top: 100,
+            toc_width: 40
         },
         created: function () {
             var that = this

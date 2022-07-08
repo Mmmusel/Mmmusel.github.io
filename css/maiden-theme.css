@@ -224,14 +224,14 @@ a {
   position: relative;
   display: flex;
   width: 100%;
-  background: #fff;
+  background: rgba(246,248,250,0.6);
   z-index: 101;
   border-radius: 10px;
   margin: auto;
 }
 #home-posts {
   position: relative;
-  background: #fff;
+  background: rgba(246,248,250,0);
   margin: auto;
 }
 #home-posts h2 {
@@ -336,7 +336,7 @@ a {
   margin: 0 7px;
 }
 #home-posts .page-current .page-num:hover {
-  background: #fff;
+  background: #f6f8fa;
   color: #fff;
 }
 #home-card {
@@ -366,10 +366,12 @@ a {
   margin: 10px auto;
   color: rgba(0,0,0,0.651);
   text-transform: capitalize;
+  font-size: 26px;
 }
 #home-card .card-style .descriptions {
   margin: 20px auto;
   width: 85%;
+  font-size: 16px;
 }
 #home-card .card-style .icon-links {
   width: 85%;
@@ -386,7 +388,7 @@ a {
 }
 #home-card .card-style .icon-links a:hover {
   color: #fff;
-  background: rgba(255,114,139,0.8);
+  background: linear-gradient(120deg, #febbc7 0%, #ffb5de 100%);
 }
 #home-card .card-style .icon-links .icon-link {
   margin: 5px;
@@ -402,13 +404,14 @@ a {
   display: inline-block;
   width: 140px;
   line-height: 3;
-  color: #9e9e9e;
+  background: linear-gradient(120deg, #96ceff 0, #ff9edb 100%);
+  color: #fff;
   font-size: 16px;
   border-radius: 15px;
 }
 #home-card .card-style .friend-links .friend-link a:hover {
   background: linear-gradient(120deg, #febbc7 0%, #ffb5de 100%);
-  color: #fff;
+  color: #9e9e9e;
 }
 @-moz-keyframes loop1 {
   0% {
@@ -840,19 +843,32 @@ footer .footer-icon {
 .categories-tags #archives {
   top: 60px;
 }
+.xxx {
+  display: flex;
+  width: 400px;
+  margin: 50px 50px 50px 120px;
+  padding: 50px 50px 50px 120px;
+}
 .article {
-  margin: auto;
-  position: relative;
-  top: 100px;
+  width: 400px;
+  margin: 50px 50px 50px 120px;
+  padding: 50px 50px 50px 120px;
+  position: left;
+  top: 20px;
   color: rgba(0,0,0,0.651);
   padding: 20px;
   font-size: 15px;
 }
 .article h1 {
+  width: 400px;
+  position: center;
+  margin: 0px 0px 0px 120px;
+  padding: 0px 0px 0px 120px;
   font-weight: bolder;
   margin: 20px 0;
 }
 .article .info a {
+  display: left;
   color: #5c6b72;
   text-decoration: none;
 }
@@ -860,7 +876,7 @@ footer .footer-icon {
 .article .info .category,
 .article .info .tags {
   color: #5c6b72;
-  display: inline-block;
+  display: right;
   margin-right: 20px;
 }
 .article .info .date .tag,
@@ -869,7 +885,103 @@ footer .footer-icon {
   margin-right: 10px;
 }
 .article .content {
-  margin: 50px 0;
+  width: 400px;
+  margin: 50px 50px 50px 120px;
+  padding: 50px 50px 50px 120px;
+}
+.toc-article {
+  position: absolute;
+  maxDepth: 2;
+  width: 200px;
+  height: 100px;
+  border-left: rgba(88,88,88,0.1) 1px solid;
+  padding: 1em 1em 0 1em;
+  margin-left: 1em;
+}
+.toc-title {
+  font-size: 120%;
+}
+.toc-title:before {
+  font-family: "FontAwesome";
+  content: "\f02e";
+  margin-right: 0.5em;
+}
+@media screen and (max-width: 1100px) {
+  #toc {
+    height: 100px;
+    maxDepth: 2;
+    display-y: scroll;
+  }
+}
+#toc {
+  maxDepth: 2;
+  overflow: scroll;
+  width: 250px;
+  height: 400px;
+  line-height: 1em;
+  font-size: 0.9em;
+  float: left;
+  overflow: auto;
+}
+@media mq-mobile {
+  #toc {
+    display: none;
+  }
+}
+@media mq-tablet {
+  #toc {
+    display-y: scroll;
+  }
+}
+#toc::-webkit-scrollbar {
+  display-y: scroll;
+}
+.toc-fixed {
+  maxDepth: 2;
+  overflow: auto;
+  width: 180px;
+  position: fixed;
+  top: 60px;
+  margin-top: 0;
+  max-height: 81%;
+  overflow: auto;
+  z-index: 1;
+}
+.toc-nav {
+  maxDepth: 2;
+  overflow: auto;
+  width: 180px;
+  padding: 0;
+  margin: 1em;
+  line-height: 1.8em;
+}
+.toc-nav li {
+  list-style-type: none;
+}
+.toc-nav li a:hover {
+  background-color: transparent !important;
+}
+.toc-nav .active > a {
+  color: color-theme;
+}
+.toc-nav-link {
+  maxDepth: 2;
+  overflow: auto;
+  font-family: "futura-pt", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei, WenQuanYi Micro Hei, "Microsoft YaHei", sans-serif;
+  color: color-link;
+  padding: 1px !important;
+}
+.toc-nav-link:hover {
+  color: color-theme;
+}
+.toc-nav-child {
+  maxDepth: 2;
+  margin-left: -1em;
+}
+#sidebar {
+  display: inline;
+  float: left;
+  padding-left: 12px;
 }
 @media (min-width: 900px) {
   #menu .desktop-menu {
@@ -987,7 +1099,7 @@ footer .footer-icon {
     margin: auto;
     width: 350px;
     height: 350px;
-    background: rgba(255,255,255,0.651);
+    background: rgba(246,248,250,0.651);
     padding: 25px;
   }
   #home-head .home-info .info .wrap {

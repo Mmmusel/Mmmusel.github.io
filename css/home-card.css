@@ -64,11 +64,11 @@
   width: 140px;
   line-height: 3;
   background: linear-gradient(120deg, #96ceff 0, #ff9edb 100%);
-  color: label-font;
+  color: #fff;
   font-size: 16px;
   border-radius: 15px;
 }
 #home-card .card-style .friend-links .friend-link a:hover {
   background: side-card-button;
-  color: #fff;
+  color: label-font;
 }

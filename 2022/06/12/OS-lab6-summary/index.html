@@ -19,22 +19,24 @@
         <meta name="keywords" content="blog">
     
     <meta name="description" content="">
-    <meta name="description" content="一、MOS中体现“面向对象”思想的两个设计1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型1.1 fd.h 定义外设文件的抽象接口dev">
+    <meta name="description" content="一、MOS中体现“面向对象”思想的两个设计1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BUAA-OS-Lab6">
-<meta property="og:url" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/index.html">
+<meta property="og:url" content="https://mmmusel.github.io/2022/06/12/OS-lab6-summary/index.html">
 <meta property="og:site_name" content="Musel&#39;s blog">
-<meta property="og:description" content="一、MOS中体现“面向对象”思想的两个设计1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型1.1 fd.h 定义外设文件的抽象接口dev">
+<meta property="og:description" content="一、MOS中体现“面向对象”思想的两个设计1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-0.png">
-<meta property="og:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-1.png">
-<meta property="og:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-2.png">
-<meta property="og:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-3.png">
-<meta property="article:published_time" content="2022-07-12T03:59:56.000Z">
-<meta property="article:modified_time" content="2022-07-12T12:47:18.307Z">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/12/OS-lab6-summary/lab6.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/12/OS-lab6-summary/lab6.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/12/OS-lab6-summary/lab6-1.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/12/OS-lab6-summary/lab6-2.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/12/OS-lab6-summary/lab6-3.png">
+<meta property="article:published_time" content="2022-06-12T03:59:56.000Z">
+<meta property="article:modified_time" content="2022-07-12T12:58:06.574Z">
 <meta property="article:author" content="Musel">
+<meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-0.png">
+<meta name="twitter:image" content="https://mmmusel.github.io/2022/06/12/OS-lab6-summary/lab6.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/x.ico">
@@ -327,6 +329,14 @@
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="OS">OS</a>
+    
+</div>
+
+                
                 
                     <div class="post-intro-read">
                         <span>字数统计: <span class="post-count word-count">4k</span>阅读时长: <span class="post-count reading-time">15 min</span></span>
@@ -335,7 +345,7 @@
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2022/07/12</span>
+                    <span class="post-intro-time">2022/06/12</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -490,9 +500,11 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h2 id="一、MOS中体现“面向对象”思想的两个设计"><a href="#一、MOS中体现“面向对象”思想的两个设计" class="headerlink" title="一、MOS中体现“面向对象”思想的两个设计"></a>一、MOS中体现“面向对象”思想的两个设计</h2><h3 id="1-fd-c的文件服务函数接口，实际上包含console-file-pipe三种外设文件类型"><a href="#1-fd-c的文件服务函数接口，实际上包含console-file-pipe三种外设文件类型" class="headerlink" title="1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型"></a>1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型</h3><h4 id="1-1-fd-h-定义外设文件的抽象接口dev"><a href="#1-1-fd-h-定义外设文件的抽象接口dev" class="headerlink" title="1.1 fd.h 定义外设文件的抽象接口dev"></a>1.1 fd.h 定义外设文件的抽象接口dev</h4><span id="more"></span>
+        <img src="/2022/06/12/OS-lab6-summary/lab6.png" class="" title="shell">
 
-<pre><code class="c">struct Dev &#123;
+<h2 id="一、MOS中体现“面向对象”思想的两个设计"><a href="#一、MOS中体现“面向对象”思想的两个设计" class="headerlink" title="一、MOS中体现“面向对象”思想的两个设计"></a>一、MOS中体现“面向对象”思想的两个设计</h2><h3 id="1-fd-c的文件服务函数接口，实际上包含console-file-pipe三种外设文件类型"><a href="#1-fd-c的文件服务函数接口，实际上包含console-file-pipe三种外设文件类型" class="headerlink" title="1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型"></a>1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型</h3><span id="more"></span>
+
+<h3 id="1-1-fd-h-定义外设文件的抽象接口dev"><a href="#1-1-fd-h-定义外设文件的抽象接口dev" class="headerlink" title="1.1 fd.h 定义外设文件的抽象接口dev"></a>1.1 fd.h 定义外设文件的抽象接口dev</h3><pre><code class="c">struct Dev &#123;
     int dev_id;
     char *dev_name;
     int (*dev_read)(struct Fd *, void *, u_int, u_int);
@@ -534,7 +546,7 @@
 </code></pre>
 <h4 id="1-3-父类方法调用的多态性"><a href="#1-3-父类方法调用的多态性" class="headerlink" title="1.3 父类方法调用的多态性"></a>1.3 父类方法调用的多态性</h4><p>在fd.c中调用close()\read()\write()的文件操作函数接口时，使用类似<code>(*dev-&gt;dev_close)(fd)</code> 、<code>(*dev-&gt;dev_read)(fd, buf, n, fd-&gt;fd_offset)</code>的调用，可以实现类似类方法的多态的效果，不同的子类（外设文件类型）对应不同的文件服务函数效果。</p>
 <h3 id="2-在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token"><a href="#2-在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token" class="headerlink" title="2. 在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token"></a>2. 在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token</h3><p>见<a target="_blank" rel="noopener" href="https://mmmusel-github-io.vercel.app/2022/07/12/OS-lab6-summary/#/2-rumcmd%EF%BC%9A%E6%8A%8A%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E4%BB%A4%E6%8B%86%E5%88%86%E6%88%90%E5%91%BD%E4%BB%A4%E5%92%8C%E5%8F%82%E6%95%B0">shell流程分析的命令拆分部分</a>。</p>
-<h2 id="二、Shell执行流程"><a href="#二、Shell执行流程" class="headerlink" title="二、Shell执行流程"></a>二、Shell执行流程</h2><img src="/2022/07/12/OS-lab6-summary/lab6-0.png" class="" title="shell">
+<h2 id="二、Shell执行流程"><a href="#二、Shell执行流程" class="headerlink" title="二、Shell执行流程"></a>二、Shell执行流程</h2><img src="/2022/06/12/OS-lab6-summary/lab6.png" class="" title="shell">
 
 <h3 id="2-1-申请新进程的几种方式"><a href="#2-1-申请新进程的几种方式" class="headerlink" title="2.1 申请新进程的几种方式"></a>2.1 申请新进程的几种方式</h3><ul>
 <li>内核态下，init.c中<code>加载二进制映像的宏ENV_CREATE()直接调用内核态函数env_create_priotity()</code>来创建进程</li>
@@ -596,7 +608,7 @@ END(sys_cgetc)
 </ul>
 </li>
 </ul>
-<h4 id="2-rumcmd：把用户输入的字符串指令拆分成命令和参数"><a href="#2-rumcmd：把用户输入的字符串指令拆分成命令和参数" class="headerlink" title="2.rumcmd：把用户输入的字符串指令拆分成命令和参数"></a>2.rumcmd：把用户输入的字符串指令拆分成命令和参数</h4><img src="/2022/07/12/OS-lab6-summary/lab6-1.png" class="" title="parse_commands">
+<h4 id="2-rumcmd：把用户输入的字符串指令拆分成命令和参数"><a href="#2-rumcmd：把用户输入的字符串指令拆分成命令和参数" class="headerlink" title="2.rumcmd：把用户输入的字符串指令拆分成命令和参数"></a>2.rumcmd：把用户输入的字符串指令拆分成命令和参数</h4><img src="/2022/06/12/OS-lab6-summary/lab6-1.png" class="" title="parse_commands">
 
 <ul>
 <li>readline()读入的用户命令字符串，通过gettoken()函数进行层次化建模与拆分：<ul>
@@ -615,7 +627,7 @@ END(sys_cgetc)
 <h5 id="管道重定向"><a href="#管道重定向" class="headerlink" title="管道重定向"></a>管道重定向</h5><ul>
 <li><strong>大致流程</strong>：识别到’|’，说明目前识别到的argv已经可以执行左边的指令。而shell的原则是申请新进程来执行命令。所以fork()，子进程进入<code>runit:</code>的命令执行部分。父进程继续循环，parse右半部分command。</li>
 </ul>
-<img src="/2022/07/12/OS-lab6-summary/lab6-2.png" class="" title="pipe">
+<img src="/2022/06/12/OS-lab6-summary/lab6-2.png" class="" title="pipe">
 
 <ul>
 <li><p>父进程的任务：</p>
@@ -658,7 +670,7 @@ END(sys_cgetc)
 <li><p>使用系统调用syscall_env_alloc() 生成新进程</p>
 </li>
 <li><p>为子进程初始化堆、栈空间，并设置栈顶指针，对于栈空间，因为我们的调用可能是有参数的，所以要将参数也安排进用户栈中。</p>
-<img src="/2022/07/12/OS-lab6-summary/lab6-3.png" class="" title="init_stack"></li>
+<img src="/2022/06/12/OS-lab6-summary/lab6-3.png" class="" title="init_stack"></li>
 <li><p>将目标程序加载到子进程的地址空间中，并为它们分配物理页面; </p>
 <ul>
 <li><p>usr_load_elf(): <code>load_icode_mapper() </code>+ 类似lab4 <code>fork.c的pgfault()</code> 中的用户态页面复制</p>
@@ -949,7 +961,7 @@ int main()&#123;
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81MOS%E4%B8%AD%E4%BD%93%E7%8E%B0%E2%80%9C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E2%80%9D%E6%80%9D%E6%83%B3%E7%9A%84%E4%B8%A4%E4%B8%AA%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.</span> <span class="toc-text">一、MOS中体现“面向对象”思想的两个设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-fd-c%E7%9A%84%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%87%BD%E6%95%B0%E6%8E%A5%E5%8F%A3%EF%BC%8C%E5%AE%9E%E9%99%85%E4%B8%8A%E5%8C%85%E5%90%ABconsole-file-pipe%E4%B8%89%E7%A7%8D%E5%A4%96%E8%AE%BE%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-fd-h-%E5%AE%9A%E4%B9%89%E5%A4%96%E8%AE%BE%E6%96%87%E4%BB%B6%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%8E%A5%E5%8F%A3dev"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 fd.h 定义外设文件的抽象接口dev</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%AE%9E%E7%8E%B0dev%E6%8E%A5%E5%8F%A3%E7%9A%84%E7%BB%A7%E6%89%BF%E7%B1%BB"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 实现dev接口的继承类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#file-c"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">file.c</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#console-c"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">console.c</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#pipe-c"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">pipe.c</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84%E5%A4%9A%E6%80%81%E6%80%A7"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 父类方法调用的多态性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%A8%E5%AF%B9shell%E8%AF%BB%E5%85%A5%E7%9A%84%E5%91%BD%E4%BB%A4%E8%BF%9B%E8%A1%8Csplit%E5%92%8Cparse%EF%BC%8C%E6%8B%86%E5%88%86%E5%87%BA%E5%91%BD%E4%BB%A4%E5%92%8C%E5%8F%82%E6%95%B0%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E5%B0%86%E6%89%80%E6%9C%89%E7%AC%A6%E5%8F%B7%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%83%BD%E6%8A%BD%E8%B1%A1%E6%88%90token"><span class="toc-number">1.2.</span> <span class="toc-text">2. 在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Shell%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">二、Shell执行流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%94%B3%E8%AF%B7%E6%96%B0%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 申请新进程的几种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-shell%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E4%B8%8E%E5%85%B6%E5%AF%B9%E5%BA%94%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 shell的基本功能与其对应的函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%8A%8Ashell%E7%BB%88%E7%AB%AF%E7%9A%84%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%BA%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%85%A5%E5%92%8C%E5%B1%8F%E5%B9%95%E8%BE%93%E5%87%BA"><span class="toc-number">2.2.1.</span> <span class="toc-text">1.把shell终端的标准输入输出初始化为控制台输入和屏幕输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-rumcmd%EF%BC%9A%E6%8A%8A%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E4%BB%A4%E6%8B%86%E5%88%86%E6%88%90%E5%91%BD%E4%BB%A4%E5%92%8C%E5%8F%82%E6%95%B0"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.rumcmd：把用户输入的字符串指令拆分成命令和参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-dup%EF%BC%9A%E6%96%87%E4%BB%B6%E3%80%81%E7%AE%A1%E9%81%93%E3%80%81%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B9%8B%E9%97%B4%E7%9A%84%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">2.2.3.</span> <span class="toc-text">3.dup：文件、管道、标准输入输出之间的重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">2.2.3.1.</span> <span class="toc-text">文件重定向</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AE%A1%E9%81%93%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">2.2.3.2.</span> <span class="toc-text">管道重定向</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#dup-int-oldfdnum-int-newfdnum-%E5%87%BD%E6%95%B0%E7%9A%84%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.2.3.3.</span> <span class="toc-text">dup(int oldfdnum, int newfdnum)函数的具体实现</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-spawn%EF%BC%9A%E5%8A%A0%E8%BD%BD%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%98%A0%E5%83%8F%EF%BC%8C%E5%88%9B%E5%BB%BA%E5%AD%90%E8%BF%9B%E7%A8%8B%E6%89%A7%E8%A1%8C%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.2.4.</span> <span class="toc-text">4.spawn：加载命令的二进制映像，创建子进程执行外部命令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81pipe%E6%9C%BA%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">三、pipe机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%AD%E6%96%AD%E5%AF%BC%E8%87%B4%E7%AB%9E%E4%BA%89%E7%9A%84%E8%A7%A3%E5%86%B3%E7%AD%96%E7%95%A5"><span class="toc-number">3.1.</span> <span class="toc-text">关于中断导致竞争的解决策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thinking-6-1"><span class="toc-number">3.2.</span> <span class="toc-text">Thinking 6.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thinking-6-2"><span class="toc-number">3.3.</span> <span class="toc-text">Thinking 6.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thinking-6-4"><span class="toc-number">3.4.</span> <span class="toc-text">Thinking 6.4</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81MOS%E4%B8%AD%E4%BD%93%E7%8E%B0%E2%80%9C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E2%80%9D%E6%80%9D%E6%83%B3%E7%9A%84%E4%B8%A4%E4%B8%AA%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.</span> <span class="toc-text">一、MOS中体现“面向对象”思想的两个设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-fd-c%E7%9A%84%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%87%BD%E6%95%B0%E6%8E%A5%E5%8F%A3%EF%BC%8C%E5%AE%9E%E9%99%85%E4%B8%8A%E5%8C%85%E5%90%ABconsole-file-pipe%E4%B8%89%E7%A7%8D%E5%A4%96%E8%AE%BE%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-fd-h-%E5%AE%9A%E4%B9%89%E5%A4%96%E8%AE%BE%E6%96%87%E4%BB%B6%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%8E%A5%E5%8F%A3dev"><span class="toc-number">1.2.</span> <span class="toc-text">1.1 fd.h 定义外设文件的抽象接口dev</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%AE%9E%E7%8E%B0dev%E6%8E%A5%E5%8F%A3%E7%9A%84%E7%BB%A7%E6%89%BF%E7%B1%BB"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.2 实现dev接口的继承类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#file-c"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">file.c</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#console-c"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">console.c</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#pipe-c"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">pipe.c</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84%E5%A4%9A%E6%80%81%E6%80%A7"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.3 父类方法调用的多态性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%A8%E5%AF%B9shell%E8%AF%BB%E5%85%A5%E7%9A%84%E5%91%BD%E4%BB%A4%E8%BF%9B%E8%A1%8Csplit%E5%92%8Cparse%EF%BC%8C%E6%8B%86%E5%88%86%E5%87%BA%E5%91%BD%E4%BB%A4%E5%92%8C%E5%8F%82%E6%95%B0%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E5%B0%86%E6%89%80%E6%9C%89%E7%AC%A6%E5%8F%B7%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%83%BD%E6%8A%BD%E8%B1%A1%E6%88%90token"><span class="toc-number">1.3.</span> <span class="toc-text">2. 在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Shell%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">二、Shell执行流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%94%B3%E8%AF%B7%E6%96%B0%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 申请新进程的几种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-shell%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E4%B8%8E%E5%85%B6%E5%AF%B9%E5%BA%94%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 shell的基本功能与其对应的函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%8A%8Ashell%E7%BB%88%E7%AB%AF%E7%9A%84%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%BA%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%85%A5%E5%92%8C%E5%B1%8F%E5%B9%95%E8%BE%93%E5%87%BA"><span class="toc-number">2.2.1.</span> <span class="toc-text">1.把shell终端的标准输入输出初始化为控制台输入和屏幕输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-rumcmd%EF%BC%9A%E6%8A%8A%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E4%BB%A4%E6%8B%86%E5%88%86%E6%88%90%E5%91%BD%E4%BB%A4%E5%92%8C%E5%8F%82%E6%95%B0"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.rumcmd：把用户输入的字符串指令拆分成命令和参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-dup%EF%BC%9A%E6%96%87%E4%BB%B6%E3%80%81%E7%AE%A1%E9%81%93%E3%80%81%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B9%8B%E9%97%B4%E7%9A%84%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">2.2.3.</span> <span class="toc-text">3.dup：文件、管道、标准输入输出之间的重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">2.2.3.1.</span> <span class="toc-text">文件重定向</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AE%A1%E9%81%93%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">2.2.3.2.</span> <span class="toc-text">管道重定向</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#dup-int-oldfdnum-int-newfdnum-%E5%87%BD%E6%95%B0%E7%9A%84%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.2.3.3.</span> <span class="toc-text">dup(int oldfdnum, int newfdnum)函数的具体实现</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-spawn%EF%BC%9A%E5%8A%A0%E8%BD%BD%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%98%A0%E5%83%8F%EF%BC%8C%E5%88%9B%E5%BB%BA%E5%AD%90%E8%BF%9B%E7%A8%8B%E6%89%A7%E8%A1%8C%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.2.4.</span> <span class="toc-text">4.spawn：加载命令的二进制映像，创建子进程执行外部命令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81pipe%E6%9C%BA%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">三、pipe机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%AD%E6%96%AD%E5%AF%BC%E8%87%B4%E7%AB%9E%E4%BA%89%E7%9A%84%E8%A7%A3%E5%86%B3%E7%AD%96%E7%95%A5"><span class="toc-number">3.1.</span> <span class="toc-text">关于中断导致竞争的解决策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thinking-6-1"><span class="toc-number">3.2.</span> <span class="toc-text">Thinking 6.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thinking-6-2"><span class="toc-number">3.3.</span> <span class="toc-text">Thinking 6.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thinking-6-4"><span class="toc-number">3.4.</span> <span class="toc-text">Thinking 6.4</span></a></li></ol></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1132,8 +1144,8 @@ int main()&#123;
             
         
         <li class="archive-post-item">
-            <span class="archive-post-date">07/12</span>
-            <a class="archive-post-title" href="/2022/07/12/OS-lab6-summary/">BUAA-OS-Lab6</a>
+            <span class="archive-post-date">06/12</span>
+            <a class="archive-post-title" href="/2022/06/12/OS-lab6-summary/">BUAA-OS-Lab6</a>
         </li>
     
         

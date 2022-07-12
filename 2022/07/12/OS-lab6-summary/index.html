@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Musel">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Musel">
+    
+        <meta name="keywords" content="blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="一、MOS中体现“面向对象”思想的两个设计1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型1.1 fd.h 定义外设文件的抽象接口dev">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUAA-OS-Lab6">
+<meta property="og:url" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/index.html">
+<meta property="og:site_name" content="Musel&#39;s blog">
+<meta property="og:description" content="一、MOS中体现“面向对象”思想的两个设计1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型1.1 fd.h 定义外设文件的抽象接口dev">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-0.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-1.png">
+<meta property="og:image" content="c:/Users/Musel/Desktop/OS助教面试/lab6/lab6-1.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-2.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-3.png">
+<meta property="article:published_time" content="2022-07-12T03:59:56.000Z">
+<meta property="article:modified_time" content="2022-07-12T04:06:36.202Z">
+<meta property="article:author" content="Musel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-0.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/x.ico">
+    
+    <title>BUAA-OS-Lab6 · Musel&#39;s blog</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>Musel's blog</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Musel&#39;s blog</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">BUAA-OS-Lab6</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                BUAA-OS-Lab6
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">4k</span>阅读时长: <span class="post-count reading-time">15 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2022/07/12</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="一、MOS中体现“面向对象”思想的两个设计"><a href="#一、MOS中体现“面向对象”思想的两个设计" class="headerlink" title="一、MOS中体现“面向对象”思想的两个设计"></a>一、MOS中体现“面向对象”思想的两个设计</h2><h3 id="1-fd-c的文件服务函数接口，实际上包含console-file-pipe三种外设文件类型"><a href="#1-fd-c的文件服务函数接口，实际上包含console-file-pipe三种外设文件类型" class="headerlink" title="1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型"></a>1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型</h3><h4 id="1-1-fd-h-定义外设文件的抽象接口dev"><a href="#1-1-fd-h-定义外设文件的抽象接口dev" class="headerlink" title="1.1 fd.h 定义外设文件的抽象接口dev"></a>1.1 fd.h 定义外设文件的抽象接口dev</h4><span id="more"></span>
+
+<pre><code class="c">struct Dev &#123;
+    int dev_id;
+    char *dev_name;
+    int (*dev_read)(struct Fd *, void *, u_int, u_int);
+    int (*dev_write)(struct Fd *, const void *, u_int, u_int);
+    int (*dev_close)(struct Fd *);
+    int (*dev_stat)(struct Fd *, struct Stat *);
+    int (*dev_seek)(struct Fd *, u_int);
+&#125;;
+</code></pre>
+<h4 id="1-2-实现dev接口的继承类"><a href="#1-2-实现dev接口的继承类" class="headerlink" title="1.2 实现dev接口的继承类"></a>1.2 实现dev接口的继承类</h4><p>以下三种外设类型，都给dev结构体填入了自己的id name 和各自的开关、读写文件函数指针。</p>
+<h5 id="file-c"><a href="#file-c" class="headerlink" title="file.c"></a>file.c</h5><pre><code class="c">struct Dev devfile = &#123;
+        .dev_id =    &#39;f&#39;,
+        .dev_name =    &quot;file&quot;,
+        .dev_read =    file_read,
+        .dev_write =    file_write,
+        .dev_close =    file_close,
+        .dev_stat =    file_stat,
+&#125;;
+</code></pre>
+<h5 id="console-c"><a href="#console-c" class="headerlink" title="console.c"></a>console.c</h5><pre><code class="c">struct Dev devcons =
+&#123;
+.dev_id=    &#39;c&#39;,
+.dev_name=    &quot;cons&quot;,
+.dev_read=    cons_read,
+.dev_write=    cons_write,
+.dev_close=    cons_close,
+.dev_stat=    cons_stat,
+&#125;;
+</code></pre>
+<h5 id="pipe-c"><a href="#pipe-c" class="headerlink" title="pipe.c"></a>pipe.c</h5><pre><code class="c">struct Dev devpipe =
+&#123;
+.dev_id=    &#39;p&#39;,
+.dev_name=    &quot;pipe&quot;,
+.dev_read=    piperead,
+.dev_write=    pipewrite,
+.dev_close=    pipeclose,
+.dev_stat=    pipestat,
+&#125;;
+</code></pre>
+<h4 id="1-3-父类方法调用的多态性"><a href="#1-3-父类方法调用的多态性" class="headerlink" title="1.3 父类方法调用的多态性"></a>1.3 父类方法调用的多态性</h4><p>在fd.c中调用close()\read()\write()的文件操作函数接口时，使用类似<code>(*dev-&gt;dev_close)(fd)</code> 、<code>(*dev-&gt;dev_read)(fd, buf, n, fd-&gt;fd_offset)</code>的调用，可以实现类似类方法的多态的效果，不同的子类（外设文件类型）对应不同的文件服务函数效果。</p>
+<h3 id="2-在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token"><a href="#2-在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token" class="headerlink" title="2. 在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token"></a>2. 在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token</h3><p>见shell流程分析的命令拆分部分。</p>
+<h2 id="二、Shell执行流程"><a href="#二、Shell执行流程" class="headerlink" title="二、Shell执行流程"></a>二、Shell执行流程</h2><img src="/2022/07/12/OS-lab6-summary/lab6-0.png" class="" title="shell">
+
+<h3 id="2-1-申请新进程的几种方式"><a href="#2-1-申请新进程的几种方式" class="headerlink" title="2.1 申请新进程的几种方式"></a>2.1 申请新进程的几种方式</h3><ul>
+<li>内核态下，init.c中<code>加载二进制映像的宏ENV_CREATE()直接调用内核态函数env_create_priotity()</code>来创建进程</li>
+<li>需要新进程执行外部命令commands.b时，通过spawn()中的系统调用<code>syscall_env_alloc()</code> 创建新进程</li>
+<li>shell中通过 fork() 创建新进程进行命令的解析和重定向工作，再调用spwan() 执行外部命令</li>
+</ul>
+<h3 id="2-2-shell的基本功能与其对应的函数"><a href="#2-2-shell的基本功能与其对应的函数" class="headerlink" title="2.2 shell的基本功能与其对应的函数"></a>2.2 shell的基本功能与其对应的函数</h3><h4 id="1-把shell终端的标准输入输出初始化为控制台输入和屏幕输出"><a href="#1-把shell终端的标准输入输出初始化为控制台输入和屏幕输出" class="headerlink" title="1.把shell终端的标准输入输出初始化为控制台输入和屏幕输出"></a>1.把shell终端的标准输入输出初始化为控制台输入和屏幕输出</h4><ul>
+<li><p>user/init.b中：int opencons(void)：把标准输入设置为控制台输入</p>
+<ul>
+<li>fd_alloc(&amp;fd)：从小到大遍历fd号，通过检查INDEX2FD(fd) 对应的页表是否PTE_V，判断fd号是否被占用</li>
+<li>给fd号所对应的fd结构体申请BY2PG，标记为共享页面。<code>syscall_mem_alloc(0, (u_int)fd, PTE_V|PTE_R|PTE_LIBRARY)</code></li>
+<li>（（（（共享指的是父子共享，而不是全局进程共享（?</li>
+</ul>
+<blockquote>
+<p>实际上，在Linux的终端概念中，默认每个进程的fd 0,1,2已经被占用。被申请使用的文件描述符fd是从3开始的。Linux默认0是标准输入，从键盘输入；1是标准输出，输出到屏幕；2是标准错误输出。</p>
+<p>而在MOS中，不存在标准输入、标准输出的概念，并没有被人为预设好。也就是说，我们的MOS中fd是从0开始申请的。所以，我们要在MOS中模拟类似Linux终端的标准输入输出这一行为。</p>
+<p>所以在user/init.b中有以下这段代码：</p>
+<pre><code class="c">if ((r = opencons()) &lt; 0)
+        user_panic(&quot;opencons: %e&quot;, r);
+    if (r != 0)
+        user_panic(&quot;first opencons used fd %d&quot;, r);
+    if ((r = dup(0, 1)) &lt; 0)
+</code></pre>
+<p>可以看到，因为init.c是我们从内核态进程spwan出来的第一个进程，所以opencons()返回的文件描述符r必然是0。</p>
+<p>此时，我们实现了标准输入 fd 0代表控制台的键盘输入。</p>
+</blockquote>
+</li>
+<li><p>shell的umain函数是一个死循环，关于用户命令的读入自顶向下调用了以下函数：</p>
+<ul>
+<li><p>readline(buf, sizeof buf) 读取用户输入的命令行，读到回车返回。</p>
+</li>
+<li><p>read(0, buf + i, 1) ：从标准输入中每次读取一个char。这个在fd.c中的用户文件服务函数接口，调取标准输入fd 0代表的控制台文件，从而调用了console.c的cons_read()函数。</p>
+</li>
+<li><p>cons_read()函数通过系统调用<code>syscall_cgetc()</code>读取控制台的字符，返回给上层函数，并把字符writef显示在终端</p>
+</li>
+<li><p>syscall_cgetc() 调用了内核函数lib/getc.S，从控制台获取了输入字符并返回。</p>
+<blockquote>
+<p>小彩蛋：</p>
+<p>这是getc.S的函数，这段汇编函数的第一行从地址0x90000000获取字符。</p>
+<p>然而，把这个地址换为控制台的外设地址0xB0000000，控制台的效果也完全一致。</p>
+<pre><code class="c">LEAF(sys_cgetc)
+
+1:    lb    t0, 0x90000000
+    beqz    t0, 1b
+    nop
+    move    v0,t0
+    jr    ra
+    nop
+END(sys_cgetc) 
+</code></pre>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>user/init.b中：dup(1,0)：把标准输出设置为控制台文件</p>
+<ul>
+<li>目的：把标准输入定向给标准输出，在user/init.b中通过<code>write(1,&quot;LALA&quot;,4);</code>语句来进行测试。</li>
+<li>原理：由于fd 1被重定向到控制台文件，write(1) 就是向控制台文件写入，目的是把写入内容显示在屏幕。</li>
+<li>对于console类型文件，write()调用cons_write()函数，通过user_bcopy和writef直接写在终端。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-rumcmd：把用户输入的字符串指令拆分成命令和参数"><a href="#2-rumcmd：把用户输入的字符串指令拆分成命令和参数" class="headerlink" title="2.rumcmd：把用户输入的字符串指令拆分成命令和参数"></a>2.rumcmd：把用户输入的字符串指令拆分成命令和参数</h4><img src="/2022/07/12/OS-lab6-summary/lab6-1.png" class="" title="parse_commands">
+
+<p><img src="C:\Users\Musel\Desktop\OS助教面试\lab6\lab6-1.png" alt="lab6-1"></p>
+<ul>
+<li>readline()读入的用户命令字符串，通过gettoken()函数进行层次化建模与拆分：<ul>
+<li>不论是连接命令和命令的pipe符号’|’，还是表示命令或者文件名的字符串，或者表示重定向的符号’&gt;’、’&lt;’等，在gettoken()中被拆分成出一个元素后，都用一个char作为返回值。（字符串使用’w’，其他符号使用自身）。</li>
+<li>这样做的优势是，可以使用一个死循环来处理可变长参数。循环内部switch case语句接受char类型的返回值，进行不同的处理。</li>
+<li>把不同元素抽象成token，实现了句法拆分的层次化处理，把繁琐的字符串处理变的有层次化，扩展性强。 对此部分的扩展性迭代见lab6-challenge的easy任务部分。</li>
+</ul>
+</li>
+<li>至此，完成了命令的读入与解析部分。下面为命令如何执行</li>
+</ul>
+<h4 id="3-dup：文件、管道、标准输入输出之间的重定向"><a href="#3-dup：文件、管道、标准输入输出之间的重定向" class="headerlink" title="3.dup：文件、管道、标准输入输出之间的重定向"></a>3.dup：文件、管道、标准输入输出之间的重定向</h4><h5 id="文件重定向"><a href="#文件重定向" class="headerlink" title="文件重定向"></a>文件重定向</h5><ul>
+<li>在上述switch case语句中，如果识别到重定向符号，会再次调用gettoken()函数读入文件名字符串，并使用r=open()获取文件描述符。</li>
+<li>如果是输出重定向，open()的参数除了写O_WONLY，还要加上创建O_CREATE。</li>
+<li>文件类型的重定向，只需要把标准输入0、或者标准输出1使用dup()重定向为打开的文件描述符r即可。</li>
+</ul>
+<h5 id="管道重定向"><a href="#管道重定向" class="headerlink" title="管道重定向"></a>管道重定向</h5><ul>
+<li><strong>大致流程</strong>：识别到’|’，说明目前识别到的argv已经可以执行左边的指令。而shell的原则是申请新进程来执行命令。所以fork()，子进程进入<code>runit:</code>的命令执行部分。父进程继续循环，parse右半部分command。</li>
+</ul>
+<img src="/2022/07/12/OS-lab6-summary/lab6-2.png" class="" title="pipe">
+
+<ul>
+<li><p>父进程的任务：</p>
+<ul>
+<li><p>fork()前申请管道 <code>pipe(p);</code>，因为父子进程需要共享pipe</p>
+</li>
+<li><p>fork()后：由于父进程要继续识别后续指令，所以它在管道中作为读方，接受左边命令子进程的返回数据。所以<code>dup(p[0],0)</code>，把管道的读指针作为父进程后续指令的标准输入。</p>
+</li>
+<li><p>此时结合管道特性分析：dup时，fd2data(0)的页面被映射到了fd2data(p[0])，此时fd2data(p[0])这个物理页所对的虚拟地址包括：fd2data(p[0]),fd2data(p[1]),fd2data(0)。</p>
+</li>
+</ul>
+<blockquote>
+<p>这使得MOS对于管道的close()时机与linux下gcc中的管道close()时机存在差异。二者都需要父进程或者子进程首先关闭一个不用的读或写指针。</p>
+<p>对于各自进程的另一个需要使用的指针的关闭时机，linux下gcc中的管道close()需要在读或者写完成时，才关闭相应指针。参考这段程序</p>
+<p>而MOS系统中，由于释放pipe的机制是ref(fd)==ref(fd2data)，也就是fd物理页面的引用次数=data物理页面的引用次数，才释放。</p>
+</blockquote>
+<ul>
+<li>所以此时，父进程可以关闭读指针和写指针。（子进程在<code>dup(p[1],1)</code>后也同样关闭读写指针。）这样此时，fd[0]和fd[1]的页面引用都是0，fd2data那个物理页面由于两次dup()重定向，页面引用是2.所以pipe不会因为两次close关闭，会在后续fd2data页面引用降到0时关闭。</li>
+<li>父进程继续解析后续指令，<code>goto again;</code></li>
+</ul>
+</li>
+<li><p>子进程的任务</p>
+<ul>
+<li>子进程用于执行识别到的指令，产生指令结果作为后续指令的输入，所以它在管道中作为写方。所以<code>dup(p[1],1)</code>，把管道的写指针作为子进程执行指令的标准输出。</li>
+<li>子进程执行自身指令，<code>goto runit;</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="dup-int-oldfdnum-int-newfdnum-函数的具体实现"><a href="#dup-int-oldfdnum-int-newfdnum-函数的具体实现" class="headerlink" title="dup(int oldfdnum, int newfdnum)函数的具体实现"></a>dup(int oldfdnum, int newfdnum)函数的具体实现</h5><ul>
+<li>找到两个fd的fd2data页面的虚拟地址</li>
+<li>遍历fd2data(oldfdnum)所对应的文件区的虚拟地址的页表项，如果PTE_V，使用系统调用<code>syscall_mem_map</code>把fd2data(oldfdnum)文件区中的这一虚拟地址的物理页，映射给fd2data(newfdnum)文件区的相同偏移的虚拟地址。</li>
+</ul>
+<h4 id="4-spawn：加载命令的二进制映像，创建子进程执行外部命令"><a href="#4-spawn：加载命令的二进制映像，创建子进程执行外部命令" class="headerlink" title="4.spawn：加载命令的二进制映像，创建子进程执行外部命令"></a>4.spawn：加载命令的二进制映像，创建子进程执行外部命令</h4><p>在runcmd()的runit部分，把解析到的命令和参数argv数组传入spawn()函数，执行外部命令。</p>
+<ul>
+<li><p>从文件系统打开2 进制 ELF，在MOS 里是 *.b，申请新的进程描述符</p>
+<ul>
+<li> MOS中open()的文件要在磁盘映像中检索，对应到fs.img文件。而此文件在fs/Makefile中生成。所以我们没有办法打开user/*.b，而是需要在fs/Makefile中给生成磁盘映像fs.img的命令中加入user/*.b的二进制文件，才能在磁盘中烧录对应的文件。</li>
+</ul>
+</li>
+<li><p>使用系统调用syscall_env_alloc() 生成新进程</p>
+</li>
+<li><p>为子进程初始化堆、栈空间，并设置栈顶指针，对于栈空间，因为我们的调用可能是有参数的，所以要将参数也安排进用户栈中。</p>
+<img src="/2022/07/12/OS-lab6-summary/lab6-3.png" class="" title="init_stack"></li>
+<li><p>将目标程序加载到子进程的地址空间中，并为它们分配物理页面; </p>
+<ul>
+<li><p>usr_load_elf(): <code>load_icode_mapper() </code>+ 类似lab4 <code>fork.c的pgfault()</code> 中的用户态页面复制</p>
+</li>
+<li><p>二进制文件从text_start位置开始加载。这个位置对于每个*.b是固定的，由user/user.lds指导链入</p>
+</li>
+</ul>
+<pre><code class="c">   . = 0x00400000;
+
+     _text = .;                    /* Text and read-only data */
+     .text : &#123;
+           *(.text)
+           *(.fixup)
+           *(.gnu.warning)
+     &#125;
+</code></pre>
+</li>
+<li><p>设置子进程的寄存器 (栈寄存器 sp 设置为 esp。程序入口地址 pc 设置为 UTEXT)</p>
+<ul>
+<li>寄存器指针为进程中上下文寄存器<code>tf = &amp;(envs[ENVX(child_envid)].env_tf);</code>。</li>
+<li>用户进程下的<code>envs</code>与env.c中的不同。envs在user/entry.S中定义，<code>.globl envs</code>，然后被赋值为UENVS <code>envs: .word UENVS</code>。此时在用户态，想修改进程env结构体，从UENVS的虚拟地址通过两级页表访问修改env结构体的物理页面。</li>
+</ul>
+</li>
+<li><p>遍历页表，将父进程的共享页面syscall_mem_map() 映射到子进程的地址空间中。</p>
+</li>
+<li><p>这些都做完后，syscall_set_env_status() 设置子进程可执行。</p>
+</li>
+</ul>
+<h2 id="三、pipe机制"><a href="#三、pipe机制" class="headerlink" title="三、pipe机制"></a>三、pipe机制</h2><p>思考题和教程描述的较为清晰。</p>
+<h3 id="关于中断导致竞争的解决策略"><a href="#关于中断导致竞争的解决策略" class="headerlink" title="关于中断导致竞争的解决策略"></a>关于中断导致竞争的解决策略</h3><ul>
+<li><p>对于fd页和fd2data页的映射和解映射不能封装成原子操作，所以做了两次修正：</p>
+<ul>
+<li>一个是顺序的问题，map时先data页再fd页，unmap时先fd页再data页。</li>
+<li>env_runs域要在lab3部分的env.c的env_runs()维护，从而保证可以通过env_runs确保获取的两个pageref是没有被时钟中断分开。</li>
+</ul>
+</li>
+<li><p>pipe_read()中需要在读取过程中写好结束或者调度条件</p>
+<pre><code class="c">while (p-&gt;p_rpos &gt;= p-&gt;p_wpos) &#123;
+            if (_pipeisclosed(fd, p) || i &gt; 0) return i;
+            syscall_yield();
+        &#125;
+</code></pre>
+</li>
+<li><p>关于MOS的管道与linux下gcc中的管道在close()中的不同：</p>
+<p>见上述内容</p>
+</li>
+</ul>
+<h3 id="Thinking-6-1"><a href="#Thinking-6-1" class="headerlink" title="Thinking 6.1"></a>Thinking 6.1</h3><blockquote>
+<p>示例代码中，父进程操作管道的写端，子进程操作管道的读端。如果现在想让父进程作为“读者”，代码应当如何修改？ </p>
+</blockquote>
+<pre><code class="c">#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+
+int fildes[2];
+/* buf size is 100 */
+char buf[100];
+int status;
+
+int main()&#123;
+
+    status = pipe(fildes);
+
+    if (status == -1 ) &#123;
+        /* an error occurred */
+        printf(&quot;error\n&quot;);
+    &#125;
+
+    switch (fork()) &#123;
+    case -1: /* Handle error */
+        break;
+
+    case 0: /* Child - reads from pipe */
+        close(fildes[0]); /* Read end is unused */
+        write(fildes[1], &quot;Hello world\n&quot;, 12); /* Write data on pipe */
+        close(fildes[1]); /* father will see EOF */
+        exit(EXIT_SUCCESS);
+
+    default: /* Parent - writes to pipe */
+        close(fildes[1]); /* Write end is unused */
+        read(fildes[0], buf, 100); /* Get data from pipe */
+        printf(&quot;father-process read:%s&quot;,buf); /* Print the data */
+        close(fildes[0]); /* Finished with pipe */
+        exit(EXIT_SUCCESS);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="Thinking-6-2"><a href="#Thinking-6-2" class="headerlink" title="Thinking 6.2"></a>Thinking 6.2</h3><blockquote>
+<p>上面这种不同步修改 pp_ref 而导致的进程竞争问题在 user/fd.c 中的dup 函数中也存在。请结合代码模仿上述情景，分析一下我们的 dup 函数中为什么会出现预想之外的情况？</p>
+</blockquote>
+<pre><code>    pipe(p);
+    rightpipe = fork();
+    if (rightpipe == 0) &#123;
+        dup(p[1], 0);
+        read(p[0]);
+    &#125;
+    else &#123;
+        close(p[0]);
+        write(p[1]);
+        close(p[1]);
+    &#125;
+</code></pre>
+<ul>
+<li> fork 结束后，子进程先执行dup(p[0],newfd).时钟中断产生在下面两条指令之间.</li>
+</ul>
+<pre><code class="c">    if ((r = syscall_mem_map(0, (u_int)oldfd, 0, (u_int)newfd,
+                             ((*vpt)[VPN(oldfd)]) &amp; (PTE_V | PTE_R | PTE_LIBRARY))) &lt; 0) &#123;
+        goto err;
+    &#125;
+
+    /* break */
+
+    if ((* vpd)[PDX(ova)]) &#123;
+        for (i = 0; i &lt; PDMAP; i += BY2PG) &#123;
+            pte = (* vpt)[VPN(ova + i)];
+            if (pte &amp; PTE_V) &#123;
+                // should be no error here -- pd is already allocated
+                if ((r = syscall_mem_map(0, ova + i, 0, nva + i,
+                                         pte &amp; (PTE_V | PTE_R | PTE_LIBRARY))) &lt; 0) &#123;
+                    goto err;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
+<ul>
+<li>子进程 dup(p[1],newfd) 后，newfd增加了对 p[1] 的映射，但还没有来得及增加对 pipe 的映射(map)，此时时钟中断产生，父进程接着执行。</li>
+<li>父进程close(p[0])后，此时各个页的引用情况：pageref(p[0]) = 1， pageref(p[1]) = 3(因为子进程复制了p[1])。此时 pipe 的pageref 是 3(子进程的pageref(pipe)是2，子进程对pipe没有dup增加映射也没有close解除映射；同时父进程中 p[0] 刚解除对 pipe 的映射，所以在父进程中也只有 p[1] 引用了 pipe。</li>
+<li>父进程执行 write，write 中首先判断读者是否关闭。比较 pageref(pipe) 与 pageref(p[1])之后发现它们都是 3，说明写端已经关闭，于是父进程退出。</li>
+</ul>
+<h3 id="Thinking-6-4"><a href="#Thinking-6-4" class="headerlink" title="Thinking 6.4"></a>Thinking 6.4</h3><blockquote>
+<p>仔细阅读上面这段话，并思考下列问题<br>• 按照上述说法控制 pipeclose 中 fd 和 pipe unmap 的顺序，是否可以解决上述场景的进程竞争问题？给出你的分析过程。<br>• 我们只分析了 close 时的情形，在 fd.c 中有一个 dup 函数，用于复制文件内容。试想，如果要复制的是一个管道，那么是否会出现与 close 类似的问题？请模仿上述材料写写你的理解。</p>
+</blockquote>
+<ul>
+<li><p>close()的ummap(fd)后unmap(pipe)可以解决竞争问题。考虑下面的过程：</p>
+<ul>
+<li>fork 结束后，子进程先执行。时钟中断产生在 close(p[1]) 与 read 之间，父进程开<br>始执行。</li>
+<li>父进程在 close(p[0]) 中，p[0] 已经解除了对 p[0] 的映射 (unmap)，还没有来得及<br>解除对 pipe 的映射，时钟中断产生，子进程接着执行。</li>
+<li>此时各个页的引用情况：pageref(p[0]) = 1(父进程解除了对 p[0] 的<br>映射)，而 pageref(p[1]) = 1(因为子进程已经关闭了 p[1])。但注意，此时 pipe 的<br>pageref 是 3，子进程中 p[0] 和 p[1] 都引用了 pipe，同时父进程中 p[0] 刚解除对 pipe 的映<br>射，所以在父进程中只有 p[1] 引用了 pipe。</li>
+<li>子进程执行 read，read 中首先判断写者是否关闭。比较 pageref(pipe) 与 pageref(p[0])<br>不相等，说明写端没有关闭。</li>
+</ul>
+</li>
+<li><p>由于pageref(fd)的取值为2或1，pageref(pipe)可以是4~2，所以需要满足“大追小”，即分pageref(pipe)和pageref(fd)别从4和2开始，要让他们在1=1的时候相遇，从而避免在2=2的时候意外相遇而终止。所以dup的时候，要先让大的pageref(pipe)先map从而增加一，再让pageref(fd)map增加一，避免因为pageref(fd)map增加的时候导致二者相等的错误情况。具体错误情况可见thinking 6.2。</p>
+</li>
+</ul>
+
+    </article>
+    <!-- license -->
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/05/31/OS-lab5-summary/" title="BUAA-OS-Lab5">
+                    <div class="prevTitle">BUAA-OS-Lab5</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+    
+        
+            
+                <a href="//github.com/Mmmusel" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://space.bilibili.com/277979311?spm_id_from=333.1007.0.0" class="iconfont-archer bilibili" target="_blank" title=bilibili></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">Thanks Vistiors <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81MOS%E4%B8%AD%E4%BD%93%E7%8E%B0%E2%80%9C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E2%80%9D%E6%80%9D%E6%83%B3%E7%9A%84%E4%B8%A4%E4%B8%AA%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.</span> <span class="toc-text">一、MOS中体现“面向对象”思想的两个设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-fd-c%E7%9A%84%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%87%BD%E6%95%B0%E6%8E%A5%E5%8F%A3%EF%BC%8C%E5%AE%9E%E9%99%85%E4%B8%8A%E5%8C%85%E5%90%ABconsole-file-pipe%E4%B8%89%E7%A7%8D%E5%A4%96%E8%AE%BE%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1. fd.c的文件服务函数接口，实际上包含console file pipe三种外设文件类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-fd-h-%E5%AE%9A%E4%B9%89%E5%A4%96%E8%AE%BE%E6%96%87%E4%BB%B6%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%8E%A5%E5%8F%A3dev"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 fd.h 定义外设文件的抽象接口dev</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%AE%9E%E7%8E%B0dev%E6%8E%A5%E5%8F%A3%E7%9A%84%E7%BB%A7%E6%89%BF%E7%B1%BB"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 实现dev接口的继承类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#file-c"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">file.c</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#console-c"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">console.c</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#pipe-c"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">pipe.c</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84%E5%A4%9A%E6%80%81%E6%80%A7"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 父类方法调用的多态性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%A8%E5%AF%B9shell%E8%AF%BB%E5%85%A5%E7%9A%84%E5%91%BD%E4%BB%A4%E8%BF%9B%E8%A1%8Csplit%E5%92%8Cparse%EF%BC%8C%E6%8B%86%E5%88%86%E5%87%BA%E5%91%BD%E4%BB%A4%E5%92%8C%E5%8F%82%E6%95%B0%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E5%B0%86%E6%89%80%E6%9C%89%E7%AC%A6%E5%8F%B7%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%83%BD%E6%8A%BD%E8%B1%A1%E6%88%90token"><span class="toc-number">1.2.</span> <span class="toc-text">2. 在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Shell%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">二、Shell执行流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%94%B3%E8%AF%B7%E6%96%B0%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 申请新进程的几种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-shell%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E4%B8%8E%E5%85%B6%E5%AF%B9%E5%BA%94%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 shell的基本功能与其对应的函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%8A%8Ashell%E7%BB%88%E7%AB%AF%E7%9A%84%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%BA%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%85%A5%E5%92%8C%E5%B1%8F%E5%B9%95%E8%BE%93%E5%87%BA"><span class="toc-number">2.2.1.</span> <span class="toc-text">1.把shell终端的标准输入输出初始化为控制台输入和屏幕输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-rumcmd%EF%BC%9A%E6%8A%8A%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E4%BB%A4%E6%8B%86%E5%88%86%E6%88%90%E5%91%BD%E4%BB%A4%E5%92%8C%E5%8F%82%E6%95%B0"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.rumcmd：把用户输入的字符串指令拆分成命令和参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-dup%EF%BC%9A%E6%96%87%E4%BB%B6%E3%80%81%E7%AE%A1%E9%81%93%E3%80%81%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B9%8B%E9%97%B4%E7%9A%84%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">2.2.3.</span> <span class="toc-text">3.dup：文件、管道、标准输入输出之间的重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">2.2.3.1.</span> <span class="toc-text">文件重定向</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AE%A1%E9%81%93%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">2.2.3.2.</span> <span class="toc-text">管道重定向</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#dup-int-oldfdnum-int-newfdnum-%E5%87%BD%E6%95%B0%E7%9A%84%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.2.3.3.</span> <span class="toc-text">dup(int oldfdnum, int newfdnum)函数的具体实现</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-spawn%EF%BC%9A%E5%8A%A0%E8%BD%BD%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%98%A0%E5%83%8F%EF%BC%8C%E5%88%9B%E5%BB%BA%E5%AD%90%E8%BF%9B%E7%A8%8B%E6%89%A7%E8%A1%8C%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.2.4.</span> <span class="toc-text">4.spawn：加载命令的二进制映像，创建子进程执行外部命令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81pipe%E6%9C%BA%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">三、pipe机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%AD%E6%96%AD%E5%AF%BC%E8%87%B4%E7%AB%9E%E4%BA%89%E7%9A%84%E8%A7%A3%E5%86%B3%E7%AD%96%E7%95%A5"><span class="toc-number">3.1.</span> <span class="toc-text">关于中断导致竞争的解决策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thinking-6-1"><span class="toc-number">3.2.</span> <span class="toc-text">Thinking 6.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thinking-6-2"><span class="toc-number">3.3.</span> <span class="toc-text">Thinking 6.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thinking-6-4"><span class="toc-number">3.4.</span> <span class="toc-text">Thinking 6.4</span></a></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 14
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span>
+            <a class="archive-post-title" href="/2022/07/12/OS-lab6-summary/">BUAA-OS-Lab6</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span>
+            <a class="archive-post-title" href="/2022/05/31/OS-lab5-summary/">BUAA-OS-Lab5</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span>
+            <a class="archive-post-title" href="/2022/05/04/Unix-MyShell-Summary/">BUAA-Unix-Linux下C语言实现MyShell</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span>
+            <a class="archive-post-title" href="/2022/05/03/OS-lab3-summary/">BUAA-OS-Lab3</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span>
+            <a class="archive-post-title" href="/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/14</span>
+            <a class="archive-post-title" href="/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span>
+            <a class="archive-post-title" href="/2022/03/24/OO-Unit1-summary/">BUAA-OO-Unit1</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2022/03/15/OS-lab0-summary/">BUAA-OS-Lab0</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span>
+            <a class="archive-post-title" href="/2022/03/12/shell/">Shell</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/">OS-Pre-Cause SR EPC BadVaddr</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/git/">Git</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span>
+            <a class="archive-post-title" href="/2022/02/16/CSS/">CSS</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span>
+            <a class="archive-post-title" href="/2022/02/14/HTML/">HTML</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span>
+            <a class="archive-post-title" href="/2022/01/27/hello-world/">Hello World</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="CSS">
+                <span class="iconfont-archer">&#xe606;</span>
+                CSS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OO">
+                <span class="iconfont-archer">&#xe606;</span>
+                OO
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OS">
+                <span class="iconfont-archer">&#xe606;</span>
+                OS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Unix">
+                <span class="iconfont-archer">&#xe606;</span>
+                Unix
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://mmmusel.github.io",
+        root: siteMetaRoot,
+        author: "Musel"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v="></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v="></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>

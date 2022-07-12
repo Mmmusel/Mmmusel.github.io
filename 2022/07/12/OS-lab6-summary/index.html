@@ -28,11 +28,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-0.png">
 <meta property="og:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-1.png">
-<meta property="og:image" content="c:/Users/Musel/Desktop/OS助教面试/lab6/lab6-1.png">
 <meta property="og:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-2.png">
 <meta property="og:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-3.png">
 <meta property="article:published_time" content="2022-07-12T03:59:56.000Z">
-<meta property="article:modified_time" content="2022-07-12T04:06:36.202Z">
+<meta property="article:modified_time" content="2022-07-12T12:47:18.307Z">
 <meta property="article:author" content="Musel">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://mmmusel.github.io/2022/07/12/OS-lab6-summary/lab6-0.png">
@@ -534,7 +533,7 @@
 &#125;;
 </code></pre>
 <h4 id="1-3-父类方法调用的多态性"><a href="#1-3-父类方法调用的多态性" class="headerlink" title="1.3 父类方法调用的多态性"></a>1.3 父类方法调用的多态性</h4><p>在fd.c中调用close()\read()\write()的文件操作函数接口时，使用类似<code>(*dev-&gt;dev_close)(fd)</code> 、<code>(*dev-&gt;dev_read)(fd, buf, n, fd-&gt;fd_offset)</code>的调用，可以实现类似类方法的多态的效果，不同的子类（外设文件类型）对应不同的文件服务函数效果。</p>
-<h3 id="2-在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token"><a href="#2-在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token" class="headerlink" title="2. 在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token"></a>2. 在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token</h3><p>见shell流程分析的命令拆分部分。</p>
+<h3 id="2-在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token"><a href="#2-在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token" class="headerlink" title="2. 在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token"></a>2. 在对shell读入的命令进行split和parse，拆分出命令和参数的过程中，将所有符号和字符串都抽象成token</h3><p>见<a target="_blank" rel="noopener" href="https://mmmusel-github-io.vercel.app/2022/07/12/OS-lab6-summary/#/2-rumcmd%EF%BC%9A%E6%8A%8A%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E4%BB%A4%E6%8B%86%E5%88%86%E6%88%90%E5%91%BD%E4%BB%A4%E5%92%8C%E5%8F%82%E6%95%B0">shell流程分析的命令拆分部分</a>。</p>
 <h2 id="二、Shell执行流程"><a href="#二、Shell执行流程" class="headerlink" title="二、Shell执行流程"></a>二、Shell执行流程</h2><img src="/2022/07/12/OS-lab6-summary/lab6-0.png" class="" title="shell">
 
 <h3 id="2-1-申请新进程的几种方式"><a href="#2-1-申请新进程的几种方式" class="headerlink" title="2.1 申请新进程的几种方式"></a>2.1 申请新进程的几种方式</h3><ul>
@@ -547,7 +546,6 @@
 <ul>
 <li>fd_alloc(&amp;fd)：从小到大遍历fd号，通过检查INDEX2FD(fd) 对应的页表是否PTE_V，判断fd号是否被占用</li>
 <li>给fd号所对应的fd结构体申请BY2PG，标记为共享页面。<code>syscall_mem_alloc(0, (u_int)fd, PTE_V|PTE_R|PTE_LIBRARY)</code></li>
-<li>（（（（共享指的是父子共享，而不是全局进程共享（?</li>
 </ul>
 <blockquote>
 <p>实际上，在Linux的终端概念中，默认每个进程的fd 0,1,2已经被占用。被申请使用的文件描述符fd是从3开始的。Linux默认0是标准输入，从键盘输入；1是标准输出，输出到屏幕；2是标准错误输出。</p>
@@ -600,7 +598,6 @@ END(sys_cgetc)
 </ul>
 <h4 id="2-rumcmd：把用户输入的字符串指令拆分成命令和参数"><a href="#2-rumcmd：把用户输入的字符串指令拆分成命令和参数" class="headerlink" title="2.rumcmd：把用户输入的字符串指令拆分成命令和参数"></a>2.rumcmd：把用户输入的字符串指令拆分成命令和参数</h4><img src="/2022/07/12/OS-lab6-summary/lab6-1.png" class="" title="parse_commands">
 
-<p><img src="C:\Users\Musel\Desktop\OS助教面试\lab6\lab6-1.png" alt="lab6-1"></p>
 <ul>
 <li>readline()读入的用户命令字符串，通过gettoken()函数进行层次化建模与拆分：<ul>
 <li>不论是连接命令和命令的pipe符号’|’，还是表示命令或者文件名的字符串，或者表示重定向的符号’&gt;’、’&lt;’等，在gettoken()中被拆分成出一个元素后，都用一个char作为返回值。（字符串使用’w’，其他符号使用自身）。</li>
@@ -706,7 +703,7 @@ END(sys_cgetc)
 </code></pre>
 </li>
 <li><p>关于MOS的管道与linux下gcc中的管道在close()中的不同：</p>
-<p>见上述内容</p>
+<p>见<a target="_blank" rel="noopener" href="https://mmmusel-github-io.vercel.app/2022/07/12/OS-lab6-summary/#/%E7%AE%A1%E9%81%93%E9%87%8D%E5%AE%9A%E5%90%91">上述关于close()的分析</a>。</p>
 </li>
 </ul>
 <h3 id="Thinking-6-1"><a href="#Thinking-6-1" class="headerlink" title="Thinking 6.1"></a>Thinking 6.1</h3><blockquote>
@@ -803,7 +800,7 @@ int main()&#123;
 <li>子进程执行 read，read 中首先判断写者是否关闭。比较 pageref(pipe) 与 pageref(p[0])<br>不相等，说明写端没有关闭。</li>
 </ul>
 </li>
-<li><p>由于pageref(fd)的取值为2或1，pageref(pipe)可以是4~2，所以需要满足“大追小”，即分pageref(pipe)和pageref(fd)别从4和2开始，要让他们在1=1的时候相遇，从而避免在2=2的时候意外相遇而终止。所以dup的时候，要先让大的pageref(pipe)先map从而增加一，再让pageref(fd)map增加一，避免因为pageref(fd)map增加的时候导致二者相等的错误情况。具体错误情况可见thinking 6.2。</p>
+<li><p>由于pageref(fd)的取值为2或1，pageref(pipe)可以是4~2，所以需要满足“大追小”，即分pageref(pipe)和pageref(fd)别从4和2开始，要让他们在1=1的时候相遇，从而避免在2=2的时候意外相遇而终止。所以dup的时候，要先让大的pageref(pipe)先map从而增加一，再让pageref(fd)map增加一，避免因为pageref(fd)map增加的时候导致二者相等的错误情况。具体错误情况可见<a target="_blank" rel="noopener" href="https://mmmusel-github-io.vercel.app/2022/07/12/OS-lab6-summary/#/Thinking-6-2">thinking 6.2</a>。</p>
 </li>
 </ul>
 
@@ -1159,14 +1156,14 @@ int main()&#123;
     
         
         <li class="archive-post-item">
-            <span class="archive-post-date">05/01</span>
-            <a class="archive-post-title" href="/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
+            <span class="archive-post-date">04/14</span>
+            <a class="archive-post-title" href="/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
         </li>
     
         
         <li class="archive-post-item">
-            <span class="archive-post-date">04/14</span>
-            <a class="archive-post-title" href="/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
+            <span class="archive-post-date">04/10</span>
+            <a class="archive-post-title" href="/2022/04/10/OO-Unit2-summary/">BUAA-OO-Unit2</a>
         </li>
     
         

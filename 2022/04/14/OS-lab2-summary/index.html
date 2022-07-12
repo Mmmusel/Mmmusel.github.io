@@ -19,26 +19,24 @@
         <meta name="keywords" content="blog">
     
     <meta name="description" content="">
-    <meta name="description" content="操作系统 Lab2：存储管理流程图解">
+    <meta name="description" content="写在前面：以下是在整个lab2从学习到理解的过程中，和朋友遇到的相同困惑和思考讨论后给出的答案：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BUAA-OS-Lab2">
 <meta property="og:url" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/index.html">
 <meta property="og:site_name" content="Musel&#39;s blog">
-<meta property="og:description" content="操作系统 Lab2：存储管理流程图解">
+<meta property="og:description" content="写在前面：以下是在整个lab2从学习到理解的过程中，和朋友遇到的相同困惑和思考讨论后给出的答案：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/2.jpg">
-<meta property="og:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/3.jpg">
-<meta property="og:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/4.jpg">
-<meta property="og:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/5.jpg">
-<meta property="og:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/6.jpg">
-<meta property="og:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/7.jpg">
+<meta property="og:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/lab2.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/lab2-2.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/lab2-1.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/lab2-3.png">
 <meta property="og:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/1.jpg">
 <meta property="article:published_time" content="2022-04-14T08:19:53.000Z">
-<meta property="article:modified_time" content="2022-07-07T02:33:37.409Z">
+<meta property="article:modified_time" content="2022-07-12T12:39:37.389Z">
 <meta property="article:author" content="Musel">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/2.jpg">
+<meta name="twitter:image" content="https://mmmusel.github.io/2022/04/14/OS-lab2-summary/lab2.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/x.ico">
@@ -341,7 +339,7 @@
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">2.9k</span>阅读时长: <span class="post-count reading-time">10 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">5.1k</span>阅读时长: <span class="post-count reading-time">18 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -502,24 +500,195 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <p>操作系统 Lab2：存储管理流程图解</p>
+        <img src="/2022/04/14/OS-lab2-summary/lab2.png" class="" title="banner">
+
+<h1 id="写在前面："><a href="#写在前面：" class="headerlink" title="写在前面："></a>写在前面：</h1><p>以下是在整个lab2从学习到理解的过程中，和朋友遇到的相同困惑和思考讨论后给出的答案：</p>
 <span id="more"></span>
 
-<h1 id="一、流程图解"><a href="#一、流程图解" class="headerlink" title="一、流程图解"></a>一、流程图解</h1><h2 id="一-虚存内存映射图："><a href="#一-虚存内存映射图：" class="headerlink" title="(一)虚存内存映射图："></a>(一)虚存内存映射图：</h2><img src="/2022/04/14/OS-lab2-summary/2.jpg" class="" title="pic1">
+<ul>
+<li>c语言写代码时，只能*内核态下的虚拟地址。不能*物理地址。</li>
+<li>在lab2中不能*用户态的虚拟地址。</li>
+</ul>
+<blockquote>
+<ul>
+<li><p>在c语言中指针面向的是cpu，所以<strong>只能 *虚拟地址</strong>。寄存器中如pc也是虚拟地址。</p>
+</li>
+<li><p>所以页表项的PTE_ADDR是物理地址，不能*物理地址。要*KADDR(PTE_ADDR(物理地址))。</p>
+</li>
+<li><p>kseg1和kuseg都是虚拟地址，但是在Lab2中只能*kseg1区域的虚拟地址。原因是：MOS 中，通过页表进行地址变换时，硬件只会查询TLB，如果查找失败，就会触发 TLB 中断，对应的异常中断处理就会对 TLB 进行重填，才能完成kuseg的虚拟地址通过二级页表访问物理地址。然而，lab2 里面没有开启tlb中断这个异常处理的功能，因此在<strong>lab2中不能*kuseg的用户态虚拟地址</strong>，比如UPAGES、UENVS。</p>
+</li>
+<li><p>在lab3的init/init.c中开启了<code>trap_init();</code>中断处理后，此时tlb中断正常响应，就可以*kuseg的用户态虚拟地址了。</p>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>在编写操作系统的c代码时，变量分别存放在哪部分物理内存？page_alloc() 申请的物理页面用来存什么？</li>
+</ul>
+<blockquote>
+<ul>
+<li><p>代码段、全局变量和静态变量在编译阶段被确定，链接时被链入0x8001 0000向上这部分物理内存。</p>
+</li>
+<li><p>临时变量在内核栈区，被存放在0x8040 0000向下8*BY2PG这部分物理内存。</p>
+</li>
+<li><p>申请物理页面的用途：lab3用于给新进程申请页目录、给内核进程加载外部二进制elf文件并执行；lab4用于为用户进程申请用户栈、duppage()时为COW复制的页表申请物理空间；lab5在进程内存放文件内容、lab6用于给用户进程加载外部二进制elf文件来执行命令。</p>
+<p>申请的页面存放在0x8040 0000向上这部分物理内存</p>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>在建立两级页表的映射机制时，虚拟地址、物理地址、（页表项）指针、（页表项）指针存放的数据 是什么关系？</li>
+</ul>
+<blockquote>
+<p>页目录项和页表项：存储于物理内存中某个物理地址中。KADDR(物理地址)就是存储页目录项和页表项的虚拟地址（位于kseg0），这个虚拟地址是页表项指针。使用*页表项指针（kseg0的虚拟地址）可以获取到这个虚拟地址对应的物理内存中的数据（页表项）。</p>
+<p>对于获取到的页表项数据，PTE_ADDR(页表项)得到的是物理页的基地址。PTE_ADDR(页目录项)得到的物理页是二级页表的物理页基地址。二级页表项指针pte = KADDR(PTE_ADDR(页目录项))。访存二级页表项数据*pte 。PTE_ADDR（二级页表项）得到的物理页是内存数据页的物理页基地址。内存数据指针同理KADDR(PTE_ADDR(二级页表项))，*得到要访存的虚拟地址的数据。</p>
+<p>要访存的虚拟地址va的不同段，用于*时提供偏移，包括页目录项在页目录的偏移PDX(va)，页表项在二级页表的偏移PTX(va)，数据在物理页面（等于在虚拟页面）的偏移offset(va)。</p>
+</blockquote>
+<ul>
+<li>MOS编写函数时，为了扩展性、代码复用性，在函数的传入参数上的两个设计：</li>
+</ul>
+<blockquote>
+<ul>
+<li>传入0或者1的标志位：例如pgdir_walk()函数的create参数，用于标志寻找二级页表项时是否创建二级页表。</li>
+<li>传入指针的指针，用作返回值：例如pgdir_walk()函数的**ppte参数，用于底层函数pgdir_walk() 传给上层调用者二级页表项地址 。</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>alloc() 和page_alloc()</p>
+<p>boot_pgdir_walk() 和pgdir_walk()</p>
+<p>前后两个相似功能函数的区别？</p>
+</li>
+</ul>
+<blockquote>
+<p>物理内存管理：页式管理的思想</p>
+<p>在mips_vm_init()时，才进行了pages物理页面结构体的内存初始化。所以才能进行page_init() 页式内存管理的初始化。</p>
+<p>page_alloc() 和pgdir_walk() 页式内存管理机制。所以在mips_vm_init()时需要使用alloc() 和boot_*() 来初始化物理内存。</p>
+</blockquote>
+<ul>
+<li>一些在Lab2为固定值，但是还存在于函数声明的参数：</li>
+</ul>
+<blockquote>
+<ol>
+<li><p>参数pgdir在pmap.c中全是使用的内核页目录地址boot_pgdir固定值：在后续用户进程使用pmap.c的函数时，参数pgdir会传入进程的页目录基地址，不再是内核页目录地址。</p>
+</li>
+<li><p>align：BY2PG。在mips_vm_init()，为了申请的时候页对齐，便h后续于物理内存的管理，页式管理，按页分配回收。</p>
+</li>
+</ol>
+</blockquote>
+<h1 id="一、操作系统启动时的内存初始化过程"><a href="#一、操作系统启动时的内存初始化过程" class="headerlink" title="一、操作系统启动时的内存初始化过程"></a>一、操作系统启动时的内存初始化过程</h1><h2 id="mips-vm-init"><a href="#mips-vm-init" class="headerlink" title="mips_vm_init()"></a>mips_vm_init()</h2><ul>
+<li>作用：初始化内核页目录、Page结构体数组、env结构体数组的内存空间</li>
+</ul>
+<h3 id="alloc"><a href="#alloc" class="headerlink" title="alloc"></a>alloc</h3><p>static void *alloc(u_int n, u_int align, int clear)</p>
+<ul>
+<li>作用：建立页式管理机制前，初始化内存时标记已使用的内存</li>
+<li>流程：修改freemem全局变量，类似向上移动移动剩余物理空间的栈顶指针。如果clear=1，同时清空所对应的物理内存。</li>
+</ul>
+<img src="/2022/04/14/OS-lab2-summary/lab2-2.png" class="" title="banner">
 
+<h3 id="boot-map-segment"><a href="#boot-map-segment" class="headerlink" title="boot_map_segment"></a>boot_map_segment</h3><p>void boot_map_segment(Pde *pgdir, u_long va, u_long size, u_long pa, int perm)</p>
+<img src="/2022/04/14/OS-lab2-summary/lab2-1.png" class="" title="banner">
 
-<h2 id="二-mips-vm-init流程图："><a href="#二-mips-vm-init流程图：" class="headerlink" title="(二)mips_vm_init流程图："></a>(二)mips_vm_init流程图：</h2><h3 id="1-物理存储部分"><a href="#1-物理存储部分" class="headerlink" title="1.物理存储部分"></a>1.物理存储部分</h3><img src="/2022/04/14/OS-lab2-summary/3.jpg" class="" title="pic1">
+<ul>
+<li><p>作用：把以va为起始，长度为size的这一范围内的虚拟地址，<strong>映射</strong>到起始地址为pa的这一段物理地址</p>
+</li>
+<li><p>如何实现页表<strong>映射</strong>：建立从va到pa的映射，也就是boot_map_segment()关键的代码：在<strong>va所对应的页表项</strong>中写入pa的<strong>物理页框号</strong>ppn以及<strong>权限位</strong>。</p>
+<pre><code class="c">*pgtable_entry = PTE_ADDR(pa + i) | (perm | PTE_V);
+</code></pre>
+<ul>
+<li><p>pa 的物理页框号ppn : PTE_ADDR(pa + i)</p>
+</li>
+<li><p>权限位 ： (perm | PTE_V)</p>
+</li>
+<li><p>va 所对应的页表项 : *pgtable_entry</p>
+<ul>
+<li><p>如何获取页表项地址 (指针) pgtable_entry ：boot_pgdir_walk的返回值</p>
+<pre><code class="c">pgtable_entry = boot_pgdir_walk(pgdir, va + i, 1);
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="boot-pgdir-walk"><a href="#boot-pgdir-walk" class="headerlink" title="boot_pgdir_walk"></a>boot_pgdir_walk</h4><p>static Pte *boot_pgdir_walk(Pde *pgdir, u_long va, int create)</p>
+<img src="/2022/04/14/OS-lab2-summary/lab2-3.png" class="" title="banner">
 
-
-<h3 id="2-虚拟存储部分"><a href="#2-虚拟存储部分" class="headerlink" title="2.虚拟存储部分"></a>2.虚拟存储部分</h3><h4 id="1-目标-粉色字"><a href="#1-目标-粉色字" class="headerlink" title="(1)目标:  (粉色字)"></a>(1)目标:  (粉色字)</h4><img src="/2022/04/14/OS-lab2-summary/4.jpg" class="" title="pic1">
-
-<h4 id="2-boot-segment-map-和-为何它要调用boot-pgdir-walk"><a href="#2-boot-segment-map-和-为何它要调用boot-pgdir-walk" class="headerlink" title="(2)boot_segment_map()   和   为何它要调用boot_pgdir_walk():"></a>(2)boot_segment_map()   和   为何它要调用boot_pgdir_walk():</h4><img src="/2022/04/14/OS-lab2-summary/5.jpg" class="" title="pic1">
-
-<h4 id="3-boot-pgdir-walk后续部分：关于权限位的细节"><a href="#3-boot-pgdir-walk后续部分：关于权限位的细节" class="headerlink" title="(3)boot_pgdir_walk后续部分：关于权限位的细节"></a>(3)boot_pgdir_walk后续部分：关于权限位的细节</h4><img src="/2022/04/14/OS-lab2-summary/6.jpg" class="" title="pic1">
-
-<h4 id="4-两个函数更为简略抽象的图解，所述内容与上文大致相同"><a href="#4-两个函数更为简略抽象的图解，所述内容与上文大致相同" class="headerlink" title="(4)两个函数更为简略抽象的图解，所述内容与上文大致相同"></a>(4)两个函数更为简略抽象的图解，所述内容与上文大致相同</h4><img src="/2022/04/14/OS-lab2-summary/7.jpg" class="" title="pic1">
-
-<h1 id="二、实验思考题"><a href="#二、实验思考题" class="headerlink" title="二、实验思考题"></a>二、实验思考题</h1><h2 id="Thinking-2-1"><a href="#Thinking-2-1" class="headerlink" title="Thinking 2.1"></a>Thinking 2.1</h2><blockquote>
+<ul>
+<li><p>作用：</p>
+<ul>
+<li>返回值作为页表项地址 (指针) pgtable_entry</li>
+<li>如果页目录项的权限位为0，表示此页目录项保存的二级页表的物理地址为空，即所对的二级页表未申请物理内存。此时如果传入参数create位为1，则alloc()出va所在二级页表的物理内存地址，写入页目录项；如果传入参数create位为0，表示boot_pgdir_walk()此时只检查二级页表是否已申请物理内存。如果已申请，正常返回页表项地址。否则返回0</li>
+</ul>
+</li>
+<li><p>流程：如何找到va所对的页表项地址</p>
+<ul>
+<li><p>计算页目录项的虚拟地址：<code>pgdir_entryp = pgdir + PDX(va);</code></p>
+</li>
+<li><p><strong>判断页目录项的有效性</strong>：<code>if (!((*pgdir_entryp) &amp; PTE_V)) </code></p>
+<ul>
+<li>为空：create位为1，则alloc()出va所在二级页表的物理内存地址，写入页目录项；create位为0，返回0.</li>
+</ul>
+</li>
+<li><p><strong>把页目录项PTE_ADDR存储的的二级页表物理地址，通过KADDR宏转换成kseg0的虚拟地址，得到二级页表基地址</strong>：<code>pgtable = (Pte *) KADDR(PTE_ADDR(*pgdir_entryp));</code></p>
+</li>
+<li><p>计算va所对应的二级页表项的虚拟地址：<code>pgtable_entry = pgtable + PTX(va);</code></p>
+</li>
+<li><p>返回va所对应的二级页表项的虚拟地址</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="page-init"><a href="#page-init" class="headerlink" title="page_init"></a>page_init</h2><ul>
+<li><p>作用：</p>
+<ul>
+<li>建立页式内存管理机制，进行物理内存的管理。</li>
+<li>一个物理页面对应一个page结构体，物理内存管理主要是修改page结构体数组的信息</li>
+</ul>
+</li>
+<li><p>流程：</p>
+<ul>
+<li>从pages（第一个page结构体地址）开始，到freemem的所对的页面的page结构体，所有page结构体的pp_ref记为1。表示被使用次数为1.</li>
+<li>剩下的所有空闲结构体的pp_ref记为0，并插入空闲结构体链表page_free_list。</li>
+</ul>
+</li>
+</ul>
+<h1 id="二、页式内存管理机制建立后，为后续lab提供的也是内存管理接口"><a href="#二、页式内存管理机制建立后，为后续lab提供的也是内存管理接口" class="headerlink" title="二、页式内存管理机制建立后，为后续lab提供的也是内存管理接口"></a>二、页式内存管理机制建立后，为后续lab提供的也是内存管理接口</h1><p>返回值均为函数执行是否成功。真正的返回值靠传入<strong>指针的指针返回给上层函数</strong>。</p>
+<h2 id="page-alloc-vs-alloc"><a href="#page-alloc-vs-alloc" class="headerlink" title="page_alloc() vs alloc()"></a>page_alloc() vs alloc()</h2><p>int page_alloc(struct Page **pp)</p>
+<ul>
+<li>不再使用freemem标记占用内存，而是使用页式内存管理模式，即使用空闲结构体链表page_free_list的删除和重新插入管理空闲页面。</li>
+<li>传入一个指针的指针pp，用于修改指针的内容，也就是给*pp写入返回分配的物理页面所对的结构体指针。</li>
+</ul>
+<h2 id="pgdir-walk-vs-boot-pgdir-walk"><a href="#pgdir-walk-vs-boot-pgdir-walk" class="headerlink" title="pgdir_walk() vs boot_pgdir_walk()"></a>pgdir_walk() vs boot_pgdir_walk()</h2><p>int pgdir_walk(Pde *pgdir, u_long va, int create, Pte **ppte)</p>
+<ul>
+<li>需要使用page_alloc()为二级页表申请物理内存空间，不要忘记 <code>ppage-&gt;pp_ref++</code></li>
+</ul>
+<h2 id="page-insert-vs-boot-map-segment"><a href="#page-insert-vs-boot-map-segment" class="headerlink" title="page_insert() vs boot_map_segment"></a>page_insert() vs boot_map_segment</h2><p>int page_insert(Pde *pgdir, struct Page *pp, u_long va, u_int perm)</p>
+<ul>
+<li>作用：<ul>
+<li>把物理页pp映射到虚拟地址va</li>
+</ul>
+</li>
+<li>流程：<ul>
+<li>pgdir_walk() 找va的二级页表项和物理地址是否存在，create=0<ul>
+<li>如果存在：<ul>
+<li>va之前映射到的旧物理页面不是pp，<code>pa2page(*pgtable_entry) != pp</code>：取消va对旧物理页面的映射，<code>page_remove(pgdir, va)</code></li>
+<li>va之前映射到的旧物理页面是pp：更新二级页表项的perm，所以需要<code>tlb_invalidate(pgdir, va);</code>清空旧的TLB，返回。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>需要对二级页表项修改PTE_ADDR，所以要<code>tlb_invalidate(pgdir, va);</code>清空旧的TLB</li>
+<li>找到二级页表项的地址，<code>pgdir_walk(pgdir, va, 1, &amp;pgtable_entry)</code>，如果不存在，此时需要创建</li>
+<li>二级页表项填入ppn和perm，物理页pp的pp_ref++</li>
+</ul>
+</li>
+</ul>
+<h2 id="page-lookup"><a href="#page-lookup" class="headerlink" title="page_lookup"></a>page_lookup</h2><p>struct Page * page_lookup(Pde *pgdir, u_long va, Pte **ppte)</p>
+<ul>
+<li>检查二级页表项是否存在：<code>pgdir_walk(pgdir, va, 0, &amp;pte);</code>，不存在返回0</li>
+<li>填入二级页表项地址 <code>*ppte = pte;</code></li>
+<li>返回va物理页面结构体 <code>return pa2page(*pte);</code></li>
+</ul>
+<h1 id="三、实验思考题"><a href="#三、实验思考题" class="headerlink" title="三、实验思考题"></a>三、实验思考题</h1><h2 id="Thinking-2-1"><a href="#Thinking-2-1" class="headerlink" title="Thinking 2.1"></a>Thinking 2.1</h2><blockquote>
 <p>请你根据上述说明，回答问题：在我们编写的 C 程序中，指针变量中存储的地址是虚拟地址还是物理地址？MIPS 汇编程序中 lw, sw 使用的是虚拟地址还是物理地址？  </p>
 </blockquote>
 <p>指针变量中存储的地址是虚拟地址;MIPS 汇编程序中 lw, sw 使用的是物理地址。</p>
@@ -635,7 +804,7 @@ END(tlb_out)
 </ul>
 </li>
 </ul>
-<h1 id="三、实验难点"><a href="#三、实验难点" class="headerlink" title="三、实验难点"></a>三、实验难点</h1><h2 id="程序空间和物理内存的映射理解："><a href="#程序空间和物理内存的映射理解：" class="headerlink" title="程序空间和物理内存的映射理解："></a>程序空间和物理内存的映射理解：</h2><ol>
+<h1 id="四、实验难点"><a href="#四、实验难点" class="headerlink" title="四、实验难点"></a>四、实验难点</h1><h2 id="程序空间和物理内存的映射理解："><a href="#程序空间和物理内存的映射理解：" class="headerlink" title="程序空间和物理内存的映射理解："></a>程序空间和物理内存的映射理解：</h2><ol>
 <li>对于Page结构体数组的理解：</li>
 </ol>
 <ul>
@@ -688,12 +857,12 @@ END(tlb_out)
 <li>移位运算符的优先级低于加号，需要加括号</li>
 <li>右移后低位截断。如<code>((*pte)&gt;&gt;12)&amp;0xfff</code>,避免出现算数右移的情况</li>
 </ul>
-<h1 id="四、体会与感想"><a href="#四、体会与感想" class="headerlink" title="四、体会与感想"></a>四、体会与感想</h1><ul>
+<h1 id="五、体会与感想"><a href="#五、体会与感想" class="headerlink" title="五、体会与感想"></a>五、体会与感想</h1><ul>
 <li>测试代码写的很好，非常全面地测试了内存管理模块，把原来的黑盒评测变成了白盒，为debug带来了很大的方便！</li>
 <li>回归到了最朴素的printf调试法。由于gxemul的单步调试只能看内存的存取情况，所以想观察函数和地址的行为只能用printf的方法进行单步调试。虽然看过gxemul的断点调试教程，但是比较抽象，希望如果有可能的话助教能结合lab2的具体代码给予结合gxemul的调试示例，作为第二种debug方法</li>
 <li>虚拟内存的函数经常多次调用，返回值类型多，函数间的调用关系比较复杂。我选择在函数的入口、出口、分支判断条件的地方都加入printf语句，配合check()代码可以显式地看到内存分配的过程，加强了对内存管理的理解</li>
 </ul>
-<h1 id="五、指导书反馈"><a href="#五、指导书反馈" class="headerlink" title="五、指导书反馈"></a>五、指导书反馈</h1><ol>
+<h1 id="六、指导书反馈"><a href="#六、指导书反馈" class="headerlink" title="六、指导书反馈"></a>六、指导书反馈</h1><ol>
 <li><p><strong>Exercise2.8</strong>给的函数中，<strong>pgdir_walk函数</strong>中，对应的二级页表不存在则会使用 page_alloc 函数分配一页物理内存用于存放。pp_ref 对应这一页物理内存被引用的次数，它等于有多少虚拟页映射到该物理页。所以此时pgdir_walk函数create的时候，<strong>pp_ref需要+1</strong>.</p>
 </li>
 <li><p><strong>请在lab2</strong>就像lab3强调结构体必须为了评测而保证倒序插入一样，<strong>强调page结构体必须倒序插入</strong>。由于一开始在lab2顺序插入的page结构体，虽然在Lab2课上的题面有强调倒序，在课上评测我也按倒序做了修改。但是<strong>lab3的评测</strong>由于没有特殊说明，我没有再修改page结构体的顺序，导致<strong>lab3课下评测只过了8个点</strong>，误以为是lab3的bug导致浪费大量时间才定位到pmap.c</p>
@@ -716,16 +885,16 @@ END(tlb_out)
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href="/2022/05/01/OO-Unit2-summary/" title="BUAA-OO-Unit2">
-                    <div class="nextTitle">BUAA-OO-Unit2</div>
+                <a href="/2022/05/03/OS-lab3-summary/" title="BUAA-OS-Lab3">
+                    <div class="nextTitle">BUAA-OS-Lab3</div>
                 </a>
             
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2022/03/24/OO-Unit1-summary/" title="BUAA-OO-Unit1">
-                    <div class="prevTitle">BUAA-OO-Unit1</div>
+                <a href="/2022/04/10/OO-Unit2-summary/" title="BUAA-OO-Unit2">
+                    <div class="prevTitle">BUAA-OO-Unit2</div>
                 </a>
             
         </li>
@@ -858,7 +1027,7 @@ END(tlb_out)
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B5%81%E7%A8%8B%E5%9B%BE%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">一、流程图解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E8%99%9A%E5%AD%98%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84%E5%9B%BE%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">(一)虚存内存映射图：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-mips-vm-init%E6%B5%81%E7%A8%8B%E5%9B%BE%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">(二)mips_vm_init流程图：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%89%A9%E7%90%86%E5%AD%98%E5%82%A8%E9%83%A8%E5%88%86"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.物理存储部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E9%83%A8%E5%88%86"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.虚拟存储部分</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%9B%AE%E6%A0%87-%E7%B2%89%E8%89%B2%E5%AD%97"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">(1)目标:  (粉色字)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-boot-segment-map-%E5%92%8C-%E4%B8%BA%E4%BD%95%E5%AE%83%E8%A6%81%E8%B0%83%E7%94%A8boot-pgdir-walk"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">(2)boot_segment_map()   和   为何它要调用boot_pgdir_walk():</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-boot-pgdir-walk%E5%90%8E%E7%BB%AD%E9%83%A8%E5%88%86%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%9D%83%E9%99%90%E4%BD%8D%E7%9A%84%E7%BB%86%E8%8A%82"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">(3)boot_pgdir_walk后续部分：关于权限位的细节</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E4%B8%A4%E4%B8%AA%E5%87%BD%E6%95%B0%E6%9B%B4%E4%B8%BA%E7%AE%80%E7%95%A5%E6%8A%BD%E8%B1%A1%E7%9A%84%E5%9B%BE%E8%A7%A3%EF%BC%8C%E6%89%80%E8%BF%B0%E5%86%85%E5%AE%B9%E4%B8%8E%E4%B8%8A%E6%96%87%E5%A4%A7%E8%87%B4%E7%9B%B8%E5%90%8C"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">(4)两个函数更为简略抽象的图解，所述内容与上文大致相同</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">二、实验思考题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-2-1"><span class="toc-number">2.1.</span> <span class="toc-text">Thinking 2.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-2-2"><span class="toc-number">2.2.</span> <span class="toc-text">Thinking 2.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-2-5"><span class="toc-number">2.3.</span> <span class="toc-text">Thinking 2.5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-2-6"><span class="toc-number">2.4.</span> <span class="toc-text">Thinking 2.6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-2-7"><span class="toc-number">2.5.</span> <span class="toc-text">Thinking 2.7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-2-8"><span class="toc-number">2.6.</span> <span class="toc-text">Thinking 2.8</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E9%9A%BE%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">三、实验难点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A9%BA%E9%97%B4%E5%92%8C%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E7%9A%84%E6%98%A0%E5%B0%84%E7%90%86%E8%A7%A3%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">程序空间和物理内存的映射理解：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E6%8C%87%E9%92%88%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%AE%8F%E5%AE%9A%E4%B9%89%E7%AD%89C%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">链表相关的指针、结构体、宏定义等C语言知识：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BD%93%E4%BC%9A%E4%B8%8E%E6%84%9F%E6%83%B3"><span class="toc-number">4.</span> <span class="toc-text">四、体会与感想</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%8C%87%E5%AF%BC%E4%B9%A6%E5%8F%8D%E9%A6%88"><span class="toc-number">5.</span> <span class="toc-text">五、指导书反馈</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">写在前面：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E7%9A%84%E5%86%85%E5%AD%98%E5%88%9D%E5%A7%8B%E5%8C%96%E8%BF%87%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">一、操作系统启动时的内存初始化过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#mips-vm-init"><span class="toc-number">2.1.</span> <span class="toc-text">mips_vm_init()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#alloc"><span class="toc-number">2.1.1.</span> <span class="toc-text">alloc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boot-map-segment"><span class="toc-number">2.1.2.</span> <span class="toc-text">boot_map_segment</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#boot-pgdir-walk"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">boot_pgdir_walk</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#page-init"><span class="toc-number">2.2.</span> <span class="toc-text">page_init</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%A1%B5%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%E5%BB%BA%E7%AB%8B%E5%90%8E%EF%BC%8C%E4%B8%BA%E5%90%8E%E7%BB%ADlab%E6%8F%90%E4%BE%9B%E7%9A%84%E4%B9%9F%E6%98%AF%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.</span> <span class="toc-text">二、页式内存管理机制建立后，为后续lab提供的也是内存管理接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#page-alloc-vs-alloc"><span class="toc-number">3.1.</span> <span class="toc-text">page_alloc() vs alloc()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pgdir-walk-vs-boot-pgdir-walk"><span class="toc-number">3.2.</span> <span class="toc-text">pgdir_walk() vs boot_pgdir_walk()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#page-insert-vs-boot-map-segment"><span class="toc-number">3.3.</span> <span class="toc-text">page_insert() vs boot_map_segment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#page-lookup"><span class="toc-number">3.4.</span> <span class="toc-text">page_lookup</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">三、实验思考题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-2-1"><span class="toc-number">4.1.</span> <span class="toc-text">Thinking 2.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-2-2"><span class="toc-number">4.2.</span> <span class="toc-text">Thinking 2.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-2-5"><span class="toc-number">4.3.</span> <span class="toc-text">Thinking 2.5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-2-6"><span class="toc-number">4.4.</span> <span class="toc-text">Thinking 2.6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-2-7"><span class="toc-number">4.5.</span> <span class="toc-text">Thinking 2.7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-2-8"><span class="toc-number">4.6.</span> <span class="toc-text">Thinking 2.8</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%9E%E9%AA%8C%E9%9A%BE%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">四、实验难点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%A9%BA%E9%97%B4%E5%92%8C%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E7%9A%84%E6%98%A0%E5%B0%84%E7%90%86%E8%A7%A3%EF%BC%9A"><span class="toc-number">5.1.</span> <span class="toc-text">程序空间和物理内存的映射理解：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9B%B8%E5%85%B3%E7%9A%84%E6%8C%87%E9%92%88%E3%80%81%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%AE%8F%E5%AE%9A%E4%B9%89%E7%AD%89C%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86%EF%BC%9A"><span class="toc-number">5.2.</span> <span class="toc-text">链表相关的指针、结构体、宏定义等C语言知识：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%BD%93%E4%BC%9A%E4%B8%8E%E6%84%9F%E6%83%B3"><span class="toc-number">6.</span> <span class="toc-text">五、体会与感想</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%8C%87%E5%AF%BC%E4%B9%A6%E5%8F%8D%E9%A6%88"><span class="toc-number">7.</span> <span class="toc-text">六、指导书反馈</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1065,14 +1234,14 @@ END(tlb_out)
     
         
         <li class="archive-post-item">
-            <span class="archive-post-date">05/01</span>
-            <a class="archive-post-title" href="/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
+            <span class="archive-post-date">04/14</span>
+            <a class="archive-post-title" href="/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
         </li>
     
         
         <li class="archive-post-item">
-            <span class="archive-post-date">04/14</span>
-            <a class="archive-post-title" href="/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
+            <span class="archive-post-date">04/10</span>
+            <a class="archive-post-title" href="/2022/04/10/OO-Unit2-summary/">BUAA-OO-Unit2</a>
         </li>
     
         

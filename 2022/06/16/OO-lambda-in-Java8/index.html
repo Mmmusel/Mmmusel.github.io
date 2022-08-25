@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Musel">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Musel">
+    
+        <meta name="keywords" content="blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="函数式编程的引入：通过四种两类编程范式之间的对比，介绍函数式编程这种编程模式的特别之处。 Java8引入的两个新特性：lambda函数和stream流式编程。这两个特性让java8有了一些函数式编程的能力或者说特点。 函数式编程的优势。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java8的新增特性与函数式编程">
+<meta property="og:url" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/index.html">
+<meta property="og:site_name" content="Musel&#39;s blog">
+<meta property="og:description" content="函数式编程的引入：通过四种两类编程范式之间的对比，介绍函数式编程这种编程模式的特别之处。 Java8引入的两个新特性：lambda函数和stream流式编程。这两个特性让java8有了一些函数式编程的能力或者说特点。 函数式编程的优势。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/1.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/2.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/3.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/4.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/5.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/6.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/7.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/8.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/9.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/10.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/11.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/12.png">
+<meta property="article:published_time" content="2022-06-15T23:12:34.000Z">
+<meta property="article:modified_time" content="2022-08-25T05:31:17.194Z">
+<meta property="article:author" content="Musel">
+<meta property="article:tag" content="OO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mmmusel.github.io/2022/06/16/OO-lambda-in-Java8/1.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/x.ico">
+    
+    <title>java8的新增特性与函数式编程 · Musel&#39;s blog</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>Musel's blog</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Musel&#39;s blog</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">java8的新增特性与函数式编程</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                java8的新增特性与函数式编程
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="OO">OO</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">4.3k</span>阅读时长: <span class="post-count reading-time">15 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2022/06/16</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <ol>
+<li>函数式编程的引入：通过四种两类编程范式之间的对比，介绍函数式编程这种编程模式的特别之处。</li>
+<li>Java8引入的两个新特性：lambda函数和stream流式编程。这两个特性让java8有了一些函数式编程的能力或者说特点。</li>
+<li>函数式编程的优势。</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="函数式编程的引入"><a href="#函数式编程的引入" class="headerlink" title="函数式编程的引入"></a>函数式编程的引入</h2><h3 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h3><p>经过一学期OO课程的设计与构造，体会到面向对象编程的特点是封装、继承、多态，让程序有了非常丰富的可扩展性。</p>
+<blockquote>
+<p>比如这是一段最简单的多线程创建的例子。我们的电梯就是在这个实现了runnable接口的类中被定义了开关门、上下行的行为。</p>
+<p>电梯作业中从这个电梯对象出发，<strong>和其他对象交互</strong>：比如调度器对象、等待对象。</p>
+</blockquote>
+<img src="/2022/06/16/OO-lambda-in-Java8/1.png" class="" title="pic1">
+
+<p>这就是面向对象编程范式的核心，以类作为对象的模板，把类和继承作为构造机制，<strong>以对象为中心</strong>，来思考并解决问题。好处是易于拓展，允许我们实现复杂的逻辑。</p>
+<p>让我们再来仔细看这个输出线程。其实<code>output类</code>作为接口，只实现了一个<code>run方法</code>，甚至只是作为了<code>thread</code>创建的一个构造参数。java比较痛苦的一点是要经常新建类，给他起名，写构造函数等等。</p>
+<h3 id="匿名类"><a href="#匿名类" class="headerlink" title="匿名类"></a>匿名类</h3><p>为了简化这种负担，java有<strong>匿名类</strong>的机制，可以省略掉这个外部类的定义，就是<strong>把<code>output类</code>匿名</strong>，直接把<code>new runnavle接口</code>实现作为<code>thread</code>的构造参数。</p>
+<p>使用了匿名类之后代码看起来简洁了不少，线程的行为也更加直观。不过可以看到，idea给我们把<code>new runnable</code>这一行标灰了，意思是可以省略。</p>
+<h3 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h3><p>其实思考一下也不难理解，上边这么多行，真正有效的代码就一行输出语句。<strong>创建线程是为了执行某一个任务</strong>，任务也就是一个<strong>方法</strong>，那我们为何不<strong>直接传入一个方法</strong>呢？干脆把新建类也省去。</p>
+<p>这就是函数式编程的一个核心概念，函数式编程的<strong>主要抽象</strong>是<strong>函数</strong>，函数是一等公民。</p>
+<p>所谓的一等公民，指的是函数与其他数据类型一样，处于同等地位。函数可以在任何地方定义，在函数内或函数外，可以作为函数的参数和返回值，因此可以对函数进行组合。</p>
+<p>放在这个代码里理解，就是这短短的一行函数，作了线程创建的参数，用到了Lambda函数。这是函数式编程和我们面向对象的世界中不一样的一种抽象。</p>
+<h3 id="命令式编程"><a href="#命令式编程" class="headerlink" title="命令式编程"></a>命令式编程</h3><p>下面我们再来看另一组编程范式。</p>
+<img src="/2022/06/16/OO-lambda-in-Java8/2.png" class="" title="pic1">
+
+<p><strong>面向对象</strong>是一种典型的<strong>命令式编程</strong>，命令式编程是关于定义<strong>如何做</strong>。</p>
+<p>怎么做，是一种<strong>面向硬件</strong>的抽象，程序员需要告诉机器每一步的实现过程。比如这个例子，想计算销量大于100的店铺的总数。命令式编程中，我们就得告诉计算机，你要先做循环，再做条件判断，销量比<code>1000</code>高就给<code>count+1</code>。哦对一定不要忘了，非常致命的一点，**<code>count</code><strong>这个负责计数的变量要记得</strong>初始化**。</p>
+<p>命令式程序有变量（对应着存储单元），赋值语句（获取，存储指令），表达式（内存引用和算术运算）和控制语句（跳转指令）。简单来说，命令式程序就是一个<strong>冯诺依曼机的指令序列</strong>。</p>
+<h3 id="声明式编程"><a href="#声明式编程" class="headerlink" title="声明式编程"></a>声明式编程</h3><p><strong>声明式编程</strong>的风格，是关于定义<strong>要做什么</strong>而不是如何做，更接近<strong>自然语言</strong>的接口。</p>
+<p>同样的功能，声明式的代码不仅写起来起来更简洁，不需要看函数内部的实现细节就可以了解大意。比如这段这段声明式编程的代码只是说：我要<code>过滤(filter)</code> 一下这些店 构成的<code>流(stream)</code> , 只把那些销量大于<code>1000</code>的留下， 计算出个数就行了。</p>
+<p>流式编程是一种典型的声明式编程，更接近自然语言接口，这一些函数调用返回一个结果给<code>count</code>变量，也规避了<code>count</code>自增前的初始化问题。<br>这也是函数式编程的另一个优势，不需要考虑过程量的副作用。</p>
+<img src="/2022/06/16/OO-lambda-in-Java8/3.png" class="" title="pic1">
+
+
+<p>看这例子：两段代码都是先排序，然后返回第一项作为最近的店。区别在于上面的排序改变了这个表的顺序，按照距离由小到大排序。而流式编程的<code>sort</code>并未改变原数据。也就是<strong>函数执行没有副作用</strong>。</p>
+<p>第一个排序，跟下边的比起来也是唯一一个没有使用Lambda表达式的排序写法，它的<code>compartor接口</code>就需要在这个<strong>店铺的类</strong>里边<strong>继承接口</strong>，然后<strong>重写</strong><code>compareto方法</code>。</p>
+<p>在排序的代码中，后面几种出现了 <code>-&gt;</code>、<code>::</code> 的，都用了lambda表达式实现<code>compartor</code>这个比较接口。</p>
+<p>可以看到都是lambda函数，有的刷灰了意思是还可有更简化的写法。<br>我们可以对比集合排序的比较器接口的几种使用lambda函数实现的方法，从compartor接口的例子中了解lambda函数的语法。</p>
+<h2 id="二、lambda函数"><a href="#二、lambda函数" class="headerlink" title="二、lambda函数"></a>二、lambda函数</h2><p>这么多次OO作业肯定大家都用到过，尽管我们在作业中使用Lambda的场景并不是为了函数式编程，是使用新特性来让代码的书写更加优雅。</p>
+<h3 id="Lambda表达式语法"><a href="#Lambda表达式语法" class="headerlink" title="Lambda表达式语法"></a>Lambda表达式语法</h3><img src="/2022/06/16/OO-lambda-in-Java8/4.png" class="" title="pic1">
+
+<p>这张图使用了刚刚提到过的<code>runnable接口</code>的实现的例子。包括函数签名，这个标志着lambda函数的箭头，还有函数式编程中最重视的函数实现。</p>
+<p>这三部分组成了Lambda表达式的完整结构，这一行就可以作为一个<code>runnable接口</code>变量。lambda表达式也可以向我们刚刚创建线程那样作为参数进行传递。</p>
+<h4 id="函数签名"><a href="#函数签名" class="headerlink" title="函数签名"></a>函数签名</h4><p>函数签名包括函数名、函数的返回值和传入参数。</p>
+<p>刚刚提到了，lambda函数是匿名类的进一步简化。lambda的匿名性省略了函数名。同时它有一种更强大的省略特性，这种机制被允许的原因是<strong>java编译器的自动类型推断</strong>。</p>
+<ul>
+<li>返回值可以省略，可以从接口类型判断出返回值。</li>
+<li>参数的类型，也可以被省略。</li>
+<li>如果只有一个参数，可以省略括号。</li>
+<li>把它存成 比较器接口变量，借助这个变量的<code>reverse方法</code>我们可以实现逆序。</li>
+</ul>
+<h4 id="函数主体"><a href="#函数主体" class="headerlink" title="函数主体"></a>函数主体</h4><img src="/2022/06/16/OO-lambda-in-Java8/5.png" class="" title="pic1">
+
+<ul>
+<li><p>主体只包含一个语句，可以省略大括号。刚刚的实现里，箭头后边都只有一条语句，没有大括号。</p>
+</li>
+<li><p>函数实现也可以语句块作为函数，这里除了比较距离，还比较了年龄这个参数，实现了多重条件的比较。</p>
+<blockquote>
+<p>函数实现比较复杂，下面介绍如何一步步化简省略定义这种多重条件的比较逻辑。</p>
+<p>首先<code>::</code>这个符号，两个冒号，像C++的作用域解析运算符，是<strong>Java 8</strong>的一种更方便的<strong>方法引用</strong>。</p>
+<p>我们可以通过使用这种实例方法的引用和<code>Comparator.comparing</code>方法来避免定义比较逻辑——它会自动提取和创建一个基于这个函数的<code>Comparable</code>。</p>
+<p>这里看起来没有lambda表达式的结构，是怎么实现的接口呢？具体原因我们放在后边再展开讲。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Lambda表达式的化简"><a href="#Lambda表达式的化简" class="headerlink" title="Lambda表达式的化简"></a>Lambda表达式的化简</h3><p>总结一下刚刚逐步简化的Lambda表达式。它的作用是取代一个类，用来实现接口。</p>
+<img src="/2022/06/16/OO-lambda-in-Java8/6.png" class="" title="pic1">
+
+<h3 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h3><p>Lambda表达式的语法是什么支持的呢？这种实现的<strong>对象类型</strong>。再怎么函数式编程，也要在java面向对象的机制中扩展。表达式的类型是函数式接口。</p>
+<p>只有一个接口函数需要被实现的接口类型，称为”函数式接口“。为了避免后来的人在这个接口中增加接口函数导致其有多个接口函数需要被实现，变成”非函数接口”，我们可以在这个上面加上一个声明<code>@FunctionalInterface</code>, 这样就无法在里面添加新的接口函数。</p>
+<h3 id="函数式接口的前提条件"><a href="#函数式接口的前提条件" class="headerlink" title="函数式接口的前提条件"></a>函数式接口的前提条件</h3><ul>
+<li><p>使用Lambda必须具有接口，且要求<strong>接口中有且仅有一个抽象方法</strong>。</p>
+<p>无论是JDK内置的Runnable、Comparator接口还是自定义的接口，只有当接口中的抽象方法存在且唯一时，才可以使用Lambda。</p>
+</li>
+<li><p>使用Lambda必须具有<strong>上下文推断</strong>。</p>
+<p>也就是方法的参数或局部变量类型必须为Lambda对应的接口类型，才能使用Lambda作为该接口的实例。上文提到的依托java编译器的自动类型推断的省略机制要求上下文推断。</p>
+</li>
+</ul>
+<h3 id="几种常见的函数式接口"><a href="#几种常见的函数式接口" class="headerlink" title="几种常见的函数式接口"></a>几种常见的函数式接口</h3><img src="/2022/06/16/OO-lambda-in-Java8/7.png" class="" title="pic1">
+
+<ul>
+<li><p><code>predicte</code>：推断出参数类型返回值类型，是用来判断真假的函数接口。 函数实现是一个布尔表达式。</p>
+</li>
+<li><p><code>BinaryOperator</code>：接收两个参数，返回一个值，返回值和参数的数据类型相同。体现一种映射关系，<code>x y -&gt;x+y</code>。</p>
+</li>
+<li><p><code>comparing</code>：上文提到的 “<code>comparing</code>没有lambda表达式的结构是怎么实现的接口？” 因为这个方法返回了一个函数式接口，使用<code>comparing()</code>的地方，也就是<code>sort()</code>的传入参数就是函数式接口function。<br><code>comparing()</code>的传入参数也是函数式接口function。<code>key::lambda</code>是对函数式接口的更一步简化。</p>
+</li>
+</ul>
+<h3 id="集合的函数式接口"><a href="#集合的函数式接口" class="headerlink" title="集合的函数式接口"></a>集合的函数式接口</h3><p>java集合框架也新增部分函数接口用于与Lambda表达式对接。</p>
+<img src="/2022/06/16/OO-lambda-in-Java8/8.png" class="" title="pic1">
+
+<ul>
+<li><p>作业中很常见，比如说removeif规避了for遍历删除的问题，这里的参数就是Prediect 函数式接口。</p>
+</li>
+<li><p>创建优先队列的构造参数，是一个比较器接口。</p>
+</li>
+<li><p>foreach遍历接受函数式接口做参数。</p>
+</li>
+<li><p>第四单元类重名的异常机制，可以借助这个merge方法，BinaryOperator接口作为重映射函数。</p>
+</li>
+</ul>
+<h3 id="作业中使用lambda函数的优化"><a href="#作业中使用lambda函数的优化" class="headerlink" title="作业中使用lambda函数的优化"></a>作业中使用lambda函数的优化</h3><h4 id="unit1"><a href="#unit1" class="headerlink" title="unit1"></a>unit1</h4><ul>
+<li><p>如果在某些情况下我们只需要实现一些行为/操作而不需要实现状态，OOP 会限制将该行为包装在一个类中以便能够执行它。会导致不必要的冗长代码，其中计算只需要执行一个函数。</p>
+</li>
+<li><p>合并同类项的加法类：代码完美遵循了面向对象地封装概念。美中不足是略为繁琐</p>
+<img src="/2022/06/16/OO-lambda-in-Java8/9.png" class="" title="pic1"></li>
+</ul>
+<ul>
+<li>合并同类项：选用hashmap的merge()方法和lambda函数来实现合并同类项非常简洁。<ul>
+<li>forEach()方法用于对 HashMap 中的每个键值对执行指定的操作。匿名函数 lambda 的表达式 作为 forEach()方法的参数传入。</li>
+<li>merge()方法用于合并两个hashmap，使用lambda表达式 (oldValue, newValue) -&gt; (oldValue + newValue) 作为重映射函数。</li>
+<li>Java 8的方法引用更方便，方法引用由::双冒号操作符标示,使用BigInteger::add作为重映射函数即可。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>减法：</p>
+<ul>
+<li>由于hashmap.merge()在插入hashmap2中不存在的key与其对应的value时不会调用重映射函数，故减法不能使用BigInteger::subtract作为映射函数；</li>
+<li>解决办法为减数先取反，再与被减数调用quanticAdd()即可</li>
+</ul>
+</li>
+<li><p>乘法：</p>
+<ul>
+<li>将两个BaseKey相乘后的新BaseKey作为merge方法的key参数，系数的乘积作为value参数，重映射函数BigInteger::add</li>
+<li>Key为自定义类型BaseKey，重写hashcode()和equal()后便于合并同类项</li>
+<li>由于需要维护可变类型BaseKey作为hashmap的key的不可变性，以及value代表的系数为不可变类型BigInteger，没有出现深浅拷贝的Bug</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、Stream流式编程"><a href="#三、Stream流式编程" class="headerlink" title="三、Stream流式编程"></a>三、Stream流式编程</h2><p>Stream 使用类似 SQL 语句从数据库查询数据的方式来提供一种<strong>对 Java 集合运算和表达的高阶抽象</strong>。  </p>
+<img src="/2022/06/16/OO-lambda-in-Java8/10.png" class="" title="pic1">
+
+<p>Stream API <strong>将要处理的元素集合看作一种流</strong>，流在<strong>管道</strong>中传输，并且可以在管道的节点上进行处理， 比如<strong>筛选，排序，聚合</strong>等。</p>
+<h3 id="流式编程特点"><a href="#流式编程特点" class="headerlink" title="流式编程特点"></a>流式编程特点</h3><ul>
+<li>Stream并无数据存储，不会修改背后的数据源。所有惰性操作以<strong>pipeline</strong>的方式执行，<strong>减少迭代次数</strong>.</li>
+<li>处理•大量元素时，为了<strong>提高性能</strong>需要<strong>并行处理</strong>，并利用多核架构。并行化的Stream 不需要再写多线程代码，所有对它的操作会<strong>自动并行</strong>进行的。</li>
+<li>流的操作可以分为两类：处理操作、聚合操作。<ul>
+<li><strong>处理操作（惰性求值）</strong>：诸如filter、map等处理操作将Stream一层一层的进行抽离，返回一个流给下一层使用。</li>
+<li><strong>聚合操作（及早求值）</strong>：从最后一次流中生成一个结果给调用方，得到<strong>最终的结果</strong>而不是Stream。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Stream-API"><a href="#Stream-API" class="headerlink" title="Stream API"></a>Stream API</h3><img src="/2022/06/16/OO-lambda-in-Java8/11.png" class="" title="pic1">
+
+<ul>
+<li>filter()：过滤大规模数据集合。接受一个前面提到的 Predicate 断言型函数式接口，传入一个lambda表达式作为过滤逻辑,获得一个新的列表。</li>
+</ul>
+<pre><code class="java">//Unit4作业
+//Elements读取不用使用多层循环嵌套
+Map&lt;String,MyClass&gt; myClass = Arrays.stream(elements)
+    .filter(element -&gt; element instanceof UmlClass)
+    .map(MyClass::new)
+    .collect(Collectors.toMap(MyClass::getId,item -&gt; item));
+
+//重写MyClass构造方法
+public MyClass(UmlElement std) &#123;
+    this.std = (UmlClass) std;
+    this.id = std.getId();
+    //...
+&#125;
+</code></pre>
+<ul>
+<li>map()：是函数式编程中非常重要的一个概念，能够将对象进行转换</li>
+</ul>
+<pre><code class="java">// 为每个订单加上12%的税，使用reduce计算总开销
+// 老方法：
+List costBeforeTax = Arrays.asList(100, 200, 300, 400, 500);
+double total = 0;
+for (Integer cost : costBeforeTax) &#123;
+    double price = cost + .12*cost;
+    total = total + price;
+&#125;
+System.out.println(&quot;Total : &quot; + total);
+
+// 新方法：
+List costBeforeTax = Arrays.asList(100, 200, 300, 400, 500);
+double bill = costBeforeTax.stream().map((cost) -&gt; cost + .12*cost)
+                                    .reduce((sum, cost) -&gt; sum + cost).get();
+System.out.println(&quot;Total : &quot; + bill); 
+</code></pre>
+<ul>
+<li>其他例子：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28112239">https://zhuanlan.zhihu.com/p/28112239</a></li>
+</ul>
+<h3 id="ForkJoin框架"><a href="#ForkJoin框架" class="headerlink" title="ForkJoin框架"></a>ForkJoin框架</h3><img src="/2022/06/16/OO-lambda-in-Java8/12.png" class="" title="pic1">
+
+<h2 id="四、函数式编程的特点与优势"><a href="#四、函数式编程的特点与优势" class="headerlink" title="四、函数式编程的特点与优势"></a>四、函数式编程的特点与优势</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li><p>函数是输入和输出之间的映射。可以将其视为将输入转换为输出的“黑匣子”。 </p>
+<p>（1）函数避免改变状态和改变数据。他们观察到的所有状态只是提供给他们的输入。 </p>
+<p>（2）函数不会改变输入的值，对它们的执行没有副作用。 </p>
+<p>（3）对于每个输入，都有<strong>相同的输出</strong>。 </p>
+</li>
+<li><p>以上特点自然适合并发和并行适用性。计算朝着更多内核和分布式/并行计算的方向发展，事实证明<strong>函数式编程</strong>更适合这些要求。</p>
+</li>
+<li><p>java并不是很典型的函数式编程语言。Apache Spark 是一个用 Scala 编码的大数据平台，它是一种函数式语言。另一个例子是 R，这是数据科学家中最流行的语言，它是函数式的。</p>
+</li>
+</ul>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><h4 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h4><p>因为FP中的每个符号都是final的，没有什么函数会有副作用。谁也不能在运行时修改任何东西，也没有函数可以修改在它作用域之外的值给其他函数继续使用（在指令式编程中可以用类成员或是全局变量做到）。这意味着决定函数执行结果的唯一因素就是它的返回值，而影响其返回值的唯一因素就是它的参数。  </p>
+<p>测试程序中的函数时只需要关注它的参数就可以。完全不需要担心函数调用的顺序，也不用费心设置外部某些状态值。  </p>
+<h4 id="调试时的可复现性"><a href="#调试时的可复现性" class="headerlink" title="调试时的可复现性"></a>调试时的可复现性</h4><p>如果一段FP程序没有按照预期设计那样运行，调试的工作非常容易，因为这些错误是百分之一百可以重现的。FP程序中的错误不依赖于之前运行过的不相关的代码。</p>
+<p>而在一个指令式程序中，一个bug可能有时能重现而有些时候又不能。因为这些函数的运行依赖于某些外部状态， 而这些外部状态又需要由某些与这个bug完全不相关的代码通过某个特别的执行流程才能修改。</p>
+<h4 id="并发执行"><a href="#并发执行" class="headerlink" title="并发执行"></a>并发执行</h4><ul>
+<li><p>所有FP程序都是可以并发执行的。由于根本<strong>不需要采用锁机制</strong>，因此完全不需要担心死锁或是并发竞争的发生。</p>
+</li>
+<li><p>某个FP程序本身只是<strong>单线程</strong>的，编译器也可以将其<strong>优化</strong>成可以在多CPU上运行的并发程序。</p>
+</li>
+<li><p>这在指令式编程中是无法做到的，因为每一个函数都有可能修改其外部状态，然后接下来的函数又可能依赖于这些状态的值。</p>
+</li>
+</ul>
+
+    </article>
+    <!-- license -->
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2022/08/24/PR-summary/" title="Adobe Pr 2020 经验记录帖">
+                    <div class="nextTitle">Adobe Pr 2020 经验记录帖</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/06/12/OS-lab6-summary/" title="BUAA-OS-Lab6">
+                    <div class="prevTitle">BUAA-OS-Lab6</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+    
+        
+            
+                <a href="//github.com/Mmmusel" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://space.bilibili.com/277979311?spm_id_from=333.1007.0.0" class="iconfont-archer bilibili" target="_blank" title=bilibili></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">Thanks Vistiors <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%BC%95%E5%85%A5"><span class="toc-number">1.</span> <span class="toc-text">函数式编程的引入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">面向对象编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">匿名类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">函数式编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">命令式编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="toc-number">1.5.</span> <span class="toc-text">声明式编程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81lambda%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">二、lambda函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">Lambda表达式语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%AD%BE%E5%90%8D"><span class="toc-number">2.1.1.</span> <span class="toc-text">函数签名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%B8%BB%E4%BD%93"><span class="toc-number">2.1.2.</span> <span class="toc-text">函数主体</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%8C%96%E7%AE%80"><span class="toc-number">2.2.</span> <span class="toc-text">Lambda表达式的化简</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.3.</span> <span class="toc-text">函数式接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.4.</span> <span class="toc-text">函数式接口的前提条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.5.</span> <span class="toc-text">几种常见的函数式接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.6.</span> <span class="toc-text">集合的函数式接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E4%B8%AD%E4%BD%BF%E7%94%A8lambda%E5%87%BD%E6%95%B0%E7%9A%84%E4%BC%98%E5%8C%96"><span class="toc-number">2.7.</span> <span class="toc-text">作业中使用lambda函数的优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#unit1"><span class="toc-number">2.7.1.</span> <span class="toc-text">unit1</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Stream%E6%B5%81%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">三、Stream流式编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%89%B9%E7%82%B9"><span class="toc-number">3.1.</span> <span class="toc-text">流式编程特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream-API"><span class="toc-number">3.2.</span> <span class="toc-text">Stream API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ForkJoin%E6%A1%86%E6%9E%B6"><span class="toc-number">3.3.</span> <span class="toc-text">ForkJoin框架</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E7%89%B9%E7%82%B9%E4%B8%8E%E4%BC%98%E5%8A%BF"><span class="toc-number">4.</span> <span class="toc-text">四、函数式编程的特点与优势</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">4.1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF"><span class="toc-number">4.2.</span> <span class="toc-text">优势</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-number">4.2.1.</span> <span class="toc-text">单元测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E6%97%B6%E7%9A%84%E5%8F%AF%E5%A4%8D%E7%8E%B0%E6%80%A7"><span class="toc-number">4.2.2.</span> <span class="toc-text">调试时的可复现性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C"><span class="toc-number">4.2.3.</span> <span class="toc-text">并发执行</span></a></li></ol></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 17
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/24</span>
+            <a class="archive-post-title" href="/2022/08/24/PR-summary/">Adobe Pr 2020 经验记录帖</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/16</span>
+            <a class="archive-post-title" href="/2022/06/16/OO-lambda-in-Java8/">java8的新增特性与函数式编程</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/12</span>
+            <a class="archive-post-title" href="/2022/06/12/OS-lab6-summary/">BUAA-OS-Lab6</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span>
+            <a class="archive-post-title" href="/2022/05/31/OS-lab5-summary/">BUAA-OS-Lab5</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span>
+            <a class="archive-post-title" href="/2022/05/04/Unix-MyShell-Summary/">BUAA-Unix-Linux下C语言实现MyShell</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span>
+            <a class="archive-post-title" href="/2022/05/04/OS-lab4-summary/">BUAA-OS-Lab3</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span>
+            <a class="archive-post-title" href="/2022/05/03/OS-lab3-summary/">BUAA-OS-Lab3</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/14</span>
+            <a class="archive-post-title" href="/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span>
+            <a class="archive-post-title" href="/2022/04/10/OO-Unit2-summary/">BUAA-OO-Unit2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span>
+            <a class="archive-post-title" href="/2022/03/24/OO-Unit1-summary/">BUAA-OO-Unit1</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2022/03/15/OS-lab0-summary/">BUAA-OS-Lab0</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span>
+            <a class="archive-post-title" href="/2022/03/12/shell/">Shell</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/">OS-Pre-Cause SR EPC BadVaddr</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/git/">Git</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span>
+            <a class="archive-post-title" href="/2022/02/16/CSS/">CSS</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span>
+            <a class="archive-post-title" href="/2022/02/14/HTML/">HTML</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span>
+            <a class="archive-post-title" href="/2022/01/27/hello-world/">Hello World</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="CSS">
+                <span class="iconfont-archer">&#xe606;</span>
+                CSS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OO">
+                <span class="iconfont-archer">&#xe606;</span>
+                OO
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OS">
+                <span class="iconfont-archer">&#xe606;</span>
+                OS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Unix">
+                <span class="iconfont-archer">&#xe606;</span>
+                Unix
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="PR">
+                <span class="iconfont-archer">&#xe606;</span>
+                PR
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://mmmusel.github.io",
+        root: siteMetaRoot,
+        author: "Musel"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v="></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v="></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>

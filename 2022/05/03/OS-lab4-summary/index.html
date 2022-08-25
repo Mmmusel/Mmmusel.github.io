@@ -19,27 +19,28 @@
         <meta name="keywords" content="blog">
     
     <meta name="description" content="">
-    <meta name="description" content="操作系统 Lab3：进程与调度">
+    <meta name="description" content="操作系统 Lab4：系统调用与FORK">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BUAA-OS-Lab3">
-<meta property="og:url" content="https://mmmusel.github.io/2022/05/03/OS-lab3-summary/index.html">
+<meta property="og:title" content="BUAA-OS-Lab4">
+<meta property="og:url" content="https://mmmusel.github.io/2022/05/03/OS-lab4-summary/index.html">
 <meta property="og:site_name" content="Musel&#39;s blog">
-<meta property="og:description" content="操作系统 Lab3：进程与调度">
+<meta property="og:description" content="操作系统 Lab4：系统调用与FORK">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mmmusel.github.io/2022/05/03/OS-lab3-summary/mapper.jpg">
-<meta property="og:image" content="https://mmmusel.github.io/2022/05/03/OS-lab3-summary/clock1.jpg">
-<meta property="og:image" content="https://mmmusel.github.io/2022/05/03/OS-lab3-summary/clock2.jpg">
-<meta property="article:published_time" content="2022-05-03T08:19:53.000Z">
-<meta property="article:modified_time" content="2022-07-07T02:33:53.217Z">
+<meta property="og:image" content="https://mmmusel.github.io/2022/05/03/OS-lab4-summary/1.jpg">
+<meta property="og:image" content="https://mmmusel.github.io/2022/05/03/OS-lab4-summary/2.jpg">
+<meta property="og:image" content="https://mmmusel.github.io/2022/05/03/OS-lab4-summary/3.jpg">
+<meta property="og:image" content="https://mmmusel.github.io/2022/05/03/OS-lab4-summary/4.jpg">
+<meta property="article:published_time" content="2022-05-02T23:44:39.000Z">
+<meta property="article:modified_time" content="2022-08-25T05:38:23.216Z">
 <meta property="article:author" content="Musel">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mmmusel.github.io/2022/05/03/OS-lab3-summary/mapper.jpg">
+<meta name="twitter:image" content="https://mmmusel.github.io/2022/05/03/OS-lab4-summary/1.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/x.ico">
     
-    <title>BUAA-OS-Lab3 · Musel&#39;s blog</title>
+    <title>BUAA-OS-Lab4 · Musel&#39;s blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -264,7 +265,7 @@
                 <a href="/">Musel&#39;s blog</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">BUAA-OS-Lab3</a>
+                <a href="#" class="post-name">BUAA-OS-Lab4</a>
             </div>
         </div>
     
@@ -310,7 +311,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                BUAA-OS-Lab3
+                BUAA-OS-Lab4
             <!-- 404 -->
             
         </h1>
@@ -337,7 +338,7 @@
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">2k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">2.9k</span>阅读时长: <span class="post-count reading-time">10 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -498,170 +499,170 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <p>操作系统 Lab3：进程与调度</p>
+        <p>操作系统 Lab4：系统调用与FORK</p>
 <span id="more"></span>
 
-<h1 id="一、实验思考题"><a href="#一、实验思考题" class="headerlink" title="一、实验思考题"></a>一、实验思考题</h1><h2 id="Thinking-3-1"><a href="#Thinking-3-1" class="headerlink" title="Thinking 3.1"></a>Thinking 3.1</h2><blockquote>
-<p>思考 envid2env 函数: 为什么 envid2env 中需要判断 e-&gt;env_id !=envid 的情况？如果没有这步判断会发生什么情况？</p>
+<h1 id="一、思考题"><a href="#一、思考题" class="headerlink" title="一、思考题"></a>一、思考题</h1><h2 id="Thinking-4-1"><a href="#Thinking-4-1" class="headerlink" title="Thinking 4.1"></a>Thinking 4.1</h2><blockquote>
+<p>内核在保存现场的时候是如何避免破坏通用寄存器的？  </p>
 </blockquote>
 <ul>
-<li><code>mkenvid(struct Env *e)</code>中生成的envid为<code>(asid &lt;&lt; (1 + LOG2NENV)) | (1 &lt;&lt; LOG2NENV) | idx</code>,即<code>asid|有效位|env结构体在envs数组的偏移</code>。</li>
-<li>而<code>envid2env(u_int envid, struct Env **penv, int checkperm)</code>中通过envid的偏移找到结构体<code>e=envs+ENVX(envid);</code>。而此时不能确保所给envid中asid的有效性。所以需要通过再次判断<code>e-&gt;env_id !=envid</code>保证进程块的asid.</li>
-<li>若此index所对的env已经更换，则新env结构体会对应新的ASID。如果没有这步判断，可能会出现：①所给envid所对的结构体已经被free后再次使用，即旧结构体所代表的PCB被淘汰，而此时得到的新env与envid想找的旧结构体不匹配；②env结构体没有成功切换为新进程的PCB，导致asid匹配出现错误。</li>
-</ul>
-<h2 id="Thinking-3-2-结合-include-mmu-h-中的地址空间布局，思考-env-setup-vm-函数："><a href="#Thinking-3-2-结合-include-mmu-h-中的地址空间布局，思考-env-setup-vm-函数：" class="headerlink" title="Thinking 3.2 结合 include/mmu.h 中的地址空间布局，思考 env_setup_vm 函数："></a>Thinking 3.2 结合 include/mmu.h 中的地址空间布局，思考 env_setup_vm 函数：</h2><blockquote>
-<p>UTOP 和 ULIM 的含义分别是什么?</p>
-</blockquote>
-<ul>
-<li>ULIM: user limit:kuseg用户态上限，0x8000 0000区分内核态和用户态的地址</li>
-<li>UTOP: userSpace top:用户可分配虚拟内存上限  </li>
+<li><code>move    k0,sp</code>：先把通用寄存器的sp复制到$k0</li>
+<li><code>sw    k0,TF_REG29(sp)、sw    $2,TF_REG2(sp)</code>：保存现场需要使用$v0作为协寄存器到内存的中转寄存器，写到内存时需要$sp，所以在正式保存协寄存器和通用寄存器前先保存这两个寄存器</li>
 </ul>
 <blockquote>
-<p>UTOP 和 ULIM 之间的区域与 UTOP 以下的区域相比有什么区别？</p>
+<p>系统陷入内核调用后可以直接从当时的 $a0-$a3 参数寄存器中得到用户调用msyscall 留下的信息吗？  </p>
+</blockquote>
+<p>可以。从用户函数<code>syscall_*()</code>到内核函数<code>sys_*()</code>时，$a1-$a3未改变,$a0在<code>handle_sys()</code>的时候被修改为内核函数的地址，但在内核函数<code>sys_*()</code>仅为占位符，不会被用到。  </p>
+<blockquote>
+<p>我们是怎么做到让 sys 开头的函数“认为”我们提供了和用户调用 msyscall 时<br>同样的参数的？  </p>
 </blockquote>
 <ul>
-<li>UTOP 和 ULIM 之间的区域：<ul>
-<li>用与存放页表和内核结构体，用户不可自由分配，即env中结构体数组的pgdir被清零后不会被赋值</li>
-<li>其中UPAGES和ENVS其所占的物理页面，除了映射到用户态的这一部分虚拟地址，还与内核中的虚拟地址有一一映射关系。</li>
-</ul>
-</li>
-<li>UTOP 以下的区域：占用物理内存，但是以页表形式，没有物理内存和内核地址的一一映射  </li>
+<li>用户调用时的参数：用户进程的寄存器现场(保存在了内核栈的TF_4-TF_7)的$a0-$a3;用户栈(栈指针为用户现场的sp)的参数a4a5</li>
+<li>把上面两部分参数分别拷贝至内核现场寄存器$a0-$a3和内核栈。  </li>
 </ul>
 <blockquote>
-<p>请结合系统自映射机制解释 Step4 中pgdir[PDX(UVPT)]=env_cr3的含义。</p>
+<p>内核处理系统调用的过程对 Trapframe 做了哪些更改？这种修改对应的用户态的变化是？  </p>
 </blockquote>
 <ul>
-<li>内核态中的虚拟页目录的第PDX(UVPT)个页目录项中保存着此页目录所在页表的基地址的物理地址env_cr3  </li>
+<li>返回值存入$v0</li>
+<li>PC+4,跳转到下一条指令。如果是延迟槽指令异常，PC不变。</li>
 </ul>
+<h2 id="Thinking-4-2"><a href="#Thinking-4-2" class="headerlink" title="Thinking 4.2"></a>Thinking 4.2</h2><blockquote>
+<p>请回顾 lib/env.c 文件中 mkenvid() 函数的实现，该函数不会返回 0，请结合系统调用和 IPC 部分的实现与 envid2env() 函数的行为进行解释。</p>
+</blockquote>
+<ul>
+<li><code>mkenvid()</code>有有效位，所以不会返回0</li>
+<li><code> envid2env()</code>的envid为0时返回curenv。</li>
+<li>由于curenv为内核态的变量，用户态不能获取curenv的envid，所以用0代表curenv-&gt;envid。</li>
+<li>目的是方便用户进程调用syscall_*()时把当前进程的envid作为参数传给内核函数，即方便用户态在内核变量不可见的情况下调用内核接口。</li>
+</ul>
+<h2 id="Thinking-4-3"><a href="#Thinking-4-3" class="headerlink" title="Thinking 4.3"></a>Thinking 4.3</h2><blockquote>
+<p>子进程完全按照 fork() 之后父进程的代码执行，说明了什么？  </p>
+</blockquote>
+<p>fork()后子进程的data段和text段与父进程相同</p>
 <blockquote>
-<p>谈谈自己对进程中物理地址和虚拟地址的理解。</p>
+<p>但是子进程却没有执行 fork() 之前父进程的代码，又说明了什么？ </p>
+</blockquote>
+<p>PC从fork后的指令开始执行，子进程恢复到的上下文位置是fork函数。</p>
+<h2 id="Thinking-4-4"><a href="#Thinking-4-4" class="headerlink" title="Thinking 4.4"></a>Thinking 4.4</h2><blockquote>
+<p>关于 fork 函数的两个返回值，下面说法正确的是：<br>A、fork 在父进程中被调用两次，产生两个返回值<br>B、fork 在两个进程中分别被调用一次，产生两个不同的返回值<br>C、fork 只在父进程中被调用了一次，在两个进程中各产生一个返回值<br>D、fork 只在子进程中被调用了一次，在两个进程中各产生一个返回值   </p>
+</blockquote>
+<p>C</p>
+<h2 id="Thinking-4-5"><a href="#Thinking-4-5" class="headerlink" title="Thinking 4.5"></a>Thinking 4.5</h2><blockquote>
+<p>我们并不应该对所有的用户空间页都使用 duppage 进行映射。那么究竟哪些用户空间页应该映射，哪些不应该呢？请结合本章的后续描述、mm/pmap.c中 mips_vm_init 函数进行的页面映射以及 include/mmu.h 里的内存布局图进行思考。  </p>
 </blockquote>
 <ul>
-<li>每个进程都有kuseg的2G虚拟空间，但是实际所有进程共享相同的内存空间。不同的进程有相同的虚拟地址，但是相同虚拟地址映射到不同物理地址</li>
+<li>USTACKTOP以下的应该映射。</li>
+<li>USTACKTOP到UTOP之间的 user exception stack 是用来进行页写入异常的，不会在处理COW异常时调用fork(),所以 user exception stack 这一页不需要共享。</li>
+<li>USTACKTOP到UTOP之间的 invalid memory 是为处理页写入异常时做缓冲区用的，所以同理也不需要共享。</li>
+<li>UTOP以上页面的内存与页表是所有进程共享的，且用户进程无权限访问，不需要做父子进程间的duppage。</li>
 </ul>
-<h2 id="Thinking-3-3"><a href="#Thinking-3-3" class="headerlink" title="Thinking 3.3"></a>Thinking 3.3</h2><blockquote>
-<p>找到 user_data 这一参数的来源，思考它的作用。没有这个参数可不可以？为什么？（可以尝试说明实际的应用场景，举一个实际的库中的例子）</p>
+<h2 id="Thinking-4-6"><a href="#Thinking-4-6" class="headerlink" title="Thinking 4.6"></a>Thinking 4.6</h2><blockquote>
+<p>在遍历地址空间存取页表项时你需要使用到 vpd 和 vpt 这两个“指针的指针”，请参考 user/entry.S 和 include/mmu.h 中的相关实现，思考并回答这几个问题：<br>• vpt 和 vpd 的作用是什么？怎样使用它们？<br>• 从实现的角度谈一下为什么进程能够通过这种方式来存取自身的页表？<br>• 它们是如何体现自映射设计的？<br>• 进程能够通过这种方式来修改自己的页表项吗？  </p>
 </blockquote>
 <ul>
-<li>来源：env_create_priority()函数中alloc的Env结构体指针</li>
-<li>这个参数的作用是传给load_elf函数，并作为load_elf的int* map函数的参数，获得结构体的页目录</li>
-<li>c语言库函数中qsort()的回调函数<code>int(*cmp)(const void* e1,const void* e2))</code>使用qsort()的参数width实现多类型的比较：<code>cmp((char*)base + j*width,(char*)base+(j+1)*width) &gt; 0))</code></li>
+<li>作用：在用户态下通过访问进程自己的物理内存获取用户页的页目录项页表项的perm，用于duppage根据不同的perm类型在父子进程间执行不同的物理页映射</li>
+<li>mmu.h 中，声明vpt和vpd的类型：</li>
 </ul>
-<h2 id="Thinking-3-4"><a href="#Thinking-3-4" class="headerlink" title="Thinking 3.4"></a>Thinking 3.4</h2><blockquote>
-<p>结合 load_icode_mapper 的参数以及二进制镜像的大小，考虑该函<br>数可能会面临哪几种复制的情况？你是否都考虑到了？</p>
-</blockquote>
-<img src="/2022/05/03/OS-lab3-summary/mapper.jpg" class="" title="pic1">
-
-<h2 id="Thinking-3-5"><a href="#Thinking-3-5" class="headerlink" title="Thinking 3.5"></a>Thinking 3.5</h2><blockquote>
-<p>你认为这里的 env_tf.pc 存储的是物理地址还是虚拟地址?</p>
-</blockquote>
-<ul>
-<li>物理地址。大概在0x400000+   </li>
-</ul>
-<blockquote>
-<p>你觉得entry_point其值对于每个进程是否一样？该如何理解这种统一或不同？</p>
-</blockquote>
-<ul>
-<li>entry_point是一样的虚拟地址，但是进程PCB不同，可以映射到各自不同的物理地址。</li>
-</ul>
-<h2 id="Thinking-3-6"><a href="#Thinking-3-6" class="headerlink" title="Thinking 3.6"></a>Thinking 3.6</h2><blockquote>
-<p>请查阅相关资料解释，上面提到的 epc 是什么？为什么要将env_tf.pc 设置为 epc 呢？</p>
-</blockquote>
-<ul>
-<li>epc是发生异常中断时执行到的pc值,保存在curenv-&gt;env_tf.cp0_epc。</li>
-<li>env_tf.pc保存进程上下文，pc保存了返回该进程时开始执行的pc值，即为发生异常时的epc</li>
-</ul>
-<h2 id="Thinking-3-7"><a href="#Thinking-3-7" class="headerlink" title="Thinking 3.7"></a>Thinking 3.7</h2><blockquote>
-<p>操作系统在何时将什么内容存到了 TIMESTACK 区域</p>
-</blockquote>
-<ul>
-<li>handle_int()处理时钟中断时，SAVE_ALL保存当前寄存器值的栈顶地址get_sp为0x8200_0000，即为TIMESTACK.  </li>
-</ul>
-<blockquote>
-<p>TIMESTACK 和 env_asm.S 中所定义的 KERNEL_SP 的含义有何不同</p>
-</blockquote>
-<ul>
-<li>TIMESTACK是产生时钟中断异常时用的存放CPU寄存器状态的栈顶指针，KERNEL_SP是非时钟中断异常用的栈指针。</li>
-</ul>
-<h2 id="Thinking-3-8"><a href="#Thinking-3-8" class="headerlink" title="Thinking 3.8"></a>Thinking 3.8</h2><blockquote>
-<p>试找出上述 5 个异常处理函数的具体实现位置。</p>
-</blockquote>
-<ul>
-<li>genex.S中有 handle_int()的实现，有do_refill()即handle_tlb()的实现</li>
-<li>syscall.S有handle_sys()的实现</li>
-</ul>
-<h2 id="Thinking-3-9"><a href="#Thinking-3-9" class="headerlink" title="Thinking 3.9"></a>Thinking 3.9</h2><blockquote>
-<p>阅读 kclock_asm.S 和 genex.S 两个文件，并尝试说出 set_timer 和time_irq 函数中每行汇编代码的作用</p>
-</blockquote>
-<pre><code class="c">    .text
-LEAF(set_timer)
-    li t0, 0xc8
-    sb t0, 0xb5000100 
-//实时钟绑定4号中断，触发4号中断
-
-    sw    sp, KERNEL_SP 
-//内核栈保存栈寄存器值
-
-setup_c0_status STATUS_CU0|0x1001 0
-//设置SR寄存器的状态：
-//1.STATUS_CU0：打开CP0寄存器使用权
-//2.SR[16]：IsC：软件能够访问并使指令高速缓存条目无效
-//3.SR[4]：IEo
-
-    jr ra
-    nop
-END(set_timer)
-
-
-    .extern delay
-timer_irq:
-    sb zero, 0xb5000110
-//关闭时钟中断
-1:    j    sched_yield
-//进程调度
-    nop
-    /*li t1, 0xff
-    lw    t0, delay
-    addu  t0, 1
-    sw    t0, delay
-    beq    t0,t1,1f    
-    nop*/
-    j    ret_from_exception
-//异常返回
-    nop
+<pre><code class="c">extern volatile Pte* vpt[];
+extern volatile Pde* vpd[];
 </code></pre>
-<h2 id="Thinking-3-10"><a href="#Thinking-3-10" class="headerlink" title="Thinking 3.10"></a>Thinking 3.10</h2><blockquote>
-<p>阅读相关代码，思考操作系统是怎么根据时钟周期切换进程的。</p>
-</blockquote>
-<img src="/2022/05/03/OS-lab3-summary/clock1.jpg" class="" title="pic1">
-<img src="/2022/05/03/OS-lab3-summary/clock2.jpg" class="" title="pic1">
-
-<h1 id="二、实验难点与指导书反馈"><a href="#二、实验难点与指导书反馈" class="headerlink" title="二、实验难点与指导书反馈"></a>二、实验难点与指导书反馈</h1><ul>
-<li>初始化进程目录时，没有理解为什么要复制UTOP上部分的内核目录，也不知道这部分的权限该如何设置。建议建议指导书把<strong>权限位</strong>的作用在头文件中指明，或者在lab教程中指明本实验中用到的权限位及其说明</li>
-<li>汇编代码读起来比较晦涩，可以把R3000中的一些部分的<strong>汇编知识</strong>抽离出来，辅助理解；比如：<ul>
-<li>SR寄存器各个位的作用。因为个人感觉虽然自己强硬地把R3000中那部分阅读翻译了一遍，但实际上还是比较困惑，不是很能读懂</li>
-<li>使用到的伪指令的作用。伪指令对阅读理解造成了比较大的理解障碍。</li>
-</ul>
-</li>
-<li><code>load_icode_mapper()</code>，纠结了很久段尾要不要考虑和后面段的共享页面。希望指导书可以提前说明段按地址顺序由小到大加载，只用考虑段首的页面共用情况</li>
-<li>de的第一个Bug就是<code>load_elf()</code>里面的binary地址，开始没有给<code>binary+shdr_offset</code>的段偏移</li>
-<li>TIMESTACK和SP两个概念的辨析：这个思考题一开始卡住了，原因是<code>grep -r TIMESTACK</code>的时候没有查到汇编代码get_sp出现了0x8200_0000。</li>
-<li>可以强调一下<code>INSERT_TAIL(env_sche_list,e,sche_link)</code>要在<code>env_create()</code>而不是alloc时插入</li>
-<li>进程调度算法时为<code>INSERT_TAIL</code></li>
-</ul>
-<h1 id="三、体会与感想"><a href="#三、体会与感想" class="headerlink" title="三、体会与感想"></a>三、体会与感想</h1><p>个人对Lab3的整体感受是比Lab2体验差很多。主要是以下原因：</p>
 <ul>
-<li>课下：<ul>
-<li>Lab2对存储管理的结构比较浑然一体，Lab3的知识相对零碎，比如很多变量的设置并不能直接看到其作用效果或范围，所以debug的时候也比较困难，比如Lab2debug还可以通过输出地址判断本步骤的正确性等，Lab3设计很多汇编函数和寄存器的操作，不管是理解还是测试都不是很容易</li>
-<li>从Lab3遇到Bug会比较瞻前顾后，不知道是本次Lab还是之前Lab的bug，排查Bug所在范围的过程比较头疼</li>
+<li>使用：<ul>
+<li>vpd是类型为页表项指针Pde *数组，即int *的数组；vpt同理。</li>
+<li>以vpt举例，vpt是Pte *数组指针，(*vpt)代表第一个pte*，也就是第一个页表项的地址。</li>
+<li>第i个页表项：*((*vpt)+i)，也就是(*vpt)[i]</li>
 </ul>
 </li>
-<li>上机时的Exam和Extra题面都比较模糊，具体是以下几点：<ul>
-<li>Exam对于“版本号相同、ASID空闲”这一分支并未显式说明要分配此ASID，而另一分支显式说明“找到最小的未使用ASID并分配”，且还强调“不要做任何无关操作”，虽然按题意是要分配，但是在阅读上的体验并不好，会在是否需要分配的问题上绊住</li>
-<li>Exam对于“模拟位图”和“运行进程”的界定可以更清晰些，避免歧义</li>
-<li>Extra对PV操作资源的个数并未叙述清楚造成理解偏差</li>
+<li>由于用户进程下的系统调用的虚拟内存管理的函数传入的pgdir均为env结构体的kuseg的进程页目录，并且<code>env_setup_vm()时</code>把页目录进行自映射<code>e-&gt;env_pgdir[PDX(UVPT)]  = e-&gt;env_cr3</code>，所以实现了用户进程的虚拟内存管理，可以通过两级页表机制访问</li>
+<li>user/entry.S文件中，初始化了vpt和vpd的地址，在kuseg范围：  </li>
+</ul>
+<pre><code class="js">vpt:
+    .word UVPT
+    .globl vpd
+vpd:
+    .word (UVPT+(UVPT&gt;&gt;12)*4)
+</code></pre>
+<p>此处也体现了自映射设计。kuseg范围内只给VPT留出了1024*BY2PG的大小，没有给VPD设置额外BY2PG。</p>
+<ul>
+<li>可以，因为在pmap.c中实现的虚拟内存机制，给页表项和页目录项的perm均为可写。</li>
+</ul>
+<h2 id="Thinking-4-7"><a href="#Thinking-4-7" class="headerlink" title="Thinking 4.7"></a>Thinking 4.7</h2><blockquote>
+<p>page_fault_handler 函数中，你可能注意到了一个向异常处理栈复制 Trapframe 运行现场的过程，请思考并回答这几个问题：<br>• 这里实现了一个支持类似于“中断重入”的机制，而在什么时候会出现这种“中断重入”？<br>• 内核为什么需要将异常的现场 Trapframe 复制到用户空间？  </p>
+</blockquote>
+<ul>
+<li>当出现COW异常时，需要使用用户态的系统调用发生中断，即中断重入</li>
+<li>由于处理COW异常时调用的<code>handle_mod()</code>函数把epc改为用户态的异常处理函数<code>__asm_pgfault_handler</code>(env结构体的env_pgfault_handler域)，退出内核中断后跳转到epc所在的用户态的异常处理函数。由于用户态把异常处理完毕后仍然在用户态恢复现场，所以此时要把内核保存的现场保存在用户空间的用户异常栈。</li>
+</ul>
+<h2 id="Thinking-4-8"><a href="#Thinking-4-8" class="headerlink" title="Thinking 4.8"></a>Thinking 4.8</h2><blockquote>
+<p>到这里我们大概知道了这是一个由用户程序处理并由用户程序自身来恢复运行现场的过程，请思考并回答以下几个问题：<br>• 在用户态处理页写入异常，相比于在内核态处理有什么优势？<br>• 从通用寄存器的用途角度讨论，在可能被中断的用户态下进行现场的恢复，要如何做到不破坏现场中的通用寄存器？  </p>
+</blockquote>
+<ul>
+<li>解放内核，不用内核执行大量的页面拷贝工作。</li>
+<li>使用存放函数调用返回值的$v0, $v1恢复非通用寄存器，之后通过sp恢复通用寄存器，最后恢复$sp</li>
+</ul>
+<h2 id="Thinking-4-9"><a href="#Thinking-4-9" class="headerlink" title="Thinking 4.9"></a>Thinking 4.9</h2><blockquote>
+<p>• 为什么需要将 set_pgfault_handler 的调用放置在 syscall_env_alloc 之前？<br>• 如果放置在写时复制保护机制完成之后会有怎样的效果？<br>• 子进程是否需要对在 entry.S 定义的字 __pgfault_handler 赋值？  </p>
+</blockquote>
+<ul>
+<li><code>syscall_env_alloc()</code>返回后父子进程各自执行自己的进程，子进程需要修改entry.S中定义的env指针，涉及到对COW页面的修改，会触发COW写入异常，COW中断的处理机制依赖于set_pgfault_handler。所以<code>set_pgfault_handler</code>要放在<code>syscall_env_alloc()</code>之前。</li>
+<li>写时复制保护机制会把entry.S中定义的__pgfault_handler变量所在的页面被COW保护，而<code>set_pgfault_handler()</code>需要写__pgfault_handler变量。此时会涉及到对COW页面的修改，会触发COW写入异常，COW中断的处理机制依赖于set_pgfault_handler。所以<code>set_pgfault_handler</code>要放在<code>写时复制保护机制duppage()</code>之前。</li>
+<li>不需要，父进程已经在syscall_env_alloc子进程前对在 entry.S 定义的字 __pgfault_handler 赋值，syscall_env_alloc后父子进程共享读即可。</li>
+</ul>
+<h1 id="二、实验难点"><a href="#二、实验难点" class="headerlink" title="二、实验难点"></a>二、实验难点</h1><ul>
+<li><p>如果是延迟槽指令，epc为当前pc,不需要再加4</p>
+</li>
+<li><p>sys_yield(void)时可以使用sched_yield()调度，但是sched_yield()从TIMESTACK中读取现场，所以需要先把现场从KERNEL_SP复制到TIMESTACK中。</p>
+</li>
+<li><p>权限位：</p>
+<ul>
+<li>sys_mem_alloc的页面初始权限为不能设置为COW；只能给当前进程或子进程sys_mem_alloc，所以此处checkperm为1</li>
+<li>sys_mem_map</li>
 </ul>
 </li>
+<li><p>sys_env_alloc要修改子进程的pc为父进程的e-&gt;env_tf.pc = e-&gt;env_tf.cp0_epc;返回值 e-&gt;env_tf.regs[2]=0;子进程状态env_status=ENV_NOT_RUNNABLE;</p>
+</li>
+<li><p>内核栈、用户栈和用户异常栈：内核栈保存中断时的现场，用户栈保存系统调用的参数，用户异常栈保存缺页中断时的现场。</p>
+</li>
+<li><p>duppage时父进程需要设置COW权限位时也要使用syscall_mem_map(0, addr, 0, addr, perm | PTE_COW)系统调用进行相同页面的映射从而修改权限位。</p>
+</li>
+<li><p>用户处理COW异常和页面复制时要引入用户异常栈下面的Invalid memory临时区域的原因：用户态处理COW异常，所以使用用户态的bcopy，由于不在内核处理，不能使用dst物理页面的地址进行映射，所以需要使用dst复制页面的虚拟地址。</p>
+</li>
+<li><p>流程图</p>
+<ul>
+<li><p>I/O中断  </p>
+<img src="/2022/05/03/OS-lab4-summary/1.jpg" class="" title="pic1"> </li>
+<li><p>系统调用  </p>
+<img src="/2022/05/03/OS-lab4-summary/2.jpg" class="" title="pic1"></li>
+<li><p>fork  </p>
+<img src="/2022/05/03/OS-lab4-summary/3.jpg" class="" title="pic1"></li>
+<li><p>页缺失处理</p>
+<img src="/2022/05/03/OS-lab4-summary/4.jpg" class="" title="pic1"></li>
+</ul>
+</li>
+</ul>
+<h1 id="三、体会与感想"><a href="#三、体会与感想" class="headerlink" title="三、体会与感想"></a>三、体会与感想</h1><ul>
+<li>对计组P7的知识要求比较高，关于中断的机制了解的更加细致</li>
+<li>用户进程的二进制映像elf执行流程的很多细节可以类比lab1，内存管理的理念和lab2是几乎相同的，lab4有关栈和中断的部分又与lab3联系比较紧密，所以整体上综合了前边的知识，难度也很高，断断续续看了将近一周</li>
+<li>这次的指导书加了很多流程图，对于理解很有帮助</li>
+<li>做完lab4之后参加的Lab3-2的上机，但是extra还是没有顺利做出来，自我反思是除了需要熟悉汇编语法以外，对于中断的机制需要更加深入的理解掌握，比如关于延迟槽出现异常；中断现场从寄存器还是栈取、从哪个栈取；以及需要把汇编和c函数灵活掌握应用，比如中断处理函数可以写c代替写法比较繁琐的汇编。</li>
+</ul>
+<h1 id="四、指导书反馈"><a href="#四、指导书反馈" class="headerlink" title="四、指导书反馈"></a>四、指导书反馈</h1><ul>
+<li><code>sys_mem_alloc</code><ul>
+<li>post-condition：<code>va must be &lt; UTOP</code>应该是pre-condition</li>
+<li><code>env may modify its own address space or the address space of its children</code>很难联想到指的是envid2env的checkperm，可以把注释再细化一些。</li>
+</ul>
+</li>
+<li><code>sys_mem_map</code><ul>
+<li><code>Perm has the same restrictions as in sys_mem_alloc.</code>这句注释容易带来很大误解，sys_mem_alloc对perm的限制是不允许出现COW，而map允许COW。</li>
+</ul>
+</li>
+</ul>
+<h1 id="五、残留问题"><a href="#五、残留问题" class="headerlink" title="五、残留问题"></a>五、残留问题</h1><ul>
+<li>sys_*()函数中，envid2env的checkperm什么时候是1什么时候是0</li>
+<li>sys_mem_map中为什么va需要对齐？sys_mem_alloc需要吗？</li>
+<li>处理COW缺页中断时还会再发生中断吗？观察缺页中断用户态的代码<code>entry.S的__asm_pgfaut_handler()</code>和<code>fork.c的pgfault()</code>，均没有发生修改用户态页面的行为。如果不会再发生中断，那为什么在<code>handle_mod()</code>跳转到<code>trap.c的__pgfault-handler()</code>时要判断tf-&gt;regs[29]是用户栈指针还是异常栈指针呢？</li>
+<li>set_pgfault_handler函数调用sys_set_pgfault_handler系统调用时，对env的赋值的两个域都是常量，为什么不能初始化时候就赋值，要特地系统调用给它赋值呢？</li>
 </ul>
 
     </article>
@@ -672,16 +673,16 @@ timer_irq:
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href="/2022/05/04/OS-lab4-summary/" title="BUAA-OS-Lab3">
-                    <div class="nextTitle">BUAA-OS-Lab3</div>
+                <a href="/2022/05/04/Unix-MyShell-Summary/" title="BUAA-Unix-Linux下C语言实现MyShell">
+                    <div class="nextTitle">BUAA-Unix-Linux下C语言实现MyShell</div>
                 </a>
             
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2022/04/14/OS-lab2-summary/" title="BUAA-OS-Lab2">
-                    <div class="prevTitle">BUAA-OS-Lab2</div>
+                <a href="/2022/05/01/OO-Unit2-summary/" title="BUAA-OO-Unit2">
+                    <div class="prevTitle">BUAA-OO-Unit2</div>
                 </a>
             
         </li>
@@ -814,7 +815,7 @@ timer_irq:
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">一、实验思考题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-1"><span class="toc-number">1.1.</span> <span class="toc-text">Thinking 3.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-2-%E7%BB%93%E5%90%88-include-mmu-h-%E4%B8%AD%E7%9A%84%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E5%B8%83%E5%B1%80%EF%BC%8C%E6%80%9D%E8%80%83-env-setup-vm-%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">Thinking 3.2 结合 include&#x2F;mmu.h 中的地址空间布局，思考 env_setup_vm 函数：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-3"><span class="toc-number">1.3.</span> <span class="toc-text">Thinking 3.3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-4"><span class="toc-number">1.4.</span> <span class="toc-text">Thinking 3.4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-5"><span class="toc-number">1.5.</span> <span class="toc-text">Thinking 3.5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-6"><span class="toc-number">1.6.</span> <span class="toc-text">Thinking 3.6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-7"><span class="toc-number">1.7.</span> <span class="toc-text">Thinking 3.7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-8"><span class="toc-number">1.8.</span> <span class="toc-text">Thinking 3.8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-9"><span class="toc-number">1.9.</span> <span class="toc-text">Thinking 3.9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-3-10"><span class="toc-number">1.10.</span> <span class="toc-text">Thinking 3.10</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E9%9A%BE%E7%82%B9%E4%B8%8E%E6%8C%87%E5%AF%BC%E4%B9%A6%E5%8F%8D%E9%A6%88"><span class="toc-number">2.</span> <span class="toc-text">二、实验难点与指导书反馈</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BD%93%E4%BC%9A%E4%B8%8E%E6%84%9F%E6%83%B3"><span class="toc-number">3.</span> <span class="toc-text">三、体会与感想</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">一、思考题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-1"><span class="toc-number">1.1.</span> <span class="toc-text">Thinking 4.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-2"><span class="toc-number">1.2.</span> <span class="toc-text">Thinking 4.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-3"><span class="toc-number">1.3.</span> <span class="toc-text">Thinking 4.3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-4"><span class="toc-number">1.4.</span> <span class="toc-text">Thinking 4.4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-5"><span class="toc-number">1.5.</span> <span class="toc-text">Thinking 4.5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-6"><span class="toc-number">1.6.</span> <span class="toc-text">Thinking 4.6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-7"><span class="toc-number">1.7.</span> <span class="toc-text">Thinking 4.7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-8"><span class="toc-number">1.8.</span> <span class="toc-text">Thinking 4.8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-4-9"><span class="toc-number">1.9.</span> <span class="toc-text">Thinking 4.9</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E9%9A%BE%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">二、实验难点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BD%93%E4%BC%9A%E4%B8%8E%E6%84%9F%E6%83%B3"><span class="toc-number">3.</span> <span class="toc-text">三、体会与感想</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%8C%87%E5%AF%BC%E4%B9%A6%E5%8F%8D%E9%A6%88"><span class="toc-number">4.</span> <span class="toc-text">四、指导书反馈</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%AE%8B%E7%95%99%E9%97%AE%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">五、残留问题</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
@@ -1068,26 +1069,26 @@ timer_irq:
     
         
         <li class="archive-post-item">
-            <span class="archive-post-date">05/04</span>
-            <a class="archive-post-title" href="/2022/05/04/OS-lab4-summary/">BUAA-OS-Lab3</a>
+            <span class="archive-post-date">05/03</span>
+            <a class="archive-post-title" href="/2022/05/03/OS-lab4-summary/">BUAA-OS-Lab4</a>
         </li>
     
         
         <li class="archive-post-item">
-            <span class="archive-post-date">05/03</span>
-            <a class="archive-post-title" href="/2022/05/03/OS-lab3-summary/">BUAA-OS-Lab3</a>
+            <span class="archive-post-date">05/01</span>
+            <a class="archive-post-title" href="/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span>
+            <a class="archive-post-title" href="/2022/04/26/OS-lab3-summary/">BUAA-OS-Lab3</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">04/14</span>
             <a class="archive-post-title" href="/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">04/10</span>
-            <a class="archive-post-title" href="/2022/04/10/OO-Unit2-summary/">BUAA-OO-Unit2</a>
         </li>
     
         

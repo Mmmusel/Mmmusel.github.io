@@ -21,19 +21,19 @@
     <meta name="description" content="">
     <meta property="og:type" content="article">
 <meta property="og:title" content="BUAA-C++与C#-项目分析报告">
-<meta property="og:url" content="https://mmmusel.github.io/2022/06/10/CPP-homework/index.html">
+<meta property="og:url" content="https://mmmusel.github.io/2022/03/22/CPP-homework/index.html">
 <meta property="og:site_name" content="Musel&#39;s blog">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mmmusel.github.io/2022/06/10/CPP-homework/1.png">
-<meta property="og:image" content="https://mmmusel.github.io/2022/06/10/CPP-homework/1.png">
-<meta property="og:image" content="https://mmmusel.github.io/2022/06/10/CPP-homework/2.png">
-<meta property="og:image" content="https://mmmusel.github.io/2022/06/10/CPP-homework/3.png">
-<meta property="og:image" content="https://mmmusel.github.io/2022/06/10/CPP-homework/4.png">
-<meta property="article:published_time" content="2022-06-10T12:38:29.000Z">
-<meta property="article:modified_time" content="2022-08-26T12:49:05.162Z">
+<meta property="og:image" content="https://mmmusel.github.io/2022/03/22/CPP-homework/1.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/03/22/CPP-homework/1.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/03/22/CPP-homework/2.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/03/22/CPP-homework/3.png">
+<meta property="og:image" content="https://mmmusel.github.io/2022/03/22/CPP-homework/4.png">
+<meta property="article:published_time" content="2022-03-22T12:38:29.000Z">
+<meta property="article:modified_time" content="2022-08-26T15:07:57.855Z">
 <meta property="article:author" content="Musel">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mmmusel.github.io/2022/06/10/CPP-homework/1.png">
+<meta name="twitter:image" content="https://mmmusel.github.io/2022/03/22/CPP-homework/1.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/x.ico">
@@ -334,7 +334,7 @@
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2022/06/10</span>
+                    <span class="post-intro-time">2022/03/22</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -489,7 +489,7 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <img src="/2022/06/10/CPP-homework/1.png" class="" title="pic1">
+        <img src="/2022/03/22/CPP-homework/1.png" class="" title="pic1">
 
 <span id="more"></span>
 
@@ -497,7 +497,7 @@
 <p>环境：VS2019 + EasyX</p>
 <p>所选项目实现功能：三个不同的背单词游戏</p>
 <p>所选项目开源库地址：<a target="_blank" rel="noopener" href="https://github.com/Wenretium/Word-Games">https://github.com/Wenretium/Word-Games</a></p>
-<h1 id="二、核心类结构——使用PlantUml绘制类图"><a href="#二、核心类结构——使用PlantUml绘制类图" class="headerlink" title="二、核心类结构——使用PlantUml绘制类图"></a>二、核心类结构——使用PlantUml绘制类图</h1><img src="/2022/06/10/CPP-homework/1.png" class="" title="pic1">
+<h1 id="二、核心类结构——使用PlantUml绘制类图"><a href="#二、核心类结构——使用PlantUml绘制类图" class="headerlink" title="二、核心类结构——使用PlantUml绘制类图"></a>二、核心类结构——使用PlantUml绘制类图</h1><img src="/2022/03/22/CPP-homework/1.png" class="" title="pic1">
 
 <h1 id="三、面向对象特征分析"><a href="#三、面向对象特征分析" class="headerlink" title="三、面向对象特征分析"></a>三、面向对象特征分析</h1><h2 id="3-1-封装性"><a href="#3-1-封装性" class="headerlink" title="3.1 封装性"></a>3.1 封装性</h2><h3 id="3-1-1-基类Ball和Word"><a href="#3-1-1-基类Ball和Word" class="headerlink" title="3.1.1 基类Ball和Word"></a>3.1.1 基类Ball和Word</h3><ul>
 <li><p>分别对图片的位置和单词的语义进行封装，为实现类或者派生类提供底层数据。</p>
@@ -542,11 +542,11 @@ public:
 <li><p>基类Ball和Word。Ball负责控制图形坐标和位置移动。Word负责记录单词内容。</p>
 </li>
 <li><p>游戏1的内容是单词和意思匹配，玩家需要控制Basket篮子类左右移动，来接住不断下落的以小猫图形为背景的单词，所以类WordBall继承类Ball和Word。</p>
-<img src="/2022/06/10/CPP-homework/2.png" class="" title="pic1"></li>
+<img src="/2022/03/22/CPP-homework/2.png" class="" title="pic1"></li>
 <li><p>游戏2的内容是以字母图标形式出现，按顺序点击字母拼出完整单词。所以类LetterBall表示字母图标，继承Ball，自己增加letter的char字段。类WordPiece表示由多个LetterBall聚合而成的完整单词，其也继承Word类用于记录自身单词内容。</p>
-<img src="/2022/06/10/CPP-homework/3.png" class="" title="pic1"></li>
+<img src="/2022/03/22/CPP-homework/3.png" class="" title="pic1"></li>
 <li><p>游戏3的内容是使用篮子类Basket通过左右移动来接住汉堡的各个片层代表的字母，从而拼出完成单词。类LetterBallB表示字母的汉堡片层图标，继承LettterBall。类W ordBurger表示由多个LetterBallB聚合而成的完整单词，其继承Word类用于记录自身单词内容。</p>
-<img src="/2022/06/10/CPP-homework/4.png" class="" title="pic1"></li>
+<img src="/2022/03/22/CPP-homework/4.png" class="" title="pic1"></li>
 </ul>
 <h2 id="3-3-多态性"><a href="#3-3-多态性" class="headerlink" title="3.3 多态性"></a>3.3 多态性</h2><h3 id="3-3-1-virtual抽象类和重写父类方法实现的多态"><a href="#3-3-1-virtual抽象类和重写父类方法实现的多态" class="headerlink" title="3.3.1 virtual抽象类和重写父类方法实现的多态"></a>3.3.1 virtual抽象类和重写父类方法实现的多态</h3><ul>
 <li><p>抽象类LetterBall中有virtual void print()=0; Word类有virtual void print()const;</p>
@@ -719,16 +719,16 @@ WordBurger::~WordBurger()
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href="/2022/06/12/OS-lab6-summary/" title="BUAA-OS-Lab6">
-                    <div class="nextTitle">BUAA-OS-Lab6</div>
+                <a href="/2022/03/24/OO-Unit1-summary/" title="BUAA-OO-Unit1">
+                    <div class="nextTitle">BUAA-OO-Unit1</div>
                 </a>
             
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2022/05/31/OS-lab5-summary/" title="BUAA-OS-Lab5">
-                    <div class="prevTitle">BUAA-OS-Lab5</div>
+                <a href="/2022/03/20/OO-UML/" title="OO-UML类图自动生成">
+                    <div class="prevTitle">OO-UML类图自动生成</div>
                 </a>
             
         </li>
@@ -965,7 +965,24 @@ WordBurger::~WordBurger()
         
         
         
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1082,7 +1099,7 @@ WordBurger::~WordBurger()
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 18
+        Total : 19
         </div>
         <!-- search  -->
         
@@ -1112,12 +1129,6 @@ WordBurger::~WordBurger()
         <li class="archive-post-item">
             <span class="archive-post-date">06/12</span>
             <a class="archive-post-title" href="/2022/06/12/OS-lab6-summary/">BUAA-OS-Lab6</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/10</span>
-            <a class="archive-post-title" href="/2022/06/10/CPP-homework/">BUAA-C++与C#-项目分析报告</a>
         </li>
     
         
@@ -1160,6 +1171,18 @@ WordBurger::~WordBurger()
         <li class="archive-post-item">
             <span class="archive-post-date">03/24</span>
             <a class="archive-post-title" href="/2022/03/24/OO-Unit1-summary/">BUAA-OO-Unit1</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span>
+            <a class="archive-post-title" href="/2022/03/22/CPP-homework/">BUAA-C++与C#-项目分析报告</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span>
+            <a class="archive-post-title" href="/2022/03/20/OO-UML/">OO-UML类图自动生成</a>
         </li>
     
         

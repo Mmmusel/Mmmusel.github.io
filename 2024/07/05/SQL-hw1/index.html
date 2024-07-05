@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Musel">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Musel">
+    
+        <meta name="keywords" content="blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="第二次数据库作业一、安装数据库1.在计算机上安装一个DBMS软件1.1 基本环境 环境：windows11 + mysql-8.0.28-winx64 命令行工具  下载链接：https:&#x2F;&#x2F;downloads.mysql.com&#x2F;archives&#x2F;community&#x2F;  mysql-8.0.28-winx64目录下创建配置文件my.ini。   [mysqld]  # port port&#x3D;330">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUAA-SQL-数据库作业2（lr班）">
+<meta property="og:url" content="https://mmmusel.github.io/2024/07/05/SQL-hw1/index.html">
+<meta property="og:site_name" content="Musel&#39;s blog">
+<meta property="og:description" content="第二次数据库作业一、安装数据库1.在计算机上安装一个DBMS软件1.1 基本环境 环境：windows11 + mysql-8.0.28-winx64 命令行工具  下载链接：https:&#x2F;&#x2F;downloads.mysql.com&#x2F;archives&#x2F;community&#x2F;  mysql-8.0.28-winx64目录下创建配置文件my.ini。   [mysqld]  # port port&#x3D;330">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mmmusel.github.io/2024/07/05/SQL-hw1/image-20221005115355290.png">
+<meta property="og:image" content="https://mmmusel.github.io/2024/07/05/SQL-hw1/image-20221002000616195.png">
+<meta property="og:image" content="https://mmmusel.github.io/2024/07/05/SQL-hw1/image-20221003092905898.png">
+<meta property="article:published_time" content="2024-07-05T08:38:09.000Z">
+<meta property="article:modified_time" content="2024-07-05T08:59:51.508Z">
+<meta property="article:author" content="Musel">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mmmusel.github.io/2024/07/05/SQL-hw1/image-20221005115355290.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/x.ico">
+    
+    <title>BUAA-SQL-数据库作业2（lr班） · Musel&#39;s blog</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>Musel's blog</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Musel&#39;s blog</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">BUAA-SQL-数据库作业2（lr班）</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                BUAA-SQL-数据库作业2（lr班）
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="SQL">SQL</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">8.4k</span>阅读时长: <span class="post-count reading-time">32 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2024/07/05</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="第二次数据库作业"><a href="#第二次数据库作业" class="headerlink" title="第二次数据库作业"></a>第二次数据库作业</h1><h2 id="一、安装数据库"><a href="#一、安装数据库" class="headerlink" title="一、安装数据库"></a>一、安装数据库</h2><h3 id="1-在计算机上安装一个DBMS软件"><a href="#1-在计算机上安装一个DBMS软件" class="headerlink" title="1.在计算机上安装一个DBMS软件"></a>1.在计算机上安装一个DBMS软件</h3><h4 id="1-1-基本环境"><a href="#1-1-基本环境" class="headerlink" title="1.1 基本环境"></a>1.1 基本环境</h4><ul>
+<li><p>环境：windows11 + mysql-8.0.28-winx64 命令行工具</p>
+</li>
+<li><p>下载链接：<a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
+</li>
+<li><p>mysql-8.0.28-winx64目录下创建配置文件<code>my.ini</code>。</p>
+</li>
+</ul>
+<pre><code class="plain">[mysqld]
+
+# port
+port=3306
+
+# set basedir to your installation path
+basedir=D:\\SOFTWARE\\mysql\\mysql-8.0.28-winx64
+
+# set datadir to the location of your data directory
+datadir=D:\\SOFTWARE\\mysql\\mysql-8.0.28-winx64\\data
+
+# 以下设置utf8字符集
+[client]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8
+
+[mysqld]
+character-set-server=utf8
+
+# 以下设置允许加载本地文件数据至数据库
+[mysqld]
+local_infile = 1
+</code></pre>
+<h4 id="1-2-初始化"><a href="#1-2-初始化" class="headerlink" title="1.2 初始化"></a>1.2 初始化</h4><ul>
+<li>ctrl+X 启动 powershell(管理员模式)，进入bin目录<pre><code>cd D:\SOFTWARE\mysql\mysql-8.0.28-winx64\bin
+</code></pre>
+</li>
+<li>初始化，创建data文件夹<pre><code>.\mysqld.exe --initialize-insecure
+</code></pre>
+</li>
+<li>制作服务，此处命名为mysql157<pre><code>.\mysqld.exe --install mysql157
+</code></pre>
+</li>
+</ul>
+<h4 id="1-3-每次启动数据库服务"><a href="#1-3-每次启动数据库服务" class="headerlink" title="1.3 每次启动数据库服务"></a>1.3 每次启动数据库服务</h4><ul>
+<li>ctrl+X 启动 powershell(管理员模式)，进入bin目录</li>
+</ul>
+<pre><code>cd D:\SOFTWARE\mysql\mysql-8.0.28-winx64\bin
+</code></pre>
+<ul>
+<li>启动服务</li>
+</ul>
+<pre><code>net start mysql157
+</code></pre>
+<blockquote>
+<p>注：</p>
+<ol>
+<li>如果此处出现无服务报错，任务管理器中打开【详细信息】，把’mysqld.exe’进程关闭。</li>
+<li>关闭sql的时候一定记得net stop mysql57!!!不能直接关闭powershell</li>
+</ol>
+</blockquote>
+<ul>
+<li>连接：此处也可以不加<code>--local-infile</code>，需要向数据库导入本地文件数据时需要添加<code>--local-infile</code>参数。<blockquote>
+<p>初始化时，先设置密码再进行连接：</p>
+<ol>
+<li><code>D:\SOFTWARE\mysql\mysql-8.0.28-winx64\bin</code>添加到path环境变量。重启后生效。初始化的时候暂时先不重启。<ul>
+<li>如果环境变量配置成功，可以直接 <code>mysqld xxx命令</code>。否则直接在bin目录下<code>.\mysqld.exe xxx命令</code>。<code>mysql</code>同理。</li>
+</ul>
+</li>
+<li><code>.\mysqld.exe --skip-grant-tables</code>，用于稍后跳过密码输入</li>
+<li><code>.\mysql.exe -h 127.0.0.1 -P 3306 -u root -p --local-infile</code>输入密码直接回车跳过即可</li>
+<li><code>set password = &#39;123456&#39;;</code> 设置密码</li>
+<li>检查连接成功：<code>show databases; </code> 需要分号</li>
+<li>改字符集为utf8：<code>set names utf8;</code></li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<p>连接指令：</p>
+<pre><code>mysql -h 127.0.0.1 -P 3306 -u root -p --local-infile
+</code></pre>
+<h4 id="1-4-每次需要手动关闭数据库服务，否则可能出现端口占用问题"><a href="#1-4-每次需要手动关闭数据库服务，否则可能出现端口占用问题" class="headerlink" title="1.4 每次需要手动关闭数据库服务，否则可能出现端口占用问题"></a>1.4 每次需要手动关闭数据库服务，否则可能出现端口占用问题</h4><ul>
+<li><p>连接后，会进入<code>&gt;mysql</code>，使用<code>exit;</code>停止</p>
+</li>
+<li><p><code>net stop mysql57</code>终止服务</p>
+</li>
+<li><p>关闭powershell即可</p>
+</li>
+<li><p>注：如果忘记<code>net stop mysql57</code>，可能start的时候会出现无服务报错，需要任务管理器中把’mysqld.exe’进程关闭。</p>
+</li>
+</ul>
+<h3 id="2-默认数据库用途"><a href="#2-默认数据库用途" class="headerlink" title="2.默认数据库用途"></a>2.默认数据库用途</h3><pre><code class="sql">mysql&gt; show databases;
+</code></pre>
+<pre><code class="sql">mysql&gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.01 sec)
+</code></pre>
+<ul>
+<li><p>mysql 数据库</p>
+<p>存储了 MySQL 服务器正常运行所需的各种系统信息，包含了关于数据库对象元数据的数据字典表和系统表等。从 MySQL 8.0 开始，mysql 系统表和数据字典表使用 InnoDB 存储引擎，存储在 MySQL 数据目录下的 mysql.ibd 表空间文件中。</p>
+</li>
+<li><p>information_schema 信息数据库<br>INFORMATION_SCHEMA 数据库提供了访问数据库元数据的各种视图，包括数据库、表、字段类型以及访问权限等。这些信息有时候也被称为数据字典（data dictionary ）或者系统目录（system catalog），主要来源就是 mysql 系统数据库中的数据字典表。INFORMATION_SCHEMA 中的表实际上都是只读的视图，只能执行查询操作，不能执行 DML 语句。</p>
+</li>
+<li><p>performance_schema 性能数据<br>performance_schema 性能数据库为 MySQL 服务器的运行时状态提供了一个底层的监控功能。<br>MySQL 默认启动了性能数据库，也可以在启动服务时通过参数 performance_schema 指定是否启用。</p>
+</li>
+<li><p>sys 数据库<br>MySQL 5.7.7 引入了 sys 数据库，其中包含了一系列的视图，可以方便 DBA 和开发人员解释 performance_schema 性能数据库中收集的数据。sys 数据库中的对象主要用于性能调优和诊断，包括：</p>
+<ul>
+<li>视图，将性能数据库中的数据进行汇总，以更加容易理解的形式进行展示。</li>
+<li>存储过程，配置性能数据库以及生成诊断报告等操作。</li>
+<li>存储函数，用于查询性能数据库的配置和格式化服务。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-字符集和排序规则"><a href="#3-字符集和排序规则" class="headerlink" title="3.字符集和排序规则"></a>3.字符集和排序规则</h3><ul>
+<li>查看字符集<pre><code class="sql">mysql&gt; show variables like &#39;character%&#39;;
+</code></pre>
+</li>
+</ul>
+<ol>
+<li><p>字符集的设置可以在MySQL实例、数据库、表、列四个级别。未显示设置时会继承字符集和排序规则。</p>
+</li>
+<li><p>查看当前MySQL支持的<strong>字符集</strong>的方式有两种，一种是通过查看information_schema.character_set系统表，一种是通过命令<code>show character set</code>查看</p>
+</li>
+<li><p>每个指定的字符集都会有一个或多个支持的<strong>排序规则</strong>，可以通过两种方式查看，一种是查看information_schema.collations表，另一种是通过show collation命令查看</p>
+</li>
+<li><p>每个字符集可以对应多个排序规则，但每个排序规则只能对应一个字符集</p>
+</li>
+<li><p>排序规则的命令通常是以对应的字符集的名字为开头，并以自己的特定属性结尾，比如排序规则utf8_general_ci和latin1_swedish_ci就分别是对应utf8和latin1字符集的排序规则。mysql8默认情况下的字符集是utf8mb4</p>
+</li>
+</ol>
+<blockquote>
+<p>部分字符集为gbk，会出现中文属性乱码等问题，需要设置成utf8。修改<code>my.ini</code>配置文件重启并<code>set names utf8;</code>即可<br>mysql：&gt;=5.5.49的版本，字符集是utf-8下，char(10)和varchar(10)存储的汉字和英文的数量都是10个</p>
+</blockquote>
+<h3 id="4-从其他同学的电脑上访问刚刚安装的数据库"><a href="#4-从其他同学的电脑上访问刚刚安装的数据库" class="headerlink" title="4.从其他同学的电脑上访问刚刚安装的数据库"></a>4.从其他同学的电脑上访问刚刚安装的数据库</h3><ul>
+<li>如果my.ini配置文件中有<code>bind-address 127.0.0.1</code>，注释掉此行，允许数据库被非本地ip访问</li>
+<li>进入mysql数据库</li>
+</ul>
+<pre><code class="mysql">use mysql
+</code></pre>
+<ul>
+<li>授权来自任何ip可以以用户名root登录数据库<pre><code class="mysql">update user set host=&#39;%&#39; where user=&#39;root&#39;;
+flush privileges;
+</code></pre>
+</li>
+<li>（mysql8.0对于设置数据库允许远程操作的命令有更新）先创建用户，此处建议使用自己数据库的密码<pre><code class="mysql">create user root@&#39;%&#39; identified by &#39;123456&#39;;
+flush privileges;
+</code></pre>
+如果遇到以下报错：应该是之前创建，执行删除的时候没有删除干净。此时重新进行删除<blockquote>
+<p>ERROR 1396 (HY000): Operation CREATE USER failed for ‘root‘@‘%’</p>
+</blockquote>
+</li>
+</ul>
+<p>如果报错执行以下命令，再尝试创建用户。</p>
+<pre><code class="mysql">drop user root@&#39;%&#39;;
+flush privileges;
+</code></pre>
+<ul>
+<li><p>成功创建用户后，给用户授权</p>
+<pre><code class="mysql">grant all privileges on *.* to &#39;root&#39;@&#39;%&#39;;
+flush privileges;
+</code></pre>
+</li>
+<li><p>测试远程访问：</p>
+</li>
+</ul>
+<p>由于之前启动服务均使用的本地ip：<code>mysql -h 127.0.0.1 -P 3306 -u root -p </code></p>
+<p>所以测试远程访问时，查到自己电脑的ip，我的为<code>10.24.167.173</code>。使用<code>mysql -h 127.0.0.1 -P 3306 -u root -p</code>即可成功使用预设密码访问。</p>
+<p>注：此处使用自己电脑测试，但是使用非本地ip，即可达到测试效果。如果使用别人电脑，需要保证两个电脑处在相同局域网下，保证ip可以互相ping通。</p>
+<p>测试结果如下：</p>
+<img src="/2024/07/05/SQL-hw1/image-20221005115355290.png" class="" title="banner">
+
+<h2 id="二、在school数据库中完成以下练习"><a href="#二、在school数据库中完成以下练习" class="headerlink" title="二、在school数据库中完成以下练习"></a>二、在school数据库中完成以下练习</h2><ul>
+<li>创建数据库<pre><code>mysql&gt; create database school;
+</code></pre>
+</li>
+<li>进入数据库：<pre><code>mysql&gt; use school;
+</code></pre>
+</li>
+</ul>
+<h4 id="2-1-创建上述表，并定义相应的完整性约束。"><a href="#2-1-创建上述表，并定义相应的完整性约束。" class="headerlink" title="2.1  创建上述表，并定义相应的完整性约束。"></a>2.1  创建上述表，并定义相应的完整性约束。</h4><h6 id="2-1-1-一些针对可能出现的数据库版本标准不同的补充说明：-在mysql8-0-28下"><a href="#2-1-1-一些针对可能出现的数据库版本标准不同的补充说明：-在mysql8-0-28下" class="headerlink" title="2.1.1 一些针对可能出现的数据库版本标准不同的补充说明：(在mysql8.0.28下)"></a>2.1.1 一些针对可能出现的数据库版本标准不同的补充说明：(在mysql8.0.28下)</h6><ul>
+<li><p>mysql&gt;=5.5.49的版本，字符集是utf-8下，char(10)和varchar(10)存储的汉字和英文的数量都是10个</p>
+</li>
+<li><p>mysql8.0，默认属性的设置可以不使用枚举，使用check约束：<code>check ((性别 = &#39;男&#39;) or (性别 = &#39;女&#39;))</code></p>
+</li>
+</ul>
+<h6 id="2-1-2-建表："><a href="#2-1-2-建表：" class="headerlink" title="2.1.2 建表："></a>2.1.2 建表：</h6><p>由于存在外码依赖，建表顺序为：系表-&gt;课程表-&gt;学生表-&gt;选课表。</p>
+<blockquote>
+<p>系表（系号，系名，系主任），其中系号是主码，系名不能有重复的。</p>
+</blockquote>
+<pre><code class="sql">create table 系表
+(系号 int not null,
+系名 varchar(10) unique,
+系主任 varchar(3),
+primary key(系号)
+);
+</code></pre>
+<blockquote>
+<p>课程表（课程号，课程名，先修课，学分），课程号是主码，课程名必须唯一，学分必须大于0小于5。</p>
+</blockquote>
+<pre><code class="sql">create table 课程表
+(课程号 char(3) not null,
+课程名 varchar(8) unique,
+先修课 char(3),
+学分 int,
+primary key(课程号),
+check (学分 &gt; 0 and 学分 &lt; 5)
+);
+</code></pre>
+<p>对于课程表建表的说明：</p>
+<ul>
+<li><code>check (学分 &gt; 0 and 学分 &lt; 5)</code>使用check约束时可以不命名，数据库会自动为check约束命名。但是后续修改约束时不方便。详见题目2.7的说明。</li>
+<li>mysql8.0也可以建表时为约束命名，使用<code>constraint</code>关键字，例如<code>constraint 学分约束 check (学分 &gt; 0 and 学分 &lt; 5)</code>，<code>学分约束</code>为对此check约束的命名。</li>
+<li>为避免中文属性乱码等问题，字符集设置成utf8。已在修改<code>my.ini</code>配置文件修改。</li>
+</ul>
+<blockquote>
+<p>学生表（学号，姓名，性别，年龄，入学年份，籍贯，系号，班长学号），学号是主码，系号和班长学号是外部码，手机号码必须唯一，学生的年龄不得小于10岁和大于50岁，性别必须是’男’或者’女’。</p>
+</blockquote>
+<pre><code class="sql">create table 学生表
+(学号 varchar(4) not null,
+姓名 varchar(3),
+性别 char(1),
+年龄 int,
+入学年份 varchar(4),
+籍贯 char(2),
+系号 int,
+班长学号 varchar(4),
+手机号码 char(11),
+primary key(学号),
+foreign key (系号) references 系表(系号),
+unique(手机号码),
+check (年龄 &gt;=10 and 年龄 &lt;=50),
+check ((性别 = &#39;男&#39;) or (性别 = &#39;女&#39;))
+);
+</code></pre>
+<p>对于学生表建表的说明：</p>
+<ul>
+<li><p>学号和入学年份设置<code>varchar</code>因为后续题目需要插入其他长度的数据。也可以此处设置为var定长，后续需要使用变长时再使用<code>alter table 学生表 modify column 学号 varchar(4);</code>语句，修改类型为<code>varchar</code>。</p>
+</li>
+<li><p>由于后续导入数据时，发现对于**”学生表”<strong>和</strong>“系表”<strong>中，对 <strong>‘系号’</strong> 的前导零处理不一致。如果把</strong>‘系号’**设置为varchar类型，无法把’6’和’06’识别为同系，导致导入数据时，大量数据会违背系号的外码约束<code>foreign key (系号) references 系表(系号)</code>而不被导入。所以此处系号选择<code>int</code>类型。</p>
+</li>
+<li><p>unique约束  <code>unique(手机号码)</code>  需要数据表中存在<code>手机号码</code>属性，故加入属性<code>手机号码 char(11)</code>。</p>
+</li>
+<li><p>此处建表时，舍去设置**’班长学号’**的外码约束<code>foreign key (班长学号)references 学生表(学号)</code>：</p>
+<ul>
+<li>此处为导入数据时，发现如果建表时，预先设置此**’班长学号’**外码约束，会出现对按行导入数据时，数据的先后顺序要求。（如果学生A的班长B在学生A的数据之后出现，则在导入学生A时，其违背了外码约束（班长B的数据还尚未被导入，未在学生表的主码中出现），故数据A不会被导入，发生错误。</li>
+<li>原因是**’班长学号’<strong>和其主码</strong>‘学号’<strong>都在</strong>“学生表”**数据表中。</li>
+<li>解决方案是，对于主码外码在一个表里的情况，先建表，并导入数据，导入数据之后再使用<code>alter table 学生表  add constraint  学生班长外码约束 foreign key (班长学号) references 学生表(学号);</code>添加外码约束。</li>
+</ul>
+</li>
+<li><p>mysql8.0，默认属性的设置可以不使用枚举，使用check约束：<code>check ((性别 = &#39;男&#39;) or (性别 = &#39;女&#39;))</code></p>
+</li>
+</ul>
+<blockquote>
+<p>选课表（学号，课程号，成绩），（学号，课程号）是主码，学号和课程号是外部码，成绩不能小于0分和大于100分</p>
+</blockquote>
+<pre><code class="mysql">create table 选课表
+(学号 varchar(6) not null,
+课程号 char(3) not null,
+成绩 numeric(4,1),
+primary key (学号,课程号),
+foreign key (学号) references 学生表(学号),
+foreign key (课程号) references 课程表(课程号),
+check (成绩 &lt;= 100 and 成绩 &gt;= 0)
+);
+</code></pre>
+<ul>
+<li>numeric(4,1)是3位整数,精确到一位小数,最多4位,四舍五入</li>
+</ul>
+<h5 id="2-2-导入数据与对错误数据的分析"><a href="#2-2-导入数据与对错误数据的分析" class="headerlink" title="2.2  导入数据与对错误数据的分析"></a>2.2  导入数据与对错误数据的分析</h5><h6 id="2-2-1-一种导入数据的方法"><a href="#2-2-1-一种导入数据的方法" class="headerlink" title="2.2.1 一种导入数据的方法"></a>2.2.1 一种导入数据的方法</h6><ul>
+<li><p>把excel的多个sheet分别另存为<code>.csv</code>格式。（此时.csv内字符串的前导0均不显示，如果使用txt打开可正常显示前导0，说明没有问题。否则可能是在csv内对源数据进行了改动，需要把源数据重新复制进.csv）</p>
+</li>
+<li><p>把.csv的第一行属性名删除。（或者稍后的sql导入语句添加<code>ignore 1 lines</code>，忽略第一行属性名的导入）</p>
+</li>
+<li><p>把.csv使用txt打开，把其ANSI格式另存为utf8格式。（注：每次对.csv使用excel视图修改后，均需要转换为utf8格式）。</p>
+</li>
+<li><p>保证启动数据库时使用<code>--local-infile</code>参数：<code>mysql -h 127.0.0.1 -P 3306 -u root -p --local-infile</code>。</p>
+<blockquote>
+<p>否则导入本地数据可能出现报错：</p>
+<p>ERROR 3948 (42000): Loading local data is disabled; this must be enabled on both the client and server sides</p>
+</blockquote>
+</li>
+<li><p>导入命令：</p>
+<pre><code class="sql">load data local infile &#39;C:\\Users\\Musel\\Desktop\\xueshengbiao.csv&#39; 
+into table 学生表 
+fields terminated by &#39;,&#39; ;
+
+# 如果没有在.csv内删除第一行属性名，需要加入 ignore 1 lines
+# 此处可以不加行分隔符&#39;\n&#39;的命令，也可以正常识别换行并导入
+</code></pre>
+</li>
+</ul>
+<h6 id="2-2-2-对错误数据的分析"><a href="#2-2-2-对错误数据的分析" class="headerlink" title="2.2.2 对错误数据的分析"></a>2.2.2 对错误数据的分析</h6><p>第一次使用上述命令导入学生表等数据后，发现<code>skipped</code>了大量数据，没有合法数据被加进学生表。选课表也存在一定问题。</p>
+<p>使用<code>show warnings;</code>查看warnings提示。</p>
+<p>发现的错误数据的类型如下：</p>
+<ul>
+<li><p>导入数据时，发现对于**”学生表”<strong>和</strong>“系表”<strong>中，对 <strong>‘系号’</strong> 的前导零处理不一致。如果把</strong>‘系号’**设置为varchar类型，无法把’6’和’06’识别为同系，导致导入数据时，大量数据会违背系号的外码约束<code>foreign key (系号) references 系表(系号)</code>而不被导入。所以此处系号选择<code>int</code>类型。</p>
+</li>
+<li><p>导入数据时，发现如果建表时，预先设置此**’班长学号’**外码约束，会出现对按行导入数据时，数据的先后顺序要求。（如果学生A的班长B在学生A的数据之后出现，则在导入学生A时，其违背了外码约束（班长B的数据还尚未被导入，未在学生表的主码中出现），故数据A不会被导入，发生错误。</p>
+<ul>
+<li>原因是**’班长学号’<strong>和其主码</strong>‘学号’<strong>都在</strong>“学生表”**数据表中。</li>
+<li>解决方案是，对于主码外码在一个表里的情况，先建表，并导入数据，导入数据之后再使用<code>alter table 学生表  add constraint  学生班长外码约束 foreign key (班长学号) references 学生表(学号);</code>添加外码约束。</li>
+</ul>
+</li>
+<li><p>修改上面两个问题后，可以成功导入所有学生表数据。</p>
+<ul>
+<li><p>如果使用<code>alter table 学生表  add constraint  学生班长外码约束 foreign key (班长学号) references 学生表(学号);</code>添加外码约束时，发现报错：</p>
+<blockquote>
+<p>ERROR: Cannot add or update a child row: a foreign key constraint fails…</p>
+</blockquote>
+</li>
+<li><p>原因：使用<code>select * from 学生表</code>，发现**’班长学号’**列，存在空字符串””。空字符串和NULL并不是相等的。外码允许NULL，但是主码中没有””空字符串的学号。</p>
+<p>使用<code>update 学生表 set 班长学号=NULL where 学号=&#39;0202&#39;;</code>命令把0202，0301，0402三个空字符串都改成NULL值，就可以使用<code>alter table 学生表  add constraint  学生班长外码约束 foreign key (班长学号) references 学生表(学号);</code>添加外码约束了。</p>
+</li>
+</ul>
+</li>
+<li><p>对于选课表，有四条数据主键重复，只导入了各自重复主键的第一条数据。数据库跳过重复主键，未报错。</p>
+</li>
+<li><p>有两条数据的学号外码在学生表中不存在，数据库跳过这两条数据，未报错。</p>
+</li>
+</ul>
+<h5 id="2-3-在学生表中插入学号为26，姓名为’李四’，性别为’女’，年龄为20，入学年份为2008，籍贯为’广东’，手机号码为10010001000，班长学号为10的一条记录"><a href="#2-3-在学生表中插入学号为26，姓名为’李四’，性别为’女’，年龄为20，入学年份为2008，籍贯为’广东’，手机号码为10010001000，班长学号为10的一条记录" class="headerlink" title="2.3 在学生表中插入学号为26，姓名为’李四’，性别为’女’，年龄为20，入学年份为2008，籍贯为’广东’，手机号码为10010001000，班长学号为10的一条记录"></a>2.3 在学生表中插入学号为26，姓名为’李四’，性别为’女’，年龄为20，入学年份为2008，籍贯为’广东’，手机号码为10010001000，班长学号为10的一条记录</h5><ul>
+<li>没有学号10的班长，所以添加：<code>insert into 学生表(学号) values(&#39;10&#39;);</code></li>
+<li>如果char类型不是变长，<code>alter table 学生表 modify column 学号 varchar(4);</code></li>
+<li>如果没有手机号列，添加：<code>alter table 学生表 add 手机号码 char(11);</code></li>
+</ul>
+<pre><code class="sql">insert into 学生表 (学号,姓名,性别,年龄,入学年份,籍贯,班长学号,手机号码) 
+values(&#39;26&#39;,&#39;李四&#39;,&#39;女&#39;,20,&#39;2008&#39;,&#39;广东&#39;,&#39;10&#39;,&#39;10010001000&#39;);
+</code></pre>
+<h5 id="2-4-删除上述记录"><a href="#2-4-删除上述记录" class="headerlink" title="2.4 删除上述记录"></a>2.4 删除上述记录</h5><pre><code class="sql">delete from 学生表 where 学号=&#39;26&#39;;
+</code></pre>
+<h5 id="2-5-将学生表中的姓名字段的长度改为6个汉字"><a href="#2-5-将学生表中的姓名字段的长度改为6个汉字" class="headerlink" title="2.5 将学生表中的姓名字段的长度改为6个汉字"></a>2.5 将学生表中的姓名字段的长度改为6个汉字</h5><pre><code class="sql">alter table 学生表 modify column 姓名 varchar(6);
+</code></pre>
+<h5 id="2-6-为学生表增加一个字段电子邮件，20个字符"><a href="#2-6-为学生表增加一个字段电子邮件，20个字符" class="headerlink" title="2.6 为学生表增加一个字段电子邮件，20个字符"></a>2.6 为学生表增加一个字段电子邮件，20个字符</h5><pre><code class="sql">alter table 学生表 add 电子邮件 varchar(20);
+</code></pre>
+<h5 id="2-7-对课程表的学分字段上的完整性约束进行修改，使其在0到6之间取值"><a href="#2-7-对课程表的学分字段上的完整性约束进行修改，使其在0到6之间取值" class="headerlink" title="2.7 对课程表的学分字段上的完整性约束进行修改，使其在0到6之间取值"></a>2.7 对课程表的学分字段上的完整性约束进行修改，使其在0到6之间取值</h5><pre><code class="sql"># 先删除旧约束。再添加新约束
+# 由于初始化建表时没有对check约束显式命名，mysql默认为其命名
+# 所以需要先获取约束的默认名字
+insert into 课程表 values(&#39;c09&#39;,&#39;xx&#39;,&#39;c01&#39;,9);
+&gt; ERROR 3819 (HY000): Check constraint &#39;课程表_chk_1&#39; is violated.
+
+# 删除约束
+alter table 课程表 drop constraint 课程表_chk_1;
+ 
+# 添加新约束
+alter table 课程表 add constraint 课程学分check check(学分&gt;0 and 学分&lt;6);
+</code></pre>
+<h5 id="2-8-为学生表在学号列上创建cluster索引"><a href="#2-8-为学生表在学号列上创建cluster索引" class="headerlink" title="2.8 为学生表在学号列上创建cluster索引"></a>2.8 为学生表在学号列上创建cluster索引</h5><p>mysql默认为主键建立聚簇索引，使用<code>show index</code>查看</p>
+<pre><code class="sql">show index from 学生表;
+</code></pre>
+<p>或者创建：</p>
+<pre><code class="mysql">create index cluster on 学生表(学号);
+</code></pre>
+<img src="/2024/07/05/SQL-hw1/image-20221002000616195.png" class="" title="banner">
+
+<h5 id="2-9-创建一个视图，计算每门课的最高分"><a href="#2-9-创建一个视图，计算每门课的最高分" class="headerlink" title="2.9 创建一个视图，计算每门课的最高分"></a>2.9 创建一个视图，计算每门课的最高分</h5><pre><code class="sql">create view 课程最高分 as 
+select 课程号,max(成绩) as 最高分 from 选课表
+group by 课程号;
+</code></pre>
+<h5 id="2-10-查找每个学生的学号、姓名、总成绩和平均分"><a href="#2-10-查找每个学生的学号、姓名、总成绩和平均分" class="headerlink" title="2.10 查找每个学生的学号、姓名、总成绩和平均分"></a>2.10 查找每个学生的学号、姓名、总成绩和平均分</h5><pre><code class="sql">select 学生表.学号,姓名,sum(成绩) as 总成绩,avg(成绩) as 平均分
+from 学生表,选课表
+where 学生表.学号=选课表.学号
+group by 学生表.学号;
+</code></pre>
+<h5 id="2-11-将6系所有学生的年龄，改为7系学生的平均年龄"><a href="#2-11-将6系所有学生的年龄，改为7系学生的平均年龄" class="headerlink" title="2.11 将6系所有学生的年龄，改为7系学生的平均年龄"></a>2.11 将6系所有学生的年龄，改为7系学生的平均年龄</h5><ul>
+<li>没有7系学生? null了</li>
+</ul>
+<pre><code class="sql"># 错误写法：
+update 学生表 set 年龄 = (select avg(年龄) from 学生表 where 系号=7 ) where 系号=6;
+&gt; &quot;You can&#39;t specify target table &#39;学生表&#39; for update in FROM clause&quot;
+
+# 如果修改数据，需要为查询结果建立子表
+update 学生表 
+set 年龄 = (select tmp.平均年龄 
+    from(
+        select avg(年龄) as 平均年龄 from 学生表 where 系号 = 7 
+    )tmp ) 
+where 系号=6;
+</code></pre>
+<h5 id="2-12-将’曹洪’同学操作系统课程的成绩改为62分"><a href="#2-12-将’曹洪’同学操作系统课程的成绩改为62分" class="headerlink" title="2.12 将’曹洪’同学操作系统课程的成绩改为62分"></a>2.12 将’曹洪’同学操作系统课程的成绩改为62分</h5><pre><code class="sql">update 选课表 
+set 成绩=62
+where (学号=(select 学号 from 学生表 where 姓名=&#39;曹洪&#39;) 
+and 课程号=(select 课程号 from 课程表 where 课程名=&#39;操作系统&#39;));
+</code></pre>
+<h5 id="2-13-查找所有学生的姓名、入学年份和籍贯"><a href="#2-13-查找所有学生的姓名、入学年份和籍贯" class="headerlink" title="2.13 查找所有学生的姓名、入学年份和籍贯"></a>2.13 查找所有学生的姓名、入学年份和籍贯</h5><pre><code class="sql">select 姓名,入学年份,籍贯 from 学生表;
+</code></pre>
+<h5 id="2-14-列出籍贯为’山东’的同学的所有属性"><a href="#2-14-列出籍贯为’山东’的同学的所有属性" class="headerlink" title="2.14 列出籍贯为’山东’的同学的所有属性"></a>2.14 列出籍贯为’山东’的同学的所有属性</h5><pre><code class="sql">select * from 学生表 where 籍贯=&#39;山东&#39;;
+</code></pre>
+<h5 id="2-15-查找年龄最小的学生的学号和姓名"><a href="#2-15-查找年龄最小的学生的学号和姓名" class="headerlink" title="2.15 查找年龄最小的学生的学号和姓名"></a>2.15 查找年龄最小的学生的学号和姓名</h5><pre><code class="sql">select 学号,姓名 from 学生表 
+where 年龄 = (select min(年龄) from 学生表);
+</code></pre>
+<h5 id="2-16-查找选修了’数据库’的学生的学号"><a href="#2-16-查找选修了’数据库’的学生的学号" class="headerlink" title="2.16 查找选修了’数据库’的学生的学号"></a>2.16 查找选修了’数据库’的学生的学号</h5><pre><code class="sql">select 学号 from 选课表 
+where 课程号 in (select 课程号 from 课程表 where 课程名=&#39;数据库&#39;);
+</code></pre>
+<ul>
+<li>因为课程名可能不唯一，所以可能select到多个同名课程号，应该用in<h5 id="2-17-查找选修了’编译技术’的女学生的学号和姓名"><a href="#2-17-查找选修了’编译技术’的女学生的学号和姓名" class="headerlink" title="2.17 查找选修了’编译技术’的女学生的学号和姓名"></a>2.17 查找选修了’编译技术’的女学生的学号和姓名</h5><pre><code class="sql">select 学号,姓名 from 学生表 
+where 性别 = &#39;女&#39; 
+and 学号 in 
+  (select 学号 from 选课表 
+  where 课程号 in 
+      (select 课程号 from 课程表 where 课程名=&#39;编译技术&#39;)); 
+</code></pre>
+</li>
+</ul>
+<h5 id="2-18-查找’典韦’同学的班长所选修的课程的课程号"><a href="#2-18-查找’典韦’同学的班长所选修的课程的课程号" class="headerlink" title="2.18 查找’典韦’同学的班长所选修的课程的课程号"></a>2.18 查找’典韦’同学的班长所选修的课程的课程号</h5><pre><code class="sql">select 课程号 from 选课表
+where 学号 in (select 班长学号 from 学生表 where 姓名 = &#39;典韦&#39;) ;
+</code></pre>
+<h5 id="2-19-查找名字中倒数第二字为’侯’的学生的学号、姓名和所在系的系名"><a href="#2-19-查找名字中倒数第二字为’侯’的学生的学号、姓名和所在系的系名" class="headerlink" title="2.19 查找名字中倒数第二字为’侯’的学生的学号、姓名和所在系的系名"></a>2.19 查找名字中倒数第二字为’侯’的学生的学号、姓名和所在系的系名</h5><pre><code class="sql">select 学号,姓名,系名 from 学生表,系表
+where 姓名 like &#39;%侯_&#39;
+and 系表.系号 = 学生表.系号;
+
+# 或者正则：
+select 学号,姓名,系名 from 学生表,系表
+where 姓名 REGEXP &#39;侯[:alpha:]&#123;1&#125;$&#39;
+and 系表.系号 = 学生表.系号;
+</code></pre>
+<h5 id="2-20-查找名字以P打头，倒数第三字为L的课程的名字"><a href="#2-20-查找名字以P打头，倒数第三字为L的课程的名字" class="headerlink" title="2.20 查找名字以P打头，倒数第三字为L的课程的名字"></a>2.20 查找名字以P打头，倒数第三字为L的课程的名字</h5><pre><code class="sql">select 课程名 from 课程表
+where 课程名 REGEXP &#39;P[:alpha:]*L[:alpha:]&#123;2&#125;&#39;;
+</code></pre>
+<h5 id="2-21-查找’甘宁’同学所有选修课程的总分"><a href="#2-21-查找’甘宁’同学所有选修课程的总分" class="headerlink" title="2.21 查找’甘宁’同学所有选修课程的总分"></a>2.21 查找’甘宁’同学所有选修课程的总分</h5><pre><code class="sql">select sum(成绩) from 选课表
+where 学号 in (select 学号 from 学生表 where 姓名=&#39;甘宁&#39;);
+</code></pre>
+<h5 id="2-22-查找既选修了’数据库’，也选修了’操作系统’的同学"><a href="#2-22-查找既选修了’数据库’，也选修了’操作系统’的同学" class="headerlink" title="2.22 查找既选修了’数据库’，也选修了’操作系统’的同学"></a>2.22 查找既选修了’数据库’，也选修了’操作系统’的同学</h5><pre><code class="sql">select * from 学生表
+where 学号 in ( select 学号 from 选课表
+    where 课程号 in (select 课程号 from 课程表 where 课程名=&#39;操作系统&#39;)
+and 学号 in (select 学号 from 选课表 
+    where 课程号 in (select 课程号 from 课程表 where 课程名=&#39;数据库&#39;)));
+</code></pre>
+<h5 id="2-23-查找没有选修’数据库’课程的学生的学号和姓名"><a href="#2-23-查找没有选修’数据库’课程的学生的学号和姓名" class="headerlink" title="2.23 查找没有选修’数据库’课程的学生的学号和姓名"></a>2.23 查找没有选修’数据库’课程的学生的学号和姓名</h5><pre><code class="sql">select 学号,姓名 from 学生表
+where not exists
+    (select * from 选课表 
+        where 学号 = 学生表.学号 
+        and 课程号 = (select 课程号 from 课程表 where 课程名=&#39;数据库&#39;));
+</code></pre>
+<h5 id="2-24-查找’数据库’课程及格了，但’编译技术’没有及格的学生的学号和姓名"><a href="#2-24-查找’数据库’课程及格了，但’编译技术’没有及格的学生的学号和姓名" class="headerlink" title="2.24 查找’数据库’课程及格了，但’编译技术’没有及格的学生的学号和姓名"></a>2.24 查找’数据库’课程及格了，但’编译技术’没有及格的学生的学号和姓名</h5><pre><code class="sql">select 学号,姓名 from 学生表
+where 学号 in (select 学号 from 选课表
+    where 课程号 in (select 课程号 from 课程表 where 课程名=&#39;数据库&#39;)
+    and 成绩&gt;=60
+    and 学号 in (select 学号 from 选课表 
+        where 课程号 in (select 课程号 from 课程表 where 课程名=&#39;编译技术&#39;) 
+        and 成绩&lt;60
+    )
+);
+</code></pre>
+<h5 id="2-25-查找数据库成绩低于数据库课平均成绩的同学的学号和姓名"><a href="#2-25-查找数据库成绩低于数据库课平均成绩的同学的学号和姓名" class="headerlink" title="2.25 查找数据库成绩低于数据库课平均成绩的同学的学号和姓名"></a>2.25 查找数据库成绩低于数据库课平均成绩的同学的学号和姓名</h5><pre><code class="sql">select 学号,姓名 from 学生表
+where 学号 in (select 学号 from 选课表
+    where 课程号 in (select 课程号 from 课程表 where 课程名=&#39;数据库&#39;)
+    and 成绩 &lt; (select avg(成绩) from 选课表
+        where 课程号 in (select 课程号 from 课程表 where 课程名=&#39;数据库&#39;))
+);
+</code></pre>
+<h5 id="2-26-查找与’貂蝉’同学选修课程完全相同的学生的学号和姓名（不能多选也不能少选）"><a href="#2-26-查找与’貂蝉’同学选修课程完全相同的学生的学号和姓名（不能多选也不能少选）" class="headerlink" title="2.26 查找与’貂蝉’同学选修课程完全相同的学生的学号和姓名（不能多选也不能少选）"></a>2.26 查找与’貂蝉’同学选修课程完全相同的学生的学号和姓名（不能多选也不能少选）</h5><pre><code class="sql"># ==
+Select 学号,姓名 From 学生表
+    Where Not Exists 
+    # 这个select语句的返回值：对于每个貂蝉选的课程，如果返回值为真，把这个课程作为select返回的集合里的课程
+        (Select * from 
+            (select * from 课程表 where 课程号 in 
+                (select 课程号 from 选课表 where 学号=
+                    (select 学号 from 学生表 where 姓名=&#39;貂蝉&#39;))) 
+            as tmp
+            # 对于（学号，课程号）的元组，选课表里有不存在的值。
+            # 等价于：
+            # 以下语句的返回值：是否找到【（这个学生）没选的（貂蝉课表里有的课）】这样的元组
+            Where Not Exists
+                (Select * from 选课表
+                    Where 学号=学生表.学号 
+                    And 课程号=tmp.课程号)
+            )
+    and Not Exists 
+    # 这个select语句的返回值：对于每个貂蝉 没 选的课程，如果返回值为真，把这个课程作为select返回的集合里的课程
+        (Select * from 
+            (select * from 课程表 where not exists
+                (select 课程号 from 选课表 where (课程号 = 课程表.课程号)
+                    and 学号= (select 学号 from 学生表 where 姓名=&#39;貂蝉&#39;)))
+            as tmp2
+            # 对于（学号，课程号）的元组，选课表里有 存在 的值。
+            # 等价于：
+            # 以下语句的返回值：是否找到【（这个学生）选的（貂蝉课表里 没有 的课）】这样的元组
+            Where Exists
+                (Select * from 选课表
+                    Where 学号=学生表.学号 
+                    And 课程号=tmp2.课程号)
+            );
+</code></pre>
+<h5 id="2-27-查找不仅选修了’貂蝉’同学选修的课程，而且还选修了其他课程的同学"><a href="#2-27-查找不仅选修了’貂蝉’同学选修的课程，而且还选修了其他课程的同学" class="headerlink" title="2.27 查找不仅选修了’貂蝉’同学选修的课程，而且还选修了其他课程的同学"></a>2.27 查找不仅选修了’貂蝉’同学选修的课程，而且还选修了其他课程的同学</h5><pre><code class="sql"># &gt;=
+Select 学号,姓名 From 学生表
+    Where Not Exists 
+    # 这个select语句的返回值：对于每个貂蝉选的课程，如果返回值为真，把这个课程作为select返回的集合里的课程
+        (Select * from 
+            (select * from 课程表 where 课程号 in 
+                (select 课程号 from 选课表 where 学号=
+                    (select 学号 from 学生表 where 姓名=&#39;貂蝉&#39;))) 
+            as tmp
+            # 对于（学号，课程号）的元组，选课表里有不存在的值。
+            # 等价于：
+            # 以下语句的返回值：是否找到【（这个学生）没选的（貂蝉课表里有的课）】这样的元组
+            Where Not Exists
+                (Select * from 选课表
+                    Where 学号=学生表.学号 
+                    And 课程号=tmp.课程号)
+            )
+    and Exists 
+    # 这个select语句的返回值：对于每个貂蝉 没 选的课程，如果返回值为真，把这个课程作为select返回的集合里的课程
+        (Select * from 
+            (select * from 课程表 where not exists
+                (select 课程号 from 选课表 where (课程号 = 课程表.课程号)
+                    and 学号= (select 学号 from 学生表 where 姓名=&#39;貂蝉&#39;)))
+              as tmp2
+            # 对于（学号，课程号）的元组，选课表里有 存在 的值。
+            # 等价于：
+            # 以下语句的返回值：是否找到【（这个学生）选的（貂蝉课表里 没有 的课）】这样的元组
+            Where Exists
+                (Select * from 选课表
+                    Where 学号=学生表.学号 
+                    And 课程号=tmp2.课程号)
+            );
+</code></pre>
+<h5 id="2-28-查找’高等数学’平均成绩最高的系的系名"><a href="#2-28-查找’高等数学’平均成绩最高的系的系名" class="headerlink" title="2.28 查找’高等数学’平均成绩最高的系的系名"></a>2.28 查找’高等数学’平均成绩最高的系的系名</h5><ul>
+<li>没有高等数学，只有数学？<br>```sql<h1 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h1><h1 id="先建立-平均分，系号-视图"><a href="#先建立-平均分，系号-视图" class="headerlink" title="先建立(平均分，系号)视图"></a>先建立(平均分，系号)视图</h1>create view 系平均分视图 as<br>select avg(成绩) as 平均分,系号 from 选课表,学生表<br>where 课程号 in (select 课程号 from 课程表 where 课程名 = ‘数学’)<br>and 选课表.学号=学生表.学号<br>group by 系号</li>
+</ul>
+<h1 id="再从视图上找最高分对应的系"><a href="#再从视图上找最高分对应的系" class="headerlink" title="再从视图上找最高分对应的系"></a>再从视图上找最高分对应的系</h1><p>select 系名 from 系表<br>where 系号 =<br>    (select 系号 from 系平均分视图<br>    where 平均分 = (select max(平均分) from 系平均分视图);</p>
+<h1 id="方法二：写在一条语句，不过方法一的视图需要作为子表tmp，并且创建两次"><a href="#方法二：写在一条语句，不过方法一的视图需要作为子表tmp，并且创建两次" class="headerlink" title="方法二：写在一条语句，不过方法一的视图需要作为子表tmp，并且创建两次"></a>方法二：写在一条语句，不过方法一的视图需要作为子表tmp，并且创建两次</h1><p>select 系名 from 系表<br>where 系号=<br>    (select 系号 from<br>        # 第一次创建子表tmp(平均分，系号)<br>        (select avg(成绩) as 平均分,系号 from 选课表,学生表<br>        where 课程号 in (select 课程号 from 课程表 where 课程名 = ‘数学’)<br>        and 选课表.学号=学生表.学号<br>        group by 系号) as tmp</p>
+<pre><code>where 平均分 = 
+    (select max(平均分) from 
+        # 第二次创建子表tmp(平均分，系号)
+        (select avg(成绩) as 平均分,系号 from 选课表,学生表 
+        where 课程号 in (select 课程号 from 课程表 where 课程名 = &#39;数学&#39;) 
+        and 选课表.学号=学生表.学号
+        group by 系号) as tmp)
+);
+</code></pre>
+<pre><code>
+##### 2.29 查找至少有一个籍贯为&#39;四川&#39;同学所选修课程的课程名
+- 没有四川人?
+```sql
+select distinct 课程名 from 课程表,选课表
+where 学号 in
+(select 学号 from 学生表 where 籍贯 = &#39;四川&#39;)
+and 课程表.课程号 = 选课表.课程号;
+
+# 或者
+select distinct 课程名 from 课程表,选课表
+where exists
+(select * from 学生表 where 籍贯 = &#39;安徽&#39; and 学生表.学号 = 选课表.学号)
+and 课程表.课程号 = 选课表.课程号;
+
+# 一开始写的exists语句忘了写两个表格的学号约束，错误地返回了所有数据
+# select distinct 课程名 from 课程表,选课表
+# where exists
+# (select * from 学生表 where 籍贯 = &#39;安徽&#39;)
+# and 课程表.课程号 = 选课表.课程号;
+</code></pre>
+<h5 id="2-30-查询选修了’数据库’课程的学生的学号和获得的学分"><a href="#2-30-查询选修了’数据库’课程的学生的学号和获得的学分" class="headerlink" title="2.30 查询选修了’数据库’课程的学生的学号和获得的学分"></a>2.30 查询选修了’数据库’课程的学生的学号和获得的学分</h5><pre><code class="sql">select 学号,学分 from 选课表,课程表
+where 选课表.课程号 = (select 课程号 from 课程表 where 课程名 = &#39;数据库&#39;)
+and 选课表.课程号=课程表.课程号;
+# 记得写表名  选课表.课程号
+# 记得写连接约束
+</code></pre>
+<h2 id="三、回答问题"><a href="#三、回答问题" class="headerlink" title="三、回答问题"></a>三、回答问题</h2><h5 id="3-1-SQL语言的特点"><a href="#3-1-SQL语言的特点" class="headerlink" title="3.1 SQL语言的特点"></a>3.1 SQL语言的特点</h5><ol>
+<li>综合统一：集数据定义，数据操纵，数据查询和数据控制于一体。单一的结构——关系，带来了数据操作符的统一。</li>
+<li>高度非过程化：用户只需提出“做什么”，无须告诉“怎么做”，不必了解存取路径。</li>
+<li>面向集合的操作方式：操作的对象和操作的结果均为集合。</li>
+<li>以同一种语法结构提供两种使用方式：SQL既是自含式语言，又是嵌入式语言</li>
+<li>语言简捷，易学易用：类似于英语自然语言</li>
+</ol>
+<h5 id="3-2-完整性约束"><a href="#3-2-完整性约束" class="headerlink" title="3.2 完整性约束"></a>3.2 完整性约束</h5><ol>
+<li>NOT NULL：非空约束：字段的值不能为空</li>
+<li>UNIQUE：唯一约束：指所有记录中字段的值不能重复出现</li>
+<li>PRIMARY KEY：主码约束，唯一约束 + 非空约束</li>
+<li>FOREIGN KEY：外码约束：用于限制两个表的关系，保证从表该字段的值必须来自于主表相关联的字段的值</li>
+<li>CHECK：mysql8.0新特性，约束表中的某个字段或者一些字段必须满足某个条件。</li>
+</ol>
+<h5 id="3-3-自然连接和等值连接有什么差别"><a href="#3-3-自然连接和等值连接有什么差别" class="headerlink" title="3.3 自然连接和等值连接有什么差别"></a>3.3 自然连接和等值连接有什么差别</h5><ul>
+<li>等值连接是WHERE子句中用来连接两个表的连接条件的连接符是=。连接条件的各连接字段类型必须可比。</li>
+<li>自然连接是一种特殊的等值连接，它要求两个关系中进行比较的分量必须是相同的属性组，并且在结果中把重复的属性列去掉。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/879135">https://developer.aliyun.com/article/879135</a></p>
+<h5 id="3-4-子查询分为哪几种？它们之间有什么区别"><a href="#3-4-子查询分为哪几种？它们之间有什么区别" class="headerlink" title="3.4 子查询分为哪几种？它们之间有什么区别"></a>3.4 子查询分为哪几种？它们之间有什么区别</h5><ul>
+<li><p>不相关子查询<br>不相关子查询的执行顺序是由内向外，即每个子查询在上一级查询处理前求解，子查询的结果集合作为其外部查询的检索条件的条件值。</p>
+</li>
+<li><p>相关子查询<br>相关子查询的查询条件引用了其外部查询的某个属性值，从而其执行依赖于其外部查询。</p>
+</li>
+<li><p>区别：子查询的查询条件是否依赖父查询。</p>
+</li>
+</ul>
+<h5 id="3-5-索引有什么作用和缺点"><a href="#3-5-索引有什么作用和缺点" class="headerlink" title="3.5 索引有什么作用和缺点"></a>3.5 索引有什么作用和缺点</h5><p>作用：加快查询速度，提供多种存取路径。</p>
+<p>缺点：占用一定存储空间。基本表更新时，索引要进行维护。</p>
+<h5 id="3-6-基本表和视图有什么区别？视图有什么优点？什么样的视图是可以更新的？"><a href="#3-6-基本表和视图有什么区别？视图有什么优点？什么样的视图是可以更新的？" class="headerlink" title="3.6 基本表和视图有什么区别？视图有什么优点？什么样的视图是可以更新的？"></a>3.6 基本表和视图有什么区别？视图有什么优点？什么样的视图是可以更新的？</h5><ul>
+<li><p>视图是从一个表或者几个基本表（视图）中导出的表。与基本表不同，是一个虚表。数据库只存放视图的定义，不存放视图对应的数据。基本表的数据发生变化，视图查询出的数据随之改变。</p>
+</li>
+<li><p>视图的优点：</p>
+<ul>
+<li>简化用户的操作</li>
+<li>以多种角度看待同一数据</li>
+<li>对重构数据库提供了一定程度的逻辑独立性</li>
+<li>对机密数据提供安全保护</li>
+</ul>
+</li>
+<li><p>行列子集视图可以更新。行列子视图：从单个基本表导出的视图，并且只是去掉了基本表的某些行和某些列，但保留了主码。</p>
+</li>
+</ul>
+<h5 id="3-7-请针对第三章SQL语言讲义中的除法例子，给出其他两种除法的实现方法"><a href="#3-7-请针对第三章SQL语言讲义中的除法例子，给出其他两种除法的实现方法" class="headerlink" title="3.7 请针对第三章SQL语言讲义中的除法例子，给出其他两种除法的实现方法"></a>3.7 请针对第三章SQL语言讲义中的除法例子，给出其他两种除法的实现方法</h5><img src="/2024/07/05/SQL-hw1/image-20221003092905898.png" class="" title="banner">
+
+<ul>
+<li><p>第三章讲义的除法例子：查询选修了全部课程的学生姓名</p>
+<p>关系代数运算：$\prod _{Sno,Cno}(SC)÷\prod _{Cno}(COURSE)\bowtie\prod _{Sno,SName}(STUDENT)$</p>
+</li>
+<li><p>方法一：双<code>not exists</code>法</p>
+<pre><code class="sql">Select Sname From STUDENT
+    Where Not Exists 
+          (Select * from COURSE
+              Where Not Exists
+                  (Select * from SC
+                     Where Sno=STUDENT.Sno 
+                          And Cno=COURSE.Cno));
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p>方法二和三的注释中，对于定义中的<code>设关系R（X，Y）与关系S（Z），其中Y和Z具有相同的属性数，且对应属性出自相同域</code>，</p>
+<p>称域X为被除表的独有属性</p>
+<p>域Y为被除表的共有属性</p>
+<p>域Z为除表的共有属性</p>
+</blockquote>
+<ul>
+<li><p>方法二：<code>Count(*)</code>法</p>
+<p>count(*)做除法的条件：被除表的共有属性 与 除表的共有属性，应当是外部码关系，或者至少二者可以满足构成外部码的约束。</p>
+<p>也就是对于定义<code>设关系R（X，Y）与关系S（Z），其中Y和Z具有相同的属性数，且对应属性出自相同域</code>，要保证$Y\subseteq  Z$</p>
+</li>
+</ul>
+<pre><code class="sql">Select Sname From STUDENT
+where Sno in (
+    Select Sno from SC group by Sno
+    having count(Sno) = ( select count(*) from COURSE )
+);
+</code></pre>
+<ul>
+<li><p>方法三：定义法</p>
+<blockquote>
+<p>定义：设关系R（X，Y）与关系S（Z），其中Y和Z具有相同的属性数，且对应属性出自相同域。关系R除以关系S所得的商关系是关系R在属性X上投影的一个子集，该子集和 S（Z）的笛卡儿积必须包含在R（X，Y）中。<br>记为：$R÷S={t;|;t \in {x}(R) ;;\wedge;;s \in S ;;\wedge;; &lt;t,s&gt; \in R }$</p>
+</blockquote>
+<p>域X和域Z 做广义笛卡尔积，如果新乘出来得到的新元组值在原来的关系集合R里，这个值保留进除法得到的结果里。</p>
+</li>
+</ul>
+<pre><code class="sql"># 与学生表做连接，得到姓名
+Select Sname From STUDENT
+where Sno in (
+
+# select出 被除表中 做除法剩下的 独有属性
+select Sno From SC
+where Sno not in(
+
+    # select出 被除表中 应该被除掉的 独有属性
+    select Sno from
+
+    # 【被除表的独有属性】投影 与 【除表的共有属性】投影 做广义笛卡尔积
+    # 得到子表 b1
+    (select Sno from SC as a1
+    cross join
+    select Cno from COURSE as a2) as b1
+
+    # 对于每个广义笛卡尔积表的独有属性和共有属性，检查被除表中是否存在这个元组（由做笛卡尔积的过程知，独有属性从被除表得到，所以一定存在。检查共有属性即可），返回【共有属性不在被除表里存在】的元组的独有属性
+    where b1.Cno not in (select Cno from SC where SC.Sno = b1.Sno)
+));
+</code></pre>
+
+    </article>
+    <!-- license -->
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/08/24/PR-summary/" title="Adobe Pr 2020 经验记录帖">
+                    <div class="prevTitle">Adobe Pr 2020 经验记录帖</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+    
+        
+            
+                <a href="//github.com/Mmmusel" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://space.bilibili.com/277979311?spm_id_from=333.1007.0.0" class="iconfont-archer bilibili" target="_blank" title=bilibili></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">Thanks Vistiors <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%9C%E4%B8%9A"><span class="toc-number">1.</span> <span class="toc-text">第二次数据库作业</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.1.</span> <span class="toc-text">一、安装数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AADBMS%E8%BD%AF%E4%BB%B6"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.在计算机上安装一个DBMS软件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">1.1 基本环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">1.2 初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E6%AF%8F%E6%AC%A1%E5%90%AF%E5%8A%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">1.3 每次启动数据库服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-%E6%AF%8F%E6%AC%A1%E9%9C%80%E8%A6%81%E6%89%8B%E5%8A%A8%E5%85%B3%E9%97%AD%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%8D%E5%8A%A1%EF%BC%8C%E5%90%A6%E5%88%99%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">1.4 每次需要手动关闭数据库服务，否则可能出现端口占用问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%BB%98%E8%AE%A4%E6%95%B0%E6%8D%AE%E5%BA%93%E7%94%A8%E9%80%94"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.默认数据库用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AD%97%E7%AC%A6%E9%9B%86%E5%92%8C%E6%8E%92%E5%BA%8F%E8%A7%84%E5%88%99"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.字符集和排序规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BB%8E%E5%85%B6%E4%BB%96%E5%90%8C%E5%AD%A6%E7%9A%84%E7%94%B5%E8%84%91%E4%B8%8A%E8%AE%BF%E9%97%AE%E5%88%9A%E5%88%9A%E5%AE%89%E8%A3%85%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.1.4.</span> <span class="toc-text">4.从其他同学的电脑上访问刚刚安装的数据库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%9C%A8school%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AE%8C%E6%88%90%E4%BB%A5%E4%B8%8B%E7%BB%83%E4%B9%A0"><span class="toc-number">1.2.</span> <span class="toc-text">二、在school数据库中完成以下练习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E5%88%9B%E5%BB%BA%E4%B8%8A%E8%BF%B0%E8%A1%A8%EF%BC%8C%E5%B9%B6%E5%AE%9A%E4%B9%89%E7%9B%B8%E5%BA%94%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F%E3%80%82"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">2.1  创建上述表，并定义相应的完整性约束。</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2-1-1-%E4%B8%80%E4%BA%9B%E9%92%88%E5%AF%B9%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88%E6%9C%AC%E6%A0%87%E5%87%86%E4%B8%8D%E5%90%8C%E7%9A%84%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E%EF%BC%9A-%E5%9C%A8mysql8-0-28%E4%B8%8B"><span class="toc-number">1.2.0.1.0.1.</span> <span class="toc-text">2.1.1 一些针对可能出现的数据库版本标准不同的补充说明：(在mysql8.0.28下)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-1-2-%E5%BB%BA%E8%A1%A8%EF%BC%9A"><span class="toc-number">1.2.0.1.0.2.</span> <span class="toc-text">2.1.2 建表：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E4%B8%8E%E5%AF%B9%E9%94%99%E8%AF%AF%E6%95%B0%E6%8D%AE%E7%9A%84%E5%88%86%E6%9E%90"><span class="toc-number">1.2.0.1.1.</span> <span class="toc-text">2.2  导入数据与对错误数据的分析</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2-2-1-%E4%B8%80%E7%A7%8D%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.0.1.1.1.</span> <span class="toc-text">2.2.1 一种导入数据的方法</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-2-2-%E5%AF%B9%E9%94%99%E8%AF%AF%E6%95%B0%E6%8D%AE%E7%9A%84%E5%88%86%E6%9E%90"><span class="toc-number">1.2.0.1.1.2.</span> <span class="toc-text">2.2.2 对错误数据的分析</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-%E5%9C%A8%E5%AD%A6%E7%94%9F%E8%A1%A8%E4%B8%AD%E6%8F%92%E5%85%A5%E5%AD%A6%E5%8F%B7%E4%B8%BA26%EF%BC%8C%E5%A7%93%E5%90%8D%E4%B8%BA%E2%80%99%E6%9D%8E%E5%9B%9B%E2%80%99%EF%BC%8C%E6%80%A7%E5%88%AB%E4%B8%BA%E2%80%99%E5%A5%B3%E2%80%99%EF%BC%8C%E5%B9%B4%E9%BE%84%E4%B8%BA20%EF%BC%8C%E5%85%A5%E5%AD%A6%E5%B9%B4%E4%BB%BD%E4%B8%BA2008%EF%BC%8C%E7%B1%8D%E8%B4%AF%E4%B8%BA%E2%80%99%E5%B9%BF%E4%B8%9C%E2%80%99%EF%BC%8C%E6%89%8B%E6%9C%BA%E5%8F%B7%E7%A0%81%E4%B8%BA10010001000%EF%BC%8C%E7%8F%AD%E9%95%BF%E5%AD%A6%E5%8F%B7%E4%B8%BA10%E7%9A%84%E4%B8%80%E6%9D%A1%E8%AE%B0%E5%BD%95"><span class="toc-number">1.2.0.1.2.</span> <span class="toc-text">2.3 在学生表中插入学号为26，姓名为’李四’，性别为’女’，年龄为20，入学年份为2008，籍贯为’广东’，手机号码为10010001000，班长学号为10的一条记录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-%E5%88%A0%E9%99%A4%E4%B8%8A%E8%BF%B0%E8%AE%B0%E5%BD%95"><span class="toc-number">1.2.0.1.3.</span> <span class="toc-text">2.4 删除上述记录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-5-%E5%B0%86%E5%AD%A6%E7%94%9F%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A7%93%E5%90%8D%E5%AD%97%E6%AE%B5%E7%9A%84%E9%95%BF%E5%BA%A6%E6%94%B9%E4%B8%BA6%E4%B8%AA%E6%B1%89%E5%AD%97"><span class="toc-number">1.2.0.1.4.</span> <span class="toc-text">2.5 将学生表中的姓名字段的长度改为6个汉字</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-6-%E4%B8%BA%E5%AD%A6%E7%94%9F%E8%A1%A8%E5%A2%9E%E5%8A%A0%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AE%B5%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%EF%BC%8C20%E4%B8%AA%E5%AD%97%E7%AC%A6"><span class="toc-number">1.2.0.1.5.</span> <span class="toc-text">2.6 为学生表增加一个字段电子邮件，20个字符</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-7-%E5%AF%B9%E8%AF%BE%E7%A8%8B%E8%A1%A8%E7%9A%84%E5%AD%A6%E5%88%86%E5%AD%97%E6%AE%B5%E4%B8%8A%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F%E8%BF%9B%E8%A1%8C%E4%BF%AE%E6%94%B9%EF%BC%8C%E4%BD%BF%E5%85%B6%E5%9C%A80%E5%88%B06%E4%B9%8B%E9%97%B4%E5%8F%96%E5%80%BC"><span class="toc-number">1.2.0.1.6.</span> <span class="toc-text">2.7 对课程表的学分字段上的完整性约束进行修改，使其在0到6之间取值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-8-%E4%B8%BA%E5%AD%A6%E7%94%9F%E8%A1%A8%E5%9C%A8%E5%AD%A6%E5%8F%B7%E5%88%97%E4%B8%8A%E5%88%9B%E5%BB%BAcluster%E7%B4%A2%E5%BC%95"><span class="toc-number">1.2.0.1.7.</span> <span class="toc-text">2.8 为学生表在学号列上创建cluster索引</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-9-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%A7%86%E5%9B%BE%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%AF%8F%E9%97%A8%E8%AF%BE%E7%9A%84%E6%9C%80%E9%AB%98%E5%88%86"><span class="toc-number">1.2.0.1.8.</span> <span class="toc-text">2.9 创建一个视图，计算每门课的最高分</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-10-%E6%9F%A5%E6%89%BE%E6%AF%8F%E4%B8%AA%E5%AD%A6%E7%94%9F%E7%9A%84%E5%AD%A6%E5%8F%B7%E3%80%81%E5%A7%93%E5%90%8D%E3%80%81%E6%80%BB%E6%88%90%E7%BB%A9%E5%92%8C%E5%B9%B3%E5%9D%87%E5%88%86"><span class="toc-number">1.2.0.1.9.</span> <span class="toc-text">2.10 查找每个学生的学号、姓名、总成绩和平均分</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-11-%E5%B0%866%E7%B3%BB%E6%89%80%E6%9C%89%E5%AD%A6%E7%94%9F%E7%9A%84%E5%B9%B4%E9%BE%84%EF%BC%8C%E6%94%B9%E4%B8%BA7%E7%B3%BB%E5%AD%A6%E7%94%9F%E7%9A%84%E5%B9%B3%E5%9D%87%E5%B9%B4%E9%BE%84"><span class="toc-number">1.2.0.1.10.</span> <span class="toc-text">2.11 将6系所有学生的年龄，改为7系学生的平均年龄</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-12-%E5%B0%86%E2%80%99%E6%9B%B9%E6%B4%AA%E2%80%99%E5%90%8C%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E7%9A%84%E6%88%90%E7%BB%A9%E6%94%B9%E4%B8%BA62%E5%88%86"><span class="toc-number">1.2.0.1.11.</span> <span class="toc-text">2.12 将’曹洪’同学操作系统课程的成绩改为62分</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-13-%E6%9F%A5%E6%89%BE%E6%89%80%E6%9C%89%E5%AD%A6%E7%94%9F%E7%9A%84%E5%A7%93%E5%90%8D%E3%80%81%E5%85%A5%E5%AD%A6%E5%B9%B4%E4%BB%BD%E5%92%8C%E7%B1%8D%E8%B4%AF"><span class="toc-number">1.2.0.1.12.</span> <span class="toc-text">2.13 查找所有学生的姓名、入学年份和籍贯</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-14-%E5%88%97%E5%87%BA%E7%B1%8D%E8%B4%AF%E4%B8%BA%E2%80%99%E5%B1%B1%E4%B8%9C%E2%80%99%E7%9A%84%E5%90%8C%E5%AD%A6%E7%9A%84%E6%89%80%E6%9C%89%E5%B1%9E%E6%80%A7"><span class="toc-number">1.2.0.1.13.</span> <span class="toc-text">2.14 列出籍贯为’山东’的同学的所有属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-15-%E6%9F%A5%E6%89%BE%E5%B9%B4%E9%BE%84%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%A6%E7%94%9F%E7%9A%84%E5%AD%A6%E5%8F%B7%E5%92%8C%E5%A7%93%E5%90%8D"><span class="toc-number">1.2.0.1.14.</span> <span class="toc-text">2.15 查找年龄最小的学生的学号和姓名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-16-%E6%9F%A5%E6%89%BE%E9%80%89%E4%BF%AE%E4%BA%86%E2%80%99%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%99%E7%9A%84%E5%AD%A6%E7%94%9F%E7%9A%84%E5%AD%A6%E5%8F%B7"><span class="toc-number">1.2.0.1.15.</span> <span class="toc-text">2.16 查找选修了’数据库’的学生的学号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-17-%E6%9F%A5%E6%89%BE%E9%80%89%E4%BF%AE%E4%BA%86%E2%80%99%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E2%80%99%E7%9A%84%E5%A5%B3%E5%AD%A6%E7%94%9F%E7%9A%84%E5%AD%A6%E5%8F%B7%E5%92%8C%E5%A7%93%E5%90%8D"><span class="toc-number">1.2.0.1.16.</span> <span class="toc-text">2.17 查找选修了’编译技术’的女学生的学号和姓名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-18-%E6%9F%A5%E6%89%BE%E2%80%99%E5%85%B8%E9%9F%A6%E2%80%99%E5%90%8C%E5%AD%A6%E7%9A%84%E7%8F%AD%E9%95%BF%E6%89%80%E9%80%89%E4%BF%AE%E7%9A%84%E8%AF%BE%E7%A8%8B%E7%9A%84%E8%AF%BE%E7%A8%8B%E5%8F%B7"><span class="toc-number">1.2.0.1.17.</span> <span class="toc-text">2.18 查找’典韦’同学的班长所选修的课程的课程号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-19-%E6%9F%A5%E6%89%BE%E5%90%8D%E5%AD%97%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%AC%E4%BA%8C%E5%AD%97%E4%B8%BA%E2%80%99%E4%BE%AF%E2%80%99%E7%9A%84%E5%AD%A6%E7%94%9F%E7%9A%84%E5%AD%A6%E5%8F%B7%E3%80%81%E5%A7%93%E5%90%8D%E5%92%8C%E6%89%80%E5%9C%A8%E7%B3%BB%E7%9A%84%E7%B3%BB%E5%90%8D"><span class="toc-number">1.2.0.1.18.</span> <span class="toc-text">2.19 查找名字中倒数第二字为’侯’的学生的学号、姓名和所在系的系名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-20-%E6%9F%A5%E6%89%BE%E5%90%8D%E5%AD%97%E4%BB%A5P%E6%89%93%E5%A4%B4%EF%BC%8C%E5%80%92%E6%95%B0%E7%AC%AC%E4%B8%89%E5%AD%97%E4%B8%BAL%E7%9A%84%E8%AF%BE%E7%A8%8B%E7%9A%84%E5%90%8D%E5%AD%97"><span class="toc-number">1.2.0.1.19.</span> <span class="toc-text">2.20 查找名字以P打头，倒数第三字为L的课程的名字</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-21-%E6%9F%A5%E6%89%BE%E2%80%99%E7%94%98%E5%AE%81%E2%80%99%E5%90%8C%E5%AD%A6%E6%89%80%E6%9C%89%E9%80%89%E4%BF%AE%E8%AF%BE%E7%A8%8B%E7%9A%84%E6%80%BB%E5%88%86"><span class="toc-number">1.2.0.1.20.</span> <span class="toc-text">2.21 查找’甘宁’同学所有选修课程的总分</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-22-%E6%9F%A5%E6%89%BE%E6%97%A2%E9%80%89%E4%BF%AE%E4%BA%86%E2%80%99%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%99%EF%BC%8C%E4%B9%9F%E9%80%89%E4%BF%AE%E4%BA%86%E2%80%99%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%99%E7%9A%84%E5%90%8C%E5%AD%A6"><span class="toc-number">1.2.0.1.21.</span> <span class="toc-text">2.22 查找既选修了’数据库’，也选修了’操作系统’的同学</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-23-%E6%9F%A5%E6%89%BE%E6%B2%A1%E6%9C%89%E9%80%89%E4%BF%AE%E2%80%99%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%99%E8%AF%BE%E7%A8%8B%E7%9A%84%E5%AD%A6%E7%94%9F%E7%9A%84%E5%AD%A6%E5%8F%B7%E5%92%8C%E5%A7%93%E5%90%8D"><span class="toc-number">1.2.0.1.22.</span> <span class="toc-text">2.23 查找没有选修’数据库’课程的学生的学号和姓名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-24-%E6%9F%A5%E6%89%BE%E2%80%99%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%99%E8%AF%BE%E7%A8%8B%E5%8F%8A%E6%A0%BC%E4%BA%86%EF%BC%8C%E4%BD%86%E2%80%99%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E2%80%99%E6%B2%A1%E6%9C%89%E5%8F%8A%E6%A0%BC%E7%9A%84%E5%AD%A6%E7%94%9F%E7%9A%84%E5%AD%A6%E5%8F%B7%E5%92%8C%E5%A7%93%E5%90%8D"><span class="toc-number">1.2.0.1.23.</span> <span class="toc-text">2.24 查找’数据库’课程及格了，但’编译技术’没有及格的学生的学号和姓名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-25-%E6%9F%A5%E6%89%BE%E6%95%B0%E6%8D%AE%E5%BA%93%E6%88%90%E7%BB%A9%E4%BD%8E%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9%E7%9A%84%E5%90%8C%E5%AD%A6%E7%9A%84%E5%AD%A6%E5%8F%B7%E5%92%8C%E5%A7%93%E5%90%8D"><span class="toc-number">1.2.0.1.24.</span> <span class="toc-text">2.25 查找数据库成绩低于数据库课平均成绩的同学的学号和姓名</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-26-%E6%9F%A5%E6%89%BE%E4%B8%8E%E2%80%99%E8%B2%82%E8%9D%89%E2%80%99%E5%90%8C%E5%AD%A6%E9%80%89%E4%BF%AE%E8%AF%BE%E7%A8%8B%E5%AE%8C%E5%85%A8%E7%9B%B8%E5%90%8C%E7%9A%84%E5%AD%A6%E7%94%9F%E7%9A%84%E5%AD%A6%E5%8F%B7%E5%92%8C%E5%A7%93%E5%90%8D%EF%BC%88%E4%B8%8D%E8%83%BD%E5%A4%9A%E9%80%89%E4%B9%9F%E4%B8%8D%E8%83%BD%E5%B0%91%E9%80%89%EF%BC%89"><span class="toc-number">1.2.0.1.25.</span> <span class="toc-text">2.26 查找与’貂蝉’同学选修课程完全相同的学生的学号和姓名（不能多选也不能少选）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-27-%E6%9F%A5%E6%89%BE%E4%B8%8D%E4%BB%85%E9%80%89%E4%BF%AE%E4%BA%86%E2%80%99%E8%B2%82%E8%9D%89%E2%80%99%E5%90%8C%E5%AD%A6%E9%80%89%E4%BF%AE%E7%9A%84%E8%AF%BE%E7%A8%8B%EF%BC%8C%E8%80%8C%E4%B8%94%E8%BF%98%E9%80%89%E4%BF%AE%E4%BA%86%E5%85%B6%E4%BB%96%E8%AF%BE%E7%A8%8B%E7%9A%84%E5%90%8C%E5%AD%A6"><span class="toc-number">1.2.0.1.26.</span> <span class="toc-text">2.27 查找不仅选修了’貂蝉’同学选修的课程，而且还选修了其他课程的同学</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-28-%E6%9F%A5%E6%89%BE%E2%80%99%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6%E2%80%99%E5%B9%B3%E5%9D%87%E6%88%90%E7%BB%A9%E6%9C%80%E9%AB%98%E7%9A%84%E7%B3%BB%E7%9A%84%E7%B3%BB%E5%90%8D"><span class="toc-number">1.2.0.1.27.</span> <span class="toc-text">2.28 查找’高等数学’平均成绩最高的系的系名</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">方法一：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%88%E5%BB%BA%E7%AB%8B-%E5%B9%B3%E5%9D%87%E5%88%86%EF%BC%8C%E7%B3%BB%E5%8F%B7-%E8%A7%86%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">先建立(平均分，系号)视图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%8D%E4%BB%8E%E8%A7%86%E5%9B%BE%E4%B8%8A%E6%89%BE%E6%9C%80%E9%AB%98%E5%88%86%E5%AF%B9%E5%BA%94%E7%9A%84%E7%B3%BB"><span class="toc-number">4.</span> <span class="toc-text">再从视图上找最高分对应的系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E5%86%99%E5%9C%A8%E4%B8%80%E6%9D%A1%E8%AF%AD%E5%8F%A5%EF%BC%8C%E4%B8%8D%E8%BF%87%E6%96%B9%E6%B3%95%E4%B8%80%E7%9A%84%E8%A7%86%E5%9B%BE%E9%9C%80%E8%A6%81%E4%BD%9C%E4%B8%BA%E5%AD%90%E8%A1%A8tmp%EF%BC%8C%E5%B9%B6%E4%B8%94%E5%88%9B%E5%BB%BA%E4%B8%A4%E6%AC%A1"><span class="toc-number">5.</span> <span class="toc-text">方法二：写在一条语句，不过方法一的视图需要作为子表tmp，并且创建两次</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-30-%E6%9F%A5%E8%AF%A2%E9%80%89%E4%BF%AE%E4%BA%86%E2%80%99%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%99%E8%AF%BE%E7%A8%8B%E7%9A%84%E5%AD%A6%E7%94%9F%E7%9A%84%E5%AD%A6%E5%8F%B7%E5%92%8C%E8%8E%B7%E5%BE%97%E7%9A%84%E5%AD%A6%E5%88%86"><span class="toc-number">5.0.0.0.1.</span> <span class="toc-text">2.30 查询选修了’数据库’课程的学生的学号和获得的学分</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9B%9E%E7%AD%94%E9%97%AE%E9%A2%98"><span class="toc-number">5.1.</span> <span class="toc-text">三、回答问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-SQL%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">5.1.0.0.1.</span> <span class="toc-text">3.1 SQL语言的特点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F"><span class="toc-number">5.1.0.0.2.</span> <span class="toc-text">3.2 完整性约束</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-%E8%87%AA%E7%84%B6%E8%BF%9E%E6%8E%A5%E5%92%8C%E7%AD%89%E5%80%BC%E8%BF%9E%E6%8E%A5%E6%9C%89%E4%BB%80%E4%B9%88%E5%B7%AE%E5%88%AB"><span class="toc-number">5.1.0.0.3.</span> <span class="toc-text">3.3 自然连接和等值连接有什么差别</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-%E5%AD%90%E6%9F%A5%E8%AF%A2%E5%88%86%E4%B8%BA%E5%93%AA%E5%87%A0%E7%A7%8D%EF%BC%9F%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">5.1.0.0.4.</span> <span class="toc-text">3.4 子查询分为哪几种？它们之间有什么区别</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-5-%E7%B4%A2%E5%BC%95%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%E5%92%8C%E7%BC%BA%E7%82%B9"><span class="toc-number">5.1.0.0.5.</span> <span class="toc-text">3.5 索引有什么作用和缺点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-6-%E5%9F%BA%E6%9C%AC%E8%A1%A8%E5%92%8C%E8%A7%86%E5%9B%BE%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E8%A7%86%E5%9B%BE%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E7%82%B9%EF%BC%9F%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E8%A7%86%E5%9B%BE%E6%98%AF%E5%8F%AF%E4%BB%A5%E6%9B%B4%E6%96%B0%E7%9A%84%EF%BC%9F"><span class="toc-number">5.1.0.0.6.</span> <span class="toc-text">3.6 基本表和视图有什么区别？视图有什么优点？什么样的视图是可以更新的？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-7-%E8%AF%B7%E9%92%88%E5%AF%B9%E7%AC%AC%E4%B8%89%E7%AB%A0SQL%E8%AF%AD%E8%A8%80%E8%AE%B2%E4%B9%89%E4%B8%AD%E7%9A%84%E9%99%A4%E6%B3%95%E4%BE%8B%E5%AD%90%EF%BC%8C%E7%BB%99%E5%87%BA%E5%85%B6%E4%BB%96%E4%B8%A4%E7%A7%8D%E9%99%A4%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="toc-number">5.1.0.0.7.</span> <span class="toc-text">3.7 请针对第三章SQL语言讲义中的除法例子，给出其他两种除法的实现方法</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 20
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2024 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/05</span>
+            <a class="archive-post-title" href="/2024/07/05/SQL-hw1/">BUAA-SQL-数据库作业2（lr班）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/24</span>
+            <a class="archive-post-title" href="/2022/08/24/PR-summary/">Adobe Pr 2020 经验记录帖</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/16</span>
+            <a class="archive-post-title" href="/2022/06/16/OO-lambda-in-Java8/">java8的新增特性与函数式编程</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/12</span>
+            <a class="archive-post-title" href="/2022/06/12/OS-lab6-summary/">BUAA-OS-Lab6</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span>
+            <a class="archive-post-title" href="/2022/05/31/OS-lab5-summary/">BUAA-OS-Lab5</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/04</span>
+            <a class="archive-post-title" href="/2022/05/04/Unix-MyShell-Summary/">BUAA-Unix-Linux下C语言实现MyShell</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span>
+            <a class="archive-post-title" href="/2022/05/03/OS-lab4-summary/">BUAA-OS-Lab4</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span>
+            <a class="archive-post-title" href="/2022/05/01/OO-Unit2-summary/">BUAA-OO-Unit2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span>
+            <a class="archive-post-title" href="/2022/04/26/OS-lab3-summary/">BUAA-OS-Lab3</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/14</span>
+            <a class="archive-post-title" href="/2022/04/14/OS-lab2-summary/">BUAA-OS-Lab2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span>
+            <a class="archive-post-title" href="/2022/03/24/OO-Unit1-summary/">BUAA-OO-Unit1</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span>
+            <a class="archive-post-title" href="/2022/03/22/CPP-homework/">BUAA-C++与C#-项目分析报告</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span>
+            <a class="archive-post-title" href="/2022/03/20/OO-UML/">OO-UML类图自动生成</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/15</span>
+            <a class="archive-post-title" href="/2022/03/15/OS-lab0-summary/">BUAA-OS-Lab0</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span>
+            <a class="archive-post-title" href="/2022/03/12/shell/">Shell</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/%E3%80%8AIDT%20R30xx%20Family%E3%80%8BChapter3/">OS-Pre-Cause SR EPC BadVaddr</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/git/">Git</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span>
+            <a class="archive-post-title" href="/2022/02/16/CSS/">CSS</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span>
+            <a class="archive-post-title" href="/2022/02/14/HTML/">HTML</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span>
+            <a class="archive-post-title" href="/2022/01/27/hello-world/">Hello World</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="CSS">
+                <span class="iconfont-archer">&#xe606;</span>
+                CSS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OO">
+                <span class="iconfont-archer">&#xe606;</span>
+                OO
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="OS">
+                <span class="iconfont-archer">&#xe606;</span>
+                OS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Unix">
+                <span class="iconfont-archer">&#xe606;</span>
+                Unix
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="PR">
+                <span class="iconfont-archer">&#xe606;</span>
+                PR
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="SQL">
+                <span class="iconfont-archer">&#xe606;</span>
+                SQL
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://mmmusel.github.io",
+        root: siteMetaRoot,
+        author: "Musel"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v="></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v="></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>
